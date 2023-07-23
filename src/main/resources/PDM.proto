@@ -1,0 +1,161 @@
+syntax = "proto3";
+
+package provenancegraph.datamodel;
+
+enum LogContent {
+    // Entity
+    CLIENT_ENTITY = 0;
+    PROCESS_ENTITY = 1;
+    FILE_ENTITY = 2;
+
+    // Event
+    PROCESS_FORK = 3;
+    FILE_CREATE = 4;
+    FILE_OPEN = 5;
+    FILE_READ = 6;
+    FILE_WRITE = 7;
+    NET_CONNECT = 8;
+}
+
+enum LogType {
+    ENTITY = 0;
+    EVENT = 1;
+}
+
+message HostUUID {
+    uint64 hostUUID = 1;
+}
+
+message ProcessUUID {
+    int32 pid = 1;
+    uint64 ts = 2;
+}
+
+message FileUUID {
+    uint64 filePathHash = 1;
+}
+
+message LogHeader {
+    HostUUID clientID = 1;
+    LogType type = 2;
+    LogContent content = 3;
+}
+
+message Client {
+    repeated IPAddress ipList = 1;
+    string clientName = 2;
+    string collectorVersion = 3;
+}
+
+message Process {
+    ProcessUUID procUUID = 1;
+    ProcessUUID parentProcUUID = 2;
+    string processName = 3;
+    string cmdline = 4;
+    FileUUID fileUUID = 5;
+    string exePath = 6;
+}
+
+message File {
+    enum FileType {
+        FILE_UNKNOWN = 0;
+        // regular file
+        FILE_REG = 1;
+        // directory
+        FILE_DIR = 2;
+        // symbolic link
+        FILE_LNK = 3;
+        // socket
+        FILE_SOCK = 4;
+        // FIFO file (e.g., pipe)
+        FILE_FIFO = 5;
+    }
+
+    FileUUID fileUUID = 1;
+    FileType fileType = 2;
+    uint32 permission = 3;
+    string filePath = 4;
+}
+
+// Event header
+message EventHeader {
+    uint64 ts = 1;
+    ProcessUUID procUUID = 2;
+    int32 hostTid = 3;
+}
+
+// Network-related event data
+message IPAddress {
+    uint32 address = 1;
+    uint32 address_1 = 2;
+    uint32 address_2 = 3;
+    uint32 address_3 = 4;
+}
+
+message NetEvent {
+    IPAddress sip = 1;
+    IPAddress dip = 2;
+    uint32 sport = 3;
+    uint32 dport = 4;
+    uint32 protocol = 5;
+
+    enum Direction {
+        IN = 0;
+        OUT = 1;
+        NONE = 2;
+    }
+    Direction direct = 6;
+}
+
+// Process-related event data
+message ProcessEvent {
+    ProcessUUID childProcUUID = 1;
+}
+
+// File-related event data
+message FileEvent {
+    FileUUID fileUUID = 1;
+    FileUUID newFileUUID = 2;
+    uint32 uid = 3;
+    uint32 gid = 4;
+    uint32 permission = 5;
+    File.FileType fileType = 6;
+}
+
+// Lost data
+message EventLost {
+    uint64 lostCpu = 1;
+    uint64 lostSize = 2;
+}
+
+/* Event structure */
+message EventData {
+    EventHeader eHeader = 1;
+    oneof _data {
+        ProcessEvent processEvent = 2;
+        FileEvent fileEvent = 3;
+        NetEvent netEvent = 4;
+    }
+}
+
+message Status {
+    string message = 1;
+    int32 code = 2;
+}
+
+/* Overall log data */
+message Log {
+    LogHeader uHeader = 1;
+    Status status  = 2;
+    oneof _data {
+        Process process = 3;
+        File file = 4;
+        Client client = 5;
+        EventData eventData = 6;
+        EventLost lost = 7;
+    }
+}
+
+message LogPack {
+    repeated Log data = 1;
+}
