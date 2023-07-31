@@ -10,11 +10,12 @@ enum LogContent {
 
     // Event
     PROCESS_FORK = 3;
-    FILE_CREATE = 4;
-    FILE_OPEN = 5;
-    FILE_READ = 6;
-    FILE_WRITE = 7;
-    NET_CONNECT = 8;
+    PROCESS_EXEC = 4;
+    FILE_CREATE = 5;
+    FILE_OPEN = 6;
+    FILE_READ = 7;
+    FILE_WRITE = 8;
+    NET_CONNECT = 9;
 }
 
 enum LogType {
@@ -42,9 +43,10 @@ message LogHeader {
 }
 
 message Client {
-    repeated IPAddress ipList = 1;
-    string clientName = 2;
-    string collectorVersion = 3;
+    HostUUID clientID = 1;
+    repeated IPAddress ipList = 2;
+    string clientName = 3;
+    string collectorVersion = 4;
 }
 
 message Process {
@@ -109,17 +111,20 @@ message NetEvent {
 
 // Process-related event data
 message ProcessEvent {
-    ProcessUUID childProcUUID = 1;
+//    ProcessUUID childProcUUID = 1;
+    Process childProc = 1;
 }
 
 // File-related event data
 message FileEvent {
-    FileUUID fileUUID = 1;
-    FileUUID newFileUUID = 2;
+//    FileUUID fileUUID = 1;
+//    FileUUID newFileUUID = 2;
+    File file = 1;
+    File newFile = 2;
     uint32 uid = 3;
     uint32 gid = 4;
     uint32 permission = 5;
-    File.FileType fileType = 6;
+//    File.FileType fileType = 6;
 }
 
 // Lost data
@@ -138,21 +143,21 @@ message EventData {
     }
 }
 
-message Status {
-    string message = 1;
-    int32 code = 2;
-}
+//message Status {
+//    string message = 1;
+//    int32 code = 2;
+//}
 
 /* Overall log data */
 message Log {
     LogHeader uHeader = 1;
-    Status status  = 2;
+//    Status status  = 2;
     oneof _data {
-        Process process = 3;
-        File file = 4;
-        Client client = 5;
-        EventData eventData = 6;
-        EventLost lost = 7;
+//        Process process = 2;
+//        File file = 3;
+        Client client = 2;
+        EventData eventData = 3;
+        EventLost lost = 4;
     }
 }
 

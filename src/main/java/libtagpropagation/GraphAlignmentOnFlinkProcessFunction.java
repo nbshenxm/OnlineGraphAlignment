@@ -41,7 +41,7 @@ public class GraphAlignmentOnFlinkProcessFunction
             }
             nodeInfoMap.put(node.getNodeId(), node);
         }
-        else if (log.getUHeader().getType() == PDM.LogType.ENTITY) {
+        else if (log.getUHeader().getType() == PDM.LogType.EVENT) {
             if (log.hasEventData()) {
 
             }

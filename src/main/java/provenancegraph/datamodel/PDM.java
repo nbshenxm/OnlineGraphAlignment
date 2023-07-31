@@ -15,7 +15,7 @@ public final class PDM {
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
   /**
-   * Protobuf enum {@code provenancegraph.provenancegraph.datamodel.LogContent}
+   * Protobuf enum {@code provenancegraph.datamodel.LogContent}
    */
   public enum LogContent
       implements com.google.protobuf.ProtocolMessageEnum {
@@ -44,25 +44,29 @@ public final class PDM {
      */
     PROCESS_FORK(3),
     /**
-     * <code>FILE_CREATE = 4;</code>
+     * <code>PROCESS_EXEC = 4;</code>
      */
-    FILE_CREATE(4),
+    PROCESS_EXEC(4),
     /**
-     * <code>FILE_OPEN = 5;</code>
+     * <code>FILE_CREATE = 5;</code>
      */
-    FILE_OPEN(5),
+    FILE_CREATE(5),
     /**
-     * <code>FILE_READ = 6;</code>
+     * <code>FILE_OPEN = 6;</code>
      */
-    FILE_READ(6),
+    FILE_OPEN(6),
     /**
-     * <code>FILE_WRITE = 7;</code>
+     * <code>FILE_READ = 7;</code>
      */
-    FILE_WRITE(7),
+    FILE_READ(7),
     /**
-     * <code>NET_CONNECT = 8;</code>
+     * <code>FILE_WRITE = 8;</code>
      */
-    NET_CONNECT(8),
+    FILE_WRITE(8),
+    /**
+     * <code>NET_CONNECT = 9;</code>
+     */
+    NET_CONNECT(9),
     UNRECOGNIZED(-1),
     ;
 
@@ -91,25 +95,29 @@ public final class PDM {
      */
     public static final int PROCESS_FORK_VALUE = 3;
     /**
-     * <code>FILE_CREATE = 4;</code>
+     * <code>PROCESS_EXEC = 4;</code>
      */
-    public static final int FILE_CREATE_VALUE = 4;
+    public static final int PROCESS_EXEC_VALUE = 4;
     /**
-     * <code>FILE_OPEN = 5;</code>
+     * <code>FILE_CREATE = 5;</code>
      */
-    public static final int FILE_OPEN_VALUE = 5;
+    public static final int FILE_CREATE_VALUE = 5;
     /**
-     * <code>FILE_READ = 6;</code>
+     * <code>FILE_OPEN = 6;</code>
      */
-    public static final int FILE_READ_VALUE = 6;
+    public static final int FILE_OPEN_VALUE = 6;
     /**
-     * <code>FILE_WRITE = 7;</code>
+     * <code>FILE_READ = 7;</code>
      */
-    public static final int FILE_WRITE_VALUE = 7;
+    public static final int FILE_READ_VALUE = 7;
     /**
-     * <code>NET_CONNECT = 8;</code>
+     * <code>FILE_WRITE = 8;</code>
      */
-    public static final int NET_CONNECT_VALUE = 8;
+    public static final int FILE_WRITE_VALUE = 8;
+    /**
+     * <code>NET_CONNECT = 9;</code>
+     */
+    public static final int NET_CONNECT_VALUE = 9;
 
 
     public final int getNumber() {
@@ -140,11 +148,12 @@ public final class PDM {
         case 1: return PROCESS_ENTITY;
         case 2: return FILE_ENTITY;
         case 3: return PROCESS_FORK;
-        case 4: return FILE_CREATE;
-        case 5: return FILE_OPEN;
-        case 6: return FILE_READ;
-        case 7: return FILE_WRITE;
-        case 8: return NET_CONNECT;
+        case 4: return PROCESS_EXEC;
+        case 5: return FILE_CREATE;
+        case 6: return FILE_OPEN;
+        case 7: return FILE_READ;
+        case 8: return FILE_WRITE;
+        case 9: return NET_CONNECT;
         default: return null;
       }
     }
@@ -198,11 +207,11 @@ public final class PDM {
       this.value = value;
     }
 
-    // @@protoc_insertion_point(enum_scope:provenancegraph.provenancegraph.datamodel.LogContent)
+    // @@protoc_insertion_point(enum_scope:provenancegraph.datamodel.LogContent)
   }
 
   /**
-   * Protobuf enum {@code provenancegraph.provenancegraph.datamodel.LogType}
+   * Protobuf enum {@code provenancegraph.datamodel.LogType}
    */
   public enum LogType
       implements com.google.protobuf.ProtocolMessageEnum {
@@ -306,11 +315,11 @@ public final class PDM {
       this.value = value;
     }
 
-    // @@protoc_insertion_point(enum_scope:provenancegraph.provenancegraph.datamodel.LogType)
+    // @@protoc_insertion_point(enum_scope:provenancegraph.datamodel.LogType)
   }
 
   public interface HostUUIDOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:provenancegraph.provenancegraph.datamodel.HostUUID)
+      // @@protoc_insertion_point(interface_extends:provenancegraph.datamodel.HostUUID)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -320,11 +329,11 @@ public final class PDM {
     long getHostUUID();
   }
   /**
-   * Protobuf type {@code provenancegraph.provenancegraph.datamodel.HostUUID}
+   * Protobuf type {@code provenancegraph.datamodel.HostUUID}
    */
   public static final class HostUUID extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:provenancegraph.provenancegraph.datamodel.HostUUID)
+      // @@protoc_insertion_point(message_implements:provenancegraph.datamodel.HostUUID)
       HostUUIDOrBuilder {
   private static final long serialVersionUID = 0L;
     // Use HostUUID.newBuilder() to construct.
@@ -524,11 +533,11 @@ public final class PDM {
       return builder;
     }
     /**
-     * Protobuf type {@code provenancegraph.provenancegraph.datamodel.HostUUID}
+     * Protobuf type {@code provenancegraph.datamodel.HostUUID}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:provenancegraph.provenancegraph.datamodel.HostUUID)
+        // @@protoc_insertion_point(builder_implements:provenancegraph.datamodel.HostUUID)
         provenancegraph.datamodel.PDM.HostUUIDOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
@@ -543,7 +552,7 @@ public final class PDM {
                 provenancegraph.datamodel.PDM.HostUUID.class, provenancegraph.datamodel.PDM.HostUUID.Builder.class);
       }
 
-      // Construct using provenancegraph.provenancegraph.datamodel.PDM.HostUUID.newBuilder()
+      // Construct using provenancegraph.datamodel.PDM.HostUUID.newBuilder()
       private Builder() {
 
       }
@@ -735,10 +744,10 @@ public final class PDM {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:provenancegraph.provenancegraph.datamodel.HostUUID)
+      // @@protoc_insertion_point(builder_scope:provenancegraph.datamodel.HostUUID)
     }
 
-    // @@protoc_insertion_point(class_scope:provenancegraph.provenancegraph.datamodel.HostUUID)
+    // @@protoc_insertion_point(class_scope:provenancegraph.datamodel.HostUUID)
     private static final provenancegraph.datamodel.PDM.HostUUID DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new provenancegraph.datamodel.PDM.HostUUID();
@@ -787,7 +796,7 @@ public final class PDM {
   }
 
   public interface ProcessUUIDOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:provenancegraph.provenancegraph.datamodel.ProcessUUID)
+      // @@protoc_insertion_point(interface_extends:provenancegraph.datamodel.ProcessUUID)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -803,11 +812,11 @@ public final class PDM {
     long getTs();
   }
   /**
-   * Protobuf type {@code provenancegraph.provenancegraph.datamodel.ProcessUUID}
+   * Protobuf type {@code provenancegraph.datamodel.ProcessUUID}
    */
   public static final class ProcessUUID extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:provenancegraph.provenancegraph.datamodel.ProcessUUID)
+      // @@protoc_insertion_point(message_implements:provenancegraph.datamodel.ProcessUUID)
       ProcessUUIDOrBuilder {
   private static final long serialVersionUID = 0L;
     // Use ProcessUUID.newBuilder() to construct.
@@ -1029,11 +1038,11 @@ public final class PDM {
       return builder;
     }
     /**
-     * Protobuf type {@code provenancegraph.provenancegraph.datamodel.ProcessUUID}
+     * Protobuf type {@code provenancegraph.datamodel.ProcessUUID}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:provenancegraph.provenancegraph.datamodel.ProcessUUID)
+        // @@protoc_insertion_point(builder_implements:provenancegraph.datamodel.ProcessUUID)
         provenancegraph.datamodel.PDM.ProcessUUIDOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
@@ -1048,7 +1057,7 @@ public final class PDM {
                 provenancegraph.datamodel.PDM.ProcessUUID.class, provenancegraph.datamodel.PDM.ProcessUUID.Builder.class);
       }
 
-      // Construct using provenancegraph.provenancegraph.datamodel.PDM.ProcessUUID.newBuilder()
+      // Construct using provenancegraph.datamodel.PDM.ProcessUUID.newBuilder()
       private Builder() {
 
       }
@@ -1284,10 +1293,10 @@ public final class PDM {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:provenancegraph.provenancegraph.datamodel.ProcessUUID)
+      // @@protoc_insertion_point(builder_scope:provenancegraph.datamodel.ProcessUUID)
     }
 
-    // @@protoc_insertion_point(class_scope:provenancegraph.provenancegraph.datamodel.ProcessUUID)
+    // @@protoc_insertion_point(class_scope:provenancegraph.datamodel.ProcessUUID)
     private static final provenancegraph.datamodel.PDM.ProcessUUID DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new provenancegraph.datamodel.PDM.ProcessUUID();
@@ -1336,7 +1345,7 @@ public final class PDM {
   }
 
   public interface FileUUIDOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:provenancegraph.provenancegraph.datamodel.FileUUID)
+      // @@protoc_insertion_point(interface_extends:provenancegraph.datamodel.FileUUID)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -1346,11 +1355,11 @@ public final class PDM {
     long getFilePathHash();
   }
   /**
-   * Protobuf type {@code provenancegraph.provenancegraph.datamodel.FileUUID}
+   * Protobuf type {@code provenancegraph.datamodel.FileUUID}
    */
   public static final class FileUUID extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:provenancegraph.provenancegraph.datamodel.FileUUID)
+      // @@protoc_insertion_point(message_implements:provenancegraph.datamodel.FileUUID)
       FileUUIDOrBuilder {
   private static final long serialVersionUID = 0L;
     // Use FileUUID.newBuilder() to construct.
@@ -1550,11 +1559,11 @@ public final class PDM {
       return builder;
     }
     /**
-     * Protobuf type {@code provenancegraph.provenancegraph.datamodel.FileUUID}
+     * Protobuf type {@code provenancegraph.datamodel.FileUUID}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:provenancegraph.provenancegraph.datamodel.FileUUID)
+        // @@protoc_insertion_point(builder_implements:provenancegraph.datamodel.FileUUID)
         provenancegraph.datamodel.PDM.FileUUIDOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
@@ -1569,7 +1578,7 @@ public final class PDM {
                 provenancegraph.datamodel.PDM.FileUUID.class, provenancegraph.datamodel.PDM.FileUUID.Builder.class);
       }
 
-      // Construct using provenancegraph.provenancegraph.datamodel.PDM.FileUUID.newBuilder()
+      // Construct using provenancegraph.datamodel.PDM.FileUUID.newBuilder()
       private Builder() {
 
       }
@@ -1761,10 +1770,10 @@ public final class PDM {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:provenancegraph.provenancegraph.datamodel.FileUUID)
+      // @@protoc_insertion_point(builder_scope:provenancegraph.datamodel.FileUUID)
     }
 
-    // @@protoc_insertion_point(class_scope:provenancegraph.provenancegraph.datamodel.FileUUID)
+    // @@protoc_insertion_point(class_scope:provenancegraph.datamodel.FileUUID)
     private static final provenancegraph.datamodel.PDM.FileUUID DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new provenancegraph.datamodel.PDM.FileUUID();
@@ -1813,52 +1822,52 @@ public final class PDM {
   }
 
   public interface LogHeaderOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:provenancegraph.provenancegraph.datamodel.LogHeader)
+      // @@protoc_insertion_point(interface_extends:provenancegraph.datamodel.LogHeader)
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.HostUUID clientID = 1;</code>
+     * <code>.provenancegraph.datamodel.HostUUID clientID = 1;</code>
      * @return Whether the clientID field is set.
      */
     boolean hasClientID();
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.HostUUID clientID = 1;</code>
+     * <code>.provenancegraph.datamodel.HostUUID clientID = 1;</code>
      * @return The clientID.
      */
     provenancegraph.datamodel.PDM.HostUUID getClientID();
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.HostUUID clientID = 1;</code>
+     * <code>.provenancegraph.datamodel.HostUUID clientID = 1;</code>
      */
     provenancegraph.datamodel.PDM.HostUUIDOrBuilder getClientIDOrBuilder();
 
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.LogType type = 2;</code>
+     * <code>.provenancegraph.datamodel.LogType type = 2;</code>
      * @return The enum numeric value on the wire for type.
      */
     int getTypeValue();
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.LogType type = 2;</code>
+     * <code>.provenancegraph.datamodel.LogType type = 2;</code>
      * @return The type.
      */
     provenancegraph.datamodel.PDM.LogType getType();
 
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.LogContent content = 3;</code>
+     * <code>.provenancegraph.datamodel.LogContent content = 3;</code>
      * @return The enum numeric value on the wire for content.
      */
     int getContentValue();
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.LogContent content = 3;</code>
+     * <code>.provenancegraph.datamodel.LogContent content = 3;</code>
      * @return The content.
      */
     provenancegraph.datamodel.PDM.LogContent getContent();
   }
   /**
-   * Protobuf type {@code provenancegraph.provenancegraph.datamodel.LogHeader}
+   * Protobuf type {@code provenancegraph.datamodel.LogHeader}
    */
   public static final class LogHeader extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:provenancegraph.provenancegraph.datamodel.LogHeader)
+      // @@protoc_insertion_point(message_implements:provenancegraph.datamodel.LogHeader)
       LogHeaderOrBuilder {
   private static final long serialVersionUID = 0L;
     // Use LogHeader.newBuilder() to construct.
@@ -1893,7 +1902,7 @@ public final class PDM {
     public static final int CLIENTID_FIELD_NUMBER = 1;
     private provenancegraph.datamodel.PDM.HostUUID clientID_;
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.HostUUID clientID = 1;</code>
+     * <code>.provenancegraph.datamodel.HostUUID clientID = 1;</code>
      * @return Whether the clientID field is set.
      */
     @java.lang.Override
@@ -1901,7 +1910,7 @@ public final class PDM {
       return clientID_ != null;
     }
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.HostUUID clientID = 1;</code>
+     * <code>.provenancegraph.datamodel.HostUUID clientID = 1;</code>
      * @return The clientID.
      */
     @java.lang.Override
@@ -1909,7 +1918,7 @@ public final class PDM {
       return clientID_ == null ? provenancegraph.datamodel.PDM.HostUUID.getDefaultInstance() : clientID_;
     }
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.HostUUID clientID = 1;</code>
+     * <code>.provenancegraph.datamodel.HostUUID clientID = 1;</code>
      */
     @java.lang.Override
     public provenancegraph.datamodel.PDM.HostUUIDOrBuilder getClientIDOrBuilder() {
@@ -1919,14 +1928,14 @@ public final class PDM {
     public static final int TYPE_FIELD_NUMBER = 2;
     private int type_ = 0;
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.LogType type = 2;</code>
+     * <code>.provenancegraph.datamodel.LogType type = 2;</code>
      * @return The enum numeric value on the wire for type.
      */
     @java.lang.Override public int getTypeValue() {
       return type_;
     }
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.LogType type = 2;</code>
+     * <code>.provenancegraph.datamodel.LogType type = 2;</code>
      * @return The type.
      */
     @java.lang.Override public provenancegraph.datamodel.PDM.LogType getType() {
@@ -1937,14 +1946,14 @@ public final class PDM {
     public static final int CONTENT_FIELD_NUMBER = 3;
     private int content_ = 0;
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.LogContent content = 3;</code>
+     * <code>.provenancegraph.datamodel.LogContent content = 3;</code>
      * @return The enum numeric value on the wire for content.
      */
     @java.lang.Override public int getContentValue() {
       return content_;
     }
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.LogContent content = 3;</code>
+     * <code>.provenancegraph.datamodel.LogContent content = 3;</code>
      * @return The content.
      */
     @java.lang.Override public provenancegraph.datamodel.PDM.LogContent getContent() {
@@ -2135,11 +2144,11 @@ public final class PDM {
       return builder;
     }
     /**
-     * Protobuf type {@code provenancegraph.provenancegraph.datamodel.LogHeader}
+     * Protobuf type {@code provenancegraph.datamodel.LogHeader}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:provenancegraph.provenancegraph.datamodel.LogHeader)
+        // @@protoc_insertion_point(builder_implements:provenancegraph.datamodel.LogHeader)
         provenancegraph.datamodel.PDM.LogHeaderOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
@@ -2154,7 +2163,7 @@ public final class PDM {
                 provenancegraph.datamodel.PDM.LogHeader.class, provenancegraph.datamodel.PDM.LogHeader.Builder.class);
       }
 
-      // Construct using provenancegraph.provenancegraph.datamodel.PDM.LogHeader.newBuilder()
+      // Construct using provenancegraph.datamodel.PDM.LogHeader.newBuilder()
       private Builder() {
 
       }
@@ -2338,14 +2347,14 @@ public final class PDM {
       private com.google.protobuf.SingleFieldBuilderV3<
           provenancegraph.datamodel.PDM.HostUUID, provenancegraph.datamodel.PDM.HostUUID.Builder, provenancegraph.datamodel.PDM.HostUUIDOrBuilder> clientIDBuilder_;
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.HostUUID clientID = 1;</code>
+       * <code>.provenancegraph.datamodel.HostUUID clientID = 1;</code>
        * @return Whether the clientID field is set.
        */
       public boolean hasClientID() {
         return ((bitField0_ & 0x00000001) != 0);
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.HostUUID clientID = 1;</code>
+       * <code>.provenancegraph.datamodel.HostUUID clientID = 1;</code>
        * @return The clientID.
        */
       public provenancegraph.datamodel.PDM.HostUUID getClientID() {
@@ -2356,7 +2365,7 @@ public final class PDM {
         }
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.HostUUID clientID = 1;</code>
+       * <code>.provenancegraph.datamodel.HostUUID clientID = 1;</code>
        */
       public Builder setClientID(provenancegraph.datamodel.PDM.HostUUID value) {
         if (clientIDBuilder_ == null) {
@@ -2372,7 +2381,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.HostUUID clientID = 1;</code>
+       * <code>.provenancegraph.datamodel.HostUUID clientID = 1;</code>
        */
       public Builder setClientID(
           provenancegraph.datamodel.PDM.HostUUID.Builder builderForValue) {
@@ -2386,7 +2395,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.HostUUID clientID = 1;</code>
+       * <code>.provenancegraph.datamodel.HostUUID clientID = 1;</code>
        */
       public Builder mergeClientID(provenancegraph.datamodel.PDM.HostUUID value) {
         if (clientIDBuilder_ == null) {
@@ -2405,7 +2414,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.HostUUID clientID = 1;</code>
+       * <code>.provenancegraph.datamodel.HostUUID clientID = 1;</code>
        */
       public Builder clearClientID() {
         bitField0_ = (bitField0_ & ~0x00000001);
@@ -2418,7 +2427,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.HostUUID clientID = 1;</code>
+       * <code>.provenancegraph.datamodel.HostUUID clientID = 1;</code>
        */
       public provenancegraph.datamodel.PDM.HostUUID.Builder getClientIDBuilder() {
         bitField0_ |= 0x00000001;
@@ -2426,7 +2435,7 @@ public final class PDM {
         return getClientIDFieldBuilder().getBuilder();
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.HostUUID clientID = 1;</code>
+       * <code>.provenancegraph.datamodel.HostUUID clientID = 1;</code>
        */
       public provenancegraph.datamodel.PDM.HostUUIDOrBuilder getClientIDOrBuilder() {
         if (clientIDBuilder_ != null) {
@@ -2437,7 +2446,7 @@ public final class PDM {
         }
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.HostUUID clientID = 1;</code>
+       * <code>.provenancegraph.datamodel.HostUUID clientID = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           provenancegraph.datamodel.PDM.HostUUID, provenancegraph.datamodel.PDM.HostUUID.Builder, provenancegraph.datamodel.PDM.HostUUIDOrBuilder> 
@@ -2455,14 +2464,14 @@ public final class PDM {
 
       private int type_ = 0;
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.LogType type = 2;</code>
+       * <code>.provenancegraph.datamodel.LogType type = 2;</code>
        * @return The enum numeric value on the wire for type.
        */
       @java.lang.Override public int getTypeValue() {
         return type_;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.LogType type = 2;</code>
+       * <code>.provenancegraph.datamodel.LogType type = 2;</code>
        * @param value The enum numeric value on the wire for type to set.
        * @return This builder for chaining.
        */
@@ -2473,7 +2482,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.LogType type = 2;</code>
+       * <code>.provenancegraph.datamodel.LogType type = 2;</code>
        * @return The type.
        */
       @java.lang.Override
@@ -2482,7 +2491,7 @@ public final class PDM {
         return result == null ? provenancegraph.datamodel.PDM.LogType.UNRECOGNIZED : result;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.LogType type = 2;</code>
+       * <code>.provenancegraph.datamodel.LogType type = 2;</code>
        * @param value The type to set.
        * @return This builder for chaining.
        */
@@ -2496,7 +2505,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.LogType type = 2;</code>
+       * <code>.provenancegraph.datamodel.LogType type = 2;</code>
        * @return This builder for chaining.
        */
       public Builder clearType() {
@@ -2508,14 +2517,14 @@ public final class PDM {
 
       private int content_ = 0;
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.LogContent content = 3;</code>
+       * <code>.provenancegraph.datamodel.LogContent content = 3;</code>
        * @return The enum numeric value on the wire for content.
        */
       @java.lang.Override public int getContentValue() {
         return content_;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.LogContent content = 3;</code>
+       * <code>.provenancegraph.datamodel.LogContent content = 3;</code>
        * @param value The enum numeric value on the wire for content to set.
        * @return This builder for chaining.
        */
@@ -2526,7 +2535,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.LogContent content = 3;</code>
+       * <code>.provenancegraph.datamodel.LogContent content = 3;</code>
        * @return The content.
        */
       @java.lang.Override
@@ -2535,7 +2544,7 @@ public final class PDM {
         return result == null ? provenancegraph.datamodel.PDM.LogContent.UNRECOGNIZED : result;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.LogContent content = 3;</code>
+       * <code>.provenancegraph.datamodel.LogContent content = 3;</code>
        * @param value The content to set.
        * @return This builder for chaining.
        */
@@ -2549,7 +2558,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.LogContent content = 3;</code>
+       * <code>.provenancegraph.datamodel.LogContent content = 3;</code>
        * @return This builder for chaining.
        */
       public Builder clearContent() {
@@ -2571,10 +2580,10 @@ public final class PDM {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:provenancegraph.provenancegraph.datamodel.LogHeader)
+      // @@protoc_insertion_point(builder_scope:provenancegraph.datamodel.LogHeader)
     }
 
-    // @@protoc_insertion_point(class_scope:provenancegraph.provenancegraph.datamodel.LogHeader)
+    // @@protoc_insertion_point(class_scope:provenancegraph.datamodel.LogHeader)
     private static final provenancegraph.datamodel.PDM.LogHeader DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new provenancegraph.datamodel.PDM.LogHeader();
@@ -2623,29 +2632,29 @@ public final class PDM {
   }
 
   public interface ClientOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:provenancegraph.provenancegraph.datamodel.Client)
+      // @@protoc_insertion_point(interface_extends:provenancegraph.datamodel.Client)
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>repeated .provenancegraph.provenancegraph.datamodel.IPAddress ipList = 1;</code>
+     * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 1;</code>
      */
     java.util.List<provenancegraph.datamodel.PDM.IPAddress> 
         getIpListList();
     /**
-     * <code>repeated .provenancegraph.provenancegraph.datamodel.IPAddress ipList = 1;</code>
+     * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 1;</code>
      */
     provenancegraph.datamodel.PDM.IPAddress getIpList(int index);
     /**
-     * <code>repeated .provenancegraph.provenancegraph.datamodel.IPAddress ipList = 1;</code>
+     * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 1;</code>
      */
     int getIpListCount();
     /**
-     * <code>repeated .provenancegraph.provenancegraph.datamodel.IPAddress ipList = 1;</code>
+     * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 1;</code>
      */
     java.util.List<? extends provenancegraph.datamodel.PDM.IPAddressOrBuilder> 
         getIpListOrBuilderList();
     /**
-     * <code>repeated .provenancegraph.provenancegraph.datamodel.IPAddress ipList = 1;</code>
+     * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 1;</code>
      */
     provenancegraph.datamodel.PDM.IPAddressOrBuilder getIpListOrBuilder(
         int index);
@@ -2675,11 +2684,11 @@ public final class PDM {
         getCollectorVersionBytes();
   }
   /**
-   * Protobuf type {@code provenancegraph.provenancegraph.datamodel.Client}
+   * Protobuf type {@code provenancegraph.datamodel.Client}
    */
   public static final class Client extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:provenancegraph.provenancegraph.datamodel.Client)
+      // @@protoc_insertion_point(message_implements:provenancegraph.datamodel.Client)
       ClientOrBuilder {
   private static final long serialVersionUID = 0L;
     // Use Client.newBuilder() to construct.
@@ -2716,14 +2725,14 @@ public final class PDM {
     @SuppressWarnings("serial")
     private java.util.List<provenancegraph.datamodel.PDM.IPAddress> ipList_;
     /**
-     * <code>repeated .provenancegraph.provenancegraph.datamodel.IPAddress ipList = 1;</code>
+     * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 1;</code>
      */
     @java.lang.Override
     public java.util.List<provenancegraph.datamodel.PDM.IPAddress> getIpListList() {
       return ipList_;
     }
     /**
-     * <code>repeated .provenancegraph.provenancegraph.datamodel.IPAddress ipList = 1;</code>
+     * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 1;</code>
      */
     @java.lang.Override
     public java.util.List<? extends provenancegraph.datamodel.PDM.IPAddressOrBuilder> 
@@ -2731,21 +2740,21 @@ public final class PDM {
       return ipList_;
     }
     /**
-     * <code>repeated .provenancegraph.provenancegraph.datamodel.IPAddress ipList = 1;</code>
+     * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 1;</code>
      */
     @java.lang.Override
     public int getIpListCount() {
       return ipList_.size();
     }
     /**
-     * <code>repeated .provenancegraph.provenancegraph.datamodel.IPAddress ipList = 1;</code>
+     * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 1;</code>
      */
     @java.lang.Override
     public provenancegraph.datamodel.PDM.IPAddress getIpList(int index) {
       return ipList_.get(index);
     }
     /**
-     * <code>repeated .provenancegraph.provenancegraph.datamodel.IPAddress ipList = 1;</code>
+     * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 1;</code>
      */
     @java.lang.Override
     public provenancegraph.datamodel.PDM.IPAddressOrBuilder getIpListOrBuilder(
@@ -3011,11 +3020,11 @@ public final class PDM {
       return builder;
     }
     /**
-     * Protobuf type {@code provenancegraph.provenancegraph.datamodel.Client}
+     * Protobuf type {@code provenancegraph.datamodel.Client}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:provenancegraph.provenancegraph.datamodel.Client)
+        // @@protoc_insertion_point(builder_implements:provenancegraph.datamodel.Client)
         provenancegraph.datamodel.PDM.ClientOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
@@ -3030,7 +3039,7 @@ public final class PDM {
                 provenancegraph.datamodel.PDM.Client.class, provenancegraph.datamodel.PDM.Client.Builder.class);
       }
 
-      // Construct using provenancegraph.provenancegraph.datamodel.PDM.Client.newBuilder()
+      // Construct using provenancegraph.datamodel.PDM.Client.newBuilder()
       private Builder() {
 
       }
@@ -3266,7 +3275,7 @@ public final class PDM {
           provenancegraph.datamodel.PDM.IPAddress, provenancegraph.datamodel.PDM.IPAddress.Builder, provenancegraph.datamodel.PDM.IPAddressOrBuilder> ipListBuilder_;
 
       /**
-       * <code>repeated .provenancegraph.provenancegraph.datamodel.IPAddress ipList = 1;</code>
+       * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 1;</code>
        */
       public java.util.List<provenancegraph.datamodel.PDM.IPAddress> getIpListList() {
         if (ipListBuilder_ == null) {
@@ -3276,7 +3285,7 @@ public final class PDM {
         }
       }
       /**
-       * <code>repeated .provenancegraph.provenancegraph.datamodel.IPAddress ipList = 1;</code>
+       * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 1;</code>
        */
       public int getIpListCount() {
         if (ipListBuilder_ == null) {
@@ -3286,7 +3295,7 @@ public final class PDM {
         }
       }
       /**
-       * <code>repeated .provenancegraph.provenancegraph.datamodel.IPAddress ipList = 1;</code>
+       * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 1;</code>
        */
       public provenancegraph.datamodel.PDM.IPAddress getIpList(int index) {
         if (ipListBuilder_ == null) {
@@ -3296,7 +3305,7 @@ public final class PDM {
         }
       }
       /**
-       * <code>repeated .provenancegraph.provenancegraph.datamodel.IPAddress ipList = 1;</code>
+       * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 1;</code>
        */
       public Builder setIpList(
           int index, provenancegraph.datamodel.PDM.IPAddress value) {
@@ -3313,7 +3322,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>repeated .provenancegraph.provenancegraph.datamodel.IPAddress ipList = 1;</code>
+       * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 1;</code>
        */
       public Builder setIpList(
           int index, provenancegraph.datamodel.PDM.IPAddress.Builder builderForValue) {
@@ -3327,7 +3336,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>repeated .provenancegraph.provenancegraph.datamodel.IPAddress ipList = 1;</code>
+       * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 1;</code>
        */
       public Builder addIpList(provenancegraph.datamodel.PDM.IPAddress value) {
         if (ipListBuilder_ == null) {
@@ -3343,7 +3352,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>repeated .provenancegraph.provenancegraph.datamodel.IPAddress ipList = 1;</code>
+       * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 1;</code>
        */
       public Builder addIpList(
           int index, provenancegraph.datamodel.PDM.IPAddress value) {
@@ -3360,7 +3369,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>repeated .provenancegraph.provenancegraph.datamodel.IPAddress ipList = 1;</code>
+       * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 1;</code>
        */
       public Builder addIpList(
           provenancegraph.datamodel.PDM.IPAddress.Builder builderForValue) {
@@ -3374,7 +3383,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>repeated .provenancegraph.provenancegraph.datamodel.IPAddress ipList = 1;</code>
+       * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 1;</code>
        */
       public Builder addIpList(
           int index, provenancegraph.datamodel.PDM.IPAddress.Builder builderForValue) {
@@ -3388,7 +3397,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>repeated .provenancegraph.provenancegraph.datamodel.IPAddress ipList = 1;</code>
+       * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 1;</code>
        */
       public Builder addAllIpList(
           java.lang.Iterable<? extends provenancegraph.datamodel.PDM.IPAddress> values) {
@@ -3403,7 +3412,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>repeated .provenancegraph.provenancegraph.datamodel.IPAddress ipList = 1;</code>
+       * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 1;</code>
        */
       public Builder clearIpList() {
         if (ipListBuilder_ == null) {
@@ -3416,7 +3425,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>repeated .provenancegraph.provenancegraph.datamodel.IPAddress ipList = 1;</code>
+       * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 1;</code>
        */
       public Builder removeIpList(int index) {
         if (ipListBuilder_ == null) {
@@ -3429,14 +3438,14 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>repeated .provenancegraph.provenancegraph.datamodel.IPAddress ipList = 1;</code>
+       * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 1;</code>
        */
       public provenancegraph.datamodel.PDM.IPAddress.Builder getIpListBuilder(
           int index) {
         return getIpListFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .provenancegraph.provenancegraph.datamodel.IPAddress ipList = 1;</code>
+       * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 1;</code>
        */
       public provenancegraph.datamodel.PDM.IPAddressOrBuilder getIpListOrBuilder(
           int index) {
@@ -3446,7 +3455,7 @@ public final class PDM {
         }
       }
       /**
-       * <code>repeated .provenancegraph.provenancegraph.datamodel.IPAddress ipList = 1;</code>
+       * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 1;</code>
        */
       public java.util.List<? extends provenancegraph.datamodel.PDM.IPAddressOrBuilder> 
            getIpListOrBuilderList() {
@@ -3457,14 +3466,14 @@ public final class PDM {
         }
       }
       /**
-       * <code>repeated .provenancegraph.provenancegraph.datamodel.IPAddress ipList = 1;</code>
+       * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 1;</code>
        */
       public provenancegraph.datamodel.PDM.IPAddress.Builder addIpListBuilder() {
         return getIpListFieldBuilder().addBuilder(
             provenancegraph.datamodel.PDM.IPAddress.getDefaultInstance());
       }
       /**
-       * <code>repeated .provenancegraph.provenancegraph.datamodel.IPAddress ipList = 1;</code>
+       * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 1;</code>
        */
       public provenancegraph.datamodel.PDM.IPAddress.Builder addIpListBuilder(
           int index) {
@@ -3472,7 +3481,7 @@ public final class PDM {
             index, provenancegraph.datamodel.PDM.IPAddress.getDefaultInstance());
       }
       /**
-       * <code>repeated .provenancegraph.provenancegraph.datamodel.IPAddress ipList = 1;</code>
+       * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 1;</code>
        */
       public java.util.List<provenancegraph.datamodel.PDM.IPAddress.Builder> 
            getIpListBuilderList() {
@@ -3649,10 +3658,10 @@ public final class PDM {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:provenancegraph.provenancegraph.datamodel.Client)
+      // @@protoc_insertion_point(builder_scope:provenancegraph.datamodel.Client)
     }
 
-    // @@protoc_insertion_point(class_scope:provenancegraph.provenancegraph.datamodel.Client)
+    // @@protoc_insertion_point(class_scope:provenancegraph.datamodel.Client)
     private static final provenancegraph.datamodel.PDM.Client DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new provenancegraph.datamodel.PDM.Client();
@@ -3701,36 +3710,36 @@ public final class PDM {
   }
 
   public interface ProcessOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:provenancegraph.provenancegraph.datamodel.Process)
+      // @@protoc_insertion_point(interface_extends:provenancegraph.datamodel.Process)
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID procUUID = 1;</code>
+     * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 1;</code>
      * @return Whether the procUUID field is set.
      */
     boolean hasProcUUID();
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID procUUID = 1;</code>
+     * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 1;</code>
      * @return The procUUID.
      */
     provenancegraph.datamodel.PDM.ProcessUUID getProcUUID();
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID procUUID = 1;</code>
+     * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 1;</code>
      */
     provenancegraph.datamodel.PDM.ProcessUUIDOrBuilder getProcUUIDOrBuilder();
 
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID parentProcUUID = 2;</code>
+     * <code>.provenancegraph.datamodel.ProcessUUID parentProcUUID = 2;</code>
      * @return Whether the parentProcUUID field is set.
      */
     boolean hasParentProcUUID();
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID parentProcUUID = 2;</code>
+     * <code>.provenancegraph.datamodel.ProcessUUID parentProcUUID = 2;</code>
      * @return The parentProcUUID.
      */
     provenancegraph.datamodel.PDM.ProcessUUID getParentProcUUID();
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID parentProcUUID = 2;</code>
+     * <code>.provenancegraph.datamodel.ProcessUUID parentProcUUID = 2;</code>
      */
     provenancegraph.datamodel.PDM.ProcessUUIDOrBuilder getParentProcUUIDOrBuilder();
 
@@ -3759,17 +3768,17 @@ public final class PDM {
         getCmdlineBytes();
 
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.FileUUID fileUUID = 5;</code>
+     * <code>.provenancegraph.datamodel.FileUUID fileUUID = 5;</code>
      * @return Whether the fileUUID field is set.
      */
     boolean hasFileUUID();
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.FileUUID fileUUID = 5;</code>
+     * <code>.provenancegraph.datamodel.FileUUID fileUUID = 5;</code>
      * @return The fileUUID.
      */
     provenancegraph.datamodel.PDM.FileUUID getFileUUID();
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.FileUUID fileUUID = 5;</code>
+     * <code>.provenancegraph.datamodel.FileUUID fileUUID = 5;</code>
      */
     provenancegraph.datamodel.PDM.FileUUIDOrBuilder getFileUUIDOrBuilder();
 
@@ -3786,11 +3795,11 @@ public final class PDM {
         getExePathBytes();
   }
   /**
-   * Protobuf type {@code provenancegraph.provenancegraph.datamodel.Process}
+   * Protobuf type {@code provenancegraph.datamodel.Process}
    */
   public static final class Process extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:provenancegraph.provenancegraph.datamodel.Process)
+      // @@protoc_insertion_point(message_implements:provenancegraph.datamodel.Process)
       ProcessOrBuilder {
   private static final long serialVersionUID = 0L;
     // Use Process.newBuilder() to construct.
@@ -3826,7 +3835,7 @@ public final class PDM {
     public static final int PROCUUID_FIELD_NUMBER = 1;
     private provenancegraph.datamodel.PDM.ProcessUUID procUUID_;
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID procUUID = 1;</code>
+     * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 1;</code>
      * @return Whether the procUUID field is set.
      */
     @java.lang.Override
@@ -3834,7 +3843,7 @@ public final class PDM {
       return procUUID_ != null;
     }
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID procUUID = 1;</code>
+     * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 1;</code>
      * @return The procUUID.
      */
     @java.lang.Override
@@ -3842,7 +3851,7 @@ public final class PDM {
       return procUUID_ == null ? provenancegraph.datamodel.PDM.ProcessUUID.getDefaultInstance() : procUUID_;
     }
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID procUUID = 1;</code>
+     * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 1;</code>
      */
     @java.lang.Override
     public provenancegraph.datamodel.PDM.ProcessUUIDOrBuilder getProcUUIDOrBuilder() {
@@ -3852,7 +3861,7 @@ public final class PDM {
     public static final int PARENTPROCUUID_FIELD_NUMBER = 2;
     private provenancegraph.datamodel.PDM.ProcessUUID parentProcUUID_;
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID parentProcUUID = 2;</code>
+     * <code>.provenancegraph.datamodel.ProcessUUID parentProcUUID = 2;</code>
      * @return Whether the parentProcUUID field is set.
      */
     @java.lang.Override
@@ -3860,7 +3869,7 @@ public final class PDM {
       return parentProcUUID_ != null;
     }
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID parentProcUUID = 2;</code>
+     * <code>.provenancegraph.datamodel.ProcessUUID parentProcUUID = 2;</code>
      * @return The parentProcUUID.
      */
     @java.lang.Override
@@ -3868,7 +3877,7 @@ public final class PDM {
       return parentProcUUID_ == null ? provenancegraph.datamodel.PDM.ProcessUUID.getDefaultInstance() : parentProcUUID_;
     }
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID parentProcUUID = 2;</code>
+     * <code>.provenancegraph.datamodel.ProcessUUID parentProcUUID = 2;</code>
      */
     @java.lang.Override
     public provenancegraph.datamodel.PDM.ProcessUUIDOrBuilder getParentProcUUIDOrBuilder() {
@@ -3956,7 +3965,7 @@ public final class PDM {
     public static final int FILEUUID_FIELD_NUMBER = 5;
     private provenancegraph.datamodel.PDM.FileUUID fileUUID_;
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.FileUUID fileUUID = 5;</code>
+     * <code>.provenancegraph.datamodel.FileUUID fileUUID = 5;</code>
      * @return Whether the fileUUID field is set.
      */
     @java.lang.Override
@@ -3964,7 +3973,7 @@ public final class PDM {
       return fileUUID_ != null;
     }
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.FileUUID fileUUID = 5;</code>
+     * <code>.provenancegraph.datamodel.FileUUID fileUUID = 5;</code>
      * @return The fileUUID.
      */
     @java.lang.Override
@@ -3972,7 +3981,7 @@ public final class PDM {
       return fileUUID_ == null ? provenancegraph.datamodel.PDM.FileUUID.getDefaultInstance() : fileUUID_;
     }
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.FileUUID fileUUID = 5;</code>
+     * <code>.provenancegraph.datamodel.FileUUID fileUUID = 5;</code>
      */
     @java.lang.Override
     public provenancegraph.datamodel.PDM.FileUUIDOrBuilder getFileUUIDOrBuilder() {
@@ -4243,11 +4252,11 @@ public final class PDM {
       return builder;
     }
     /**
-     * Protobuf type {@code provenancegraph.provenancegraph.datamodel.Process}
+     * Protobuf type {@code provenancegraph.datamodel.Process}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:provenancegraph.provenancegraph.datamodel.Process)
+        // @@protoc_insertion_point(builder_implements:provenancegraph.datamodel.Process)
         provenancegraph.datamodel.PDM.ProcessOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
@@ -4262,7 +4271,7 @@ public final class PDM {
                 provenancegraph.datamodel.PDM.Process.class, provenancegraph.datamodel.PDM.Process.Builder.class);
       }
 
-      // Construct using provenancegraph.provenancegraph.datamodel.PDM.Process.newBuilder()
+      // Construct using provenancegraph.datamodel.PDM.Process.newBuilder()
       private Builder() {
 
       }
@@ -4504,14 +4513,14 @@ public final class PDM {
       private com.google.protobuf.SingleFieldBuilderV3<
           provenancegraph.datamodel.PDM.ProcessUUID, provenancegraph.datamodel.PDM.ProcessUUID.Builder, provenancegraph.datamodel.PDM.ProcessUUIDOrBuilder> procUUIDBuilder_;
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID procUUID = 1;</code>
+       * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 1;</code>
        * @return Whether the procUUID field is set.
        */
       public boolean hasProcUUID() {
         return ((bitField0_ & 0x00000001) != 0);
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID procUUID = 1;</code>
+       * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 1;</code>
        * @return The procUUID.
        */
       public provenancegraph.datamodel.PDM.ProcessUUID getProcUUID() {
@@ -4522,7 +4531,7 @@ public final class PDM {
         }
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID procUUID = 1;</code>
+       * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 1;</code>
        */
       public Builder setProcUUID(provenancegraph.datamodel.PDM.ProcessUUID value) {
         if (procUUIDBuilder_ == null) {
@@ -4538,7 +4547,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID procUUID = 1;</code>
+       * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 1;</code>
        */
       public Builder setProcUUID(
           provenancegraph.datamodel.PDM.ProcessUUID.Builder builderForValue) {
@@ -4552,7 +4561,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID procUUID = 1;</code>
+       * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 1;</code>
        */
       public Builder mergeProcUUID(provenancegraph.datamodel.PDM.ProcessUUID value) {
         if (procUUIDBuilder_ == null) {
@@ -4571,7 +4580,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID procUUID = 1;</code>
+       * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 1;</code>
        */
       public Builder clearProcUUID() {
         bitField0_ = (bitField0_ & ~0x00000001);
@@ -4584,7 +4593,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID procUUID = 1;</code>
+       * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 1;</code>
        */
       public provenancegraph.datamodel.PDM.ProcessUUID.Builder getProcUUIDBuilder() {
         bitField0_ |= 0x00000001;
@@ -4592,7 +4601,7 @@ public final class PDM {
         return getProcUUIDFieldBuilder().getBuilder();
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID procUUID = 1;</code>
+       * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 1;</code>
        */
       public provenancegraph.datamodel.PDM.ProcessUUIDOrBuilder getProcUUIDOrBuilder() {
         if (procUUIDBuilder_ != null) {
@@ -4603,7 +4612,7 @@ public final class PDM {
         }
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID procUUID = 1;</code>
+       * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           provenancegraph.datamodel.PDM.ProcessUUID, provenancegraph.datamodel.PDM.ProcessUUID.Builder, provenancegraph.datamodel.PDM.ProcessUUIDOrBuilder> 
@@ -4623,14 +4632,14 @@ public final class PDM {
       private com.google.protobuf.SingleFieldBuilderV3<
           provenancegraph.datamodel.PDM.ProcessUUID, provenancegraph.datamodel.PDM.ProcessUUID.Builder, provenancegraph.datamodel.PDM.ProcessUUIDOrBuilder> parentProcUUIDBuilder_;
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID parentProcUUID = 2;</code>
+       * <code>.provenancegraph.datamodel.ProcessUUID parentProcUUID = 2;</code>
        * @return Whether the parentProcUUID field is set.
        */
       public boolean hasParentProcUUID() {
         return ((bitField0_ & 0x00000002) != 0);
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID parentProcUUID = 2;</code>
+       * <code>.provenancegraph.datamodel.ProcessUUID parentProcUUID = 2;</code>
        * @return The parentProcUUID.
        */
       public provenancegraph.datamodel.PDM.ProcessUUID getParentProcUUID() {
@@ -4641,7 +4650,7 @@ public final class PDM {
         }
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID parentProcUUID = 2;</code>
+       * <code>.provenancegraph.datamodel.ProcessUUID parentProcUUID = 2;</code>
        */
       public Builder setParentProcUUID(provenancegraph.datamodel.PDM.ProcessUUID value) {
         if (parentProcUUIDBuilder_ == null) {
@@ -4657,7 +4666,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID parentProcUUID = 2;</code>
+       * <code>.provenancegraph.datamodel.ProcessUUID parentProcUUID = 2;</code>
        */
       public Builder setParentProcUUID(
           provenancegraph.datamodel.PDM.ProcessUUID.Builder builderForValue) {
@@ -4671,7 +4680,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID parentProcUUID = 2;</code>
+       * <code>.provenancegraph.datamodel.ProcessUUID parentProcUUID = 2;</code>
        */
       public Builder mergeParentProcUUID(provenancegraph.datamodel.PDM.ProcessUUID value) {
         if (parentProcUUIDBuilder_ == null) {
@@ -4690,7 +4699,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID parentProcUUID = 2;</code>
+       * <code>.provenancegraph.datamodel.ProcessUUID parentProcUUID = 2;</code>
        */
       public Builder clearParentProcUUID() {
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -4703,7 +4712,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID parentProcUUID = 2;</code>
+       * <code>.provenancegraph.datamodel.ProcessUUID parentProcUUID = 2;</code>
        */
       public provenancegraph.datamodel.PDM.ProcessUUID.Builder getParentProcUUIDBuilder() {
         bitField0_ |= 0x00000002;
@@ -4711,7 +4720,7 @@ public final class PDM {
         return getParentProcUUIDFieldBuilder().getBuilder();
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID parentProcUUID = 2;</code>
+       * <code>.provenancegraph.datamodel.ProcessUUID parentProcUUID = 2;</code>
        */
       public provenancegraph.datamodel.PDM.ProcessUUIDOrBuilder getParentProcUUIDOrBuilder() {
         if (parentProcUUIDBuilder_ != null) {
@@ -4722,7 +4731,7 @@ public final class PDM {
         }
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID parentProcUUID = 2;</code>
+       * <code>.provenancegraph.datamodel.ProcessUUID parentProcUUID = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           provenancegraph.datamodel.PDM.ProcessUUID, provenancegraph.datamodel.PDM.ProcessUUID.Builder, provenancegraph.datamodel.PDM.ProcessUUIDOrBuilder> 
@@ -4886,14 +4895,14 @@ public final class PDM {
       private com.google.protobuf.SingleFieldBuilderV3<
           provenancegraph.datamodel.PDM.FileUUID, provenancegraph.datamodel.PDM.FileUUID.Builder, provenancegraph.datamodel.PDM.FileUUIDOrBuilder> fileUUIDBuilder_;
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.FileUUID fileUUID = 5;</code>
+       * <code>.provenancegraph.datamodel.FileUUID fileUUID = 5;</code>
        * @return Whether the fileUUID field is set.
        */
       public boolean hasFileUUID() {
         return ((bitField0_ & 0x00000010) != 0);
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.FileUUID fileUUID = 5;</code>
+       * <code>.provenancegraph.datamodel.FileUUID fileUUID = 5;</code>
        * @return The fileUUID.
        */
       public provenancegraph.datamodel.PDM.FileUUID getFileUUID() {
@@ -4904,7 +4913,7 @@ public final class PDM {
         }
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.FileUUID fileUUID = 5;</code>
+       * <code>.provenancegraph.datamodel.FileUUID fileUUID = 5;</code>
        */
       public Builder setFileUUID(provenancegraph.datamodel.PDM.FileUUID value) {
         if (fileUUIDBuilder_ == null) {
@@ -4920,7 +4929,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.FileUUID fileUUID = 5;</code>
+       * <code>.provenancegraph.datamodel.FileUUID fileUUID = 5;</code>
        */
       public Builder setFileUUID(
           provenancegraph.datamodel.PDM.FileUUID.Builder builderForValue) {
@@ -4934,7 +4943,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.FileUUID fileUUID = 5;</code>
+       * <code>.provenancegraph.datamodel.FileUUID fileUUID = 5;</code>
        */
       public Builder mergeFileUUID(provenancegraph.datamodel.PDM.FileUUID value) {
         if (fileUUIDBuilder_ == null) {
@@ -4953,7 +4962,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.FileUUID fileUUID = 5;</code>
+       * <code>.provenancegraph.datamodel.FileUUID fileUUID = 5;</code>
        */
       public Builder clearFileUUID() {
         bitField0_ = (bitField0_ & ~0x00000010);
@@ -4966,7 +4975,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.FileUUID fileUUID = 5;</code>
+       * <code>.provenancegraph.datamodel.FileUUID fileUUID = 5;</code>
        */
       public provenancegraph.datamodel.PDM.FileUUID.Builder getFileUUIDBuilder() {
         bitField0_ |= 0x00000010;
@@ -4974,7 +4983,7 @@ public final class PDM {
         return getFileUUIDFieldBuilder().getBuilder();
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.FileUUID fileUUID = 5;</code>
+       * <code>.provenancegraph.datamodel.FileUUID fileUUID = 5;</code>
        */
       public provenancegraph.datamodel.PDM.FileUUIDOrBuilder getFileUUIDOrBuilder() {
         if (fileUUIDBuilder_ != null) {
@@ -4985,7 +4994,7 @@ public final class PDM {
         }
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.FileUUID fileUUID = 5;</code>
+       * <code>.provenancegraph.datamodel.FileUUID fileUUID = 5;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           provenancegraph.datamodel.PDM.FileUUID, provenancegraph.datamodel.PDM.FileUUID.Builder, provenancegraph.datamodel.PDM.FileUUIDOrBuilder> 
@@ -5085,10 +5094,10 @@ public final class PDM {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:provenancegraph.provenancegraph.datamodel.Process)
+      // @@protoc_insertion_point(builder_scope:provenancegraph.datamodel.Process)
     }
 
-    // @@protoc_insertion_point(class_scope:provenancegraph.provenancegraph.datamodel.Process)
+    // @@protoc_insertion_point(class_scope:provenancegraph.datamodel.Process)
     private static final provenancegraph.datamodel.PDM.Process DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new provenancegraph.datamodel.PDM.Process();
@@ -5137,31 +5146,31 @@ public final class PDM {
   }
 
   public interface FileOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:provenancegraph.provenancegraph.datamodel.File)
+      // @@protoc_insertion_point(interface_extends:provenancegraph.datamodel.File)
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
+     * <code>.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
      * @return Whether the fileUUID field is set.
      */
     boolean hasFileUUID();
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
+     * <code>.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
      * @return The fileUUID.
      */
     provenancegraph.datamodel.PDM.FileUUID getFileUUID();
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
+     * <code>.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
      */
     provenancegraph.datamodel.PDM.FileUUIDOrBuilder getFileUUIDOrBuilder();
 
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.File.FileType fileType = 2;</code>
+     * <code>.provenancegraph.datamodel.File.FileType fileType = 2;</code>
      * @return The enum numeric value on the wire for fileType.
      */
     int getFileTypeValue();
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.File.FileType fileType = 2;</code>
+     * <code>.provenancegraph.datamodel.File.FileType fileType = 2;</code>
      * @return The fileType.
      */
     provenancegraph.datamodel.PDM.File.FileType getFileType();
@@ -5185,11 +5194,11 @@ public final class PDM {
         getFilePathBytes();
   }
   /**
-   * Protobuf type {@code provenancegraph.provenancegraph.datamodel.File}
+   * Protobuf type {@code provenancegraph.datamodel.File}
    */
   public static final class File extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:provenancegraph.provenancegraph.datamodel.File)
+      // @@protoc_insertion_point(message_implements:provenancegraph.datamodel.File)
       FileOrBuilder {
   private static final long serialVersionUID = 0L;
     // Use File.newBuilder() to construct.
@@ -5222,7 +5231,7 @@ public final class PDM {
     }
 
     /**
-     * Protobuf enum {@code provenancegraph.provenancegraph.datamodel.File.FileType}
+     * Protobuf enum {@code provenancegraph.datamodel.File.FileType}
      */
     public enum FileType
         implements com.google.protobuf.ProtocolMessageEnum {
@@ -5402,13 +5411,13 @@ public final class PDM {
         this.value = value;
       }
 
-      // @@protoc_insertion_point(enum_scope:provenancegraph.provenancegraph.datamodel.File.FileType)
+      // @@protoc_insertion_point(enum_scope:provenancegraph.datamodel.File.FileType)
     }
 
     public static final int FILEUUID_FIELD_NUMBER = 1;
     private provenancegraph.datamodel.PDM.FileUUID fileUUID_;
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
+     * <code>.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
      * @return Whether the fileUUID field is set.
      */
     @java.lang.Override
@@ -5416,7 +5425,7 @@ public final class PDM {
       return fileUUID_ != null;
     }
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
+     * <code>.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
      * @return The fileUUID.
      */
     @java.lang.Override
@@ -5424,7 +5433,7 @@ public final class PDM {
       return fileUUID_ == null ? provenancegraph.datamodel.PDM.FileUUID.getDefaultInstance() : fileUUID_;
     }
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
+     * <code>.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
      */
     @java.lang.Override
     public provenancegraph.datamodel.PDM.FileUUIDOrBuilder getFileUUIDOrBuilder() {
@@ -5434,14 +5443,14 @@ public final class PDM {
     public static final int FILETYPE_FIELD_NUMBER = 2;
     private int fileType_ = 0;
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.File.FileType fileType = 2;</code>
+     * <code>.provenancegraph.datamodel.File.FileType fileType = 2;</code>
      * @return The enum numeric value on the wire for fileType.
      */
     @java.lang.Override public int getFileTypeValue() {
       return fileType_;
     }
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.File.FileType fileType = 2;</code>
+     * <code>.provenancegraph.datamodel.File.FileType fileType = 2;</code>
      * @return The fileType.
      */
     @java.lang.Override public provenancegraph.datamodel.PDM.File.FileType getFileType() {
@@ -5693,11 +5702,11 @@ public final class PDM {
       return builder;
     }
     /**
-     * Protobuf type {@code provenancegraph.provenancegraph.datamodel.File}
+     * Protobuf type {@code provenancegraph.datamodel.File}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:provenancegraph.provenancegraph.datamodel.File)
+        // @@protoc_insertion_point(builder_implements:provenancegraph.datamodel.File)
         provenancegraph.datamodel.PDM.FileOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
@@ -5712,7 +5721,7 @@ public final class PDM {
                 provenancegraph.datamodel.PDM.File.class, provenancegraph.datamodel.PDM.File.Builder.class);
       }
 
-      // Construct using provenancegraph.provenancegraph.datamodel.PDM.File.newBuilder()
+      // Construct using provenancegraph.datamodel.PDM.File.newBuilder()
       private Builder() {
 
       }
@@ -5910,14 +5919,14 @@ public final class PDM {
       private com.google.protobuf.SingleFieldBuilderV3<
           provenancegraph.datamodel.PDM.FileUUID, provenancegraph.datamodel.PDM.FileUUID.Builder, provenancegraph.datamodel.PDM.FileUUIDOrBuilder> fileUUIDBuilder_;
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
+       * <code>.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
        * @return Whether the fileUUID field is set.
        */
       public boolean hasFileUUID() {
         return ((bitField0_ & 0x00000001) != 0);
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
+       * <code>.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
        * @return The fileUUID.
        */
       public provenancegraph.datamodel.PDM.FileUUID getFileUUID() {
@@ -5928,7 +5937,7 @@ public final class PDM {
         }
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
+       * <code>.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
        */
       public Builder setFileUUID(provenancegraph.datamodel.PDM.FileUUID value) {
         if (fileUUIDBuilder_ == null) {
@@ -5944,7 +5953,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
+       * <code>.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
        */
       public Builder setFileUUID(
           provenancegraph.datamodel.PDM.FileUUID.Builder builderForValue) {
@@ -5958,7 +5967,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
+       * <code>.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
        */
       public Builder mergeFileUUID(provenancegraph.datamodel.PDM.FileUUID value) {
         if (fileUUIDBuilder_ == null) {
@@ -5977,7 +5986,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
+       * <code>.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
        */
       public Builder clearFileUUID() {
         bitField0_ = (bitField0_ & ~0x00000001);
@@ -5990,7 +5999,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
+       * <code>.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
        */
       public provenancegraph.datamodel.PDM.FileUUID.Builder getFileUUIDBuilder() {
         bitField0_ |= 0x00000001;
@@ -5998,7 +6007,7 @@ public final class PDM {
         return getFileUUIDFieldBuilder().getBuilder();
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
+       * <code>.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
        */
       public provenancegraph.datamodel.PDM.FileUUIDOrBuilder getFileUUIDOrBuilder() {
         if (fileUUIDBuilder_ != null) {
@@ -6009,7 +6018,7 @@ public final class PDM {
         }
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
+       * <code>.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           provenancegraph.datamodel.PDM.FileUUID, provenancegraph.datamodel.PDM.FileUUID.Builder, provenancegraph.datamodel.PDM.FileUUIDOrBuilder> 
@@ -6027,14 +6036,14 @@ public final class PDM {
 
       private int fileType_ = 0;
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.File.FileType fileType = 2;</code>
+       * <code>.provenancegraph.datamodel.File.FileType fileType = 2;</code>
        * @return The enum numeric value on the wire for fileType.
        */
       @java.lang.Override public int getFileTypeValue() {
         return fileType_;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.File.FileType fileType = 2;</code>
+       * <code>.provenancegraph.datamodel.File.FileType fileType = 2;</code>
        * @param value The enum numeric value on the wire for fileType to set.
        * @return This builder for chaining.
        */
@@ -6045,7 +6054,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.File.FileType fileType = 2;</code>
+       * <code>.provenancegraph.datamodel.File.FileType fileType = 2;</code>
        * @return The fileType.
        */
       @java.lang.Override
@@ -6054,7 +6063,7 @@ public final class PDM {
         return result == null ? provenancegraph.datamodel.PDM.File.FileType.UNRECOGNIZED : result;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.File.FileType fileType = 2;</code>
+       * <code>.provenancegraph.datamodel.File.FileType fileType = 2;</code>
        * @param value The fileType to set.
        * @return This builder for chaining.
        */
@@ -6068,7 +6077,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.File.FileType fileType = 2;</code>
+       * <code>.provenancegraph.datamodel.File.FileType fileType = 2;</code>
        * @return This builder for chaining.
        */
       public Builder clearFileType() {
@@ -6194,10 +6203,10 @@ public final class PDM {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:provenancegraph.provenancegraph.datamodel.File)
+      // @@protoc_insertion_point(builder_scope:provenancegraph.datamodel.File)
     }
 
-    // @@protoc_insertion_point(class_scope:provenancegraph.provenancegraph.datamodel.File)
+    // @@protoc_insertion_point(class_scope:provenancegraph.datamodel.File)
     private static final provenancegraph.datamodel.PDM.File DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new provenancegraph.datamodel.PDM.File();
@@ -6246,7 +6255,7 @@ public final class PDM {
   }
 
   public interface EventHeaderOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:provenancegraph.provenancegraph.datamodel.EventHeader)
+      // @@protoc_insertion_point(interface_extends:provenancegraph.datamodel.EventHeader)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -6256,17 +6265,17 @@ public final class PDM {
     long getTs();
 
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID procUUID = 2;</code>
+     * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 2;</code>
      * @return Whether the procUUID field is set.
      */
     boolean hasProcUUID();
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID procUUID = 2;</code>
+     * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 2;</code>
      * @return The procUUID.
      */
     provenancegraph.datamodel.PDM.ProcessUUID getProcUUID();
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID procUUID = 2;</code>
+     * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 2;</code>
      */
     provenancegraph.datamodel.PDM.ProcessUUIDOrBuilder getProcUUIDOrBuilder();
 
@@ -6281,11 +6290,11 @@ public final class PDM {
    * Event header
    * </pre>
    *
-   * Protobuf type {@code provenancegraph.provenancegraph.datamodel.EventHeader}
+   * Protobuf type {@code provenancegraph.datamodel.EventHeader}
    */
   public static final class EventHeader extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:provenancegraph.provenancegraph.datamodel.EventHeader)
+      // @@protoc_insertion_point(message_implements:provenancegraph.datamodel.EventHeader)
       EventHeaderOrBuilder {
   private static final long serialVersionUID = 0L;
     // Use EventHeader.newBuilder() to construct.
@@ -6329,7 +6338,7 @@ public final class PDM {
     public static final int PROCUUID_FIELD_NUMBER = 2;
     private provenancegraph.datamodel.PDM.ProcessUUID procUUID_;
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID procUUID = 2;</code>
+     * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 2;</code>
      * @return Whether the procUUID field is set.
      */
     @java.lang.Override
@@ -6337,7 +6346,7 @@ public final class PDM {
       return procUUID_ != null;
     }
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID procUUID = 2;</code>
+     * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 2;</code>
      * @return The procUUID.
      */
     @java.lang.Override
@@ -6345,7 +6354,7 @@ public final class PDM {
       return procUUID_ == null ? provenancegraph.datamodel.PDM.ProcessUUID.getDefaultInstance() : procUUID_;
     }
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID procUUID = 2;</code>
+     * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 2;</code>
      */
     @java.lang.Override
     public provenancegraph.datamodel.PDM.ProcessUUIDOrBuilder getProcUUIDOrBuilder() {
@@ -6553,11 +6562,11 @@ public final class PDM {
      * Event header
      * </pre>
      *
-     * Protobuf type {@code provenancegraph.provenancegraph.datamodel.EventHeader}
+     * Protobuf type {@code provenancegraph.datamodel.EventHeader}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:provenancegraph.provenancegraph.datamodel.EventHeader)
+        // @@protoc_insertion_point(builder_implements:provenancegraph.datamodel.EventHeader)
         provenancegraph.datamodel.PDM.EventHeaderOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
@@ -6572,7 +6581,7 @@ public final class PDM {
                 provenancegraph.datamodel.PDM.EventHeader.class, provenancegraph.datamodel.PDM.EventHeader.Builder.class);
       }
 
-      // Construct using provenancegraph.provenancegraph.datamodel.PDM.EventHeader.newBuilder()
+      // Construct using provenancegraph.datamodel.PDM.EventHeader.newBuilder()
       private Builder() {
 
       }
@@ -6788,14 +6797,14 @@ public final class PDM {
       private com.google.protobuf.SingleFieldBuilderV3<
           provenancegraph.datamodel.PDM.ProcessUUID, provenancegraph.datamodel.PDM.ProcessUUID.Builder, provenancegraph.datamodel.PDM.ProcessUUIDOrBuilder> procUUIDBuilder_;
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID procUUID = 2;</code>
+       * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 2;</code>
        * @return Whether the procUUID field is set.
        */
       public boolean hasProcUUID() {
         return ((bitField0_ & 0x00000002) != 0);
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID procUUID = 2;</code>
+       * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 2;</code>
        * @return The procUUID.
        */
       public provenancegraph.datamodel.PDM.ProcessUUID getProcUUID() {
@@ -6806,7 +6815,7 @@ public final class PDM {
         }
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID procUUID = 2;</code>
+       * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 2;</code>
        */
       public Builder setProcUUID(provenancegraph.datamodel.PDM.ProcessUUID value) {
         if (procUUIDBuilder_ == null) {
@@ -6822,7 +6831,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID procUUID = 2;</code>
+       * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 2;</code>
        */
       public Builder setProcUUID(
           provenancegraph.datamodel.PDM.ProcessUUID.Builder builderForValue) {
@@ -6836,7 +6845,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID procUUID = 2;</code>
+       * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 2;</code>
        */
       public Builder mergeProcUUID(provenancegraph.datamodel.PDM.ProcessUUID value) {
         if (procUUIDBuilder_ == null) {
@@ -6855,7 +6864,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID procUUID = 2;</code>
+       * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 2;</code>
        */
       public Builder clearProcUUID() {
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -6868,7 +6877,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID procUUID = 2;</code>
+       * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 2;</code>
        */
       public provenancegraph.datamodel.PDM.ProcessUUID.Builder getProcUUIDBuilder() {
         bitField0_ |= 0x00000002;
@@ -6876,7 +6885,7 @@ public final class PDM {
         return getProcUUIDFieldBuilder().getBuilder();
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID procUUID = 2;</code>
+       * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 2;</code>
        */
       public provenancegraph.datamodel.PDM.ProcessUUIDOrBuilder getProcUUIDOrBuilder() {
         if (procUUIDBuilder_ != null) {
@@ -6887,7 +6896,7 @@ public final class PDM {
         }
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID procUUID = 2;</code>
+       * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           provenancegraph.datamodel.PDM.ProcessUUID, provenancegraph.datamodel.PDM.ProcessUUID.Builder, provenancegraph.datamodel.PDM.ProcessUUIDOrBuilder> 
@@ -6947,10 +6956,10 @@ public final class PDM {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:provenancegraph.provenancegraph.datamodel.EventHeader)
+      // @@protoc_insertion_point(builder_scope:provenancegraph.datamodel.EventHeader)
     }
 
-    // @@protoc_insertion_point(class_scope:provenancegraph.provenancegraph.datamodel.EventHeader)
+    // @@protoc_insertion_point(class_scope:provenancegraph.datamodel.EventHeader)
     private static final provenancegraph.datamodel.PDM.EventHeader DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new provenancegraph.datamodel.PDM.EventHeader();
@@ -6999,7 +7008,7 @@ public final class PDM {
   }
 
   public interface IPAddressOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:provenancegraph.provenancegraph.datamodel.IPAddress)
+      // @@protoc_insertion_point(interface_extends:provenancegraph.datamodel.IPAddress)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -7031,11 +7040,11 @@ public final class PDM {
    * Network-related event data
    * </pre>
    *
-   * Protobuf type {@code provenancegraph.provenancegraph.datamodel.IPAddress}
+   * Protobuf type {@code provenancegraph.datamodel.IPAddress}
    */
   public static final class IPAddress extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:provenancegraph.provenancegraph.datamodel.IPAddress)
+      // @@protoc_insertion_point(message_implements:provenancegraph.datamodel.IPAddress)
       IPAddressOrBuilder {
   private static final long serialVersionUID = 0L;
     // Use IPAddress.newBuilder() to construct.
@@ -7304,11 +7313,11 @@ public final class PDM {
      * Network-related event data
      * </pre>
      *
-     * Protobuf type {@code provenancegraph.provenancegraph.datamodel.IPAddress}
+     * Protobuf type {@code provenancegraph.datamodel.IPAddress}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:provenancegraph.provenancegraph.datamodel.IPAddress)
+        // @@protoc_insertion_point(builder_implements:provenancegraph.datamodel.IPAddress)
         provenancegraph.datamodel.PDM.IPAddressOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
@@ -7323,7 +7332,7 @@ public final class PDM {
                 provenancegraph.datamodel.PDM.IPAddress.class, provenancegraph.datamodel.PDM.IPAddress.Builder.class);
       }
 
-      // Construct using provenancegraph.provenancegraph.datamodel.PDM.IPAddress.newBuilder()
+      // Construct using provenancegraph.datamodel.PDM.IPAddress.newBuilder()
       private Builder() {
 
       }
@@ -7647,10 +7656,10 @@ public final class PDM {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:provenancegraph.provenancegraph.datamodel.IPAddress)
+      // @@protoc_insertion_point(builder_scope:provenancegraph.datamodel.IPAddress)
     }
 
-    // @@protoc_insertion_point(class_scope:provenancegraph.provenancegraph.datamodel.IPAddress)
+    // @@protoc_insertion_point(class_scope:provenancegraph.datamodel.IPAddress)
     private static final provenancegraph.datamodel.PDM.IPAddress DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new provenancegraph.datamodel.PDM.IPAddress();
@@ -7699,36 +7708,36 @@ public final class PDM {
   }
 
   public interface NetEventOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:provenancegraph.provenancegraph.datamodel.NetEvent)
+      // @@protoc_insertion_point(interface_extends:provenancegraph.datamodel.NetEvent)
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.IPAddress sip = 1;</code>
+     * <code>.provenancegraph.datamodel.IPAddress sip = 1;</code>
      * @return Whether the sip field is set.
      */
     boolean hasSip();
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.IPAddress sip = 1;</code>
+     * <code>.provenancegraph.datamodel.IPAddress sip = 1;</code>
      * @return The sip.
      */
     provenancegraph.datamodel.PDM.IPAddress getSip();
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.IPAddress sip = 1;</code>
+     * <code>.provenancegraph.datamodel.IPAddress sip = 1;</code>
      */
     provenancegraph.datamodel.PDM.IPAddressOrBuilder getSipOrBuilder();
 
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.IPAddress dip = 2;</code>
+     * <code>.provenancegraph.datamodel.IPAddress dip = 2;</code>
      * @return Whether the dip field is set.
      */
     boolean hasDip();
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.IPAddress dip = 2;</code>
+     * <code>.provenancegraph.datamodel.IPAddress dip = 2;</code>
      * @return The dip.
      */
     provenancegraph.datamodel.PDM.IPAddress getDip();
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.IPAddress dip = 2;</code>
+     * <code>.provenancegraph.datamodel.IPAddress dip = 2;</code>
      */
     provenancegraph.datamodel.PDM.IPAddressOrBuilder getDipOrBuilder();
 
@@ -7751,22 +7760,22 @@ public final class PDM {
     int getProtocol();
 
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.NetEvent.Direction direct = 6;</code>
+     * <code>.provenancegraph.datamodel.NetEvent.Direction direct = 6;</code>
      * @return The enum numeric value on the wire for direct.
      */
     int getDirectValue();
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.NetEvent.Direction direct = 6;</code>
+     * <code>.provenancegraph.datamodel.NetEvent.Direction direct = 6;</code>
      * @return The direct.
      */
     provenancegraph.datamodel.PDM.NetEvent.Direction getDirect();
   }
   /**
-   * Protobuf type {@code provenancegraph.provenancegraph.datamodel.NetEvent}
+   * Protobuf type {@code provenancegraph.datamodel.NetEvent}
    */
   public static final class NetEvent extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:provenancegraph.provenancegraph.datamodel.NetEvent)
+      // @@protoc_insertion_point(message_implements:provenancegraph.datamodel.NetEvent)
       NetEventOrBuilder {
   private static final long serialVersionUID = 0L;
     // Use NetEvent.newBuilder() to construct.
@@ -7798,7 +7807,7 @@ public final class PDM {
     }
 
     /**
-     * Protobuf enum {@code provenancegraph.provenancegraph.datamodel.NetEvent.Direction}
+     * Protobuf enum {@code provenancegraph.datamodel.NetEvent.Direction}
      */
     public enum Direction
         implements com.google.protobuf.ProtocolMessageEnum {
@@ -7911,13 +7920,13 @@ public final class PDM {
         this.value = value;
       }
 
-      // @@protoc_insertion_point(enum_scope:provenancegraph.provenancegraph.datamodel.NetEvent.Direction)
+      // @@protoc_insertion_point(enum_scope:provenancegraph.datamodel.NetEvent.Direction)
     }
 
     public static final int SIP_FIELD_NUMBER = 1;
     private provenancegraph.datamodel.PDM.IPAddress sip_;
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.IPAddress sip = 1;</code>
+     * <code>.provenancegraph.datamodel.IPAddress sip = 1;</code>
      * @return Whether the sip field is set.
      */
     @java.lang.Override
@@ -7925,7 +7934,7 @@ public final class PDM {
       return sip_ != null;
     }
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.IPAddress sip = 1;</code>
+     * <code>.provenancegraph.datamodel.IPAddress sip = 1;</code>
      * @return The sip.
      */
     @java.lang.Override
@@ -7933,7 +7942,7 @@ public final class PDM {
       return sip_ == null ? provenancegraph.datamodel.PDM.IPAddress.getDefaultInstance() : sip_;
     }
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.IPAddress sip = 1;</code>
+     * <code>.provenancegraph.datamodel.IPAddress sip = 1;</code>
      */
     @java.lang.Override
     public provenancegraph.datamodel.PDM.IPAddressOrBuilder getSipOrBuilder() {
@@ -7943,7 +7952,7 @@ public final class PDM {
     public static final int DIP_FIELD_NUMBER = 2;
     private provenancegraph.datamodel.PDM.IPAddress dip_;
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.IPAddress dip = 2;</code>
+     * <code>.provenancegraph.datamodel.IPAddress dip = 2;</code>
      * @return Whether the dip field is set.
      */
     @java.lang.Override
@@ -7951,7 +7960,7 @@ public final class PDM {
       return dip_ != null;
     }
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.IPAddress dip = 2;</code>
+     * <code>.provenancegraph.datamodel.IPAddress dip = 2;</code>
      * @return The dip.
      */
     @java.lang.Override
@@ -7959,7 +7968,7 @@ public final class PDM {
       return dip_ == null ? provenancegraph.datamodel.PDM.IPAddress.getDefaultInstance() : dip_;
     }
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.IPAddress dip = 2;</code>
+     * <code>.provenancegraph.datamodel.IPAddress dip = 2;</code>
      */
     @java.lang.Override
     public provenancegraph.datamodel.PDM.IPAddressOrBuilder getDipOrBuilder() {
@@ -8002,14 +8011,14 @@ public final class PDM {
     public static final int DIRECT_FIELD_NUMBER = 6;
     private int direct_ = 0;
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.NetEvent.Direction direct = 6;</code>
+     * <code>.provenancegraph.datamodel.NetEvent.Direction direct = 6;</code>
      * @return The enum numeric value on the wire for direct.
      */
     @java.lang.Override public int getDirectValue() {
       return direct_;
     }
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.NetEvent.Direction direct = 6;</code>
+     * <code>.provenancegraph.datamodel.NetEvent.Direction direct = 6;</code>
      * @return The direct.
      */
     @java.lang.Override public provenancegraph.datamodel.PDM.NetEvent.Direction getDirect() {
@@ -8239,11 +8248,11 @@ public final class PDM {
       return builder;
     }
     /**
-     * Protobuf type {@code provenancegraph.provenancegraph.datamodel.NetEvent}
+     * Protobuf type {@code provenancegraph.datamodel.NetEvent}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:provenancegraph.provenancegraph.datamodel.NetEvent)
+        // @@protoc_insertion_point(builder_implements:provenancegraph.datamodel.NetEvent)
         provenancegraph.datamodel.PDM.NetEventOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
@@ -8258,7 +8267,7 @@ public final class PDM {
                 provenancegraph.datamodel.PDM.NetEvent.class, provenancegraph.datamodel.PDM.NetEvent.Builder.class);
       }
 
-      // Construct using provenancegraph.provenancegraph.datamodel.PDM.NetEvent.newBuilder()
+      // Construct using provenancegraph.datamodel.PDM.NetEvent.newBuilder()
       private Builder() {
 
       }
@@ -8486,14 +8495,14 @@ public final class PDM {
       private com.google.protobuf.SingleFieldBuilderV3<
           provenancegraph.datamodel.PDM.IPAddress, provenancegraph.datamodel.PDM.IPAddress.Builder, provenancegraph.datamodel.PDM.IPAddressOrBuilder> sipBuilder_;
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.IPAddress sip = 1;</code>
+       * <code>.provenancegraph.datamodel.IPAddress sip = 1;</code>
        * @return Whether the sip field is set.
        */
       public boolean hasSip() {
         return ((bitField0_ & 0x00000001) != 0);
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.IPAddress sip = 1;</code>
+       * <code>.provenancegraph.datamodel.IPAddress sip = 1;</code>
        * @return The sip.
        */
       public provenancegraph.datamodel.PDM.IPAddress getSip() {
@@ -8504,7 +8513,7 @@ public final class PDM {
         }
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.IPAddress sip = 1;</code>
+       * <code>.provenancegraph.datamodel.IPAddress sip = 1;</code>
        */
       public Builder setSip(provenancegraph.datamodel.PDM.IPAddress value) {
         if (sipBuilder_ == null) {
@@ -8520,7 +8529,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.IPAddress sip = 1;</code>
+       * <code>.provenancegraph.datamodel.IPAddress sip = 1;</code>
        */
       public Builder setSip(
           provenancegraph.datamodel.PDM.IPAddress.Builder builderForValue) {
@@ -8534,7 +8543,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.IPAddress sip = 1;</code>
+       * <code>.provenancegraph.datamodel.IPAddress sip = 1;</code>
        */
       public Builder mergeSip(provenancegraph.datamodel.PDM.IPAddress value) {
         if (sipBuilder_ == null) {
@@ -8553,7 +8562,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.IPAddress sip = 1;</code>
+       * <code>.provenancegraph.datamodel.IPAddress sip = 1;</code>
        */
       public Builder clearSip() {
         bitField0_ = (bitField0_ & ~0x00000001);
@@ -8566,7 +8575,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.IPAddress sip = 1;</code>
+       * <code>.provenancegraph.datamodel.IPAddress sip = 1;</code>
        */
       public provenancegraph.datamodel.PDM.IPAddress.Builder getSipBuilder() {
         bitField0_ |= 0x00000001;
@@ -8574,7 +8583,7 @@ public final class PDM {
         return getSipFieldBuilder().getBuilder();
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.IPAddress sip = 1;</code>
+       * <code>.provenancegraph.datamodel.IPAddress sip = 1;</code>
        */
       public provenancegraph.datamodel.PDM.IPAddressOrBuilder getSipOrBuilder() {
         if (sipBuilder_ != null) {
@@ -8585,7 +8594,7 @@ public final class PDM {
         }
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.IPAddress sip = 1;</code>
+       * <code>.provenancegraph.datamodel.IPAddress sip = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           provenancegraph.datamodel.PDM.IPAddress, provenancegraph.datamodel.PDM.IPAddress.Builder, provenancegraph.datamodel.PDM.IPAddressOrBuilder> 
@@ -8605,14 +8614,14 @@ public final class PDM {
       private com.google.protobuf.SingleFieldBuilderV3<
           provenancegraph.datamodel.PDM.IPAddress, provenancegraph.datamodel.PDM.IPAddress.Builder, provenancegraph.datamodel.PDM.IPAddressOrBuilder> dipBuilder_;
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.IPAddress dip = 2;</code>
+       * <code>.provenancegraph.datamodel.IPAddress dip = 2;</code>
        * @return Whether the dip field is set.
        */
       public boolean hasDip() {
         return ((bitField0_ & 0x00000002) != 0);
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.IPAddress dip = 2;</code>
+       * <code>.provenancegraph.datamodel.IPAddress dip = 2;</code>
        * @return The dip.
        */
       public provenancegraph.datamodel.PDM.IPAddress getDip() {
@@ -8623,7 +8632,7 @@ public final class PDM {
         }
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.IPAddress dip = 2;</code>
+       * <code>.provenancegraph.datamodel.IPAddress dip = 2;</code>
        */
       public Builder setDip(provenancegraph.datamodel.PDM.IPAddress value) {
         if (dipBuilder_ == null) {
@@ -8639,7 +8648,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.IPAddress dip = 2;</code>
+       * <code>.provenancegraph.datamodel.IPAddress dip = 2;</code>
        */
       public Builder setDip(
           provenancegraph.datamodel.PDM.IPAddress.Builder builderForValue) {
@@ -8653,7 +8662,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.IPAddress dip = 2;</code>
+       * <code>.provenancegraph.datamodel.IPAddress dip = 2;</code>
        */
       public Builder mergeDip(provenancegraph.datamodel.PDM.IPAddress value) {
         if (dipBuilder_ == null) {
@@ -8672,7 +8681,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.IPAddress dip = 2;</code>
+       * <code>.provenancegraph.datamodel.IPAddress dip = 2;</code>
        */
       public Builder clearDip() {
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -8685,7 +8694,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.IPAddress dip = 2;</code>
+       * <code>.provenancegraph.datamodel.IPAddress dip = 2;</code>
        */
       public provenancegraph.datamodel.PDM.IPAddress.Builder getDipBuilder() {
         bitField0_ |= 0x00000002;
@@ -8693,7 +8702,7 @@ public final class PDM {
         return getDipFieldBuilder().getBuilder();
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.IPAddress dip = 2;</code>
+       * <code>.provenancegraph.datamodel.IPAddress dip = 2;</code>
        */
       public provenancegraph.datamodel.PDM.IPAddressOrBuilder getDipOrBuilder() {
         if (dipBuilder_ != null) {
@@ -8704,7 +8713,7 @@ public final class PDM {
         }
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.IPAddress dip = 2;</code>
+       * <code>.provenancegraph.datamodel.IPAddress dip = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           provenancegraph.datamodel.PDM.IPAddress, provenancegraph.datamodel.PDM.IPAddress.Builder, provenancegraph.datamodel.PDM.IPAddressOrBuilder> 
@@ -8818,14 +8827,14 @@ public final class PDM {
 
       private int direct_ = 0;
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.NetEvent.Direction direct = 6;</code>
+       * <code>.provenancegraph.datamodel.NetEvent.Direction direct = 6;</code>
        * @return The enum numeric value on the wire for direct.
        */
       @java.lang.Override public int getDirectValue() {
         return direct_;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.NetEvent.Direction direct = 6;</code>
+       * <code>.provenancegraph.datamodel.NetEvent.Direction direct = 6;</code>
        * @param value The enum numeric value on the wire for direct to set.
        * @return This builder for chaining.
        */
@@ -8836,7 +8845,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.NetEvent.Direction direct = 6;</code>
+       * <code>.provenancegraph.datamodel.NetEvent.Direction direct = 6;</code>
        * @return The direct.
        */
       @java.lang.Override
@@ -8845,7 +8854,7 @@ public final class PDM {
         return result == null ? provenancegraph.datamodel.PDM.NetEvent.Direction.UNRECOGNIZED : result;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.NetEvent.Direction direct = 6;</code>
+       * <code>.provenancegraph.datamodel.NetEvent.Direction direct = 6;</code>
        * @param value The direct to set.
        * @return This builder for chaining.
        */
@@ -8859,7 +8868,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.NetEvent.Direction direct = 6;</code>
+       * <code>.provenancegraph.datamodel.NetEvent.Direction direct = 6;</code>
        * @return This builder for chaining.
        */
       public Builder clearDirect() {
@@ -8881,10 +8890,10 @@ public final class PDM {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:provenancegraph.provenancegraph.datamodel.NetEvent)
+      // @@protoc_insertion_point(builder_scope:provenancegraph.datamodel.NetEvent)
     }
 
-    // @@protoc_insertion_point(class_scope:provenancegraph.provenancegraph.datamodel.NetEvent)
+    // @@protoc_insertion_point(class_scope:provenancegraph.datamodel.NetEvent)
     private static final provenancegraph.datamodel.PDM.NetEvent DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new provenancegraph.datamodel.PDM.NetEvent();
@@ -8933,34 +8942,46 @@ public final class PDM {
   }
 
   public interface ProcessEventOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:provenancegraph.provenancegraph.datamodel.ProcessEvent)
+      // @@protoc_insertion_point(interface_extends:provenancegraph.datamodel.ProcessEvent)
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID childProcUUID = 1;</code>
-     * @return Whether the childProcUUID field is set.
+     * <pre>
+     *    ProcessUUID childProcUUID = 1;
+     * </pre>
+     *
+     * <code>.provenancegraph.datamodel.Process childProc = 1;</code>
+     * @return Whether the childProc field is set.
      */
-    boolean hasChildProcUUID();
+    boolean hasChildProc();
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID childProcUUID = 1;</code>
-     * @return The childProcUUID.
+     * <pre>
+     *    ProcessUUID childProcUUID = 1;
+     * </pre>
+     *
+     * <code>.provenancegraph.datamodel.Process childProc = 1;</code>
+     * @return The childProc.
      */
-    provenancegraph.datamodel.PDM.ProcessUUID getChildProcUUID();
+    provenancegraph.datamodel.PDM.Process getChildProc();
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID childProcUUID = 1;</code>
+     * <pre>
+     *    ProcessUUID childProcUUID = 1;
+     * </pre>
+     *
+     * <code>.provenancegraph.datamodel.Process childProc = 1;</code>
      */
-    provenancegraph.datamodel.PDM.ProcessUUIDOrBuilder getChildProcUUIDOrBuilder();
+    provenancegraph.datamodel.PDM.ProcessOrBuilder getChildProcOrBuilder();
   }
   /**
    * <pre>
    * Process-related event data
    * </pre>
    *
-   * Protobuf type {@code provenancegraph.provenancegraph.datamodel.ProcessEvent}
+   * Protobuf type {@code provenancegraph.datamodel.ProcessEvent}
    */
   public static final class ProcessEvent extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:provenancegraph.provenancegraph.datamodel.ProcessEvent)
+      // @@protoc_insertion_point(message_implements:provenancegraph.datamodel.ProcessEvent)
       ProcessEventOrBuilder {
   private static final long serialVersionUID = 0L;
     // Use ProcessEvent.newBuilder() to construct.
@@ -8990,30 +9011,42 @@ public final class PDM {
               provenancegraph.datamodel.PDM.ProcessEvent.class, provenancegraph.datamodel.PDM.ProcessEvent.Builder.class);
     }
 
-    public static final int CHILDPROCUUID_FIELD_NUMBER = 1;
-    private provenancegraph.datamodel.PDM.ProcessUUID childProcUUID_;
+    public static final int CHILDPROC_FIELD_NUMBER = 1;
+    private provenancegraph.datamodel.PDM.Process childProc_;
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID childProcUUID = 1;</code>
-     * @return Whether the childProcUUID field is set.
+     * <pre>
+     *    ProcessUUID childProcUUID = 1;
+     * </pre>
+     *
+     * <code>.provenancegraph.datamodel.Process childProc = 1;</code>
+     * @return Whether the childProc field is set.
      */
     @java.lang.Override
-    public boolean hasChildProcUUID() {
-      return childProcUUID_ != null;
+    public boolean hasChildProc() {
+      return childProc_ != null;
     }
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID childProcUUID = 1;</code>
-     * @return The childProcUUID.
+     * <pre>
+     *    ProcessUUID childProcUUID = 1;
+     * </pre>
+     *
+     * <code>.provenancegraph.datamodel.Process childProc = 1;</code>
+     * @return The childProc.
      */
     @java.lang.Override
-    public provenancegraph.datamodel.PDM.ProcessUUID getChildProcUUID() {
-      return childProcUUID_ == null ? provenancegraph.datamodel.PDM.ProcessUUID.getDefaultInstance() : childProcUUID_;
+    public provenancegraph.datamodel.PDM.Process getChildProc() {
+      return childProc_ == null ? provenancegraph.datamodel.PDM.Process.getDefaultInstance() : childProc_;
     }
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID childProcUUID = 1;</code>
+     * <pre>
+     *    ProcessUUID childProcUUID = 1;
+     * </pre>
+     *
+     * <code>.provenancegraph.datamodel.Process childProc = 1;</code>
      */
     @java.lang.Override
-    public provenancegraph.datamodel.PDM.ProcessUUIDOrBuilder getChildProcUUIDOrBuilder() {
-      return childProcUUID_ == null ? provenancegraph.datamodel.PDM.ProcessUUID.getDefaultInstance() : childProcUUID_;
+    public provenancegraph.datamodel.PDM.ProcessOrBuilder getChildProcOrBuilder() {
+      return childProc_ == null ? provenancegraph.datamodel.PDM.Process.getDefaultInstance() : childProc_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -9030,8 +9063,8 @@ public final class PDM {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (childProcUUID_ != null) {
-        output.writeMessage(1, getChildProcUUID());
+      if (childProc_ != null) {
+        output.writeMessage(1, getChildProc());
       }
       getUnknownFields().writeTo(output);
     }
@@ -9042,9 +9075,9 @@ public final class PDM {
       if (size != -1) return size;
 
       size = 0;
-      if (childProcUUID_ != null) {
+      if (childProc_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, getChildProcUUID());
+          .computeMessageSize(1, getChildProc());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
@@ -9061,10 +9094,10 @@ public final class PDM {
       }
       provenancegraph.datamodel.PDM.ProcessEvent other = (provenancegraph.datamodel.PDM.ProcessEvent) obj;
 
-      if (hasChildProcUUID() != other.hasChildProcUUID()) return false;
-      if (hasChildProcUUID()) {
-        if (!getChildProcUUID()
-            .equals(other.getChildProcUUID())) return false;
+      if (hasChildProc() != other.hasChildProc()) return false;
+      if (hasChildProc()) {
+        if (!getChildProc()
+            .equals(other.getChildProc())) return false;
       }
       if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
@@ -9077,9 +9110,9 @@ public final class PDM {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      if (hasChildProcUUID()) {
-        hash = (37 * hash) + CHILDPROCUUID_FIELD_NUMBER;
-        hash = (53 * hash) + getChildProcUUID().hashCode();
+      if (hasChildProc()) {
+        hash = (37 * hash) + CHILDPROC_FIELD_NUMBER;
+        hash = (53 * hash) + getChildProc().hashCode();
       }
       hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
@@ -9183,11 +9216,11 @@ public final class PDM {
      * Process-related event data
      * </pre>
      *
-     * Protobuf type {@code provenancegraph.provenancegraph.datamodel.ProcessEvent}
+     * Protobuf type {@code provenancegraph.datamodel.ProcessEvent}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:provenancegraph.provenancegraph.datamodel.ProcessEvent)
+        // @@protoc_insertion_point(builder_implements:provenancegraph.datamodel.ProcessEvent)
         provenancegraph.datamodel.PDM.ProcessEventOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
@@ -9202,7 +9235,7 @@ public final class PDM {
                 provenancegraph.datamodel.PDM.ProcessEvent.class, provenancegraph.datamodel.PDM.ProcessEvent.Builder.class);
       }
 
-      // Construct using provenancegraph.provenancegraph.datamodel.PDM.ProcessEvent.newBuilder()
+      // Construct using provenancegraph.datamodel.PDM.ProcessEvent.newBuilder()
       private Builder() {
 
       }
@@ -9216,10 +9249,10 @@ public final class PDM {
       public Builder clear() {
         super.clear();
         bitField0_ = 0;
-        childProcUUID_ = null;
-        if (childProcUUIDBuilder_ != null) {
-          childProcUUIDBuilder_.dispose();
-          childProcUUIDBuilder_ = null;
+        childProc_ = null;
+        if (childProcBuilder_ != null) {
+          childProcBuilder_.dispose();
+          childProcBuilder_ = null;
         }
         return this;
       }
@@ -9255,9 +9288,9 @@ public final class PDM {
       private void buildPartial0(provenancegraph.datamodel.PDM.ProcessEvent result) {
         int from_bitField0_ = bitField0_;
         if (((from_bitField0_ & 0x00000001) != 0)) {
-          result.childProcUUID_ = childProcUUIDBuilder_ == null
-              ? childProcUUID_
-              : childProcUUIDBuilder_.build();
+          result.childProc_ = childProcBuilder_ == null
+              ? childProc_
+              : childProcBuilder_.build();
         }
       }
 
@@ -9305,8 +9338,8 @@ public final class PDM {
 
       public Builder mergeFrom(provenancegraph.datamodel.PDM.ProcessEvent other) {
         if (other == provenancegraph.datamodel.PDM.ProcessEvent.getDefaultInstance()) return this;
-        if (other.hasChildProcUUID()) {
-          mergeChildProcUUID(other.getChildProcUUID());
+        if (other.hasChildProc()) {
+          mergeChildProc(other.getChildProc());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
@@ -9336,7 +9369,7 @@ public final class PDM {
                 break;
               case 10: {
                 input.readMessage(
-                    getChildProcUUIDFieldBuilder().getBuilder(),
+                    getChildProcFieldBuilder().getBuilder(),
                     extensionRegistry);
                 bitField0_ |= 0x00000001;
                 break;
@@ -9358,123 +9391,159 @@ public final class PDM {
       }
       private int bitField0_;
 
-      private provenancegraph.datamodel.PDM.ProcessUUID childProcUUID_;
+      private provenancegraph.datamodel.PDM.Process childProc_;
       private com.google.protobuf.SingleFieldBuilderV3<
-          provenancegraph.datamodel.PDM.ProcessUUID, provenancegraph.datamodel.PDM.ProcessUUID.Builder, provenancegraph.datamodel.PDM.ProcessUUIDOrBuilder> childProcUUIDBuilder_;
+          provenancegraph.datamodel.PDM.Process, provenancegraph.datamodel.PDM.Process.Builder, provenancegraph.datamodel.PDM.ProcessOrBuilder> childProcBuilder_;
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID childProcUUID = 1;</code>
-       * @return Whether the childProcUUID field is set.
+       * <pre>
+       *    ProcessUUID childProcUUID = 1;
+       * </pre>
+       *
+       * <code>.provenancegraph.datamodel.Process childProc = 1;</code>
+       * @return Whether the childProc field is set.
        */
-      public boolean hasChildProcUUID() {
+      public boolean hasChildProc() {
         return ((bitField0_ & 0x00000001) != 0);
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID childProcUUID = 1;</code>
-       * @return The childProcUUID.
+       * <pre>
+       *    ProcessUUID childProcUUID = 1;
+       * </pre>
+       *
+       * <code>.provenancegraph.datamodel.Process childProc = 1;</code>
+       * @return The childProc.
        */
-      public provenancegraph.datamodel.PDM.ProcessUUID getChildProcUUID() {
-        if (childProcUUIDBuilder_ == null) {
-          return childProcUUID_ == null ? provenancegraph.datamodel.PDM.ProcessUUID.getDefaultInstance() : childProcUUID_;
+      public provenancegraph.datamodel.PDM.Process getChildProc() {
+        if (childProcBuilder_ == null) {
+          return childProc_ == null ? provenancegraph.datamodel.PDM.Process.getDefaultInstance() : childProc_;
         } else {
-          return childProcUUIDBuilder_.getMessage();
+          return childProcBuilder_.getMessage();
         }
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID childProcUUID = 1;</code>
+       * <pre>
+       *    ProcessUUID childProcUUID = 1;
+       * </pre>
+       *
+       * <code>.provenancegraph.datamodel.Process childProc = 1;</code>
        */
-      public Builder setChildProcUUID(provenancegraph.datamodel.PDM.ProcessUUID value) {
-        if (childProcUUIDBuilder_ == null) {
+      public Builder setChildProc(provenancegraph.datamodel.PDM.Process value) {
+        if (childProcBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          childProcUUID_ = value;
+          childProc_ = value;
         } else {
-          childProcUUIDBuilder_.setMessage(value);
+          childProcBuilder_.setMessage(value);
         }
         bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID childProcUUID = 1;</code>
+       * <pre>
+       *    ProcessUUID childProcUUID = 1;
+       * </pre>
+       *
+       * <code>.provenancegraph.datamodel.Process childProc = 1;</code>
        */
-      public Builder setChildProcUUID(
-          provenancegraph.datamodel.PDM.ProcessUUID.Builder builderForValue) {
-        if (childProcUUIDBuilder_ == null) {
-          childProcUUID_ = builderForValue.build();
+      public Builder setChildProc(
+          provenancegraph.datamodel.PDM.Process.Builder builderForValue) {
+        if (childProcBuilder_ == null) {
+          childProc_ = builderForValue.build();
         } else {
-          childProcUUIDBuilder_.setMessage(builderForValue.build());
+          childProcBuilder_.setMessage(builderForValue.build());
         }
         bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID childProcUUID = 1;</code>
+       * <pre>
+       *    ProcessUUID childProcUUID = 1;
+       * </pre>
+       *
+       * <code>.provenancegraph.datamodel.Process childProc = 1;</code>
        */
-      public Builder mergeChildProcUUID(provenancegraph.datamodel.PDM.ProcessUUID value) {
-        if (childProcUUIDBuilder_ == null) {
+      public Builder mergeChildProc(provenancegraph.datamodel.PDM.Process value) {
+        if (childProcBuilder_ == null) {
           if (((bitField0_ & 0x00000001) != 0) &&
-            childProcUUID_ != null &&
-            childProcUUID_ != provenancegraph.datamodel.PDM.ProcessUUID.getDefaultInstance()) {
-            getChildProcUUIDBuilder().mergeFrom(value);
+            childProc_ != null &&
+            childProc_ != provenancegraph.datamodel.PDM.Process.getDefaultInstance()) {
+            getChildProcBuilder().mergeFrom(value);
           } else {
-            childProcUUID_ = value;
+            childProc_ = value;
           }
         } else {
-          childProcUUIDBuilder_.mergeFrom(value);
+          childProcBuilder_.mergeFrom(value);
         }
         bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID childProcUUID = 1;</code>
+       * <pre>
+       *    ProcessUUID childProcUUID = 1;
+       * </pre>
+       *
+       * <code>.provenancegraph.datamodel.Process childProc = 1;</code>
        */
-      public Builder clearChildProcUUID() {
+      public Builder clearChildProc() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        childProcUUID_ = null;
-        if (childProcUUIDBuilder_ != null) {
-          childProcUUIDBuilder_.dispose();
-          childProcUUIDBuilder_ = null;
+        childProc_ = null;
+        if (childProcBuilder_ != null) {
+          childProcBuilder_.dispose();
+          childProcBuilder_ = null;
         }
         onChanged();
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID childProcUUID = 1;</code>
+       * <pre>
+       *    ProcessUUID childProcUUID = 1;
+       * </pre>
+       *
+       * <code>.provenancegraph.datamodel.Process childProc = 1;</code>
        */
-      public provenancegraph.datamodel.PDM.ProcessUUID.Builder getChildProcUUIDBuilder() {
+      public provenancegraph.datamodel.PDM.Process.Builder getChildProcBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
-        return getChildProcUUIDFieldBuilder().getBuilder();
+        return getChildProcFieldBuilder().getBuilder();
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID childProcUUID = 1;</code>
+       * <pre>
+       *    ProcessUUID childProcUUID = 1;
+       * </pre>
+       *
+       * <code>.provenancegraph.datamodel.Process childProc = 1;</code>
        */
-      public provenancegraph.datamodel.PDM.ProcessUUIDOrBuilder getChildProcUUIDOrBuilder() {
-        if (childProcUUIDBuilder_ != null) {
-          return childProcUUIDBuilder_.getMessageOrBuilder();
+      public provenancegraph.datamodel.PDM.ProcessOrBuilder getChildProcOrBuilder() {
+        if (childProcBuilder_ != null) {
+          return childProcBuilder_.getMessageOrBuilder();
         } else {
-          return childProcUUID_ == null ?
-              provenancegraph.datamodel.PDM.ProcessUUID.getDefaultInstance() : childProcUUID_;
+          return childProc_ == null ?
+              provenancegraph.datamodel.PDM.Process.getDefaultInstance() : childProc_;
         }
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.ProcessUUID childProcUUID = 1;</code>
+       * <pre>
+       *    ProcessUUID childProcUUID = 1;
+       * </pre>
+       *
+       * <code>.provenancegraph.datamodel.Process childProc = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          provenancegraph.datamodel.PDM.ProcessUUID, provenancegraph.datamodel.PDM.ProcessUUID.Builder, provenancegraph.datamodel.PDM.ProcessUUIDOrBuilder> 
-          getChildProcUUIDFieldBuilder() {
-        if (childProcUUIDBuilder_ == null) {
-          childProcUUIDBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              provenancegraph.datamodel.PDM.ProcessUUID, provenancegraph.datamodel.PDM.ProcessUUID.Builder, provenancegraph.datamodel.PDM.ProcessUUIDOrBuilder>(
-                  getChildProcUUID(),
+          provenancegraph.datamodel.PDM.Process, provenancegraph.datamodel.PDM.Process.Builder, provenancegraph.datamodel.PDM.ProcessOrBuilder> 
+          getChildProcFieldBuilder() {
+        if (childProcBuilder_ == null) {
+          childProcBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              provenancegraph.datamodel.PDM.Process, provenancegraph.datamodel.PDM.Process.Builder, provenancegraph.datamodel.PDM.ProcessOrBuilder>(
+                  getChildProc(),
                   getParentForChildren(),
                   isClean());
-          childProcUUID_ = null;
+          childProc_ = null;
         }
-        return childProcUUIDBuilder_;
+        return childProcBuilder_;
       }
       @java.lang.Override
       public final Builder setUnknownFields(
@@ -9489,10 +9558,10 @@ public final class PDM {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:provenancegraph.provenancegraph.datamodel.ProcessEvent)
+      // @@protoc_insertion_point(builder_scope:provenancegraph.datamodel.ProcessEvent)
     }
 
-    // @@protoc_insertion_point(class_scope:provenancegraph.provenancegraph.datamodel.ProcessEvent)
+    // @@protoc_insertion_point(class_scope:provenancegraph.datamodel.ProcessEvent)
     private static final provenancegraph.datamodel.PDM.ProcessEvent DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new provenancegraph.datamodel.PDM.ProcessEvent();
@@ -9541,38 +9610,53 @@ public final class PDM {
   }
 
   public interface FileEventOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:provenancegraph.provenancegraph.datamodel.FileEvent)
+      // @@protoc_insertion_point(interface_extends:provenancegraph.datamodel.FileEvent)
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
-     * @return Whether the fileUUID field is set.
+     * <pre>
+     *    FileUUID fileUUID = 1;
+     *    FileUUID newFileUUID = 2;
+     * </pre>
+     *
+     * <code>.provenancegraph.datamodel.File file = 1;</code>
+     * @return Whether the file field is set.
      */
-    boolean hasFileUUID();
+    boolean hasFile();
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
-     * @return The fileUUID.
+     * <pre>
+     *    FileUUID fileUUID = 1;
+     *    FileUUID newFileUUID = 2;
+     * </pre>
+     *
+     * <code>.provenancegraph.datamodel.File file = 1;</code>
+     * @return The file.
      */
-    provenancegraph.datamodel.PDM.FileUUID getFileUUID();
+    provenancegraph.datamodel.PDM.File getFile();
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
+     * <pre>
+     *    FileUUID fileUUID = 1;
+     *    FileUUID newFileUUID = 2;
+     * </pre>
+     *
+     * <code>.provenancegraph.datamodel.File file = 1;</code>
      */
-    provenancegraph.datamodel.PDM.FileUUIDOrBuilder getFileUUIDOrBuilder();
+    provenancegraph.datamodel.PDM.FileOrBuilder getFileOrBuilder();
 
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.FileUUID newFileUUID = 2;</code>
-     * @return Whether the newFileUUID field is set.
+     * <code>.provenancegraph.datamodel.File newFile = 2;</code>
+     * @return Whether the newFile field is set.
      */
-    boolean hasNewFileUUID();
+    boolean hasNewFile();
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.FileUUID newFileUUID = 2;</code>
-     * @return The newFileUUID.
+     * <code>.provenancegraph.datamodel.File newFile = 2;</code>
+     * @return The newFile.
      */
-    provenancegraph.datamodel.PDM.FileUUID getNewFileUUID();
+    provenancegraph.datamodel.PDM.File getNewFile();
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.FileUUID newFileUUID = 2;</code>
+     * <code>.provenancegraph.datamodel.File newFile = 2;</code>
      */
-    provenancegraph.datamodel.PDM.FileUUIDOrBuilder getNewFileUUIDOrBuilder();
+    provenancegraph.datamodel.PDM.FileOrBuilder getNewFileOrBuilder();
 
     /**
      * <code>uint32 uid = 3;</code>
@@ -9587,32 +9671,25 @@ public final class PDM {
     int getGid();
 
     /**
+     * <pre>
+     *    File.FileType fileType = 6;
+     * </pre>
+     *
      * <code>uint32 permission = 5;</code>
      * @return The permission.
      */
     int getPermission();
-
-    /**
-     * <code>.provenancegraph.provenancegraph.datamodel.File.FileType fileType = 6;</code>
-     * @return The enum numeric value on the wire for fileType.
-     */
-    int getFileTypeValue();
-    /**
-     * <code>.provenancegraph.provenancegraph.datamodel.File.FileType fileType = 6;</code>
-     * @return The fileType.
-     */
-    provenancegraph.datamodel.PDM.File.FileType getFileType();
   }
   /**
    * <pre>
    * File-related event data
    * </pre>
    *
-   * Protobuf type {@code provenancegraph.provenancegraph.datamodel.FileEvent}
+   * Protobuf type {@code provenancegraph.datamodel.FileEvent}
    */
   public static final class FileEvent extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:provenancegraph.provenancegraph.datamodel.FileEvent)
+      // @@protoc_insertion_point(message_implements:provenancegraph.datamodel.FileEvent)
       FileEventOrBuilder {
   private static final long serialVersionUID = 0L;
     // Use FileEvent.newBuilder() to construct.
@@ -9620,7 +9697,6 @@ public final class PDM {
       super(builder);
     }
     private FileEvent() {
-      fileType_ = 0;
     }
 
     @java.lang.Override
@@ -9643,56 +9719,71 @@ public final class PDM {
               provenancegraph.datamodel.PDM.FileEvent.class, provenancegraph.datamodel.PDM.FileEvent.Builder.class);
     }
 
-    public static final int FILEUUID_FIELD_NUMBER = 1;
-    private provenancegraph.datamodel.PDM.FileUUID fileUUID_;
+    public static final int FILE_FIELD_NUMBER = 1;
+    private provenancegraph.datamodel.PDM.File file_;
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
-     * @return Whether the fileUUID field is set.
+     * <pre>
+     *    FileUUID fileUUID = 1;
+     *    FileUUID newFileUUID = 2;
+     * </pre>
+     *
+     * <code>.provenancegraph.datamodel.File file = 1;</code>
+     * @return Whether the file field is set.
      */
     @java.lang.Override
-    public boolean hasFileUUID() {
-      return fileUUID_ != null;
+    public boolean hasFile() {
+      return file_ != null;
     }
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
-     * @return The fileUUID.
+     * <pre>
+     *    FileUUID fileUUID = 1;
+     *    FileUUID newFileUUID = 2;
+     * </pre>
+     *
+     * <code>.provenancegraph.datamodel.File file = 1;</code>
+     * @return The file.
      */
     @java.lang.Override
-    public provenancegraph.datamodel.PDM.FileUUID getFileUUID() {
-      return fileUUID_ == null ? provenancegraph.datamodel.PDM.FileUUID.getDefaultInstance() : fileUUID_;
+    public provenancegraph.datamodel.PDM.File getFile() {
+      return file_ == null ? provenancegraph.datamodel.PDM.File.getDefaultInstance() : file_;
     }
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
+     * <pre>
+     *    FileUUID fileUUID = 1;
+     *    FileUUID newFileUUID = 2;
+     * </pre>
+     *
+     * <code>.provenancegraph.datamodel.File file = 1;</code>
      */
     @java.lang.Override
-    public provenancegraph.datamodel.PDM.FileUUIDOrBuilder getFileUUIDOrBuilder() {
-      return fileUUID_ == null ? provenancegraph.datamodel.PDM.FileUUID.getDefaultInstance() : fileUUID_;
+    public provenancegraph.datamodel.PDM.FileOrBuilder getFileOrBuilder() {
+      return file_ == null ? provenancegraph.datamodel.PDM.File.getDefaultInstance() : file_;
     }
 
-    public static final int NEWFILEUUID_FIELD_NUMBER = 2;
-    private provenancegraph.datamodel.PDM.FileUUID newFileUUID_;
+    public static final int NEWFILE_FIELD_NUMBER = 2;
+    private provenancegraph.datamodel.PDM.File newFile_;
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.FileUUID newFileUUID = 2;</code>
-     * @return Whether the newFileUUID field is set.
+     * <code>.provenancegraph.datamodel.File newFile = 2;</code>
+     * @return Whether the newFile field is set.
      */
     @java.lang.Override
-    public boolean hasNewFileUUID() {
-      return newFileUUID_ != null;
+    public boolean hasNewFile() {
+      return newFile_ != null;
     }
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.FileUUID newFileUUID = 2;</code>
-     * @return The newFileUUID.
+     * <code>.provenancegraph.datamodel.File newFile = 2;</code>
+     * @return The newFile.
      */
     @java.lang.Override
-    public provenancegraph.datamodel.PDM.FileUUID getNewFileUUID() {
-      return newFileUUID_ == null ? provenancegraph.datamodel.PDM.FileUUID.getDefaultInstance() : newFileUUID_;
+    public provenancegraph.datamodel.PDM.File getNewFile() {
+      return newFile_ == null ? provenancegraph.datamodel.PDM.File.getDefaultInstance() : newFile_;
     }
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.FileUUID newFileUUID = 2;</code>
+     * <code>.provenancegraph.datamodel.File newFile = 2;</code>
      */
     @java.lang.Override
-    public provenancegraph.datamodel.PDM.FileUUIDOrBuilder getNewFileUUIDOrBuilder() {
-      return newFileUUID_ == null ? provenancegraph.datamodel.PDM.FileUUID.getDefaultInstance() : newFileUUID_;
+    public provenancegraph.datamodel.PDM.FileOrBuilder getNewFileOrBuilder() {
+      return newFile_ == null ? provenancegraph.datamodel.PDM.File.getDefaultInstance() : newFile_;
     }
 
     public static final int UID_FIELD_NUMBER = 3;
@@ -9720,30 +9811,16 @@ public final class PDM {
     public static final int PERMISSION_FIELD_NUMBER = 5;
     private int permission_ = 0;
     /**
+     * <pre>
+     *    File.FileType fileType = 6;
+     * </pre>
+     *
      * <code>uint32 permission = 5;</code>
      * @return The permission.
      */
     @java.lang.Override
     public int getPermission() {
       return permission_;
-    }
-
-    public static final int FILETYPE_FIELD_NUMBER = 6;
-    private int fileType_ = 0;
-    /**
-     * <code>.provenancegraph.provenancegraph.datamodel.File.FileType fileType = 6;</code>
-     * @return The enum numeric value on the wire for fileType.
-     */
-    @java.lang.Override public int getFileTypeValue() {
-      return fileType_;
-    }
-    /**
-     * <code>.provenancegraph.provenancegraph.datamodel.File.FileType fileType = 6;</code>
-     * @return The fileType.
-     */
-    @java.lang.Override public provenancegraph.datamodel.PDM.File.FileType getFileType() {
-      provenancegraph.datamodel.PDM.File.FileType result = provenancegraph.datamodel.PDM.File.FileType.forNumber(fileType_);
-      return result == null ? provenancegraph.datamodel.PDM.File.FileType.UNRECOGNIZED : result;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -9760,11 +9837,11 @@ public final class PDM {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (fileUUID_ != null) {
-        output.writeMessage(1, getFileUUID());
+      if (file_ != null) {
+        output.writeMessage(1, getFile());
       }
-      if (newFileUUID_ != null) {
-        output.writeMessage(2, getNewFileUUID());
+      if (newFile_ != null) {
+        output.writeMessage(2, getNewFile());
       }
       if (uid_ != 0) {
         output.writeUInt32(3, uid_);
@@ -9775,9 +9852,6 @@ public final class PDM {
       if (permission_ != 0) {
         output.writeUInt32(5, permission_);
       }
-      if (fileType_ != provenancegraph.datamodel.PDM.File.FileType.FILE_UNKNOWN.getNumber()) {
-        output.writeEnum(6, fileType_);
-      }
       getUnknownFields().writeTo(output);
     }
 
@@ -9787,13 +9861,13 @@ public final class PDM {
       if (size != -1) return size;
 
       size = 0;
-      if (fileUUID_ != null) {
+      if (file_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, getFileUUID());
+          .computeMessageSize(1, getFile());
       }
-      if (newFileUUID_ != null) {
+      if (newFile_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, getNewFileUUID());
+          .computeMessageSize(2, getNewFile());
       }
       if (uid_ != 0) {
         size += com.google.protobuf.CodedOutputStream
@@ -9806,10 +9880,6 @@ public final class PDM {
       if (permission_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(5, permission_);
-      }
-      if (fileType_ != provenancegraph.datamodel.PDM.File.FileType.FILE_UNKNOWN.getNumber()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(6, fileType_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
@@ -9826,15 +9896,15 @@ public final class PDM {
       }
       provenancegraph.datamodel.PDM.FileEvent other = (provenancegraph.datamodel.PDM.FileEvent) obj;
 
-      if (hasFileUUID() != other.hasFileUUID()) return false;
-      if (hasFileUUID()) {
-        if (!getFileUUID()
-            .equals(other.getFileUUID())) return false;
+      if (hasFile() != other.hasFile()) return false;
+      if (hasFile()) {
+        if (!getFile()
+            .equals(other.getFile())) return false;
       }
-      if (hasNewFileUUID() != other.hasNewFileUUID()) return false;
-      if (hasNewFileUUID()) {
-        if (!getNewFileUUID()
-            .equals(other.getNewFileUUID())) return false;
+      if (hasNewFile() != other.hasNewFile()) return false;
+      if (hasNewFile()) {
+        if (!getNewFile()
+            .equals(other.getNewFile())) return false;
       }
       if (getUid()
           != other.getUid()) return false;
@@ -9842,7 +9912,6 @@ public final class PDM {
           != other.getGid()) return false;
       if (getPermission()
           != other.getPermission()) return false;
-      if (fileType_ != other.fileType_) return false;
       if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
@@ -9854,13 +9923,13 @@ public final class PDM {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      if (hasFileUUID()) {
-        hash = (37 * hash) + FILEUUID_FIELD_NUMBER;
-        hash = (53 * hash) + getFileUUID().hashCode();
+      if (hasFile()) {
+        hash = (37 * hash) + FILE_FIELD_NUMBER;
+        hash = (53 * hash) + getFile().hashCode();
       }
-      if (hasNewFileUUID()) {
-        hash = (37 * hash) + NEWFILEUUID_FIELD_NUMBER;
-        hash = (53 * hash) + getNewFileUUID().hashCode();
+      if (hasNewFile()) {
+        hash = (37 * hash) + NEWFILE_FIELD_NUMBER;
+        hash = (53 * hash) + getNewFile().hashCode();
       }
       hash = (37 * hash) + UID_FIELD_NUMBER;
       hash = (53 * hash) + getUid();
@@ -9868,8 +9937,6 @@ public final class PDM {
       hash = (53 * hash) + getGid();
       hash = (37 * hash) + PERMISSION_FIELD_NUMBER;
       hash = (53 * hash) + getPermission();
-      hash = (37 * hash) + FILETYPE_FIELD_NUMBER;
-      hash = (53 * hash) + fileType_;
       hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -9972,11 +10039,11 @@ public final class PDM {
      * File-related event data
      * </pre>
      *
-     * Protobuf type {@code provenancegraph.provenancegraph.datamodel.FileEvent}
+     * Protobuf type {@code provenancegraph.datamodel.FileEvent}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:provenancegraph.provenancegraph.datamodel.FileEvent)
+        // @@protoc_insertion_point(builder_implements:provenancegraph.datamodel.FileEvent)
         provenancegraph.datamodel.PDM.FileEventOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
@@ -9991,7 +10058,7 @@ public final class PDM {
                 provenancegraph.datamodel.PDM.FileEvent.class, provenancegraph.datamodel.PDM.FileEvent.Builder.class);
       }
 
-      // Construct using provenancegraph.provenancegraph.datamodel.PDM.FileEvent.newBuilder()
+      // Construct using provenancegraph.datamodel.PDM.FileEvent.newBuilder()
       private Builder() {
 
       }
@@ -10005,20 +10072,19 @@ public final class PDM {
       public Builder clear() {
         super.clear();
         bitField0_ = 0;
-        fileUUID_ = null;
-        if (fileUUIDBuilder_ != null) {
-          fileUUIDBuilder_.dispose();
-          fileUUIDBuilder_ = null;
+        file_ = null;
+        if (fileBuilder_ != null) {
+          fileBuilder_.dispose();
+          fileBuilder_ = null;
         }
-        newFileUUID_ = null;
-        if (newFileUUIDBuilder_ != null) {
-          newFileUUIDBuilder_.dispose();
-          newFileUUIDBuilder_ = null;
+        newFile_ = null;
+        if (newFileBuilder_ != null) {
+          newFileBuilder_.dispose();
+          newFileBuilder_ = null;
         }
         uid_ = 0;
         gid_ = 0;
         permission_ = 0;
-        fileType_ = 0;
         return this;
       }
 
@@ -10053,14 +10119,14 @@ public final class PDM {
       private void buildPartial0(provenancegraph.datamodel.PDM.FileEvent result) {
         int from_bitField0_ = bitField0_;
         if (((from_bitField0_ & 0x00000001) != 0)) {
-          result.fileUUID_ = fileUUIDBuilder_ == null
-              ? fileUUID_
-              : fileUUIDBuilder_.build();
+          result.file_ = fileBuilder_ == null
+              ? file_
+              : fileBuilder_.build();
         }
         if (((from_bitField0_ & 0x00000002) != 0)) {
-          result.newFileUUID_ = newFileUUIDBuilder_ == null
-              ? newFileUUID_
-              : newFileUUIDBuilder_.build();
+          result.newFile_ = newFileBuilder_ == null
+              ? newFile_
+              : newFileBuilder_.build();
         }
         if (((from_bitField0_ & 0x00000004) != 0)) {
           result.uid_ = uid_;
@@ -10070,9 +10136,6 @@ public final class PDM {
         }
         if (((from_bitField0_ & 0x00000010) != 0)) {
           result.permission_ = permission_;
-        }
-        if (((from_bitField0_ & 0x00000020) != 0)) {
-          result.fileType_ = fileType_;
         }
       }
 
@@ -10120,11 +10183,11 @@ public final class PDM {
 
       public Builder mergeFrom(provenancegraph.datamodel.PDM.FileEvent other) {
         if (other == provenancegraph.datamodel.PDM.FileEvent.getDefaultInstance()) return this;
-        if (other.hasFileUUID()) {
-          mergeFileUUID(other.getFileUUID());
+        if (other.hasFile()) {
+          mergeFile(other.getFile());
         }
-        if (other.hasNewFileUUID()) {
-          mergeNewFileUUID(other.getNewFileUUID());
+        if (other.hasNewFile()) {
+          mergeNewFile(other.getNewFile());
         }
         if (other.getUid() != 0) {
           setUid(other.getUid());
@@ -10134,9 +10197,6 @@ public final class PDM {
         }
         if (other.getPermission() != 0) {
           setPermission(other.getPermission());
-        }
-        if (other.fileType_ != 0) {
-          setFileTypeValue(other.getFileTypeValue());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
@@ -10166,14 +10226,14 @@ public final class PDM {
                 break;
               case 10: {
                 input.readMessage(
-                    getFileUUIDFieldBuilder().getBuilder(),
+                    getFileFieldBuilder().getBuilder(),
                     extensionRegistry);
                 bitField0_ |= 0x00000001;
                 break;
               } // case 10
               case 18: {
                 input.readMessage(
-                    getNewFileUUIDFieldBuilder().getBuilder(),
+                    getNewFileFieldBuilder().getBuilder(),
                     extensionRegistry);
                 bitField0_ |= 0x00000002;
                 break;
@@ -10193,11 +10253,6 @@ public final class PDM {
                 bitField0_ |= 0x00000010;
                 break;
               } // case 40
-              case 48: {
-                fileType_ = input.readEnum();
-                bitField0_ |= 0x00000020;
-                break;
-              } // case 48
               default: {
                 if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                   done = true; // was an endgroup tag
@@ -10215,242 +10270,287 @@ public final class PDM {
       }
       private int bitField0_;
 
-      private provenancegraph.datamodel.PDM.FileUUID fileUUID_;
+      private provenancegraph.datamodel.PDM.File file_;
       private com.google.protobuf.SingleFieldBuilderV3<
-          provenancegraph.datamodel.PDM.FileUUID, provenancegraph.datamodel.PDM.FileUUID.Builder, provenancegraph.datamodel.PDM.FileUUIDOrBuilder> fileUUIDBuilder_;
+          provenancegraph.datamodel.PDM.File, provenancegraph.datamodel.PDM.File.Builder, provenancegraph.datamodel.PDM.FileOrBuilder> fileBuilder_;
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
-       * @return Whether the fileUUID field is set.
+       * <pre>
+       *    FileUUID fileUUID = 1;
+       *    FileUUID newFileUUID = 2;
+       * </pre>
+       *
+       * <code>.provenancegraph.datamodel.File file = 1;</code>
+       * @return Whether the file field is set.
        */
-      public boolean hasFileUUID() {
+      public boolean hasFile() {
         return ((bitField0_ & 0x00000001) != 0);
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
-       * @return The fileUUID.
+       * <pre>
+       *    FileUUID fileUUID = 1;
+       *    FileUUID newFileUUID = 2;
+       * </pre>
+       *
+       * <code>.provenancegraph.datamodel.File file = 1;</code>
+       * @return The file.
        */
-      public provenancegraph.datamodel.PDM.FileUUID getFileUUID() {
-        if (fileUUIDBuilder_ == null) {
-          return fileUUID_ == null ? provenancegraph.datamodel.PDM.FileUUID.getDefaultInstance() : fileUUID_;
+      public provenancegraph.datamodel.PDM.File getFile() {
+        if (fileBuilder_ == null) {
+          return file_ == null ? provenancegraph.datamodel.PDM.File.getDefaultInstance() : file_;
         } else {
-          return fileUUIDBuilder_.getMessage();
+          return fileBuilder_.getMessage();
         }
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
+       * <pre>
+       *    FileUUID fileUUID = 1;
+       *    FileUUID newFileUUID = 2;
+       * </pre>
+       *
+       * <code>.provenancegraph.datamodel.File file = 1;</code>
        */
-      public Builder setFileUUID(provenancegraph.datamodel.PDM.FileUUID value) {
-        if (fileUUIDBuilder_ == null) {
+      public Builder setFile(provenancegraph.datamodel.PDM.File value) {
+        if (fileBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          fileUUID_ = value;
+          file_ = value;
         } else {
-          fileUUIDBuilder_.setMessage(value);
+          fileBuilder_.setMessage(value);
         }
         bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
+       * <pre>
+       *    FileUUID fileUUID = 1;
+       *    FileUUID newFileUUID = 2;
+       * </pre>
+       *
+       * <code>.provenancegraph.datamodel.File file = 1;</code>
        */
-      public Builder setFileUUID(
-          provenancegraph.datamodel.PDM.FileUUID.Builder builderForValue) {
-        if (fileUUIDBuilder_ == null) {
-          fileUUID_ = builderForValue.build();
+      public Builder setFile(
+          provenancegraph.datamodel.PDM.File.Builder builderForValue) {
+        if (fileBuilder_ == null) {
+          file_ = builderForValue.build();
         } else {
-          fileUUIDBuilder_.setMessage(builderForValue.build());
+          fileBuilder_.setMessage(builderForValue.build());
         }
         bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
+       * <pre>
+       *    FileUUID fileUUID = 1;
+       *    FileUUID newFileUUID = 2;
+       * </pre>
+       *
+       * <code>.provenancegraph.datamodel.File file = 1;</code>
        */
-      public Builder mergeFileUUID(provenancegraph.datamodel.PDM.FileUUID value) {
-        if (fileUUIDBuilder_ == null) {
+      public Builder mergeFile(provenancegraph.datamodel.PDM.File value) {
+        if (fileBuilder_ == null) {
           if (((bitField0_ & 0x00000001) != 0) &&
-            fileUUID_ != null &&
-            fileUUID_ != provenancegraph.datamodel.PDM.FileUUID.getDefaultInstance()) {
-            getFileUUIDBuilder().mergeFrom(value);
+            file_ != null &&
+            file_ != provenancegraph.datamodel.PDM.File.getDefaultInstance()) {
+            getFileBuilder().mergeFrom(value);
           } else {
-            fileUUID_ = value;
+            file_ = value;
           }
         } else {
-          fileUUIDBuilder_.mergeFrom(value);
+          fileBuilder_.mergeFrom(value);
         }
         bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
+       * <pre>
+       *    FileUUID fileUUID = 1;
+       *    FileUUID newFileUUID = 2;
+       * </pre>
+       *
+       * <code>.provenancegraph.datamodel.File file = 1;</code>
        */
-      public Builder clearFileUUID() {
+      public Builder clearFile() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        fileUUID_ = null;
-        if (fileUUIDBuilder_ != null) {
-          fileUUIDBuilder_.dispose();
-          fileUUIDBuilder_ = null;
+        file_ = null;
+        if (fileBuilder_ != null) {
+          fileBuilder_.dispose();
+          fileBuilder_ = null;
         }
         onChanged();
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
+       * <pre>
+       *    FileUUID fileUUID = 1;
+       *    FileUUID newFileUUID = 2;
+       * </pre>
+       *
+       * <code>.provenancegraph.datamodel.File file = 1;</code>
        */
-      public provenancegraph.datamodel.PDM.FileUUID.Builder getFileUUIDBuilder() {
+      public provenancegraph.datamodel.PDM.File.Builder getFileBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
-        return getFileUUIDFieldBuilder().getBuilder();
+        return getFileFieldBuilder().getBuilder();
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
+       * <pre>
+       *    FileUUID fileUUID = 1;
+       *    FileUUID newFileUUID = 2;
+       * </pre>
+       *
+       * <code>.provenancegraph.datamodel.File file = 1;</code>
        */
-      public provenancegraph.datamodel.PDM.FileUUIDOrBuilder getFileUUIDOrBuilder() {
-        if (fileUUIDBuilder_ != null) {
-          return fileUUIDBuilder_.getMessageOrBuilder();
+      public provenancegraph.datamodel.PDM.FileOrBuilder getFileOrBuilder() {
+        if (fileBuilder_ != null) {
+          return fileBuilder_.getMessageOrBuilder();
         } else {
-          return fileUUID_ == null ?
-              provenancegraph.datamodel.PDM.FileUUID.getDefaultInstance() : fileUUID_;
+          return file_ == null ?
+              provenancegraph.datamodel.PDM.File.getDefaultInstance() : file_;
         }
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
+       * <pre>
+       *    FileUUID fileUUID = 1;
+       *    FileUUID newFileUUID = 2;
+       * </pre>
+       *
+       * <code>.provenancegraph.datamodel.File file = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          provenancegraph.datamodel.PDM.FileUUID, provenancegraph.datamodel.PDM.FileUUID.Builder, provenancegraph.datamodel.PDM.FileUUIDOrBuilder> 
-          getFileUUIDFieldBuilder() {
-        if (fileUUIDBuilder_ == null) {
-          fileUUIDBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              provenancegraph.datamodel.PDM.FileUUID, provenancegraph.datamodel.PDM.FileUUID.Builder, provenancegraph.datamodel.PDM.FileUUIDOrBuilder>(
-                  getFileUUID(),
+          provenancegraph.datamodel.PDM.File, provenancegraph.datamodel.PDM.File.Builder, provenancegraph.datamodel.PDM.FileOrBuilder> 
+          getFileFieldBuilder() {
+        if (fileBuilder_ == null) {
+          fileBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              provenancegraph.datamodel.PDM.File, provenancegraph.datamodel.PDM.File.Builder, provenancegraph.datamodel.PDM.FileOrBuilder>(
+                  getFile(),
                   getParentForChildren(),
                   isClean());
-          fileUUID_ = null;
+          file_ = null;
         }
-        return fileUUIDBuilder_;
+        return fileBuilder_;
       }
 
-      private provenancegraph.datamodel.PDM.FileUUID newFileUUID_;
+      private provenancegraph.datamodel.PDM.File newFile_;
       private com.google.protobuf.SingleFieldBuilderV3<
-          provenancegraph.datamodel.PDM.FileUUID, provenancegraph.datamodel.PDM.FileUUID.Builder, provenancegraph.datamodel.PDM.FileUUIDOrBuilder> newFileUUIDBuilder_;
+          provenancegraph.datamodel.PDM.File, provenancegraph.datamodel.PDM.File.Builder, provenancegraph.datamodel.PDM.FileOrBuilder> newFileBuilder_;
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.FileUUID newFileUUID = 2;</code>
-       * @return Whether the newFileUUID field is set.
+       * <code>.provenancegraph.datamodel.File newFile = 2;</code>
+       * @return Whether the newFile field is set.
        */
-      public boolean hasNewFileUUID() {
+      public boolean hasNewFile() {
         return ((bitField0_ & 0x00000002) != 0);
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.FileUUID newFileUUID = 2;</code>
-       * @return The newFileUUID.
+       * <code>.provenancegraph.datamodel.File newFile = 2;</code>
+       * @return The newFile.
        */
-      public provenancegraph.datamodel.PDM.FileUUID getNewFileUUID() {
-        if (newFileUUIDBuilder_ == null) {
-          return newFileUUID_ == null ? provenancegraph.datamodel.PDM.FileUUID.getDefaultInstance() : newFileUUID_;
+      public provenancegraph.datamodel.PDM.File getNewFile() {
+        if (newFileBuilder_ == null) {
+          return newFile_ == null ? provenancegraph.datamodel.PDM.File.getDefaultInstance() : newFile_;
         } else {
-          return newFileUUIDBuilder_.getMessage();
+          return newFileBuilder_.getMessage();
         }
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.FileUUID newFileUUID = 2;</code>
+       * <code>.provenancegraph.datamodel.File newFile = 2;</code>
        */
-      public Builder setNewFileUUID(provenancegraph.datamodel.PDM.FileUUID value) {
-        if (newFileUUIDBuilder_ == null) {
+      public Builder setNewFile(provenancegraph.datamodel.PDM.File value) {
+        if (newFileBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          newFileUUID_ = value;
+          newFile_ = value;
         } else {
-          newFileUUIDBuilder_.setMessage(value);
+          newFileBuilder_.setMessage(value);
         }
         bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.FileUUID newFileUUID = 2;</code>
+       * <code>.provenancegraph.datamodel.File newFile = 2;</code>
        */
-      public Builder setNewFileUUID(
-          provenancegraph.datamodel.PDM.FileUUID.Builder builderForValue) {
-        if (newFileUUIDBuilder_ == null) {
-          newFileUUID_ = builderForValue.build();
+      public Builder setNewFile(
+          provenancegraph.datamodel.PDM.File.Builder builderForValue) {
+        if (newFileBuilder_ == null) {
+          newFile_ = builderForValue.build();
         } else {
-          newFileUUIDBuilder_.setMessage(builderForValue.build());
+          newFileBuilder_.setMessage(builderForValue.build());
         }
         bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.FileUUID newFileUUID = 2;</code>
+       * <code>.provenancegraph.datamodel.File newFile = 2;</code>
        */
-      public Builder mergeNewFileUUID(provenancegraph.datamodel.PDM.FileUUID value) {
-        if (newFileUUIDBuilder_ == null) {
+      public Builder mergeNewFile(provenancegraph.datamodel.PDM.File value) {
+        if (newFileBuilder_ == null) {
           if (((bitField0_ & 0x00000002) != 0) &&
-            newFileUUID_ != null &&
-            newFileUUID_ != provenancegraph.datamodel.PDM.FileUUID.getDefaultInstance()) {
-            getNewFileUUIDBuilder().mergeFrom(value);
+            newFile_ != null &&
+            newFile_ != provenancegraph.datamodel.PDM.File.getDefaultInstance()) {
+            getNewFileBuilder().mergeFrom(value);
           } else {
-            newFileUUID_ = value;
+            newFile_ = value;
           }
         } else {
-          newFileUUIDBuilder_.mergeFrom(value);
+          newFileBuilder_.mergeFrom(value);
         }
         bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.FileUUID newFileUUID = 2;</code>
+       * <code>.provenancegraph.datamodel.File newFile = 2;</code>
        */
-      public Builder clearNewFileUUID() {
+      public Builder clearNewFile() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        newFileUUID_ = null;
-        if (newFileUUIDBuilder_ != null) {
-          newFileUUIDBuilder_.dispose();
-          newFileUUIDBuilder_ = null;
+        newFile_ = null;
+        if (newFileBuilder_ != null) {
+          newFileBuilder_.dispose();
+          newFileBuilder_ = null;
         }
         onChanged();
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.FileUUID newFileUUID = 2;</code>
+       * <code>.provenancegraph.datamodel.File newFile = 2;</code>
        */
-      public provenancegraph.datamodel.PDM.FileUUID.Builder getNewFileUUIDBuilder() {
+      public provenancegraph.datamodel.PDM.File.Builder getNewFileBuilder() {
         bitField0_ |= 0x00000002;
         onChanged();
-        return getNewFileUUIDFieldBuilder().getBuilder();
+        return getNewFileFieldBuilder().getBuilder();
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.FileUUID newFileUUID = 2;</code>
+       * <code>.provenancegraph.datamodel.File newFile = 2;</code>
        */
-      public provenancegraph.datamodel.PDM.FileUUIDOrBuilder getNewFileUUIDOrBuilder() {
-        if (newFileUUIDBuilder_ != null) {
-          return newFileUUIDBuilder_.getMessageOrBuilder();
+      public provenancegraph.datamodel.PDM.FileOrBuilder getNewFileOrBuilder() {
+        if (newFileBuilder_ != null) {
+          return newFileBuilder_.getMessageOrBuilder();
         } else {
-          return newFileUUID_ == null ?
-              provenancegraph.datamodel.PDM.FileUUID.getDefaultInstance() : newFileUUID_;
+          return newFile_ == null ?
+              provenancegraph.datamodel.PDM.File.getDefaultInstance() : newFile_;
         }
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.FileUUID newFileUUID = 2;</code>
+       * <code>.provenancegraph.datamodel.File newFile = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          provenancegraph.datamodel.PDM.FileUUID, provenancegraph.datamodel.PDM.FileUUID.Builder, provenancegraph.datamodel.PDM.FileUUIDOrBuilder> 
-          getNewFileUUIDFieldBuilder() {
-        if (newFileUUIDBuilder_ == null) {
-          newFileUUIDBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              provenancegraph.datamodel.PDM.FileUUID, provenancegraph.datamodel.PDM.FileUUID.Builder, provenancegraph.datamodel.PDM.FileUUIDOrBuilder>(
-                  getNewFileUUID(),
+          provenancegraph.datamodel.PDM.File, provenancegraph.datamodel.PDM.File.Builder, provenancegraph.datamodel.PDM.FileOrBuilder> 
+          getNewFileFieldBuilder() {
+        if (newFileBuilder_ == null) {
+          newFileBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              provenancegraph.datamodel.PDM.File, provenancegraph.datamodel.PDM.File.Builder, provenancegraph.datamodel.PDM.FileOrBuilder>(
+                  getNewFile(),
                   getParentForChildren(),
                   isClean());
-          newFileUUID_ = null;
+          newFile_ = null;
         }
-        return newFileUUIDBuilder_;
+        return newFileBuilder_;
       }
 
       private int uid_ ;
@@ -10519,6 +10619,10 @@ public final class PDM {
 
       private int permission_ ;
       /**
+       * <pre>
+       *    File.FileType fileType = 6;
+       * </pre>
+       *
        * <code>uint32 permission = 5;</code>
        * @return The permission.
        */
@@ -10527,6 +10631,10 @@ public final class PDM {
         return permission_;
       }
       /**
+       * <pre>
+       *    File.FileType fileType = 6;
+       * </pre>
+       *
        * <code>uint32 permission = 5;</code>
        * @param value The permission to set.
        * @return This builder for chaining.
@@ -10539,65 +10647,16 @@ public final class PDM {
         return this;
       }
       /**
+       * <pre>
+       *    File.FileType fileType = 6;
+       * </pre>
+       *
        * <code>uint32 permission = 5;</code>
        * @return This builder for chaining.
        */
       public Builder clearPermission() {
         bitField0_ = (bitField0_ & ~0x00000010);
         permission_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int fileType_ = 0;
-      /**
-       * <code>.provenancegraph.provenancegraph.datamodel.File.FileType fileType = 6;</code>
-       * @return The enum numeric value on the wire for fileType.
-       */
-      @java.lang.Override public int getFileTypeValue() {
-        return fileType_;
-      }
-      /**
-       * <code>.provenancegraph.provenancegraph.datamodel.File.FileType fileType = 6;</code>
-       * @param value The enum numeric value on the wire for fileType to set.
-       * @return This builder for chaining.
-       */
-      public Builder setFileTypeValue(int value) {
-        fileType_ = value;
-        bitField0_ |= 0x00000020;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.provenancegraph.provenancegraph.datamodel.File.FileType fileType = 6;</code>
-       * @return The fileType.
-       */
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.File.FileType getFileType() {
-        provenancegraph.datamodel.PDM.File.FileType result = provenancegraph.datamodel.PDM.File.FileType.forNumber(fileType_);
-        return result == null ? provenancegraph.datamodel.PDM.File.FileType.UNRECOGNIZED : result;
-      }
-      /**
-       * <code>.provenancegraph.provenancegraph.datamodel.File.FileType fileType = 6;</code>
-       * @param value The fileType to set.
-       * @return This builder for chaining.
-       */
-      public Builder setFileType(provenancegraph.datamodel.PDM.File.FileType value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        bitField0_ |= 0x00000020;
-        fileType_ = value.getNumber();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.provenancegraph.provenancegraph.datamodel.File.FileType fileType = 6;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearFileType() {
-        bitField0_ = (bitField0_ & ~0x00000020);
-        fileType_ = 0;
         onChanged();
         return this;
       }
@@ -10614,10 +10673,10 @@ public final class PDM {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:provenancegraph.provenancegraph.datamodel.FileEvent)
+      // @@protoc_insertion_point(builder_scope:provenancegraph.datamodel.FileEvent)
     }
 
-    // @@protoc_insertion_point(class_scope:provenancegraph.provenancegraph.datamodel.FileEvent)
+    // @@protoc_insertion_point(class_scope:provenancegraph.datamodel.FileEvent)
     private static final provenancegraph.datamodel.PDM.FileEvent DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new provenancegraph.datamodel.PDM.FileEvent();
@@ -10666,7 +10725,7 @@ public final class PDM {
   }
 
   public interface EventLostOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:provenancegraph.provenancegraph.datamodel.EventLost)
+      // @@protoc_insertion_point(interface_extends:provenancegraph.datamodel.EventLost)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -10686,11 +10745,11 @@ public final class PDM {
    * Lost data
    * </pre>
    *
-   * Protobuf type {@code provenancegraph.provenancegraph.datamodel.EventLost}
+   * Protobuf type {@code provenancegraph.datamodel.EventLost}
    */
   public static final class EventLost extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:provenancegraph.provenancegraph.datamodel.EventLost)
+      // @@protoc_insertion_point(message_implements:provenancegraph.datamodel.EventLost)
       EventLostOrBuilder {
   private static final long serialVersionUID = 0L;
     // Use EventLost.newBuilder() to construct.
@@ -10917,11 +10976,11 @@ public final class PDM {
      * Lost data
      * </pre>
      *
-     * Protobuf type {@code provenancegraph.provenancegraph.datamodel.EventLost}
+     * Protobuf type {@code provenancegraph.datamodel.EventLost}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:provenancegraph.provenancegraph.datamodel.EventLost)
+        // @@protoc_insertion_point(builder_implements:provenancegraph.datamodel.EventLost)
         provenancegraph.datamodel.PDM.EventLostOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
@@ -10936,7 +10995,7 @@ public final class PDM {
                 provenancegraph.datamodel.PDM.EventLost.class, provenancegraph.datamodel.PDM.EventLost.Builder.class);
       }
 
-      // Construct using provenancegraph.provenancegraph.datamodel.PDM.EventLost.newBuilder()
+      // Construct using provenancegraph.datamodel.PDM.EventLost.newBuilder()
       private Builder() {
 
       }
@@ -11172,10 +11231,10 @@ public final class PDM {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:provenancegraph.provenancegraph.datamodel.EventLost)
+      // @@protoc_insertion_point(builder_scope:provenancegraph.datamodel.EventLost)
     }
 
-    // @@protoc_insertion_point(class_scope:provenancegraph.provenancegraph.datamodel.EventLost)
+    // @@protoc_insertion_point(class_scope:provenancegraph.datamodel.EventLost)
     private static final provenancegraph.datamodel.PDM.EventLost DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new provenancegraph.datamodel.PDM.EventLost();
@@ -11224,66 +11283,66 @@ public final class PDM {
   }
 
   public interface EventDataOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:provenancegraph.provenancegraph.datamodel.EventData)
+      // @@protoc_insertion_point(interface_extends:provenancegraph.datamodel.EventData)
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.EventHeader eHeader = 1;</code>
+     * <code>.provenancegraph.datamodel.EventHeader eHeader = 1;</code>
      * @return Whether the eHeader field is set.
      */
     boolean hasEHeader();
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.EventHeader eHeader = 1;</code>
+     * <code>.provenancegraph.datamodel.EventHeader eHeader = 1;</code>
      * @return The eHeader.
      */
     provenancegraph.datamodel.PDM.EventHeader getEHeader();
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.EventHeader eHeader = 1;</code>
+     * <code>.provenancegraph.datamodel.EventHeader eHeader = 1;</code>
      */
     provenancegraph.datamodel.PDM.EventHeaderOrBuilder getEHeaderOrBuilder();
 
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.ProcessEvent processEvent = 2;</code>
+     * <code>.provenancegraph.datamodel.ProcessEvent processEvent = 2;</code>
      * @return Whether the processEvent field is set.
      */
     boolean hasProcessEvent();
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.ProcessEvent processEvent = 2;</code>
+     * <code>.provenancegraph.datamodel.ProcessEvent processEvent = 2;</code>
      * @return The processEvent.
      */
     provenancegraph.datamodel.PDM.ProcessEvent getProcessEvent();
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.ProcessEvent processEvent = 2;</code>
+     * <code>.provenancegraph.datamodel.ProcessEvent processEvent = 2;</code>
      */
     provenancegraph.datamodel.PDM.ProcessEventOrBuilder getProcessEventOrBuilder();
 
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.FileEvent fileEvent = 3;</code>
+     * <code>.provenancegraph.datamodel.FileEvent fileEvent = 3;</code>
      * @return Whether the fileEvent field is set.
      */
     boolean hasFileEvent();
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.FileEvent fileEvent = 3;</code>
+     * <code>.provenancegraph.datamodel.FileEvent fileEvent = 3;</code>
      * @return The fileEvent.
      */
     provenancegraph.datamodel.PDM.FileEvent getFileEvent();
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.FileEvent fileEvent = 3;</code>
+     * <code>.provenancegraph.datamodel.FileEvent fileEvent = 3;</code>
      */
     provenancegraph.datamodel.PDM.FileEventOrBuilder getFileEventOrBuilder();
 
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.NetEvent netEvent = 4;</code>
+     * <code>.provenancegraph.datamodel.NetEvent netEvent = 4;</code>
      * @return Whether the netEvent field is set.
      */
     boolean hasNetEvent();
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.NetEvent netEvent = 4;</code>
+     * <code>.provenancegraph.datamodel.NetEvent netEvent = 4;</code>
      * @return The netEvent.
      */
     provenancegraph.datamodel.PDM.NetEvent getNetEvent();
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.NetEvent netEvent = 4;</code>
+     * <code>.provenancegraph.datamodel.NetEvent netEvent = 4;</code>
      */
     provenancegraph.datamodel.PDM.NetEventOrBuilder getNetEventOrBuilder();
 
@@ -11294,11 +11353,11 @@ public final class PDM {
    * Event structure 
    * </pre>
    *
-   * Protobuf type {@code provenancegraph.provenancegraph.datamodel.EventData}
+   * Protobuf type {@code provenancegraph.datamodel.EventData}
    */
   public static final class EventData extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:provenancegraph.provenancegraph.datamodel.EventData)
+      // @@protoc_insertion_point(message_implements:provenancegraph.datamodel.EventData)
       EventDataOrBuilder {
   private static final long serialVersionUID = 0L;
     // Use EventData.newBuilder() to construct.
@@ -11375,7 +11434,7 @@ public final class PDM {
     public static final int EHEADER_FIELD_NUMBER = 1;
     private provenancegraph.datamodel.PDM.EventHeader eHeader_;
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.EventHeader eHeader = 1;</code>
+     * <code>.provenancegraph.datamodel.EventHeader eHeader = 1;</code>
      * @return Whether the eHeader field is set.
      */
     @java.lang.Override
@@ -11383,7 +11442,7 @@ public final class PDM {
       return eHeader_ != null;
     }
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.EventHeader eHeader = 1;</code>
+     * <code>.provenancegraph.datamodel.EventHeader eHeader = 1;</code>
      * @return The eHeader.
      */
     @java.lang.Override
@@ -11391,7 +11450,7 @@ public final class PDM {
       return eHeader_ == null ? provenancegraph.datamodel.PDM.EventHeader.getDefaultInstance() : eHeader_;
     }
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.EventHeader eHeader = 1;</code>
+     * <code>.provenancegraph.datamodel.EventHeader eHeader = 1;</code>
      */
     @java.lang.Override
     public provenancegraph.datamodel.PDM.EventHeaderOrBuilder getEHeaderOrBuilder() {
@@ -11400,7 +11459,7 @@ public final class PDM {
 
     public static final int PROCESSEVENT_FIELD_NUMBER = 2;
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.ProcessEvent processEvent = 2;</code>
+     * <code>.provenancegraph.datamodel.ProcessEvent processEvent = 2;</code>
      * @return Whether the processEvent field is set.
      */
     @java.lang.Override
@@ -11408,7 +11467,7 @@ public final class PDM {
       return DataCase_ == 2;
     }
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.ProcessEvent processEvent = 2;</code>
+     * <code>.provenancegraph.datamodel.ProcessEvent processEvent = 2;</code>
      * @return The processEvent.
      */
     @java.lang.Override
@@ -11419,7 +11478,7 @@ public final class PDM {
       return provenancegraph.datamodel.PDM.ProcessEvent.getDefaultInstance();
     }
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.ProcessEvent processEvent = 2;</code>
+     * <code>.provenancegraph.datamodel.ProcessEvent processEvent = 2;</code>
      */
     @java.lang.Override
     public provenancegraph.datamodel.PDM.ProcessEventOrBuilder getProcessEventOrBuilder() {
@@ -11431,7 +11490,7 @@ public final class PDM {
 
     public static final int FILEEVENT_FIELD_NUMBER = 3;
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.FileEvent fileEvent = 3;</code>
+     * <code>.provenancegraph.datamodel.FileEvent fileEvent = 3;</code>
      * @return Whether the fileEvent field is set.
      */
     @java.lang.Override
@@ -11439,7 +11498,7 @@ public final class PDM {
       return DataCase_ == 3;
     }
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.FileEvent fileEvent = 3;</code>
+     * <code>.provenancegraph.datamodel.FileEvent fileEvent = 3;</code>
      * @return The fileEvent.
      */
     @java.lang.Override
@@ -11450,7 +11509,7 @@ public final class PDM {
       return provenancegraph.datamodel.PDM.FileEvent.getDefaultInstance();
     }
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.FileEvent fileEvent = 3;</code>
+     * <code>.provenancegraph.datamodel.FileEvent fileEvent = 3;</code>
      */
     @java.lang.Override
     public provenancegraph.datamodel.PDM.FileEventOrBuilder getFileEventOrBuilder() {
@@ -11462,7 +11521,7 @@ public final class PDM {
 
     public static final int NETEVENT_FIELD_NUMBER = 4;
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.NetEvent netEvent = 4;</code>
+     * <code>.provenancegraph.datamodel.NetEvent netEvent = 4;</code>
      * @return Whether the netEvent field is set.
      */
     @java.lang.Override
@@ -11470,7 +11529,7 @@ public final class PDM {
       return DataCase_ == 4;
     }
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.NetEvent netEvent = 4;</code>
+     * <code>.provenancegraph.datamodel.NetEvent netEvent = 4;</code>
      * @return The netEvent.
      */
     @java.lang.Override
@@ -11481,7 +11540,7 @@ public final class PDM {
       return provenancegraph.datamodel.PDM.NetEvent.getDefaultInstance();
     }
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.NetEvent netEvent = 4;</code>
+     * <code>.provenancegraph.datamodel.NetEvent netEvent = 4;</code>
      */
     @java.lang.Override
     public provenancegraph.datamodel.PDM.NetEventOrBuilder getNetEventOrBuilder() {
@@ -11712,11 +11771,11 @@ public final class PDM {
      * Event structure 
      * </pre>
      *
-     * Protobuf type {@code provenancegraph.provenancegraph.datamodel.EventData}
+     * Protobuf type {@code provenancegraph.datamodel.EventData}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:provenancegraph.provenancegraph.datamodel.EventData)
+        // @@protoc_insertion_point(builder_implements:provenancegraph.datamodel.EventData)
         provenancegraph.datamodel.PDM.EventDataOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
@@ -11731,7 +11790,7 @@ public final class PDM {
                 provenancegraph.datamodel.PDM.EventData.class, provenancegraph.datamodel.PDM.EventData.Builder.class);
       }
 
-      // Construct using provenancegraph.provenancegraph.datamodel.PDM.EventData.newBuilder()
+      // Construct using provenancegraph.datamodel.PDM.EventData.newBuilder()
       private Builder() {
 
       }
@@ -11973,14 +12032,14 @@ public final class PDM {
       private com.google.protobuf.SingleFieldBuilderV3<
           provenancegraph.datamodel.PDM.EventHeader, provenancegraph.datamodel.PDM.EventHeader.Builder, provenancegraph.datamodel.PDM.EventHeaderOrBuilder> eHeaderBuilder_;
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.EventHeader eHeader = 1;</code>
+       * <code>.provenancegraph.datamodel.EventHeader eHeader = 1;</code>
        * @return Whether the eHeader field is set.
        */
       public boolean hasEHeader() {
         return ((bitField0_ & 0x00000001) != 0);
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.EventHeader eHeader = 1;</code>
+       * <code>.provenancegraph.datamodel.EventHeader eHeader = 1;</code>
        * @return The eHeader.
        */
       public provenancegraph.datamodel.PDM.EventHeader getEHeader() {
@@ -11991,7 +12050,7 @@ public final class PDM {
         }
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.EventHeader eHeader = 1;</code>
+       * <code>.provenancegraph.datamodel.EventHeader eHeader = 1;</code>
        */
       public Builder setEHeader(provenancegraph.datamodel.PDM.EventHeader value) {
         if (eHeaderBuilder_ == null) {
@@ -12007,7 +12066,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.EventHeader eHeader = 1;</code>
+       * <code>.provenancegraph.datamodel.EventHeader eHeader = 1;</code>
        */
       public Builder setEHeader(
           provenancegraph.datamodel.PDM.EventHeader.Builder builderForValue) {
@@ -12021,7 +12080,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.EventHeader eHeader = 1;</code>
+       * <code>.provenancegraph.datamodel.EventHeader eHeader = 1;</code>
        */
       public Builder mergeEHeader(provenancegraph.datamodel.PDM.EventHeader value) {
         if (eHeaderBuilder_ == null) {
@@ -12040,7 +12099,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.EventHeader eHeader = 1;</code>
+       * <code>.provenancegraph.datamodel.EventHeader eHeader = 1;</code>
        */
       public Builder clearEHeader() {
         bitField0_ = (bitField0_ & ~0x00000001);
@@ -12053,7 +12112,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.EventHeader eHeader = 1;</code>
+       * <code>.provenancegraph.datamodel.EventHeader eHeader = 1;</code>
        */
       public provenancegraph.datamodel.PDM.EventHeader.Builder getEHeaderBuilder() {
         bitField0_ |= 0x00000001;
@@ -12061,7 +12120,7 @@ public final class PDM {
         return getEHeaderFieldBuilder().getBuilder();
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.EventHeader eHeader = 1;</code>
+       * <code>.provenancegraph.datamodel.EventHeader eHeader = 1;</code>
        */
       public provenancegraph.datamodel.PDM.EventHeaderOrBuilder getEHeaderOrBuilder() {
         if (eHeaderBuilder_ != null) {
@@ -12072,7 +12131,7 @@ public final class PDM {
         }
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.EventHeader eHeader = 1;</code>
+       * <code>.provenancegraph.datamodel.EventHeader eHeader = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           provenancegraph.datamodel.PDM.EventHeader, provenancegraph.datamodel.PDM.EventHeader.Builder, provenancegraph.datamodel.PDM.EventHeaderOrBuilder> 
@@ -12091,7 +12150,7 @@ public final class PDM {
       private com.google.protobuf.SingleFieldBuilderV3<
           provenancegraph.datamodel.PDM.ProcessEvent, provenancegraph.datamodel.PDM.ProcessEvent.Builder, provenancegraph.datamodel.PDM.ProcessEventOrBuilder> processEventBuilder_;
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.ProcessEvent processEvent = 2;</code>
+       * <code>.provenancegraph.datamodel.ProcessEvent processEvent = 2;</code>
        * @return Whether the processEvent field is set.
        */
       @java.lang.Override
@@ -12099,7 +12158,7 @@ public final class PDM {
         return DataCase_ == 2;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.ProcessEvent processEvent = 2;</code>
+       * <code>.provenancegraph.datamodel.ProcessEvent processEvent = 2;</code>
        * @return The processEvent.
        */
       @java.lang.Override
@@ -12117,7 +12176,7 @@ public final class PDM {
         }
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.ProcessEvent processEvent = 2;</code>
+       * <code>.provenancegraph.datamodel.ProcessEvent processEvent = 2;</code>
        */
       public Builder setProcessEvent(provenancegraph.datamodel.PDM.ProcessEvent value) {
         if (processEventBuilder_ == null) {
@@ -12133,7 +12192,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.ProcessEvent processEvent = 2;</code>
+       * <code>.provenancegraph.datamodel.ProcessEvent processEvent = 2;</code>
        */
       public Builder setProcessEvent(
           provenancegraph.datamodel.PDM.ProcessEvent.Builder builderForValue) {
@@ -12147,7 +12206,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.ProcessEvent processEvent = 2;</code>
+       * <code>.provenancegraph.datamodel.ProcessEvent processEvent = 2;</code>
        */
       public Builder mergeProcessEvent(provenancegraph.datamodel.PDM.ProcessEvent value) {
         if (processEventBuilder_ == null) {
@@ -12170,7 +12229,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.ProcessEvent processEvent = 2;</code>
+       * <code>.provenancegraph.datamodel.ProcessEvent processEvent = 2;</code>
        */
       public Builder clearProcessEvent() {
         if (processEventBuilder_ == null) {
@@ -12189,13 +12248,13 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.ProcessEvent processEvent = 2;</code>
+       * <code>.provenancegraph.datamodel.ProcessEvent processEvent = 2;</code>
        */
       public provenancegraph.datamodel.PDM.ProcessEvent.Builder getProcessEventBuilder() {
         return getProcessEventFieldBuilder().getBuilder();
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.ProcessEvent processEvent = 2;</code>
+       * <code>.provenancegraph.datamodel.ProcessEvent processEvent = 2;</code>
        */
       @java.lang.Override
       public provenancegraph.datamodel.PDM.ProcessEventOrBuilder getProcessEventOrBuilder() {
@@ -12209,7 +12268,7 @@ public final class PDM {
         }
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.ProcessEvent processEvent = 2;</code>
+       * <code>.provenancegraph.datamodel.ProcessEvent processEvent = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           provenancegraph.datamodel.PDM.ProcessEvent, provenancegraph.datamodel.PDM.ProcessEvent.Builder, provenancegraph.datamodel.PDM.ProcessEventOrBuilder> 
@@ -12233,7 +12292,7 @@ public final class PDM {
       private com.google.protobuf.SingleFieldBuilderV3<
           provenancegraph.datamodel.PDM.FileEvent, provenancegraph.datamodel.PDM.FileEvent.Builder, provenancegraph.datamodel.PDM.FileEventOrBuilder> fileEventBuilder_;
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.FileEvent fileEvent = 3;</code>
+       * <code>.provenancegraph.datamodel.FileEvent fileEvent = 3;</code>
        * @return Whether the fileEvent field is set.
        */
       @java.lang.Override
@@ -12241,7 +12300,7 @@ public final class PDM {
         return DataCase_ == 3;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.FileEvent fileEvent = 3;</code>
+       * <code>.provenancegraph.datamodel.FileEvent fileEvent = 3;</code>
        * @return The fileEvent.
        */
       @java.lang.Override
@@ -12259,7 +12318,7 @@ public final class PDM {
         }
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.FileEvent fileEvent = 3;</code>
+       * <code>.provenancegraph.datamodel.FileEvent fileEvent = 3;</code>
        */
       public Builder setFileEvent(provenancegraph.datamodel.PDM.FileEvent value) {
         if (fileEventBuilder_ == null) {
@@ -12275,7 +12334,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.FileEvent fileEvent = 3;</code>
+       * <code>.provenancegraph.datamodel.FileEvent fileEvent = 3;</code>
        */
       public Builder setFileEvent(
           provenancegraph.datamodel.PDM.FileEvent.Builder builderForValue) {
@@ -12289,7 +12348,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.FileEvent fileEvent = 3;</code>
+       * <code>.provenancegraph.datamodel.FileEvent fileEvent = 3;</code>
        */
       public Builder mergeFileEvent(provenancegraph.datamodel.PDM.FileEvent value) {
         if (fileEventBuilder_ == null) {
@@ -12312,7 +12371,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.FileEvent fileEvent = 3;</code>
+       * <code>.provenancegraph.datamodel.FileEvent fileEvent = 3;</code>
        */
       public Builder clearFileEvent() {
         if (fileEventBuilder_ == null) {
@@ -12331,13 +12390,13 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.FileEvent fileEvent = 3;</code>
+       * <code>.provenancegraph.datamodel.FileEvent fileEvent = 3;</code>
        */
       public provenancegraph.datamodel.PDM.FileEvent.Builder getFileEventBuilder() {
         return getFileEventFieldBuilder().getBuilder();
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.FileEvent fileEvent = 3;</code>
+       * <code>.provenancegraph.datamodel.FileEvent fileEvent = 3;</code>
        */
       @java.lang.Override
       public provenancegraph.datamodel.PDM.FileEventOrBuilder getFileEventOrBuilder() {
@@ -12351,7 +12410,7 @@ public final class PDM {
         }
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.FileEvent fileEvent = 3;</code>
+       * <code>.provenancegraph.datamodel.FileEvent fileEvent = 3;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           provenancegraph.datamodel.PDM.FileEvent, provenancegraph.datamodel.PDM.FileEvent.Builder, provenancegraph.datamodel.PDM.FileEventOrBuilder> 
@@ -12375,7 +12434,7 @@ public final class PDM {
       private com.google.protobuf.SingleFieldBuilderV3<
           provenancegraph.datamodel.PDM.NetEvent, provenancegraph.datamodel.PDM.NetEvent.Builder, provenancegraph.datamodel.PDM.NetEventOrBuilder> netEventBuilder_;
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.NetEvent netEvent = 4;</code>
+       * <code>.provenancegraph.datamodel.NetEvent netEvent = 4;</code>
        * @return Whether the netEvent field is set.
        */
       @java.lang.Override
@@ -12383,7 +12442,7 @@ public final class PDM {
         return DataCase_ == 4;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.NetEvent netEvent = 4;</code>
+       * <code>.provenancegraph.datamodel.NetEvent netEvent = 4;</code>
        * @return The netEvent.
        */
       @java.lang.Override
@@ -12401,7 +12460,7 @@ public final class PDM {
         }
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.NetEvent netEvent = 4;</code>
+       * <code>.provenancegraph.datamodel.NetEvent netEvent = 4;</code>
        */
       public Builder setNetEvent(provenancegraph.datamodel.PDM.NetEvent value) {
         if (netEventBuilder_ == null) {
@@ -12417,7 +12476,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.NetEvent netEvent = 4;</code>
+       * <code>.provenancegraph.datamodel.NetEvent netEvent = 4;</code>
        */
       public Builder setNetEvent(
           provenancegraph.datamodel.PDM.NetEvent.Builder builderForValue) {
@@ -12431,7 +12490,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.NetEvent netEvent = 4;</code>
+       * <code>.provenancegraph.datamodel.NetEvent netEvent = 4;</code>
        */
       public Builder mergeNetEvent(provenancegraph.datamodel.PDM.NetEvent value) {
         if (netEventBuilder_ == null) {
@@ -12454,7 +12513,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.NetEvent netEvent = 4;</code>
+       * <code>.provenancegraph.datamodel.NetEvent netEvent = 4;</code>
        */
       public Builder clearNetEvent() {
         if (netEventBuilder_ == null) {
@@ -12473,13 +12532,13 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.NetEvent netEvent = 4;</code>
+       * <code>.provenancegraph.datamodel.NetEvent netEvent = 4;</code>
        */
       public provenancegraph.datamodel.PDM.NetEvent.Builder getNetEventBuilder() {
         return getNetEventFieldBuilder().getBuilder();
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.NetEvent netEvent = 4;</code>
+       * <code>.provenancegraph.datamodel.NetEvent netEvent = 4;</code>
        */
       @java.lang.Override
       public provenancegraph.datamodel.PDM.NetEventOrBuilder getNetEventOrBuilder() {
@@ -12493,7 +12552,7 @@ public final class PDM {
         }
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.NetEvent netEvent = 4;</code>
+       * <code>.provenancegraph.datamodel.NetEvent netEvent = 4;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           provenancegraph.datamodel.PDM.NetEvent, provenancegraph.datamodel.PDM.NetEvent.Builder, provenancegraph.datamodel.PDM.NetEventOrBuilder> 
@@ -12526,10 +12585,10 @@ public final class PDM {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:provenancegraph.provenancegraph.datamodel.EventData)
+      // @@protoc_insertion_point(builder_scope:provenancegraph.datamodel.EventData)
     }
 
-    // @@protoc_insertion_point(class_scope:provenancegraph.provenancegraph.datamodel.EventData)
+    // @@protoc_insertion_point(class_scope:provenancegraph.datamodel.EventData)
     private static final provenancegraph.datamodel.PDM.EventData DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new provenancegraph.datamodel.PDM.EventData();
@@ -12577,736 +12636,82 @@ public final class PDM {
 
   }
 
-  public interface StatusOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:provenancegraph.provenancegraph.datamodel.Status)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>string message = 1;</code>
-     * @return The message.
-     */
-    java.lang.String getMessage();
-    /**
-     * <code>string message = 1;</code>
-     * @return The bytes for message.
-     */
-    com.google.protobuf.ByteString
-        getMessageBytes();
-
-    /**
-     * <code>int32 code = 2;</code>
-     * @return The code.
-     */
-    int getCode();
-  }
-  /**
-   * Protobuf type {@code provenancegraph.provenancegraph.datamodel.Status}
-   */
-  public static final class Status extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:provenancegraph.provenancegraph.datamodel.Status)
-      StatusOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use Status.newBuilder() to construct.
-    private Status(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private Status() {
-      message_ = "";
-    }
-
-    @java.lang.Override
-    @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
-        UnusedPrivateParameter unused) {
-      return new Status();
-    }
-
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_Status_descriptor;
-    }
-
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_Status_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              provenancegraph.datamodel.PDM.Status.class, provenancegraph.datamodel.PDM.Status.Builder.class);
-    }
-
-    public static final int MESSAGE_FIELD_NUMBER = 1;
-    @SuppressWarnings("serial")
-    private volatile java.lang.Object message_ = "";
-    /**
-     * <code>string message = 1;</code>
-     * @return The message.
-     */
-    @java.lang.Override
-    public java.lang.String getMessage() {
-      java.lang.Object ref = message_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        message_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string message = 1;</code>
-     * @return The bytes for message.
-     */
-    @java.lang.Override
-    public com.google.protobuf.ByteString
-        getMessageBytes() {
-      java.lang.Object ref = message_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        message_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int CODE_FIELD_NUMBER = 2;
-    private int code_ = 0;
-    /**
-     * <code>int32 code = 2;</code>
-     * @return The code.
-     */
-    @java.lang.Override
-    public int getCode() {
-      return code_;
-    }
-
-    private byte memoizedIsInitialized = -1;
-    @java.lang.Override
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    @java.lang.Override
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(message_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, message_);
-      }
-      if (code_ != 0) {
-        output.writeInt32(2, code_);
-      }
-      getUnknownFields().writeTo(output);
-    }
-
-    @java.lang.Override
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(message_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, message_);
-      }
-      if (code_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, code_);
-      }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof provenancegraph.datamodel.PDM.Status)) {
-        return super.equals(obj);
-      }
-      provenancegraph.datamodel.PDM.Status other = (provenancegraph.datamodel.PDM.Status) obj;
-
-      if (!getMessage()
-          .equals(other.getMessage())) return false;
-      if (getCode()
-          != other.getCode()) return false;
-      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
-      return true;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + MESSAGE_FIELD_NUMBER;
-      hash = (53 * hash) + getMessage().hashCode();
-      hash = (37 * hash) + CODE_FIELD_NUMBER;
-      hash = (53 * hash) + getCode();
-      hash = (29 * hash) + getUnknownFields().hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static provenancegraph.datamodel.PDM.Status parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static provenancegraph.datamodel.PDM.Status parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static provenancegraph.datamodel.PDM.Status parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static provenancegraph.datamodel.PDM.Status parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static provenancegraph.datamodel.PDM.Status parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static provenancegraph.datamodel.PDM.Status parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static provenancegraph.datamodel.PDM.Status parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static provenancegraph.datamodel.PDM.Status parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    public static provenancegraph.datamodel.PDM.Status parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-
-    public static provenancegraph.datamodel.PDM.Status parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static provenancegraph.datamodel.PDM.Status parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static provenancegraph.datamodel.PDM.Status parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    @java.lang.Override
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(provenancegraph.datamodel.PDM.Status prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    @java.lang.Override
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code provenancegraph.provenancegraph.datamodel.Status}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:provenancegraph.provenancegraph.datamodel.Status)
-        provenancegraph.datamodel.PDM.StatusOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_Status_descriptor;
-      }
-
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_Status_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                provenancegraph.datamodel.PDM.Status.class, provenancegraph.datamodel.PDM.Status.Builder.class);
-      }
-
-      // Construct using provenancegraph.provenancegraph.datamodel.PDM.Status.newBuilder()
-      private Builder() {
-
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-
-      }
-      @java.lang.Override
-      public Builder clear() {
-        super.clear();
-        bitField0_ = 0;
-        message_ = "";
-        code_ = 0;
-        return this;
-      }
-
-      @java.lang.Override
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_Status_descriptor;
-      }
-
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.Status getDefaultInstanceForType() {
-        return provenancegraph.datamodel.PDM.Status.getDefaultInstance();
-      }
-
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.Status build() {
-        provenancegraph.datamodel.PDM.Status result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.Status buildPartial() {
-        provenancegraph.datamodel.PDM.Status result = new provenancegraph.datamodel.PDM.Status(this);
-        if (bitField0_ != 0) { buildPartial0(result); }
-        onBuilt();
-        return result;
-      }
-
-      private void buildPartial0(provenancegraph.datamodel.PDM.Status result) {
-        int from_bitField0_ = bitField0_;
-        if (((from_bitField0_ & 0x00000001) != 0)) {
-          result.message_ = message_;
-        }
-        if (((from_bitField0_ & 0x00000002) != 0)) {
-          result.code_ = code_;
-        }
-      }
-
-      @java.lang.Override
-      public Builder clone() {
-        return super.clone();
-      }
-      @java.lang.Override
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.setField(field, value);
-      }
-      @java.lang.Override
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
-      }
-      @java.lang.Override
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
-      }
-      @java.lang.Override
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
-      }
-      @java.lang.Override
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.addRepeatedField(field, value);
-      }
-      @java.lang.Override
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof provenancegraph.datamodel.PDM.Status) {
-          return mergeFrom((provenancegraph.datamodel.PDM.Status)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(provenancegraph.datamodel.PDM.Status other) {
-        if (other == provenancegraph.datamodel.PDM.Status.getDefaultInstance()) return this;
-        if (!other.getMessage().isEmpty()) {
-          message_ = other.message_;
-          bitField0_ |= 0x00000001;
-          onChanged();
-        }
-        if (other.getCode() != 0) {
-          setCode(other.getCode());
-        }
-        this.mergeUnknownFields(other.getUnknownFields());
-        onChanged();
-        return this;
-      }
-
-      @java.lang.Override
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      @java.lang.Override
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        if (extensionRegistry == null) {
-          throw new java.lang.NullPointerException();
-        }
-        try {
-          boolean done = false;
-          while (!done) {
-            int tag = input.readTag();
-            switch (tag) {
-              case 0:
-                done = true;
-                break;
-              case 10: {
-                message_ = input.readStringRequireUtf8();
-                bitField0_ |= 0x00000001;
-                break;
-              } // case 10
-              case 16: {
-                code_ = input.readInt32();
-                bitField0_ |= 0x00000002;
-                break;
-              } // case 16
-              default: {
-                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
-                  done = true; // was an endgroup tag
-                }
-                break;
-              } // default:
-            } // switch (tag)
-          } // while (!done)
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          throw e.unwrapIOException();
-        } finally {
-          onChanged();
-        } // finally
-        return this;
-      }
-      private int bitField0_;
-
-      private java.lang.Object message_ = "";
-      /**
-       * <code>string message = 1;</code>
-       * @return The message.
-       */
-      public java.lang.String getMessage() {
-        java.lang.Object ref = message_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          message_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string message = 1;</code>
-       * @return The bytes for message.
-       */
-      public com.google.protobuf.ByteString
-          getMessageBytes() {
-        java.lang.Object ref = message_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          message_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string message = 1;</code>
-       * @param value The message to set.
-       * @return This builder for chaining.
-       */
-      public Builder setMessage(
-          java.lang.String value) {
-        if (value == null) { throw new NullPointerException(); }
-        message_ = value;
-        bitField0_ |= 0x00000001;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string message = 1;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearMessage() {
-        message_ = getDefaultInstance().getMessage();
-        bitField0_ = (bitField0_ & ~0x00000001);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string message = 1;</code>
-       * @param value The bytes for message to set.
-       * @return This builder for chaining.
-       */
-      public Builder setMessageBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) { throw new NullPointerException(); }
-        checkByteStringIsUtf8(value);
-        message_ = value;
-        bitField0_ |= 0x00000001;
-        onChanged();
-        return this;
-      }
-
-      private int code_ ;
-      /**
-       * <code>int32 code = 2;</code>
-       * @return The code.
-       */
-      @java.lang.Override
-      public int getCode() {
-        return code_;
-      }
-      /**
-       * <code>int32 code = 2;</code>
-       * @param value The code to set.
-       * @return This builder for chaining.
-       */
-      public Builder setCode(int value) {
-
-        code_ = value;
-        bitField0_ |= 0x00000002;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>int32 code = 2;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearCode() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        code_ = 0;
-        onChanged();
-        return this;
-      }
-      @java.lang.Override
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      @java.lang.Override
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:provenancegraph.provenancegraph.datamodel.Status)
-    }
-
-    // @@protoc_insertion_point(class_scope:provenancegraph.provenancegraph.datamodel.Status)
-    private static final provenancegraph.datamodel.PDM.Status DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new provenancegraph.datamodel.PDM.Status();
-    }
-
-    public static provenancegraph.datamodel.PDM.Status getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<Status>
-        PARSER = new com.google.protobuf.AbstractParser<Status>() {
-      @java.lang.Override
-      public Status parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        Builder builder = newBuilder();
-        try {
-          builder.mergeFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          throw e.setUnfinishedMessage(builder.buildPartial());
-        } catch (com.google.protobuf.UninitializedMessageException e) {
-          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
-        } catch (java.io.IOException e) {
-          throw new com.google.protobuf.InvalidProtocolBufferException(e)
-              .setUnfinishedMessage(builder.buildPartial());
-        }
-        return builder.buildPartial();
-      }
-    };
-
-    public static com.google.protobuf.Parser<Status> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<Status> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.Status getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
   public interface LogOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:provenancegraph.provenancegraph.datamodel.Log)
+      // @@protoc_insertion_point(interface_extends:provenancegraph.datamodel.Log)
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.LogHeader uHeader = 1;</code>
+     * <code>.provenancegraph.datamodel.LogHeader uHeader = 1;</code>
      * @return Whether the uHeader field is set.
      */
     boolean hasUHeader();
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.LogHeader uHeader = 1;</code>
+     * <code>.provenancegraph.datamodel.LogHeader uHeader = 1;</code>
      * @return The uHeader.
      */
     provenancegraph.datamodel.PDM.LogHeader getUHeader();
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.LogHeader uHeader = 1;</code>
+     * <code>.provenancegraph.datamodel.LogHeader uHeader = 1;</code>
      */
     provenancegraph.datamodel.PDM.LogHeaderOrBuilder getUHeaderOrBuilder();
 
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.Status status = 2;</code>
-     * @return Whether the status field is set.
-     */
-    boolean hasStatus();
-    /**
-     * <code>.provenancegraph.provenancegraph.datamodel.Status status = 2;</code>
-     * @return The status.
-     */
-    provenancegraph.datamodel.PDM.Status getStatus();
-    /**
-     * <code>.provenancegraph.provenancegraph.datamodel.Status status = 2;</code>
-     */
-    provenancegraph.datamodel.PDM.StatusOrBuilder getStatusOrBuilder();
-
-    /**
-     * <code>.provenancegraph.provenancegraph.datamodel.Process process = 3;</code>
-     * @return Whether the process field is set.
-     */
-    boolean hasProcess();
-    /**
-     * <code>.provenancegraph.provenancegraph.datamodel.Process process = 3;</code>
-     * @return The process.
-     */
-    provenancegraph.datamodel.PDM.Process getProcess();
-    /**
-     * <code>.provenancegraph.provenancegraph.datamodel.Process process = 3;</code>
-     */
-    provenancegraph.datamodel.PDM.ProcessOrBuilder getProcessOrBuilder();
-
-    /**
-     * <code>.provenancegraph.provenancegraph.datamodel.File file = 4;</code>
-     * @return Whether the file field is set.
-     */
-    boolean hasFile();
-    /**
-     * <code>.provenancegraph.provenancegraph.datamodel.File file = 4;</code>
-     * @return The file.
-     */
-    provenancegraph.datamodel.PDM.File getFile();
-    /**
-     * <code>.provenancegraph.provenancegraph.datamodel.File file = 4;</code>
-     */
-    provenancegraph.datamodel.PDM.FileOrBuilder getFileOrBuilder();
-
-    /**
-     * <code>.provenancegraph.provenancegraph.datamodel.Client client = 5;</code>
+     * <pre>
+     *        Process process = 2;
+     *        File file = 3;
+     * </pre>
+     *
+     * <code>.provenancegraph.datamodel.Client client = 2;</code>
      * @return Whether the client field is set.
      */
     boolean hasClient();
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.Client client = 5;</code>
+     * <pre>
+     *        Process process = 2;
+     *        File file = 3;
+     * </pre>
+     *
+     * <code>.provenancegraph.datamodel.Client client = 2;</code>
      * @return The client.
      */
     provenancegraph.datamodel.PDM.Client getClient();
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.Client client = 5;</code>
+     * <pre>
+     *        Process process = 2;
+     *        File file = 3;
+     * </pre>
+     *
+     * <code>.provenancegraph.datamodel.Client client = 2;</code>
      */
     provenancegraph.datamodel.PDM.ClientOrBuilder getClientOrBuilder();
 
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.EventData eventData = 6;</code>
+     * <code>.provenancegraph.datamodel.EventData eventData = 3;</code>
      * @return Whether the eventData field is set.
      */
     boolean hasEventData();
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.EventData eventData = 6;</code>
+     * <code>.provenancegraph.datamodel.EventData eventData = 3;</code>
      * @return The eventData.
      */
     provenancegraph.datamodel.PDM.EventData getEventData();
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.EventData eventData = 6;</code>
+     * <code>.provenancegraph.datamodel.EventData eventData = 3;</code>
      */
     provenancegraph.datamodel.PDM.EventDataOrBuilder getEventDataOrBuilder();
 
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.EventLost lost = 7;</code>
+     * <code>.provenancegraph.datamodel.EventLost lost = 4;</code>
      * @return Whether the lost field is set.
      */
     boolean hasLost();
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.EventLost lost = 7;</code>
+     * <code>.provenancegraph.datamodel.EventLost lost = 4;</code>
      * @return The lost.
      */
     provenancegraph.datamodel.PDM.EventLost getLost();
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.EventLost lost = 7;</code>
+     * <code>.provenancegraph.datamodel.EventLost lost = 4;</code>
      */
     provenancegraph.datamodel.PDM.EventLostOrBuilder getLostOrBuilder();
 
@@ -13317,11 +12722,11 @@ public final class PDM {
    * Overall log data 
    * </pre>
    *
-   * Protobuf type {@code provenancegraph.provenancegraph.datamodel.Log}
+   * Protobuf type {@code provenancegraph.datamodel.Log}
    */
   public static final class Log extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:provenancegraph.provenancegraph.datamodel.Log)
+      // @@protoc_insertion_point(message_implements:provenancegraph.datamodel.Log)
       LogOrBuilder {
   private static final long serialVersionUID = 0L;
     // Use Log.newBuilder() to construct.
@@ -13357,11 +12762,9 @@ public final class PDM {
     public enum DataCase
         implements com.google.protobuf.Internal.EnumLite,
             com.google.protobuf.AbstractMessage.InternalOneOfEnum {
-      PROCESS(3),
-      FILE(4),
-      CLIENT(5),
-      EVENTDATA(6),
-      LOST(7),
+      CLIENT(2),
+      EVENTDATA(3),
+      LOST(4),
       DATA_NOT_SET(0);
       private final int value;
       private DataCase(int value) {
@@ -13379,11 +12782,9 @@ public final class PDM {
 
       public static DataCase forNumber(int value) {
         switch (value) {
-          case 3: return PROCESS;
-          case 4: return FILE;
-          case 5: return CLIENT;
-          case 6: return EVENTDATA;
-          case 7: return LOST;
+          case 2: return CLIENT;
+          case 3: return EVENTDATA;
+          case 4: return LOST;
           case 0: return DATA_NOT_SET;
           default: return null;
         }
@@ -13402,7 +12803,7 @@ public final class PDM {
     public static final int UHEADER_FIELD_NUMBER = 1;
     private provenancegraph.datamodel.PDM.LogHeader uHeader_;
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.LogHeader uHeader = 1;</code>
+     * <code>.provenancegraph.datamodel.LogHeader uHeader = 1;</code>
      * @return Whether the uHeader field is set.
      */
     @java.lang.Override
@@ -13410,7 +12811,7 @@ public final class PDM {
       return uHeader_ != null;
     }
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.LogHeader uHeader = 1;</code>
+     * <code>.provenancegraph.datamodel.LogHeader uHeader = 1;</code>
      * @return The uHeader.
      */
     @java.lang.Override
@@ -13418,189 +12819,116 @@ public final class PDM {
       return uHeader_ == null ? provenancegraph.datamodel.PDM.LogHeader.getDefaultInstance() : uHeader_;
     }
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.LogHeader uHeader = 1;</code>
+     * <code>.provenancegraph.datamodel.LogHeader uHeader = 1;</code>
      */
     @java.lang.Override
     public provenancegraph.datamodel.PDM.LogHeaderOrBuilder getUHeaderOrBuilder() {
       return uHeader_ == null ? provenancegraph.datamodel.PDM.LogHeader.getDefaultInstance() : uHeader_;
     }
 
-    public static final int STATUS_FIELD_NUMBER = 2;
-    private provenancegraph.datamodel.PDM.Status status_;
+    public static final int CLIENT_FIELD_NUMBER = 2;
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.Status status = 2;</code>
-     * @return Whether the status field is set.
-     */
-    @java.lang.Override
-    public boolean hasStatus() {
-      return status_ != null;
-    }
-    /**
-     * <code>.provenancegraph.provenancegraph.datamodel.Status status = 2;</code>
-     * @return The status.
-     */
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.Status getStatus() {
-      return status_ == null ? provenancegraph.datamodel.PDM.Status.getDefaultInstance() : status_;
-    }
-    /**
-     * <code>.provenancegraph.provenancegraph.datamodel.Status status = 2;</code>
-     */
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.StatusOrBuilder getStatusOrBuilder() {
-      return status_ == null ? provenancegraph.datamodel.PDM.Status.getDefaultInstance() : status_;
-    }
-
-    public static final int PROCESS_FIELD_NUMBER = 3;
-    /**
-     * <code>.provenancegraph.provenancegraph.datamodel.Process process = 3;</code>
-     * @return Whether the process field is set.
-     */
-    @java.lang.Override
-    public boolean hasProcess() {
-      return DataCase_ == 3;
-    }
-    /**
-     * <code>.provenancegraph.provenancegraph.datamodel.Process process = 3;</code>
-     * @return The process.
-     */
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.Process getProcess() {
-      if (DataCase_ == 3) {
-         return (provenancegraph.datamodel.PDM.Process) Data_;
-      }
-      return provenancegraph.datamodel.PDM.Process.getDefaultInstance();
-    }
-    /**
-     * <code>.provenancegraph.provenancegraph.datamodel.Process process = 3;</code>
-     */
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.ProcessOrBuilder getProcessOrBuilder() {
-      if (DataCase_ == 3) {
-         return (provenancegraph.datamodel.PDM.Process) Data_;
-      }
-      return provenancegraph.datamodel.PDM.Process.getDefaultInstance();
-    }
-
-    public static final int FILE_FIELD_NUMBER = 4;
-    /**
-     * <code>.provenancegraph.provenancegraph.datamodel.File file = 4;</code>
-     * @return Whether the file field is set.
-     */
-    @java.lang.Override
-    public boolean hasFile() {
-      return DataCase_ == 4;
-    }
-    /**
-     * <code>.provenancegraph.provenancegraph.datamodel.File file = 4;</code>
-     * @return The file.
-     */
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.File getFile() {
-      if (DataCase_ == 4) {
-         return (provenancegraph.datamodel.PDM.File) Data_;
-      }
-      return provenancegraph.datamodel.PDM.File.getDefaultInstance();
-    }
-    /**
-     * <code>.provenancegraph.provenancegraph.datamodel.File file = 4;</code>
-     */
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.FileOrBuilder getFileOrBuilder() {
-      if (DataCase_ == 4) {
-         return (provenancegraph.datamodel.PDM.File) Data_;
-      }
-      return provenancegraph.datamodel.PDM.File.getDefaultInstance();
-    }
-
-    public static final int CLIENT_FIELD_NUMBER = 5;
-    /**
-     * <code>.provenancegraph.provenancegraph.datamodel.Client client = 5;</code>
+     * <pre>
+     *        Process process = 2;
+     *        File file = 3;
+     * </pre>
+     *
+     * <code>.provenancegraph.datamodel.Client client = 2;</code>
      * @return Whether the client field is set.
      */
     @java.lang.Override
     public boolean hasClient() {
-      return DataCase_ == 5;
+      return DataCase_ == 2;
     }
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.Client client = 5;</code>
+     * <pre>
+     *        Process process = 2;
+     *        File file = 3;
+     * </pre>
+     *
+     * <code>.provenancegraph.datamodel.Client client = 2;</code>
      * @return The client.
      */
     @java.lang.Override
     public provenancegraph.datamodel.PDM.Client getClient() {
-      if (DataCase_ == 5) {
+      if (DataCase_ == 2) {
          return (provenancegraph.datamodel.PDM.Client) Data_;
       }
       return provenancegraph.datamodel.PDM.Client.getDefaultInstance();
     }
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.Client client = 5;</code>
+     * <pre>
+     *        Process process = 2;
+     *        File file = 3;
+     * </pre>
+     *
+     * <code>.provenancegraph.datamodel.Client client = 2;</code>
      */
     @java.lang.Override
     public provenancegraph.datamodel.PDM.ClientOrBuilder getClientOrBuilder() {
-      if (DataCase_ == 5) {
+      if (DataCase_ == 2) {
          return (provenancegraph.datamodel.PDM.Client) Data_;
       }
       return provenancegraph.datamodel.PDM.Client.getDefaultInstance();
     }
 
-    public static final int EVENTDATA_FIELD_NUMBER = 6;
+    public static final int EVENTDATA_FIELD_NUMBER = 3;
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.EventData eventData = 6;</code>
+     * <code>.provenancegraph.datamodel.EventData eventData = 3;</code>
      * @return Whether the eventData field is set.
      */
     @java.lang.Override
     public boolean hasEventData() {
-      return DataCase_ == 6;
+      return DataCase_ == 3;
     }
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.EventData eventData = 6;</code>
+     * <code>.provenancegraph.datamodel.EventData eventData = 3;</code>
      * @return The eventData.
      */
     @java.lang.Override
     public provenancegraph.datamodel.PDM.EventData getEventData() {
-      if (DataCase_ == 6) {
+      if (DataCase_ == 3) {
          return (provenancegraph.datamodel.PDM.EventData) Data_;
       }
       return provenancegraph.datamodel.PDM.EventData.getDefaultInstance();
     }
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.EventData eventData = 6;</code>
+     * <code>.provenancegraph.datamodel.EventData eventData = 3;</code>
      */
     @java.lang.Override
     public provenancegraph.datamodel.PDM.EventDataOrBuilder getEventDataOrBuilder() {
-      if (DataCase_ == 6) {
+      if (DataCase_ == 3) {
          return (provenancegraph.datamodel.PDM.EventData) Data_;
       }
       return provenancegraph.datamodel.PDM.EventData.getDefaultInstance();
     }
 
-    public static final int LOST_FIELD_NUMBER = 7;
+    public static final int LOST_FIELD_NUMBER = 4;
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.EventLost lost = 7;</code>
+     * <code>.provenancegraph.datamodel.EventLost lost = 4;</code>
      * @return Whether the lost field is set.
      */
     @java.lang.Override
     public boolean hasLost() {
-      return DataCase_ == 7;
+      return DataCase_ == 4;
     }
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.EventLost lost = 7;</code>
+     * <code>.provenancegraph.datamodel.EventLost lost = 4;</code>
      * @return The lost.
      */
     @java.lang.Override
     public provenancegraph.datamodel.PDM.EventLost getLost() {
-      if (DataCase_ == 7) {
+      if (DataCase_ == 4) {
          return (provenancegraph.datamodel.PDM.EventLost) Data_;
       }
       return provenancegraph.datamodel.PDM.EventLost.getDefaultInstance();
     }
     /**
-     * <code>.provenancegraph.provenancegraph.datamodel.EventLost lost = 7;</code>
+     * <code>.provenancegraph.datamodel.EventLost lost = 4;</code>
      */
     @java.lang.Override
     public provenancegraph.datamodel.PDM.EventLostOrBuilder getLostOrBuilder() {
-      if (DataCase_ == 7) {
+      if (DataCase_ == 4) {
          return (provenancegraph.datamodel.PDM.EventLost) Data_;
       }
       return provenancegraph.datamodel.PDM.EventLost.getDefaultInstance();
@@ -13623,23 +12951,14 @@ public final class PDM {
       if (uHeader_ != null) {
         output.writeMessage(1, getUHeader());
       }
-      if (status_ != null) {
-        output.writeMessage(2, getStatus());
+      if (DataCase_ == 2) {
+        output.writeMessage(2, (provenancegraph.datamodel.PDM.Client) Data_);
       }
       if (DataCase_ == 3) {
-        output.writeMessage(3, (provenancegraph.datamodel.PDM.Process) Data_);
+        output.writeMessage(3, (provenancegraph.datamodel.PDM.EventData) Data_);
       }
       if (DataCase_ == 4) {
-        output.writeMessage(4, (provenancegraph.datamodel.PDM.File) Data_);
-      }
-      if (DataCase_ == 5) {
-        output.writeMessage(5, (provenancegraph.datamodel.PDM.Client) Data_);
-      }
-      if (DataCase_ == 6) {
-        output.writeMessage(6, (provenancegraph.datamodel.PDM.EventData) Data_);
-      }
-      if (DataCase_ == 7) {
-        output.writeMessage(7, (provenancegraph.datamodel.PDM.EventLost) Data_);
+        output.writeMessage(4, (provenancegraph.datamodel.PDM.EventLost) Data_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -13654,29 +12973,17 @@ public final class PDM {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, getUHeader());
       }
-      if (status_ != null) {
+      if (DataCase_ == 2) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, getStatus());
+          .computeMessageSize(2, (provenancegraph.datamodel.PDM.Client) Data_);
       }
       if (DataCase_ == 3) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, (provenancegraph.datamodel.PDM.Process) Data_);
+          .computeMessageSize(3, (provenancegraph.datamodel.PDM.EventData) Data_);
       }
       if (DataCase_ == 4) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, (provenancegraph.datamodel.PDM.File) Data_);
-      }
-      if (DataCase_ == 5) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(5, (provenancegraph.datamodel.PDM.Client) Data_);
-      }
-      if (DataCase_ == 6) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(6, (provenancegraph.datamodel.PDM.EventData) Data_);
-      }
-      if (DataCase_ == 7) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(7, (provenancegraph.datamodel.PDM.EventLost) Data_);
+          .computeMessageSize(4, (provenancegraph.datamodel.PDM.EventLost) Data_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
@@ -13698,30 +13005,17 @@ public final class PDM {
         if (!getUHeader()
             .equals(other.getUHeader())) return false;
       }
-      if (hasStatus() != other.hasStatus()) return false;
-      if (hasStatus()) {
-        if (!getStatus()
-            .equals(other.getStatus())) return false;
-      }
       if (!getDataCase().equals(other.getDataCase())) return false;
       switch (DataCase_) {
-        case 3:
-          if (!getProcess()
-              .equals(other.getProcess())) return false;
-          break;
-        case 4:
-          if (!getFile()
-              .equals(other.getFile())) return false;
-          break;
-        case 5:
+        case 2:
           if (!getClient()
               .equals(other.getClient())) return false;
           break;
-        case 6:
+        case 3:
           if (!getEventData()
               .equals(other.getEventData())) return false;
           break;
-        case 7:
+        case 4:
           if (!getLost()
               .equals(other.getLost())) return false;
           break;
@@ -13743,28 +13037,16 @@ public final class PDM {
         hash = (37 * hash) + UHEADER_FIELD_NUMBER;
         hash = (53 * hash) + getUHeader().hashCode();
       }
-      if (hasStatus()) {
-        hash = (37 * hash) + STATUS_FIELD_NUMBER;
-        hash = (53 * hash) + getStatus().hashCode();
-      }
       switch (DataCase_) {
-        case 3:
-          hash = (37 * hash) + PROCESS_FIELD_NUMBER;
-          hash = (53 * hash) + getProcess().hashCode();
-          break;
-        case 4:
-          hash = (37 * hash) + FILE_FIELD_NUMBER;
-          hash = (53 * hash) + getFile().hashCode();
-          break;
-        case 5:
+        case 2:
           hash = (37 * hash) + CLIENT_FIELD_NUMBER;
           hash = (53 * hash) + getClient().hashCode();
           break;
-        case 6:
+        case 3:
           hash = (37 * hash) + EVENTDATA_FIELD_NUMBER;
           hash = (53 * hash) + getEventData().hashCode();
           break;
-        case 7:
+        case 4:
           hash = (37 * hash) + LOST_FIELD_NUMBER;
           hash = (53 * hash) + getLost().hashCode();
           break;
@@ -13873,11 +13155,11 @@ public final class PDM {
      * Overall log data 
      * </pre>
      *
-     * Protobuf type {@code provenancegraph.provenancegraph.datamodel.Log}
+     * Protobuf type {@code provenancegraph.datamodel.Log}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:provenancegraph.provenancegraph.datamodel.Log)
+        // @@protoc_insertion_point(builder_implements:provenancegraph.datamodel.Log)
         provenancegraph.datamodel.PDM.LogOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
@@ -13892,7 +13174,7 @@ public final class PDM {
                 provenancegraph.datamodel.PDM.Log.class, provenancegraph.datamodel.PDM.Log.Builder.class);
       }
 
-      // Construct using provenancegraph.provenancegraph.datamodel.PDM.Log.newBuilder()
+      // Construct using provenancegraph.datamodel.PDM.Log.newBuilder()
       private Builder() {
 
       }
@@ -13910,17 +13192,6 @@ public final class PDM {
         if (uHeaderBuilder_ != null) {
           uHeaderBuilder_.dispose();
           uHeaderBuilder_ = null;
-        }
-        status_ = null;
-        if (statusBuilder_ != null) {
-          statusBuilder_.dispose();
-          statusBuilder_ = null;
-        }
-        if (processBuilder_ != null) {
-          processBuilder_.clear();
-        }
-        if (fileBuilder_ != null) {
-          fileBuilder_.clear();
         }
         if (clientBuilder_ != null) {
           clientBuilder_.clear();
@@ -13972,33 +13243,20 @@ public final class PDM {
               ? uHeader_
               : uHeaderBuilder_.build();
         }
-        if (((from_bitField0_ & 0x00000002) != 0)) {
-          result.status_ = statusBuilder_ == null
-              ? status_
-              : statusBuilder_.build();
-        }
       }
 
       private void buildPartialOneofs(provenancegraph.datamodel.PDM.Log result) {
         result.DataCase_ = DataCase_;
         result.Data_ = this.Data_;
-        if (DataCase_ == 3 &&
-            processBuilder_ != null) {
-          result.Data_ = processBuilder_.build();
-        }
-        if (DataCase_ == 4 &&
-            fileBuilder_ != null) {
-          result.Data_ = fileBuilder_.build();
-        }
-        if (DataCase_ == 5 &&
+        if (DataCase_ == 2 &&
             clientBuilder_ != null) {
           result.Data_ = clientBuilder_.build();
         }
-        if (DataCase_ == 6 &&
+        if (DataCase_ == 3 &&
             eventDataBuilder_ != null) {
           result.Data_ = eventDataBuilder_.build();
         }
-        if (DataCase_ == 7 &&
+        if (DataCase_ == 4 &&
             lostBuilder_ != null) {
           result.Data_ = lostBuilder_.build();
         }
@@ -14051,18 +13309,7 @@ public final class PDM {
         if (other.hasUHeader()) {
           mergeUHeader(other.getUHeader());
         }
-        if (other.hasStatus()) {
-          mergeStatus(other.getStatus());
-        }
         switch (other.getDataCase()) {
-          case PROCESS: {
-            mergeProcess(other.getProcess());
-            break;
-          }
-          case FILE: {
-            mergeFile(other.getFile());
-            break;
-          }
           case CLIENT: {
             mergeClient(other.getClient());
             break;
@@ -14114,46 +13361,25 @@ public final class PDM {
               } // case 10
               case 18: {
                 input.readMessage(
-                    getStatusFieldBuilder().getBuilder(),
+                    getClientFieldBuilder().getBuilder(),
                     extensionRegistry);
-                bitField0_ |= 0x00000002;
+                DataCase_ = 2;
                 break;
               } // case 18
               case 26: {
                 input.readMessage(
-                    getProcessFieldBuilder().getBuilder(),
+                    getEventDataFieldBuilder().getBuilder(),
                     extensionRegistry);
                 DataCase_ = 3;
                 break;
               } // case 26
               case 34: {
                 input.readMessage(
-                    getFileFieldBuilder().getBuilder(),
+                    getLostFieldBuilder().getBuilder(),
                     extensionRegistry);
                 DataCase_ = 4;
                 break;
               } // case 34
-              case 42: {
-                input.readMessage(
-                    getClientFieldBuilder().getBuilder(),
-                    extensionRegistry);
-                DataCase_ = 5;
-                break;
-              } // case 42
-              case 50: {
-                input.readMessage(
-                    getEventDataFieldBuilder().getBuilder(),
-                    extensionRegistry);
-                DataCase_ = 6;
-                break;
-              } // case 50
-              case 58: {
-                input.readMessage(
-                    getLostFieldBuilder().getBuilder(),
-                    extensionRegistry);
-                DataCase_ = 7;
-                break;
-              } // case 58
               default: {
                 if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                   done = true; // was an endgroup tag
@@ -14190,14 +13416,14 @@ public final class PDM {
       private com.google.protobuf.SingleFieldBuilderV3<
           provenancegraph.datamodel.PDM.LogHeader, provenancegraph.datamodel.PDM.LogHeader.Builder, provenancegraph.datamodel.PDM.LogHeaderOrBuilder> uHeaderBuilder_;
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.LogHeader uHeader = 1;</code>
+       * <code>.provenancegraph.datamodel.LogHeader uHeader = 1;</code>
        * @return Whether the uHeader field is set.
        */
       public boolean hasUHeader() {
         return ((bitField0_ & 0x00000001) != 0);
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.LogHeader uHeader = 1;</code>
+       * <code>.provenancegraph.datamodel.LogHeader uHeader = 1;</code>
        * @return The uHeader.
        */
       public provenancegraph.datamodel.PDM.LogHeader getUHeader() {
@@ -14208,7 +13434,7 @@ public final class PDM {
         }
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.LogHeader uHeader = 1;</code>
+       * <code>.provenancegraph.datamodel.LogHeader uHeader = 1;</code>
        */
       public Builder setUHeader(provenancegraph.datamodel.PDM.LogHeader value) {
         if (uHeaderBuilder_ == null) {
@@ -14224,7 +13450,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.LogHeader uHeader = 1;</code>
+       * <code>.provenancegraph.datamodel.LogHeader uHeader = 1;</code>
        */
       public Builder setUHeader(
           provenancegraph.datamodel.PDM.LogHeader.Builder builderForValue) {
@@ -14238,7 +13464,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.LogHeader uHeader = 1;</code>
+       * <code>.provenancegraph.datamodel.LogHeader uHeader = 1;</code>
        */
       public Builder mergeUHeader(provenancegraph.datamodel.PDM.LogHeader value) {
         if (uHeaderBuilder_ == null) {
@@ -14257,7 +13483,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.LogHeader uHeader = 1;</code>
+       * <code>.provenancegraph.datamodel.LogHeader uHeader = 1;</code>
        */
       public Builder clearUHeader() {
         bitField0_ = (bitField0_ & ~0x00000001);
@@ -14270,7 +13496,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.LogHeader uHeader = 1;</code>
+       * <code>.provenancegraph.datamodel.LogHeader uHeader = 1;</code>
        */
       public provenancegraph.datamodel.PDM.LogHeader.Builder getUHeaderBuilder() {
         bitField0_ |= 0x00000001;
@@ -14278,7 +13504,7 @@ public final class PDM {
         return getUHeaderFieldBuilder().getBuilder();
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.LogHeader uHeader = 1;</code>
+       * <code>.provenancegraph.datamodel.LogHeader uHeader = 1;</code>
        */
       public provenancegraph.datamodel.PDM.LogHeaderOrBuilder getUHeaderOrBuilder() {
         if (uHeaderBuilder_ != null) {
@@ -14289,7 +13515,7 @@ public final class PDM {
         }
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.LogHeader uHeader = 1;</code>
+       * <code>.provenancegraph.datamodel.LogHeader uHeader = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           provenancegraph.datamodel.PDM.LogHeader, provenancegraph.datamodel.PDM.LogHeader.Builder, provenancegraph.datamodel.PDM.LogHeaderOrBuilder> 
@@ -14305,439 +13531,51 @@ public final class PDM {
         return uHeaderBuilder_;
       }
 
-      private provenancegraph.datamodel.PDM.Status status_;
-      private com.google.protobuf.SingleFieldBuilderV3<
-          provenancegraph.datamodel.PDM.Status, provenancegraph.datamodel.PDM.Status.Builder, provenancegraph.datamodel.PDM.StatusOrBuilder> statusBuilder_;
-      /**
-       * <code>.provenancegraph.provenancegraph.datamodel.Status status = 2;</code>
-       * @return Whether the status field is set.
-       */
-      public boolean hasStatus() {
-        return ((bitField0_ & 0x00000002) != 0);
-      }
-      /**
-       * <code>.provenancegraph.provenancegraph.datamodel.Status status = 2;</code>
-       * @return The status.
-       */
-      public provenancegraph.datamodel.PDM.Status getStatus() {
-        if (statusBuilder_ == null) {
-          return status_ == null ? provenancegraph.datamodel.PDM.Status.getDefaultInstance() : status_;
-        } else {
-          return statusBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>.provenancegraph.provenancegraph.datamodel.Status status = 2;</code>
-       */
-      public Builder setStatus(provenancegraph.datamodel.PDM.Status value) {
-        if (statusBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          status_ = value;
-        } else {
-          statusBuilder_.setMessage(value);
-        }
-        bitField0_ |= 0x00000002;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.provenancegraph.provenancegraph.datamodel.Status status = 2;</code>
-       */
-      public Builder setStatus(
-          provenancegraph.datamodel.PDM.Status.Builder builderForValue) {
-        if (statusBuilder_ == null) {
-          status_ = builderForValue.build();
-        } else {
-          statusBuilder_.setMessage(builderForValue.build());
-        }
-        bitField0_ |= 0x00000002;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.provenancegraph.provenancegraph.datamodel.Status status = 2;</code>
-       */
-      public Builder mergeStatus(provenancegraph.datamodel.PDM.Status value) {
-        if (statusBuilder_ == null) {
-          if (((bitField0_ & 0x00000002) != 0) &&
-            status_ != null &&
-            status_ != provenancegraph.datamodel.PDM.Status.getDefaultInstance()) {
-            getStatusBuilder().mergeFrom(value);
-          } else {
-            status_ = value;
-          }
-        } else {
-          statusBuilder_.mergeFrom(value);
-        }
-        bitField0_ |= 0x00000002;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.provenancegraph.provenancegraph.datamodel.Status status = 2;</code>
-       */
-      public Builder clearStatus() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = null;
-        if (statusBuilder_ != null) {
-          statusBuilder_.dispose();
-          statusBuilder_ = null;
-        }
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.provenancegraph.provenancegraph.datamodel.Status status = 2;</code>
-       */
-      public provenancegraph.datamodel.PDM.Status.Builder getStatusBuilder() {
-        bitField0_ |= 0x00000002;
-        onChanged();
-        return getStatusFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>.provenancegraph.provenancegraph.datamodel.Status status = 2;</code>
-       */
-      public provenancegraph.datamodel.PDM.StatusOrBuilder getStatusOrBuilder() {
-        if (statusBuilder_ != null) {
-          return statusBuilder_.getMessageOrBuilder();
-        } else {
-          return status_ == null ?
-              provenancegraph.datamodel.PDM.Status.getDefaultInstance() : status_;
-        }
-      }
-      /**
-       * <code>.provenancegraph.provenancegraph.datamodel.Status status = 2;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          provenancegraph.datamodel.PDM.Status, provenancegraph.datamodel.PDM.Status.Builder, provenancegraph.datamodel.PDM.StatusOrBuilder> 
-          getStatusFieldBuilder() {
-        if (statusBuilder_ == null) {
-          statusBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              provenancegraph.datamodel.PDM.Status, provenancegraph.datamodel.PDM.Status.Builder, provenancegraph.datamodel.PDM.StatusOrBuilder>(
-                  getStatus(),
-                  getParentForChildren(),
-                  isClean());
-          status_ = null;
-        }
-        return statusBuilder_;
-      }
-
-      private com.google.protobuf.SingleFieldBuilderV3<
-          provenancegraph.datamodel.PDM.Process, provenancegraph.datamodel.PDM.Process.Builder, provenancegraph.datamodel.PDM.ProcessOrBuilder> processBuilder_;
-      /**
-       * <code>.provenancegraph.provenancegraph.datamodel.Process process = 3;</code>
-       * @return Whether the process field is set.
-       */
-      @java.lang.Override
-      public boolean hasProcess() {
-        return DataCase_ == 3;
-      }
-      /**
-       * <code>.provenancegraph.provenancegraph.datamodel.Process process = 3;</code>
-       * @return The process.
-       */
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.Process getProcess() {
-        if (processBuilder_ == null) {
-          if (DataCase_ == 3) {
-            return (provenancegraph.datamodel.PDM.Process) Data_;
-          }
-          return provenancegraph.datamodel.PDM.Process.getDefaultInstance();
-        } else {
-          if (DataCase_ == 3) {
-            return processBuilder_.getMessage();
-          }
-          return provenancegraph.datamodel.PDM.Process.getDefaultInstance();
-        }
-      }
-      /**
-       * <code>.provenancegraph.provenancegraph.datamodel.Process process = 3;</code>
-       */
-      public Builder setProcess(provenancegraph.datamodel.PDM.Process value) {
-        if (processBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          Data_ = value;
-          onChanged();
-        } else {
-          processBuilder_.setMessage(value);
-        }
-        DataCase_ = 3;
-        return this;
-      }
-      /**
-       * <code>.provenancegraph.provenancegraph.datamodel.Process process = 3;</code>
-       */
-      public Builder setProcess(
-          provenancegraph.datamodel.PDM.Process.Builder builderForValue) {
-        if (processBuilder_ == null) {
-          Data_ = builderForValue.build();
-          onChanged();
-        } else {
-          processBuilder_.setMessage(builderForValue.build());
-        }
-        DataCase_ = 3;
-        return this;
-      }
-      /**
-       * <code>.provenancegraph.provenancegraph.datamodel.Process process = 3;</code>
-       */
-      public Builder mergeProcess(provenancegraph.datamodel.PDM.Process value) {
-        if (processBuilder_ == null) {
-          if (DataCase_ == 3 &&
-              Data_ != provenancegraph.datamodel.PDM.Process.getDefaultInstance()) {
-            Data_ = provenancegraph.datamodel.PDM.Process.newBuilder((provenancegraph.datamodel.PDM.Process) Data_)
-                .mergeFrom(value).buildPartial();
-          } else {
-            Data_ = value;
-          }
-          onChanged();
-        } else {
-          if (DataCase_ == 3) {
-            processBuilder_.mergeFrom(value);
-          } else {
-            processBuilder_.setMessage(value);
-          }
-        }
-        DataCase_ = 3;
-        return this;
-      }
-      /**
-       * <code>.provenancegraph.provenancegraph.datamodel.Process process = 3;</code>
-       */
-      public Builder clearProcess() {
-        if (processBuilder_ == null) {
-          if (DataCase_ == 3) {
-            DataCase_ = 0;
-            Data_ = null;
-            onChanged();
-          }
-        } else {
-          if (DataCase_ == 3) {
-            DataCase_ = 0;
-            Data_ = null;
-          }
-          processBuilder_.clear();
-        }
-        return this;
-      }
-      /**
-       * <code>.provenancegraph.provenancegraph.datamodel.Process process = 3;</code>
-       */
-      public provenancegraph.datamodel.PDM.Process.Builder getProcessBuilder() {
-        return getProcessFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>.provenancegraph.provenancegraph.datamodel.Process process = 3;</code>
-       */
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.ProcessOrBuilder getProcessOrBuilder() {
-        if ((DataCase_ == 3) && (processBuilder_ != null)) {
-          return processBuilder_.getMessageOrBuilder();
-        } else {
-          if (DataCase_ == 3) {
-            return (provenancegraph.datamodel.PDM.Process) Data_;
-          }
-          return provenancegraph.datamodel.PDM.Process.getDefaultInstance();
-        }
-      }
-      /**
-       * <code>.provenancegraph.provenancegraph.datamodel.Process process = 3;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          provenancegraph.datamodel.PDM.Process, provenancegraph.datamodel.PDM.Process.Builder, provenancegraph.datamodel.PDM.ProcessOrBuilder> 
-          getProcessFieldBuilder() {
-        if (processBuilder_ == null) {
-          if (!(DataCase_ == 3)) {
-            Data_ = provenancegraph.datamodel.PDM.Process.getDefaultInstance();
-          }
-          processBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              provenancegraph.datamodel.PDM.Process, provenancegraph.datamodel.PDM.Process.Builder, provenancegraph.datamodel.PDM.ProcessOrBuilder>(
-                  (provenancegraph.datamodel.PDM.Process) Data_,
-                  getParentForChildren(),
-                  isClean());
-          Data_ = null;
-        }
-        DataCase_ = 3;
-        onChanged();
-        return processBuilder_;
-      }
-
-      private com.google.protobuf.SingleFieldBuilderV3<
-          provenancegraph.datamodel.PDM.File, provenancegraph.datamodel.PDM.File.Builder, provenancegraph.datamodel.PDM.FileOrBuilder> fileBuilder_;
-      /**
-       * <code>.provenancegraph.provenancegraph.datamodel.File file = 4;</code>
-       * @return Whether the file field is set.
-       */
-      @java.lang.Override
-      public boolean hasFile() {
-        return DataCase_ == 4;
-      }
-      /**
-       * <code>.provenancegraph.provenancegraph.datamodel.File file = 4;</code>
-       * @return The file.
-       */
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.File getFile() {
-        if (fileBuilder_ == null) {
-          if (DataCase_ == 4) {
-            return (provenancegraph.datamodel.PDM.File) Data_;
-          }
-          return provenancegraph.datamodel.PDM.File.getDefaultInstance();
-        } else {
-          if (DataCase_ == 4) {
-            return fileBuilder_.getMessage();
-          }
-          return provenancegraph.datamodel.PDM.File.getDefaultInstance();
-        }
-      }
-      /**
-       * <code>.provenancegraph.provenancegraph.datamodel.File file = 4;</code>
-       */
-      public Builder setFile(provenancegraph.datamodel.PDM.File value) {
-        if (fileBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          Data_ = value;
-          onChanged();
-        } else {
-          fileBuilder_.setMessage(value);
-        }
-        DataCase_ = 4;
-        return this;
-      }
-      /**
-       * <code>.provenancegraph.provenancegraph.datamodel.File file = 4;</code>
-       */
-      public Builder setFile(
-          provenancegraph.datamodel.PDM.File.Builder builderForValue) {
-        if (fileBuilder_ == null) {
-          Data_ = builderForValue.build();
-          onChanged();
-        } else {
-          fileBuilder_.setMessage(builderForValue.build());
-        }
-        DataCase_ = 4;
-        return this;
-      }
-      /**
-       * <code>.provenancegraph.provenancegraph.datamodel.File file = 4;</code>
-       */
-      public Builder mergeFile(provenancegraph.datamodel.PDM.File value) {
-        if (fileBuilder_ == null) {
-          if (DataCase_ == 4 &&
-              Data_ != provenancegraph.datamodel.PDM.File.getDefaultInstance()) {
-            Data_ = provenancegraph.datamodel.PDM.File.newBuilder((provenancegraph.datamodel.PDM.File) Data_)
-                .mergeFrom(value).buildPartial();
-          } else {
-            Data_ = value;
-          }
-          onChanged();
-        } else {
-          if (DataCase_ == 4) {
-            fileBuilder_.mergeFrom(value);
-          } else {
-            fileBuilder_.setMessage(value);
-          }
-        }
-        DataCase_ = 4;
-        return this;
-      }
-      /**
-       * <code>.provenancegraph.provenancegraph.datamodel.File file = 4;</code>
-       */
-      public Builder clearFile() {
-        if (fileBuilder_ == null) {
-          if (DataCase_ == 4) {
-            DataCase_ = 0;
-            Data_ = null;
-            onChanged();
-          }
-        } else {
-          if (DataCase_ == 4) {
-            DataCase_ = 0;
-            Data_ = null;
-          }
-          fileBuilder_.clear();
-        }
-        return this;
-      }
-      /**
-       * <code>.provenancegraph.provenancegraph.datamodel.File file = 4;</code>
-       */
-      public provenancegraph.datamodel.PDM.File.Builder getFileBuilder() {
-        return getFileFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>.provenancegraph.provenancegraph.datamodel.File file = 4;</code>
-       */
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.FileOrBuilder getFileOrBuilder() {
-        if ((DataCase_ == 4) && (fileBuilder_ != null)) {
-          return fileBuilder_.getMessageOrBuilder();
-        } else {
-          if (DataCase_ == 4) {
-            return (provenancegraph.datamodel.PDM.File) Data_;
-          }
-          return provenancegraph.datamodel.PDM.File.getDefaultInstance();
-        }
-      }
-      /**
-       * <code>.provenancegraph.provenancegraph.datamodel.File file = 4;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          provenancegraph.datamodel.PDM.File, provenancegraph.datamodel.PDM.File.Builder, provenancegraph.datamodel.PDM.FileOrBuilder> 
-          getFileFieldBuilder() {
-        if (fileBuilder_ == null) {
-          if (!(DataCase_ == 4)) {
-            Data_ = provenancegraph.datamodel.PDM.File.getDefaultInstance();
-          }
-          fileBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              provenancegraph.datamodel.PDM.File, provenancegraph.datamodel.PDM.File.Builder, provenancegraph.datamodel.PDM.FileOrBuilder>(
-                  (provenancegraph.datamodel.PDM.File) Data_,
-                  getParentForChildren(),
-                  isClean());
-          Data_ = null;
-        }
-        DataCase_ = 4;
-        onChanged();
-        return fileBuilder_;
-      }
-
       private com.google.protobuf.SingleFieldBuilderV3<
           provenancegraph.datamodel.PDM.Client, provenancegraph.datamodel.PDM.Client.Builder, provenancegraph.datamodel.PDM.ClientOrBuilder> clientBuilder_;
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.Client client = 5;</code>
+       * <pre>
+       *        Process process = 2;
+       *        File file = 3;
+       * </pre>
+       *
+       * <code>.provenancegraph.datamodel.Client client = 2;</code>
        * @return Whether the client field is set.
        */
       @java.lang.Override
       public boolean hasClient() {
-        return DataCase_ == 5;
+        return DataCase_ == 2;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.Client client = 5;</code>
+       * <pre>
+       *        Process process = 2;
+       *        File file = 3;
+       * </pre>
+       *
+       * <code>.provenancegraph.datamodel.Client client = 2;</code>
        * @return The client.
        */
       @java.lang.Override
       public provenancegraph.datamodel.PDM.Client getClient() {
         if (clientBuilder_ == null) {
-          if (DataCase_ == 5) {
+          if (DataCase_ == 2) {
             return (provenancegraph.datamodel.PDM.Client) Data_;
           }
           return provenancegraph.datamodel.PDM.Client.getDefaultInstance();
         } else {
-          if (DataCase_ == 5) {
+          if (DataCase_ == 2) {
             return clientBuilder_.getMessage();
           }
           return provenancegraph.datamodel.PDM.Client.getDefaultInstance();
         }
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.Client client = 5;</code>
+       * <pre>
+       *        Process process = 2;
+       *        File file = 3;
+       * </pre>
+       *
+       * <code>.provenancegraph.datamodel.Client client = 2;</code>
        */
       public Builder setClient(provenancegraph.datamodel.PDM.Client value) {
         if (clientBuilder_ == null) {
@@ -14749,11 +13587,16 @@ public final class PDM {
         } else {
           clientBuilder_.setMessage(value);
         }
-        DataCase_ = 5;
+        DataCase_ = 2;
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.Client client = 5;</code>
+       * <pre>
+       *        Process process = 2;
+       *        File file = 3;
+       * </pre>
+       *
+       * <code>.provenancegraph.datamodel.Client client = 2;</code>
        */
       public Builder setClient(
           provenancegraph.datamodel.PDM.Client.Builder builderForValue) {
@@ -14763,15 +13606,20 @@ public final class PDM {
         } else {
           clientBuilder_.setMessage(builderForValue.build());
         }
-        DataCase_ = 5;
+        DataCase_ = 2;
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.Client client = 5;</code>
+       * <pre>
+       *        Process process = 2;
+       *        File file = 3;
+       * </pre>
+       *
+       * <code>.provenancegraph.datamodel.Client client = 2;</code>
        */
       public Builder mergeClient(provenancegraph.datamodel.PDM.Client value) {
         if (clientBuilder_ == null) {
-          if (DataCase_ == 5 &&
+          if (DataCase_ == 2 &&
               Data_ != provenancegraph.datamodel.PDM.Client.getDefaultInstance()) {
             Data_ = provenancegraph.datamodel.PDM.Client.newBuilder((provenancegraph.datamodel.PDM.Client) Data_)
                 .mergeFrom(value).buildPartial();
@@ -14780,27 +13628,32 @@ public final class PDM {
           }
           onChanged();
         } else {
-          if (DataCase_ == 5) {
+          if (DataCase_ == 2) {
             clientBuilder_.mergeFrom(value);
           } else {
             clientBuilder_.setMessage(value);
           }
         }
-        DataCase_ = 5;
+        DataCase_ = 2;
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.Client client = 5;</code>
+       * <pre>
+       *        Process process = 2;
+       *        File file = 3;
+       * </pre>
+       *
+       * <code>.provenancegraph.datamodel.Client client = 2;</code>
        */
       public Builder clearClient() {
         if (clientBuilder_ == null) {
-          if (DataCase_ == 5) {
+          if (DataCase_ == 2) {
             DataCase_ = 0;
             Data_ = null;
             onChanged();
           }
         } else {
-          if (DataCase_ == 5) {
+          if (DataCase_ == 2) {
             DataCase_ = 0;
             Data_ = null;
           }
@@ -14809,33 +13662,48 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.Client client = 5;</code>
+       * <pre>
+       *        Process process = 2;
+       *        File file = 3;
+       * </pre>
+       *
+       * <code>.provenancegraph.datamodel.Client client = 2;</code>
        */
       public provenancegraph.datamodel.PDM.Client.Builder getClientBuilder() {
         return getClientFieldBuilder().getBuilder();
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.Client client = 5;</code>
+       * <pre>
+       *        Process process = 2;
+       *        File file = 3;
+       * </pre>
+       *
+       * <code>.provenancegraph.datamodel.Client client = 2;</code>
        */
       @java.lang.Override
       public provenancegraph.datamodel.PDM.ClientOrBuilder getClientOrBuilder() {
-        if ((DataCase_ == 5) && (clientBuilder_ != null)) {
+        if ((DataCase_ == 2) && (clientBuilder_ != null)) {
           return clientBuilder_.getMessageOrBuilder();
         } else {
-          if (DataCase_ == 5) {
+          if (DataCase_ == 2) {
             return (provenancegraph.datamodel.PDM.Client) Data_;
           }
           return provenancegraph.datamodel.PDM.Client.getDefaultInstance();
         }
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.Client client = 5;</code>
+       * <pre>
+       *        Process process = 2;
+       *        File file = 3;
+       * </pre>
+       *
+       * <code>.provenancegraph.datamodel.Client client = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           provenancegraph.datamodel.PDM.Client, provenancegraph.datamodel.PDM.Client.Builder, provenancegraph.datamodel.PDM.ClientOrBuilder> 
           getClientFieldBuilder() {
         if (clientBuilder_ == null) {
-          if (!(DataCase_ == 5)) {
+          if (!(DataCase_ == 2)) {
             Data_ = provenancegraph.datamodel.PDM.Client.getDefaultInstance();
           }
           clientBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
@@ -14845,7 +13713,7 @@ public final class PDM {
                   isClean());
           Data_ = null;
         }
-        DataCase_ = 5;
+        DataCase_ = 2;
         onChanged();
         return clientBuilder_;
       }
@@ -14853,33 +13721,33 @@ public final class PDM {
       private com.google.protobuf.SingleFieldBuilderV3<
           provenancegraph.datamodel.PDM.EventData, provenancegraph.datamodel.PDM.EventData.Builder, provenancegraph.datamodel.PDM.EventDataOrBuilder> eventDataBuilder_;
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.EventData eventData = 6;</code>
+       * <code>.provenancegraph.datamodel.EventData eventData = 3;</code>
        * @return Whether the eventData field is set.
        */
       @java.lang.Override
       public boolean hasEventData() {
-        return DataCase_ == 6;
+        return DataCase_ == 3;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.EventData eventData = 6;</code>
+       * <code>.provenancegraph.datamodel.EventData eventData = 3;</code>
        * @return The eventData.
        */
       @java.lang.Override
       public provenancegraph.datamodel.PDM.EventData getEventData() {
         if (eventDataBuilder_ == null) {
-          if (DataCase_ == 6) {
+          if (DataCase_ == 3) {
             return (provenancegraph.datamodel.PDM.EventData) Data_;
           }
           return provenancegraph.datamodel.PDM.EventData.getDefaultInstance();
         } else {
-          if (DataCase_ == 6) {
+          if (DataCase_ == 3) {
             return eventDataBuilder_.getMessage();
           }
           return provenancegraph.datamodel.PDM.EventData.getDefaultInstance();
         }
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.EventData eventData = 6;</code>
+       * <code>.provenancegraph.datamodel.EventData eventData = 3;</code>
        */
       public Builder setEventData(provenancegraph.datamodel.PDM.EventData value) {
         if (eventDataBuilder_ == null) {
@@ -14891,11 +13759,11 @@ public final class PDM {
         } else {
           eventDataBuilder_.setMessage(value);
         }
-        DataCase_ = 6;
+        DataCase_ = 3;
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.EventData eventData = 6;</code>
+       * <code>.provenancegraph.datamodel.EventData eventData = 3;</code>
        */
       public Builder setEventData(
           provenancegraph.datamodel.PDM.EventData.Builder builderForValue) {
@@ -14905,15 +13773,15 @@ public final class PDM {
         } else {
           eventDataBuilder_.setMessage(builderForValue.build());
         }
-        DataCase_ = 6;
+        DataCase_ = 3;
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.EventData eventData = 6;</code>
+       * <code>.provenancegraph.datamodel.EventData eventData = 3;</code>
        */
       public Builder mergeEventData(provenancegraph.datamodel.PDM.EventData value) {
         if (eventDataBuilder_ == null) {
-          if (DataCase_ == 6 &&
+          if (DataCase_ == 3 &&
               Data_ != provenancegraph.datamodel.PDM.EventData.getDefaultInstance()) {
             Data_ = provenancegraph.datamodel.PDM.EventData.newBuilder((provenancegraph.datamodel.PDM.EventData) Data_)
                 .mergeFrom(value).buildPartial();
@@ -14922,27 +13790,27 @@ public final class PDM {
           }
           onChanged();
         } else {
-          if (DataCase_ == 6) {
+          if (DataCase_ == 3) {
             eventDataBuilder_.mergeFrom(value);
           } else {
             eventDataBuilder_.setMessage(value);
           }
         }
-        DataCase_ = 6;
+        DataCase_ = 3;
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.EventData eventData = 6;</code>
+       * <code>.provenancegraph.datamodel.EventData eventData = 3;</code>
        */
       public Builder clearEventData() {
         if (eventDataBuilder_ == null) {
-          if (DataCase_ == 6) {
+          if (DataCase_ == 3) {
             DataCase_ = 0;
             Data_ = null;
             onChanged();
           }
         } else {
-          if (DataCase_ == 6) {
+          if (DataCase_ == 3) {
             DataCase_ = 0;
             Data_ = null;
           }
@@ -14951,33 +13819,33 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.EventData eventData = 6;</code>
+       * <code>.provenancegraph.datamodel.EventData eventData = 3;</code>
        */
       public provenancegraph.datamodel.PDM.EventData.Builder getEventDataBuilder() {
         return getEventDataFieldBuilder().getBuilder();
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.EventData eventData = 6;</code>
+       * <code>.provenancegraph.datamodel.EventData eventData = 3;</code>
        */
       @java.lang.Override
       public provenancegraph.datamodel.PDM.EventDataOrBuilder getEventDataOrBuilder() {
-        if ((DataCase_ == 6) && (eventDataBuilder_ != null)) {
+        if ((DataCase_ == 3) && (eventDataBuilder_ != null)) {
           return eventDataBuilder_.getMessageOrBuilder();
         } else {
-          if (DataCase_ == 6) {
+          if (DataCase_ == 3) {
             return (provenancegraph.datamodel.PDM.EventData) Data_;
           }
           return provenancegraph.datamodel.PDM.EventData.getDefaultInstance();
         }
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.EventData eventData = 6;</code>
+       * <code>.provenancegraph.datamodel.EventData eventData = 3;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           provenancegraph.datamodel.PDM.EventData, provenancegraph.datamodel.PDM.EventData.Builder, provenancegraph.datamodel.PDM.EventDataOrBuilder> 
           getEventDataFieldBuilder() {
         if (eventDataBuilder_ == null) {
-          if (!(DataCase_ == 6)) {
+          if (!(DataCase_ == 3)) {
             Data_ = provenancegraph.datamodel.PDM.EventData.getDefaultInstance();
           }
           eventDataBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
@@ -14987,7 +13855,7 @@ public final class PDM {
                   isClean());
           Data_ = null;
         }
-        DataCase_ = 6;
+        DataCase_ = 3;
         onChanged();
         return eventDataBuilder_;
       }
@@ -14995,33 +13863,33 @@ public final class PDM {
       private com.google.protobuf.SingleFieldBuilderV3<
           provenancegraph.datamodel.PDM.EventLost, provenancegraph.datamodel.PDM.EventLost.Builder, provenancegraph.datamodel.PDM.EventLostOrBuilder> lostBuilder_;
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.EventLost lost = 7;</code>
+       * <code>.provenancegraph.datamodel.EventLost lost = 4;</code>
        * @return Whether the lost field is set.
        */
       @java.lang.Override
       public boolean hasLost() {
-        return DataCase_ == 7;
+        return DataCase_ == 4;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.EventLost lost = 7;</code>
+       * <code>.provenancegraph.datamodel.EventLost lost = 4;</code>
        * @return The lost.
        */
       @java.lang.Override
       public provenancegraph.datamodel.PDM.EventLost getLost() {
         if (lostBuilder_ == null) {
-          if (DataCase_ == 7) {
+          if (DataCase_ == 4) {
             return (provenancegraph.datamodel.PDM.EventLost) Data_;
           }
           return provenancegraph.datamodel.PDM.EventLost.getDefaultInstance();
         } else {
-          if (DataCase_ == 7) {
+          if (DataCase_ == 4) {
             return lostBuilder_.getMessage();
           }
           return provenancegraph.datamodel.PDM.EventLost.getDefaultInstance();
         }
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.EventLost lost = 7;</code>
+       * <code>.provenancegraph.datamodel.EventLost lost = 4;</code>
        */
       public Builder setLost(provenancegraph.datamodel.PDM.EventLost value) {
         if (lostBuilder_ == null) {
@@ -15033,11 +13901,11 @@ public final class PDM {
         } else {
           lostBuilder_.setMessage(value);
         }
-        DataCase_ = 7;
+        DataCase_ = 4;
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.EventLost lost = 7;</code>
+       * <code>.provenancegraph.datamodel.EventLost lost = 4;</code>
        */
       public Builder setLost(
           provenancegraph.datamodel.PDM.EventLost.Builder builderForValue) {
@@ -15047,15 +13915,15 @@ public final class PDM {
         } else {
           lostBuilder_.setMessage(builderForValue.build());
         }
-        DataCase_ = 7;
+        DataCase_ = 4;
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.EventLost lost = 7;</code>
+       * <code>.provenancegraph.datamodel.EventLost lost = 4;</code>
        */
       public Builder mergeLost(provenancegraph.datamodel.PDM.EventLost value) {
         if (lostBuilder_ == null) {
-          if (DataCase_ == 7 &&
+          if (DataCase_ == 4 &&
               Data_ != provenancegraph.datamodel.PDM.EventLost.getDefaultInstance()) {
             Data_ = provenancegraph.datamodel.PDM.EventLost.newBuilder((provenancegraph.datamodel.PDM.EventLost) Data_)
                 .mergeFrom(value).buildPartial();
@@ -15064,27 +13932,27 @@ public final class PDM {
           }
           onChanged();
         } else {
-          if (DataCase_ == 7) {
+          if (DataCase_ == 4) {
             lostBuilder_.mergeFrom(value);
           } else {
             lostBuilder_.setMessage(value);
           }
         }
-        DataCase_ = 7;
+        DataCase_ = 4;
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.EventLost lost = 7;</code>
+       * <code>.provenancegraph.datamodel.EventLost lost = 4;</code>
        */
       public Builder clearLost() {
         if (lostBuilder_ == null) {
-          if (DataCase_ == 7) {
+          if (DataCase_ == 4) {
             DataCase_ = 0;
             Data_ = null;
             onChanged();
           }
         } else {
-          if (DataCase_ == 7) {
+          if (DataCase_ == 4) {
             DataCase_ = 0;
             Data_ = null;
           }
@@ -15093,33 +13961,33 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.EventLost lost = 7;</code>
+       * <code>.provenancegraph.datamodel.EventLost lost = 4;</code>
        */
       public provenancegraph.datamodel.PDM.EventLost.Builder getLostBuilder() {
         return getLostFieldBuilder().getBuilder();
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.EventLost lost = 7;</code>
+       * <code>.provenancegraph.datamodel.EventLost lost = 4;</code>
        */
       @java.lang.Override
       public provenancegraph.datamodel.PDM.EventLostOrBuilder getLostOrBuilder() {
-        if ((DataCase_ == 7) && (lostBuilder_ != null)) {
+        if ((DataCase_ == 4) && (lostBuilder_ != null)) {
           return lostBuilder_.getMessageOrBuilder();
         } else {
-          if (DataCase_ == 7) {
+          if (DataCase_ == 4) {
             return (provenancegraph.datamodel.PDM.EventLost) Data_;
           }
           return provenancegraph.datamodel.PDM.EventLost.getDefaultInstance();
         }
       }
       /**
-       * <code>.provenancegraph.provenancegraph.datamodel.EventLost lost = 7;</code>
+       * <code>.provenancegraph.datamodel.EventLost lost = 4;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           provenancegraph.datamodel.PDM.EventLost, provenancegraph.datamodel.PDM.EventLost.Builder, provenancegraph.datamodel.PDM.EventLostOrBuilder> 
           getLostFieldBuilder() {
         if (lostBuilder_ == null) {
-          if (!(DataCase_ == 7)) {
+          if (!(DataCase_ == 4)) {
             Data_ = provenancegraph.datamodel.PDM.EventLost.getDefaultInstance();
           }
           lostBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
@@ -15129,7 +13997,7 @@ public final class PDM {
                   isClean());
           Data_ = null;
         }
-        DataCase_ = 7;
+        DataCase_ = 4;
         onChanged();
         return lostBuilder_;
       }
@@ -15146,10 +14014,10 @@ public final class PDM {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:provenancegraph.provenancegraph.datamodel.Log)
+      // @@protoc_insertion_point(builder_scope:provenancegraph.datamodel.Log)
     }
 
-    // @@protoc_insertion_point(class_scope:provenancegraph.provenancegraph.datamodel.Log)
+    // @@protoc_insertion_point(class_scope:provenancegraph.datamodel.Log)
     private static final provenancegraph.datamodel.PDM.Log DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new provenancegraph.datamodel.PDM.Log();
@@ -15198,39 +14066,39 @@ public final class PDM {
   }
 
   public interface LogPackOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:provenancegraph.provenancegraph.datamodel.LogPack)
+      // @@protoc_insertion_point(interface_extends:provenancegraph.datamodel.LogPack)
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>repeated .provenancegraph.provenancegraph.datamodel.Log data = 1;</code>
+     * <code>repeated .provenancegraph.datamodel.Log data = 1;</code>
      */
     java.util.List<provenancegraph.datamodel.PDM.Log> 
         getDataList();
     /**
-     * <code>repeated .provenancegraph.provenancegraph.datamodel.Log data = 1;</code>
+     * <code>repeated .provenancegraph.datamodel.Log data = 1;</code>
      */
     provenancegraph.datamodel.PDM.Log getData(int index);
     /**
-     * <code>repeated .provenancegraph.provenancegraph.datamodel.Log data = 1;</code>
+     * <code>repeated .provenancegraph.datamodel.Log data = 1;</code>
      */
     int getDataCount();
     /**
-     * <code>repeated .provenancegraph.provenancegraph.datamodel.Log data = 1;</code>
+     * <code>repeated .provenancegraph.datamodel.Log data = 1;</code>
      */
     java.util.List<? extends provenancegraph.datamodel.PDM.LogOrBuilder> 
         getDataOrBuilderList();
     /**
-     * <code>repeated .provenancegraph.provenancegraph.datamodel.Log data = 1;</code>
+     * <code>repeated .provenancegraph.datamodel.Log data = 1;</code>
      */
     provenancegraph.datamodel.PDM.LogOrBuilder getDataOrBuilder(
         int index);
   }
   /**
-   * Protobuf type {@code provenancegraph.provenancegraph.datamodel.LogPack}
+   * Protobuf type {@code provenancegraph.datamodel.LogPack}
    */
   public static final class LogPack extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:provenancegraph.provenancegraph.datamodel.LogPack)
+      // @@protoc_insertion_point(message_implements:provenancegraph.datamodel.LogPack)
       LogPackOrBuilder {
   private static final long serialVersionUID = 0L;
     // Use LogPack.newBuilder() to construct.
@@ -15265,14 +14133,14 @@ public final class PDM {
     @SuppressWarnings("serial")
     private java.util.List<provenancegraph.datamodel.PDM.Log> data_;
     /**
-     * <code>repeated .provenancegraph.provenancegraph.datamodel.Log data = 1;</code>
+     * <code>repeated .provenancegraph.datamodel.Log data = 1;</code>
      */
     @java.lang.Override
     public java.util.List<provenancegraph.datamodel.PDM.Log> getDataList() {
       return data_;
     }
     /**
-     * <code>repeated .provenancegraph.provenancegraph.datamodel.Log data = 1;</code>
+     * <code>repeated .provenancegraph.datamodel.Log data = 1;</code>
      */
     @java.lang.Override
     public java.util.List<? extends provenancegraph.datamodel.PDM.LogOrBuilder> 
@@ -15280,21 +14148,21 @@ public final class PDM {
       return data_;
     }
     /**
-     * <code>repeated .provenancegraph.provenancegraph.datamodel.Log data = 1;</code>
+     * <code>repeated .provenancegraph.datamodel.Log data = 1;</code>
      */
     @java.lang.Override
     public int getDataCount() {
       return data_.size();
     }
     /**
-     * <code>repeated .provenancegraph.provenancegraph.datamodel.Log data = 1;</code>
+     * <code>repeated .provenancegraph.datamodel.Log data = 1;</code>
      */
     @java.lang.Override
     public provenancegraph.datamodel.PDM.Log getData(int index) {
       return data_.get(index);
     }
     /**
-     * <code>repeated .provenancegraph.provenancegraph.datamodel.Log data = 1;</code>
+     * <code>repeated .provenancegraph.datamodel.Log data = 1;</code>
      */
     @java.lang.Override
     public provenancegraph.datamodel.PDM.LogOrBuilder getDataOrBuilder(
@@ -15462,11 +14330,11 @@ public final class PDM {
       return builder;
     }
     /**
-     * Protobuf type {@code provenancegraph.provenancegraph.datamodel.LogPack}
+     * Protobuf type {@code provenancegraph.datamodel.LogPack}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:provenancegraph.provenancegraph.datamodel.LogPack)
+        // @@protoc_insertion_point(builder_implements:provenancegraph.datamodel.LogPack)
         provenancegraph.datamodel.PDM.LogPackOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
@@ -15481,7 +14349,7 @@ public final class PDM {
                 provenancegraph.datamodel.PDM.LogPack.class, provenancegraph.datamodel.PDM.LogPack.Builder.class);
       }
 
-      // Construct using provenancegraph.provenancegraph.datamodel.PDM.LogPack.newBuilder()
+      // Construct using provenancegraph.datamodel.PDM.LogPack.newBuilder()
       private Builder() {
 
       }
@@ -15689,7 +14557,7 @@ public final class PDM {
           provenancegraph.datamodel.PDM.Log, provenancegraph.datamodel.PDM.Log.Builder, provenancegraph.datamodel.PDM.LogOrBuilder> dataBuilder_;
 
       /**
-       * <code>repeated .provenancegraph.provenancegraph.datamodel.Log data = 1;</code>
+       * <code>repeated .provenancegraph.datamodel.Log data = 1;</code>
        */
       public java.util.List<provenancegraph.datamodel.PDM.Log> getDataList() {
         if (dataBuilder_ == null) {
@@ -15699,7 +14567,7 @@ public final class PDM {
         }
       }
       /**
-       * <code>repeated .provenancegraph.provenancegraph.datamodel.Log data = 1;</code>
+       * <code>repeated .provenancegraph.datamodel.Log data = 1;</code>
        */
       public int getDataCount() {
         if (dataBuilder_ == null) {
@@ -15709,7 +14577,7 @@ public final class PDM {
         }
       }
       /**
-       * <code>repeated .provenancegraph.provenancegraph.datamodel.Log data = 1;</code>
+       * <code>repeated .provenancegraph.datamodel.Log data = 1;</code>
        */
       public provenancegraph.datamodel.PDM.Log getData(int index) {
         if (dataBuilder_ == null) {
@@ -15719,7 +14587,7 @@ public final class PDM {
         }
       }
       /**
-       * <code>repeated .provenancegraph.provenancegraph.datamodel.Log data = 1;</code>
+       * <code>repeated .provenancegraph.datamodel.Log data = 1;</code>
        */
       public Builder setData(
           int index, provenancegraph.datamodel.PDM.Log value) {
@@ -15736,7 +14604,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>repeated .provenancegraph.provenancegraph.datamodel.Log data = 1;</code>
+       * <code>repeated .provenancegraph.datamodel.Log data = 1;</code>
        */
       public Builder setData(
           int index, provenancegraph.datamodel.PDM.Log.Builder builderForValue) {
@@ -15750,7 +14618,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>repeated .provenancegraph.provenancegraph.datamodel.Log data = 1;</code>
+       * <code>repeated .provenancegraph.datamodel.Log data = 1;</code>
        */
       public Builder addData(provenancegraph.datamodel.PDM.Log value) {
         if (dataBuilder_ == null) {
@@ -15766,7 +14634,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>repeated .provenancegraph.provenancegraph.datamodel.Log data = 1;</code>
+       * <code>repeated .provenancegraph.datamodel.Log data = 1;</code>
        */
       public Builder addData(
           int index, provenancegraph.datamodel.PDM.Log value) {
@@ -15783,7 +14651,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>repeated .provenancegraph.provenancegraph.datamodel.Log data = 1;</code>
+       * <code>repeated .provenancegraph.datamodel.Log data = 1;</code>
        */
       public Builder addData(
           provenancegraph.datamodel.PDM.Log.Builder builderForValue) {
@@ -15797,7 +14665,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>repeated .provenancegraph.provenancegraph.datamodel.Log data = 1;</code>
+       * <code>repeated .provenancegraph.datamodel.Log data = 1;</code>
        */
       public Builder addData(
           int index, provenancegraph.datamodel.PDM.Log.Builder builderForValue) {
@@ -15811,7 +14679,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>repeated .provenancegraph.provenancegraph.datamodel.Log data = 1;</code>
+       * <code>repeated .provenancegraph.datamodel.Log data = 1;</code>
        */
       public Builder addAllData(
           java.lang.Iterable<? extends provenancegraph.datamodel.PDM.Log> values) {
@@ -15826,7 +14694,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>repeated .provenancegraph.provenancegraph.datamodel.Log data = 1;</code>
+       * <code>repeated .provenancegraph.datamodel.Log data = 1;</code>
        */
       public Builder clearData() {
         if (dataBuilder_ == null) {
@@ -15839,7 +14707,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>repeated .provenancegraph.provenancegraph.datamodel.Log data = 1;</code>
+       * <code>repeated .provenancegraph.datamodel.Log data = 1;</code>
        */
       public Builder removeData(int index) {
         if (dataBuilder_ == null) {
@@ -15852,14 +14720,14 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>repeated .provenancegraph.provenancegraph.datamodel.Log data = 1;</code>
+       * <code>repeated .provenancegraph.datamodel.Log data = 1;</code>
        */
       public provenancegraph.datamodel.PDM.Log.Builder getDataBuilder(
           int index) {
         return getDataFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .provenancegraph.provenancegraph.datamodel.Log data = 1;</code>
+       * <code>repeated .provenancegraph.datamodel.Log data = 1;</code>
        */
       public provenancegraph.datamodel.PDM.LogOrBuilder getDataOrBuilder(
           int index) {
@@ -15869,7 +14737,7 @@ public final class PDM {
         }
       }
       /**
-       * <code>repeated .provenancegraph.provenancegraph.datamodel.Log data = 1;</code>
+       * <code>repeated .provenancegraph.datamodel.Log data = 1;</code>
        */
       public java.util.List<? extends provenancegraph.datamodel.PDM.LogOrBuilder> 
            getDataOrBuilderList() {
@@ -15880,14 +14748,14 @@ public final class PDM {
         }
       }
       /**
-       * <code>repeated .provenancegraph.provenancegraph.datamodel.Log data = 1;</code>
+       * <code>repeated .provenancegraph.datamodel.Log data = 1;</code>
        */
       public provenancegraph.datamodel.PDM.Log.Builder addDataBuilder() {
         return getDataFieldBuilder().addBuilder(
             provenancegraph.datamodel.PDM.Log.getDefaultInstance());
       }
       /**
-       * <code>repeated .provenancegraph.provenancegraph.datamodel.Log data = 1;</code>
+       * <code>repeated .provenancegraph.datamodel.Log data = 1;</code>
        */
       public provenancegraph.datamodel.PDM.Log.Builder addDataBuilder(
           int index) {
@@ -15895,7 +14763,7 @@ public final class PDM {
             index, provenancegraph.datamodel.PDM.Log.getDefaultInstance());
       }
       /**
-       * <code>repeated .provenancegraph.provenancegraph.datamodel.Log data = 1;</code>
+       * <code>repeated .provenancegraph.datamodel.Log data = 1;</code>
        */
       public java.util.List<provenancegraph.datamodel.PDM.Log.Builder> 
            getDataBuilderList() {
@@ -15928,10 +14796,10 @@ public final class PDM {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:provenancegraph.provenancegraph.datamodel.LogPack)
+      // @@protoc_insertion_point(builder_scope:provenancegraph.datamodel.LogPack)
     }
 
-    // @@protoc_insertion_point(class_scope:provenancegraph.provenancegraph.datamodel.LogPack)
+    // @@protoc_insertion_point(class_scope:provenancegraph.datamodel.LogPack)
     private static final provenancegraph.datamodel.PDM.LogPack DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new provenancegraph.datamodel.PDM.LogPack();
@@ -16050,11 +14918,6 @@ public final class PDM {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_provenancegraph_datamodel_EventData_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_provenancegraph_datamodel_Status_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_provenancegraph_datamodel_Status_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_provenancegraph_datamodel_Log_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -16073,26 +14936,26 @@ public final class PDM {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\tPDM.proto\022\031provenancegraph.provenancegraph.datamodel\"\034" +
+      "\n\tPDM.proto\022\031provenancegraph.datamodel\"\034" +
       "\n\010HostUUID\022\020\n\010hostUUID\030\001 \001(\004\"&\n\013ProcessU" +
       "UID\022\013\n\003pid\030\001 \001(\005\022\n\n\002ts\030\002 \001(\004\" \n\010FileUUID" +
       "\022\024\n\014filePathHash\030\001 \001(\004\"\254\001\n\tLogHeader\0225\n\010" +
       "clientID\030\001 \001(\0132#.provenancegraph.datamod" +
       "el.HostUUID\0220\n\004type\030\002 \001(\0162\".provenancegr" +
-      "aph.provenancegraph.datamodel.LogType\0226\n\007content\030\003 \001(\0162%" +
-      ".provenancegraph.provenancegraph.datamodel.LogContent\"l\n" +
+      "aph.datamodel.LogType\0226\n\007content\030\003 \001(\0162%" +
+      ".provenancegraph.datamodel.LogContent\"l\n" +
       "\006Client\0224\n\006ipList\030\001 \003(\0132$.provenancegrap" +
-      "h.provenancegraph.datamodel.IPAddress\022\022\n\nclientName\030\002 \001(" +
+      "h.datamodel.IPAddress\022\022\n\nclientName\030\002 \001(" +
       "\t\022\030\n\020collectorVersion\030\003 \001(\t\"\361\001\n\007Process\022" +
       "8\n\010procUUID\030\001 \001(\0132&.provenancegraph.data" +
       "model.ProcessUUID\022>\n\016parentProcUUID\030\002 \001(" +
-      "\0132&.provenancegraph.provenancegraph.datamodel.ProcessUUI" +
+      "\0132&.provenancegraph.datamodel.ProcessUUI" +
       "D\022\023\n\013processName\030\003 \001(\t\022\017\n\007cmdline\030\004 \001(\t\022" +
       "5\n\010fileUUID\030\005 \001(\0132#.provenancegraph.data" +
       "model.FileUUID\022\017\n\007exePath\030\006 \001(\t\"\205\002\n\004File" +
       "\0225\n\010fileUUID\030\001 \001(\0132#.provenancegraph.dat" +
       "amodel.FileUUID\022:\n\010fileType\030\002 \001(\0162(.prov" +
-      "enancegraph.provenancegraph.datamodel.File.FileType\022\022\n\np" +
+      "enancegraph.datamodel.File.FileType\022\022\n\np" +
       "ermission\030\003 \001(\r\022\020\n\010filePath\030\004 \001(\t\"d\n\010Fil" +
       "eType\022\020\n\014FILE_UNKNOWN\020\000\022\014\n\010FILE_REG\020\001\022\014\n" +
       "\010FILE_DIR\020\002\022\014\n\010FILE_LNK\020\003\022\r\n\tFILE_SOCK\020\004" +
@@ -16102,45 +14965,39 @@ public final class PDM {
       "\tIPAddress\022\017\n\007address\030\001 \001(\r\022\021\n\taddress_1" +
       "\030\002 \001(\r\022\021\n\taddress_2\030\003 \001(\r\022\021\n\taddress_3\030\004" +
       " \001(\r\"\207\002\n\010NetEvent\0221\n\003sip\030\001 \001(\0132$.provena" +
-      "ncegraph.provenancegraph.datamodel.IPAddress\0221\n\003dip\030\002 \001(" +
-      "\0132$.provenancegraph.provenancegraph.datamodel.IPAddress\022" +
+      "ncegraph.datamodel.IPAddress\0221\n\003dip\030\002 \001(" +
+      "\0132$.provenancegraph.datamodel.IPAddress\022" +
       "\r\n\005sport\030\003 \001(\r\022\r\n\005dport\030\004 \001(\r\022\020\n\010protoco" +
       "l\030\005 \001(\r\022=\n\006direct\030\006 \001(\0162-.provenancegrap" +
-      "h.provenancegraph.datamodel.NetEvent.Direction\"&\n\tDirect" +
-      "ion\022\006\n\002IN\020\000\022\007\n\003OUT\020\001\022\010\n\004NONE\020\002\"M\n\014Proces" +
-      "sEvent\022=\n\rchildProcUUID\030\001 \001(\0132&.provenan" +
-      "cegraph.provenancegraph.datamodel.ProcessUUID\"\346\001\n\tFileEv" +
-      "ent\0225\n\010fileUUID\030\001 \001(\0132#.provenancegraph." +
-      "provenancegraph.datamodel.FileUUID\0228\n\013newFileUUID\030\002 \001(\0132" +
-      "#.provenancegraph.provenancegraph.datamodel.FileUUID\022\013\n\003" +
-      "uid\030\003 \001(\r\022\013\n\003gid\030\004 \001(\r\022\022\n\npermission\030\005 \001" +
-      "(\r\022:\n\010fileType\030\006 \001(\0162(.provenancegraph.d" +
-      "atamodel.File.FileType\".\n\tEventLost\022\017\n\007l" +
-      "ostCpu\030\001 \001(\004\022\020\n\010lostSize\030\002 \001(\004\"\202\002\n\tEvent" +
-      "Data\0227\n\007eHeader\030\001 \001(\0132&.provenancegraph." +
-      "provenancegraph.datamodel.EventHeader\022?\n\014processEvent\030\002 " +
-      "\001(\0132\'.provenancegraph.provenancegraph.datamodel.ProcessE" +
-      "ventH\000\0229\n\tfileEvent\030\003 \001(\0132$.provenancegr" +
-      "aph.provenancegraph.datamodel.FileEventH\000\0227\n\010netEvent\030\004 " +
-      "\001(\0132#.provenancegraph.provenancegraph.datamodel.NetEvent" +
-      "H\000B\007\n\005_data\"\'\n\006Status\022\017\n\007message\030\001 \001(\t\022\014" +
-      "\n\004code\030\002 \001(\005\"\206\003\n\003Log\0225\n\007uHeader\030\001 \001(\0132$." +
-      "provenancegraph.provenancegraph.datamodel.LogHeader\0221\n\006s" +
-      "tatus\030\002 \001(\0132!.provenancegraph.provenancegraph.datamodel." +
-      "Status\0225\n\007process\030\003 \001(\0132\".provenancegrap" +
-      "h.provenancegraph.datamodel.ProcessH\000\022/\n\004file\030\004 \001(\0132\037.pr" +
-      "ovenancegraph.provenancegraph.datamodel.FileH\000\0223\n\006client" +
-      "\030\005 \001(\0132!.provenancegraph.provenancegraph.datamodel.Clien" +
-      "tH\000\0229\n\teventData\030\006 \001(\0132$.provenancegraph" +
-      ".provenancegraph.datamodel.EventDataH\000\0224\n\004lost\030\007 \001(\0132$.p" +
-      "rovenancegraph.provenancegraph.datamodel.EventLostH\000B\007\n\005" +
+      "h.datamodel.NetEvent.Direction\"&\n\tDirect" +
+      "ion\022\006\n\002IN\020\000\022\007\n\003OUT\020\001\022\010\n\004NONE\020\002\"E\n\014Proces" +
+      "sEvent\0225\n\tchildProc\030\001 \001(\0132\".provenancegr" +
+      "aph.datamodel.Process\"\232\001\n\tFileEvent\022-\n\004f" +
+      "ile\030\001 \001(\0132\037.provenancegraph.datamodel.Fi" +
+      "le\0220\n\007newFile\030\002 \001(\0132\037.provenancegraph.da" +
+      "tamodel.File\022\013\n\003uid\030\003 \001(\r\022\013\n\003gid\030\004 \001(\r\022\022" +
+      "\n\npermission\030\005 \001(\r\".\n\tEventLost\022\017\n\007lostC" +
+      "pu\030\001 \001(\004\022\020\n\010lostSize\030\002 \001(\004\"\202\002\n\tEventData" +
+      "\0227\n\007eHeader\030\001 \001(\0132&.provenancegraph.data" +
+      "model.EventHeader\022?\n\014processEvent\030\002 \001(\0132" +
+      "\'.provenancegraph.datamodel.ProcessEvent" +
+      "H\000\0229\n\tfileEvent\030\003 \001(\0132$.provenancegraph." +
+      "datamodel.FileEventH\000\0227\n\010netEvent\030\004 \001(\0132" +
+      "#.provenancegraph.datamodel.NetEventH\000B\007" +
+      "\n\005_data\"\353\001\n\003Log\0225\n\007uHeader\030\001 \001(\0132$.prove" +
+      "nancegraph.datamodel.LogHeader\0223\n\006client" +
+      "\030\002 \001(\0132!.provenancegraph.datamodel.Clien" +
+      "tH\000\0229\n\teventData\030\003 \001(\0132$.provenancegraph" +
+      ".datamodel.EventDataH\000\0224\n\004lost\030\004 \001(\0132$.p" +
+      "rovenancegraph.datamodel.EventLostH\000B\007\n\005" +
       "_data\"7\n\007LogPack\022,\n\004data\030\001 \003(\0132\036.provena" +
-      "ncegraph.provenancegraph.datamodel.Log*\246\001\n\nLogContent\022\021\n" +
+      "ncegraph.datamodel.Log*\270\001\n\nLogContent\022\021\n" +
       "\rCLIENT_ENTITY\020\000\022\022\n\016PROCESS_ENTITY\020\001\022\017\n\013" +
-      "FILE_ENTITY\020\002\022\020\n\014PROCESS_FORK\020\003\022\017\n\013FILE_" +
-      "CREATE\020\004\022\r\n\tFILE_OPEN\020\005\022\r\n\tFILE_READ\020\006\022\016" +
-      "\n\nFILE_WRITE\020\007\022\017\n\013NET_CONNECT\020\010* \n\007LogTy" +
-      "pe\022\n\n\006ENTITY\020\000\022\t\n\005EVENT\020\001b\006proto3"
+      "FILE_ENTITY\020\002\022\020\n\014PROCESS_FORK\020\003\022\020\n\014PROCE" +
+      "SS_EXEC\020\004\022\017\n\013FILE_CREATE\020\005\022\r\n\tFILE_OPEN\020" +
+      "\006\022\r\n\tFILE_READ\020\007\022\016\n\nFILE_WRITE\020\010\022\017\n\013NET_" +
+      "CONNECT\020\t* \n\007LogType\022\n\n\006ENTITY\020\000\022\t\n\005EVEN" +
+      "T\020\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -16211,13 +15068,13 @@ public final class PDM {
     internal_static_provenancegraph_datamodel_ProcessEvent_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_provenancegraph_datamodel_ProcessEvent_descriptor,
-        new java.lang.String[] { "ChildProcUUID", });
+        new java.lang.String[] { "ChildProc", });
     internal_static_provenancegraph_datamodel_FileEvent_descriptor =
       getDescriptor().getMessageTypes().get(11);
     internal_static_provenancegraph_datamodel_FileEvent_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_provenancegraph_datamodel_FileEvent_descriptor,
-        new java.lang.String[] { "FileUUID", "NewFileUUID", "Uid", "Gid", "Permission", "FileType", });
+        new java.lang.String[] { "File", "NewFile", "Uid", "Gid", "Permission", });
     internal_static_provenancegraph_datamodel_EventLost_descriptor =
       getDescriptor().getMessageTypes().get(12);
     internal_static_provenancegraph_datamodel_EventLost_fieldAccessorTable = new
@@ -16230,20 +15087,14 @@ public final class PDM {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_provenancegraph_datamodel_EventData_descriptor,
         new java.lang.String[] { "EHeader", "ProcessEvent", "FileEvent", "NetEvent", "Data", });
-    internal_static_provenancegraph_datamodel_Status_descriptor =
-      getDescriptor().getMessageTypes().get(14);
-    internal_static_provenancegraph_datamodel_Status_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_provenancegraph_datamodel_Status_descriptor,
-        new java.lang.String[] { "Message", "Code", });
     internal_static_provenancegraph_datamodel_Log_descriptor =
-      getDescriptor().getMessageTypes().get(15);
+      getDescriptor().getMessageTypes().get(14);
     internal_static_provenancegraph_datamodel_Log_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_provenancegraph_datamodel_Log_descriptor,
-        new java.lang.String[] { "UHeader", "Status", "Process", "File", "Client", "EventData", "Lost", "Data", });
+        new java.lang.String[] { "UHeader", "Client", "EventData", "Lost", "Data", });
     internal_static_provenancegraph_datamodel_LogPack_descriptor =
-      getDescriptor().getMessageTypes().get(16);
+      getDescriptor().getMessageTypes().get(15);
     internal_static_provenancegraph_datamodel_LogPack_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_provenancegraph_datamodel_LogPack_descriptor,

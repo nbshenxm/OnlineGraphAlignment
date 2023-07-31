@@ -1,5 +1,6 @@
 package provenancegraph.parser;
 
+import provenancegraph.AssociatedEvent;
 import provenancegraph.BasicEdge;
 import provenancegraph.BasicNode;
 import provenancegraph.NodeProperties;
@@ -50,23 +51,35 @@ public class PDMParser {
             String nodeType;
             String nodeName;
 
-            if (log.hasProcess()) {
-                nodeId = processUuidToUuid(log.getProcess().getProcUUID());
+//            if (log.hasProcess()) {
+//                nodeId = processUuidToUuid(log.getProcess().getProcUUID());
+//                nodeType = "Process";
+//                nodeName = log.getProcess().getProcessName();
+//            }
+//            else if (log.hasFile()) {
+//                nodeId = fileUuidToUuid(log.getFile().getFileUUID());
+//                nodeType = "File";
+//                nodeName = log.getFile().getFilePath();
+//            }
+            if (log.hasEventData() && log.getEventData().hasProcessEvent()){
+                PDM.ProcessEvent processEvent = log.getEventData().getProcessEvent();
+                nodeId = processUuidToUuid(processEvent.getChildProc().getProcUUID());
                 nodeType = "Process";
-                nodeName = log.getProcess().getProcessName();
+                nodeName = processEvent.getChildProc().getProcessName();
             }
-            else if (log.hasFile()) {
-                nodeId = fileUuidToUuid(log.getFile().getFileUUID());
+            else if (log.hasEventData() && log.getEventData().hasFileEvent()){
+                PDM.FileEvent fileEvent = log.getEventData().getFileEvent();
+                nodeId = fileUuidToUuid(fileEvent.getFile().getFileUUID());
                 nodeType = "File";
-                nodeName = log.getFile().getFilePath();
+                nodeName = fileEvent.getFile().getFilePath();
             }
-            else if (log.getUHeader().getType() == PDM.LogType.EVENT
-                    && log.getUHeader().getContent() == PDM.LogContent.NET_CONNECT){
+            else if (log.hasEventData() && log.getEventData().hasNetEvent()){
                 PDM.NetEvent netInfo = log.getEventData().getNetEvent();
                 if (netInfo.getDirect() == PDM.NetEvent.Direction.IN)
                     nodeId = networkToUuid(netInfo.getSip(), netInfo.getSport());
-                else
+                else {
                     nodeId = networkToUuid(netInfo.getDip(), netInfo.getDport());
+                }
                 nodeType = "Network";
                 nodeName = Utils.convertIntToIpString(netInfo.getSip().getAddress());
             }
@@ -75,6 +88,10 @@ public class PDMParser {
             }
             return new BasicNode(nodeId, nodeType, nodeName);
         }
+    }
+
+    public static AssociatedEvent initAssociatedEvent(PDM.Log log){
+        return null;
     }
 
 //    ToDo: Change UDM item to PDM item.

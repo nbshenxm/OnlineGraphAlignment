@@ -24,7 +24,7 @@ public class Main {
                 env.fromSource(source, WatermarkStrategy.noWatermarks(), "file-source");
 
 //        stream.print();
-        final DataStream<JsonElement> json_stream = stream.map(Main::convertToJson).name("json-source");
+//        final DataStream<JsonElement> json_stream = stream.map(Main::convertToJson).name("json-source");
         // TODO: create a KeyedProcessFunction class to process data
 
 

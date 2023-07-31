@@ -80,8 +80,7 @@ public class AssociatedEvent extends BasicEdge implements Serializable {
 
     public String toJsonString() {
         Gson fullEventJson = new Gson();
-        String fullEventJsonString = fullEventJson.toJson(this);
-        return fullEventJsonString;
+        return fullEventJson.toJson(this);
     }
 
     public static Long generalizeTime(Long timeStamp) {
