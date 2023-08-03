@@ -14,7 +14,7 @@ import com.google.gson.JsonElement;
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        final String inputDirectory = "SystemLog/apt.log"; // Replace with the actual path to your JSON files directory
+        final String inputDirectory = "SystemLog/apt.log";
 
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 
@@ -24,8 +24,11 @@ public class Main {
                 env.fromSource(source, WatermarkStrategy.noWatermarks(), "file-source");
 
 //        stream.print();
-//        final DataStream<JsonElement> json_stream = stream.map(Main::convertToJson).name("json-source");
-        // TODO: create a KeyedProcessFunction class to process data
+        final DataStream<JsonElement> json_stream = stream.map(Main::convertToJson).name("json-source");
+
+        json_stream.keyBy(jsonElement -> jsonElement.getAsJsonObject().get("uuid").getAsString())
+                // TODO: map data entry -> associatedEvent
+                .process(new GraphAlignmentLocalProcessFunction());
 
 
         // Execute the Flink job
