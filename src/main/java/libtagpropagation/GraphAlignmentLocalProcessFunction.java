@@ -32,7 +32,10 @@ public class GraphAlignmentLocalProcessFunction
     @Override
     public void processElement(JsonElement jsonElement, KeyedProcessFunction<String, JsonElement, String>.Context context, Collector<String> collector) throws Exception {
         JsonObject rootObject = jsonElement.getAsJsonObject();
-        int eventType = rootObject.get("event_type").getAsInt();
+        if (rootObject == null){
+            return;
+        }
+
         AssociatedEvent associatedEvent = LocalParser.initAssociatedEvent(jsonElement);
         // TODO: initialize and propagation tag
         GraphAlignmentTag graphAlignmentTag;
