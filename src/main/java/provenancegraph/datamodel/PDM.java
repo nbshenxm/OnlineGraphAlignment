@@ -48,9 +48,9 @@ public final class PDM {
      */
     PROCESS_EXEC(4),
     /**
-     * <code>FILE_CREATE = 5;</code>
+     * <code>PROCESS_LOAD = 5;</code>
      */
-    FILE_CREATE(5),
+    PROCESS_LOAD(5),
     /**
      * <code>FILE_OPEN = 6;</code>
      */
@@ -99,9 +99,9 @@ public final class PDM {
      */
     public static final int PROCESS_EXEC_VALUE = 4;
     /**
-     * <code>FILE_CREATE = 5;</code>
+     * <code>PROCESS_LOAD = 5;</code>
      */
-    public static final int FILE_CREATE_VALUE = 5;
+    public static final int PROCESS_LOAD_VALUE = 5;
     /**
      * <code>FILE_OPEN = 6;</code>
      */
@@ -122,7 +122,7 @@ public final class PDM {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -133,7 +133,7 @@ public final class PDM {
      * @return The enum associated with the given numeric wire value.
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static LogContent valueOf(int value) {
       return forNumber(value);
     }
@@ -149,7 +149,7 @@ public final class PDM {
         case 2: return FILE_ENTITY;
         case 3: return PROCESS_FORK;
         case 4: return PROCESS_EXEC;
-        case 5: return FILE_CREATE;
+        case 5: return PROCESS_LOAD;
         case 6: return FILE_OPEN;
         case 7: return FILE_READ;
         case 8: return FILE_WRITE;
@@ -173,7 +173,7 @@ public final class PDM {
     public final com.google.protobuf.Descriptors.EnumValueDescriptor
         getValueDescriptor() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalStateException(
+        throw new IllegalStateException(
             "Can't get the descriptor of an unrecognized enum value.");
       }
       return getDescriptor().getValues().get(ordinal());
@@ -184,7 +184,7 @@ public final class PDM {
     }
     public static final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptor() {
-      return provenancegraph.datamodel.PDM.getDescriptor().getEnumTypes().get(0);
+      return PDM.getDescriptor().getEnumTypes().get(0);
     }
 
     private static final LogContent[] VALUES = values();
@@ -192,7 +192,7 @@ public final class PDM {
     public static LogContent valueOf(
         com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
       if (desc.getType() != getDescriptor()) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
           "EnumValueDescriptor is not for this type.");
       }
       if (desc.getIndex() == -1) {
@@ -238,7 +238,7 @@ public final class PDM {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -249,7 +249,7 @@ public final class PDM {
      * @return The enum associated with the given numeric wire value.
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @java.lang.Deprecated
+    @Deprecated
     public static LogType valueOf(int value) {
       return forNumber(value);
     }
@@ -281,7 +281,7 @@ public final class PDM {
     public final com.google.protobuf.Descriptors.EnumValueDescriptor
         getValueDescriptor() {
       if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalStateException(
+        throw new IllegalStateException(
             "Can't get the descriptor of an unrecognized enum value.");
       }
       return getDescriptor().getValues().get(ordinal());
@@ -292,7 +292,7 @@ public final class PDM {
     }
     public static final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptor() {
-      return provenancegraph.datamodel.PDM.getDescriptor().getEnumTypes().get(1);
+      return PDM.getDescriptor().getEnumTypes().get(1);
     }
 
     private static final LogType[] VALUES = values();
@@ -300,7 +300,7 @@ public final class PDM {
     public static LogType valueOf(
         com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
       if (desc.getType() != getDescriptor()) {
-        throw new java.lang.IllegalArgumentException(
+        throw new IllegalArgumentException(
           "EnumValueDescriptor is not for this type.");
       }
       if (desc.getIndex() == -1) {
@@ -343,24 +343,24 @@ public final class PDM {
     private HostUUID() {
     }
 
-    @java.lang.Override
+    @Override
     @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
+    protected Object newInstance(
         UnusedPrivateParameter unused) {
       return new HostUUID();
     }
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_HostUUID_descriptor;
+      return PDM.internal_static_provenancegraph_datamodel_HostUUID_descriptor;
     }
 
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+    @Override
+    protected FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_HostUUID_fieldAccessorTable
+      return PDM.internal_static_provenancegraph_datamodel_HostUUID_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              provenancegraph.datamodel.PDM.HostUUID.class, provenancegraph.datamodel.PDM.HostUUID.Builder.class);
+              HostUUID.class, Builder.class);
     }
 
     public static final int HOSTUUID_FIELD_NUMBER = 1;
@@ -369,13 +369,13 @@ public final class PDM {
      * <code>uint64 hostUUID = 1;</code>
      * @return The hostUUID.
      */
-    @java.lang.Override
+    @Override
     public long getHostUUID() {
       return hostUUID_;
     }
 
     private byte memoizedIsInitialized = -1;
-    @java.lang.Override
+    @Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -385,7 +385,7 @@ public final class PDM {
       return true;
     }
 
-    @java.lang.Override
+    @Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (hostUUID_ != 0L) {
@@ -394,7 +394,7 @@ public final class PDM {
       getUnknownFields().writeTo(output);
     }
 
-    @java.lang.Override
+    @Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -409,15 +409,15 @@ public final class PDM {
       return size;
     }
 
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
+    @Override
+    public boolean equals(final Object obj) {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof provenancegraph.datamodel.PDM.HostUUID)) {
+      if (!(obj instanceof HostUUID)) {
         return super.equals(obj);
       }
-      provenancegraph.datamodel.PDM.HostUUID other = (provenancegraph.datamodel.PDM.HostUUID) obj;
+      HostUUID other = (HostUUID) obj;
 
       if (getHostUUID()
           != other.getHostUUID()) return false;
@@ -425,7 +425,7 @@ public final class PDM {
       return true;
     }
 
-    @java.lang.Override
+    @Override
     public int hashCode() {
       if (memoizedHashCode != 0) {
         return memoizedHashCode;
@@ -440,44 +440,44 @@ public final class PDM {
       return hash;
     }
 
-    public static provenancegraph.datamodel.PDM.HostUUID parseFrom(
+    public static HostUUID parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static provenancegraph.datamodel.PDM.HostUUID parseFrom(
+    public static HostUUID parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.HostUUID parseFrom(
+    public static HostUUID parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static provenancegraph.datamodel.PDM.HostUUID parseFrom(
+    public static HostUUID parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.HostUUID parseFrom(byte[] data)
+    public static HostUUID parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static provenancegraph.datamodel.PDM.HostUUID parseFrom(
+    public static HostUUID parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.HostUUID parseFrom(java.io.InputStream input)
+    public static HostUUID parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static provenancegraph.datamodel.PDM.HostUUID parseFrom(
+    public static HostUUID parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -485,26 +485,26 @@ public final class PDM {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    public static provenancegraph.datamodel.PDM.HostUUID parseDelimitedFrom(java.io.InputStream input)
+    public static HostUUID parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
 
-    public static provenancegraph.datamodel.PDM.HostUUID parseDelimitedFrom(
+    public static HostUUID parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.HostUUID parseFrom(
+    public static HostUUID parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static provenancegraph.datamodel.PDM.HostUUID parseFrom(
+    public static HostUUID parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -512,23 +512,23 @@ public final class PDM {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    @java.lang.Override
+    @Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(provenancegraph.datamodel.PDM.HostUUID prototype) {
+    public static Builder newBuilder(HostUUID prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
-    @java.lang.Override
+    @Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
     }
 
-    @java.lang.Override
+    @Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -538,18 +538,18 @@ public final class PDM {
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:provenancegraph.datamodel.HostUUID)
-        provenancegraph.datamodel.PDM.HostUUIDOrBuilder {
+        HostUUIDOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_HostUUID_descriptor;
+        return PDM.internal_static_provenancegraph_datamodel_HostUUID_descriptor;
       }
 
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      @Override
+      protected FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_HostUUID_fieldAccessorTable
+        return PDM.internal_static_provenancegraph_datamodel_HostUUID_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                provenancegraph.datamodel.PDM.HostUUID.class, provenancegraph.datamodel.PDM.HostUUID.Builder.class);
+                HostUUID.class, Builder.class);
       }
 
       // Construct using provenancegraph.datamodel.PDM.HostUUID.newBuilder()
@@ -558,11 +558,11 @@ public final class PDM {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          BuilderParent parent) {
         super(parent);
 
       }
-      @java.lang.Override
+      @Override
       public Builder clear() {
         super.clear();
         bitField0_ = 0;
@@ -570,85 +570,85 @@ public final class PDM {
         return this;
       }
 
-      @java.lang.Override
+      @Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_HostUUID_descriptor;
+        return PDM.internal_static_provenancegraph_datamodel_HostUUID_descriptor;
       }
 
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.HostUUID getDefaultInstanceForType() {
-        return provenancegraph.datamodel.PDM.HostUUID.getDefaultInstance();
+      @Override
+      public HostUUID getDefaultInstanceForType() {
+        return HostUUID.getDefaultInstance();
       }
 
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.HostUUID build() {
-        provenancegraph.datamodel.PDM.HostUUID result = buildPartial();
+      @Override
+      public HostUUID build() {
+        HostUUID result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.HostUUID buildPartial() {
-        provenancegraph.datamodel.PDM.HostUUID result = new provenancegraph.datamodel.PDM.HostUUID(this);
+      @Override
+      public HostUUID buildPartial() {
+        HostUUID result = new HostUUID(this);
         if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
       }
 
-      private void buildPartial0(provenancegraph.datamodel.PDM.HostUUID result) {
+      private void buildPartial0(HostUUID result) {
         int from_bitField0_ = bitField0_;
         if (((from_bitField0_ & 0x00000001) != 0)) {
           result.hostUUID_ = hostUUID_;
         }
       }
 
-      @java.lang.Override
+      @Override
       public Builder clone() {
         return super.clone();
       }
-      @java.lang.Override
+      @Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return super.setField(field, value);
       }
-      @java.lang.Override
+      @Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return super.clearField(field);
       }
-      @java.lang.Override
+      @Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return super.clearOneof(oneof);
       }
-      @java.lang.Override
+      @Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
+          int index, Object value) {
         return super.setRepeatedField(field, index, value);
       }
-      @java.lang.Override
+      @Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return super.addRepeatedField(field, value);
       }
-      @java.lang.Override
+      @Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof provenancegraph.datamodel.PDM.HostUUID) {
-          return mergeFrom((provenancegraph.datamodel.PDM.HostUUID)other);
+        if (other instanceof HostUUID) {
+          return mergeFrom((HostUUID)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(provenancegraph.datamodel.PDM.HostUUID other) {
-        if (other == provenancegraph.datamodel.PDM.HostUUID.getDefaultInstance()) return this;
+      public Builder mergeFrom(HostUUID other) {
+        if (other == HostUUID.getDefaultInstance()) return this;
         if (other.getHostUUID() != 0L) {
           setHostUUID(other.getHostUUID());
         }
@@ -657,18 +657,18 @@ public final class PDM {
         return this;
       }
 
-      @java.lang.Override
+      @Override
       public final boolean isInitialized() {
         return true;
       }
 
-      @java.lang.Override
+      @Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
         if (extensionRegistry == null) {
-          throw new java.lang.NullPointerException();
+          throw new NullPointerException();
         }
         try {
           boolean done = false;
@@ -705,7 +705,7 @@ public final class PDM {
        * <code>uint64 hostUUID = 1;</code>
        * @return The hostUUID.
        */
-      @java.lang.Override
+      @Override
       public long getHostUUID() {
         return hostUUID_;
       }
@@ -731,13 +731,13 @@ public final class PDM {
         onChanged();
         return this;
       }
-      @java.lang.Override
+      @Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFields(unknownFields);
       }
 
-      @java.lang.Override
+      @Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -748,18 +748,18 @@ public final class PDM {
     }
 
     // @@protoc_insertion_point(class_scope:provenancegraph.datamodel.HostUUID)
-    private static final provenancegraph.datamodel.PDM.HostUUID DEFAULT_INSTANCE;
+    private static final HostUUID DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new provenancegraph.datamodel.PDM.HostUUID();
+      DEFAULT_INSTANCE = new HostUUID();
     }
 
-    public static provenancegraph.datamodel.PDM.HostUUID getDefaultInstance() {
+    public static HostUUID getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
     private static final com.google.protobuf.Parser<HostUUID>
         PARSER = new com.google.protobuf.AbstractParser<HostUUID>() {
-      @java.lang.Override
+      @Override
       public HostUUID parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -783,13 +783,13 @@ public final class PDM {
       return PARSER;
     }
 
-    @java.lang.Override
+    @Override
     public com.google.protobuf.Parser<HostUUID> getParserForType() {
       return PARSER;
     }
 
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.HostUUID getDefaultInstanceForType() {
+    @Override
+    public HostUUID getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -826,24 +826,24 @@ public final class PDM {
     private ProcessUUID() {
     }
 
-    @java.lang.Override
+    @Override
     @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
+    protected Object newInstance(
         UnusedPrivateParameter unused) {
       return new ProcessUUID();
     }
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_ProcessUUID_descriptor;
+      return PDM.internal_static_provenancegraph_datamodel_ProcessUUID_descriptor;
     }
 
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+    @Override
+    protected FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_ProcessUUID_fieldAccessorTable
+      return PDM.internal_static_provenancegraph_datamodel_ProcessUUID_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              provenancegraph.datamodel.PDM.ProcessUUID.class, provenancegraph.datamodel.PDM.ProcessUUID.Builder.class);
+              ProcessUUID.class, Builder.class);
     }
 
     public static final int PID_FIELD_NUMBER = 1;
@@ -852,7 +852,7 @@ public final class PDM {
      * <code>int32 pid = 1;</code>
      * @return The pid.
      */
-    @java.lang.Override
+    @Override
     public int getPid() {
       return pid_;
     }
@@ -863,13 +863,13 @@ public final class PDM {
      * <code>uint64 ts = 2;</code>
      * @return The ts.
      */
-    @java.lang.Override
+    @Override
     public long getTs() {
       return ts_;
     }
 
     private byte memoizedIsInitialized = -1;
-    @java.lang.Override
+    @Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -879,7 +879,7 @@ public final class PDM {
       return true;
     }
 
-    @java.lang.Override
+    @Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (pid_ != 0) {
@@ -891,7 +891,7 @@ public final class PDM {
       getUnknownFields().writeTo(output);
     }
 
-    @java.lang.Override
+    @Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -910,15 +910,15 @@ public final class PDM {
       return size;
     }
 
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
+    @Override
+    public boolean equals(final Object obj) {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof provenancegraph.datamodel.PDM.ProcessUUID)) {
+      if (!(obj instanceof ProcessUUID)) {
         return super.equals(obj);
       }
-      provenancegraph.datamodel.PDM.ProcessUUID other = (provenancegraph.datamodel.PDM.ProcessUUID) obj;
+      ProcessUUID other = (ProcessUUID) obj;
 
       if (getPid()
           != other.getPid()) return false;
@@ -928,7 +928,7 @@ public final class PDM {
       return true;
     }
 
-    @java.lang.Override
+    @Override
     public int hashCode() {
       if (memoizedHashCode != 0) {
         return memoizedHashCode;
@@ -945,44 +945,44 @@ public final class PDM {
       return hash;
     }
 
-    public static provenancegraph.datamodel.PDM.ProcessUUID parseFrom(
+    public static ProcessUUID parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static provenancegraph.datamodel.PDM.ProcessUUID parseFrom(
+    public static ProcessUUID parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.ProcessUUID parseFrom(
+    public static ProcessUUID parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static provenancegraph.datamodel.PDM.ProcessUUID parseFrom(
+    public static ProcessUUID parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.ProcessUUID parseFrom(byte[] data)
+    public static ProcessUUID parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static provenancegraph.datamodel.PDM.ProcessUUID parseFrom(
+    public static ProcessUUID parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.ProcessUUID parseFrom(java.io.InputStream input)
+    public static ProcessUUID parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static provenancegraph.datamodel.PDM.ProcessUUID parseFrom(
+    public static ProcessUUID parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -990,26 +990,26 @@ public final class PDM {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    public static provenancegraph.datamodel.PDM.ProcessUUID parseDelimitedFrom(java.io.InputStream input)
+    public static ProcessUUID parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
 
-    public static provenancegraph.datamodel.PDM.ProcessUUID parseDelimitedFrom(
+    public static ProcessUUID parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.ProcessUUID parseFrom(
+    public static ProcessUUID parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static provenancegraph.datamodel.PDM.ProcessUUID parseFrom(
+    public static ProcessUUID parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -1017,23 +1017,23 @@ public final class PDM {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    @java.lang.Override
+    @Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(provenancegraph.datamodel.PDM.ProcessUUID prototype) {
+    public static Builder newBuilder(ProcessUUID prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
-    @java.lang.Override
+    @Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
     }
 
-    @java.lang.Override
+    @Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -1043,18 +1043,18 @@ public final class PDM {
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:provenancegraph.datamodel.ProcessUUID)
-        provenancegraph.datamodel.PDM.ProcessUUIDOrBuilder {
+        ProcessUUIDOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_ProcessUUID_descriptor;
+        return PDM.internal_static_provenancegraph_datamodel_ProcessUUID_descriptor;
       }
 
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      @Override
+      protected FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_ProcessUUID_fieldAccessorTable
+        return PDM.internal_static_provenancegraph_datamodel_ProcessUUID_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                provenancegraph.datamodel.PDM.ProcessUUID.class, provenancegraph.datamodel.PDM.ProcessUUID.Builder.class);
+                ProcessUUID.class, Builder.class);
       }
 
       // Construct using provenancegraph.datamodel.PDM.ProcessUUID.newBuilder()
@@ -1063,11 +1063,11 @@ public final class PDM {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          BuilderParent parent) {
         super(parent);
 
       }
-      @java.lang.Override
+      @Override
       public Builder clear() {
         super.clear();
         bitField0_ = 0;
@@ -1076,35 +1076,35 @@ public final class PDM {
         return this;
       }
 
-      @java.lang.Override
+      @Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_ProcessUUID_descriptor;
+        return PDM.internal_static_provenancegraph_datamodel_ProcessUUID_descriptor;
       }
 
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.ProcessUUID getDefaultInstanceForType() {
-        return provenancegraph.datamodel.PDM.ProcessUUID.getDefaultInstance();
+      @Override
+      public ProcessUUID getDefaultInstanceForType() {
+        return ProcessUUID.getDefaultInstance();
       }
 
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.ProcessUUID build() {
-        provenancegraph.datamodel.PDM.ProcessUUID result = buildPartial();
+      @Override
+      public ProcessUUID build() {
+        ProcessUUID result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.ProcessUUID buildPartial() {
-        provenancegraph.datamodel.PDM.ProcessUUID result = new provenancegraph.datamodel.PDM.ProcessUUID(this);
+      @Override
+      public ProcessUUID buildPartial() {
+        ProcessUUID result = new ProcessUUID(this);
         if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
       }
 
-      private void buildPartial0(provenancegraph.datamodel.PDM.ProcessUUID result) {
+      private void buildPartial0(ProcessUUID result) {
         int from_bitField0_ = bitField0_;
         if (((from_bitField0_ & 0x00000001) != 0)) {
           result.pid_ = pid_;
@@ -1114,50 +1114,50 @@ public final class PDM {
         }
       }
 
-      @java.lang.Override
+      @Override
       public Builder clone() {
         return super.clone();
       }
-      @java.lang.Override
+      @Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return super.setField(field, value);
       }
-      @java.lang.Override
+      @Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return super.clearField(field);
       }
-      @java.lang.Override
+      @Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return super.clearOneof(oneof);
       }
-      @java.lang.Override
+      @Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
+          int index, Object value) {
         return super.setRepeatedField(field, index, value);
       }
-      @java.lang.Override
+      @Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return super.addRepeatedField(field, value);
       }
-      @java.lang.Override
+      @Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof provenancegraph.datamodel.PDM.ProcessUUID) {
-          return mergeFrom((provenancegraph.datamodel.PDM.ProcessUUID)other);
+        if (other instanceof ProcessUUID) {
+          return mergeFrom((ProcessUUID)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(provenancegraph.datamodel.PDM.ProcessUUID other) {
-        if (other == provenancegraph.datamodel.PDM.ProcessUUID.getDefaultInstance()) return this;
+      public Builder mergeFrom(ProcessUUID other) {
+        if (other == ProcessUUID.getDefaultInstance()) return this;
         if (other.getPid() != 0) {
           setPid(other.getPid());
         }
@@ -1169,18 +1169,18 @@ public final class PDM {
         return this;
       }
 
-      @java.lang.Override
+      @Override
       public final boolean isInitialized() {
         return true;
       }
 
-      @java.lang.Override
+      @Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
         if (extensionRegistry == null) {
-          throw new java.lang.NullPointerException();
+          throw new NullPointerException();
         }
         try {
           boolean done = false;
@@ -1222,7 +1222,7 @@ public final class PDM {
        * <code>int32 pid = 1;</code>
        * @return The pid.
        */
-      @java.lang.Override
+      @Override
       public int getPid() {
         return pid_;
       }
@@ -1254,7 +1254,7 @@ public final class PDM {
        * <code>uint64 ts = 2;</code>
        * @return The ts.
        */
-      @java.lang.Override
+      @Override
       public long getTs() {
         return ts_;
       }
@@ -1280,13 +1280,13 @@ public final class PDM {
         onChanged();
         return this;
       }
-      @java.lang.Override
+      @Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFields(unknownFields);
       }
 
-      @java.lang.Override
+      @Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -1297,18 +1297,18 @@ public final class PDM {
     }
 
     // @@protoc_insertion_point(class_scope:provenancegraph.datamodel.ProcessUUID)
-    private static final provenancegraph.datamodel.PDM.ProcessUUID DEFAULT_INSTANCE;
+    private static final ProcessUUID DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new provenancegraph.datamodel.PDM.ProcessUUID();
+      DEFAULT_INSTANCE = new ProcessUUID();
     }
 
-    public static provenancegraph.datamodel.PDM.ProcessUUID getDefaultInstance() {
+    public static ProcessUUID getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
     private static final com.google.protobuf.Parser<ProcessUUID>
         PARSER = new com.google.protobuf.AbstractParser<ProcessUUID>() {
-      @java.lang.Override
+      @Override
       public ProcessUUID parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -1332,13 +1332,13 @@ public final class PDM {
       return PARSER;
     }
 
-    @java.lang.Override
+    @Override
     public com.google.protobuf.Parser<ProcessUUID> getParserForType() {
       return PARSER;
     }
 
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.ProcessUUID getDefaultInstanceForType() {
+    @Override
+    public ProcessUUID getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -1369,24 +1369,24 @@ public final class PDM {
     private FileUUID() {
     }
 
-    @java.lang.Override
+    @Override
     @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
+    protected Object newInstance(
         UnusedPrivateParameter unused) {
       return new FileUUID();
     }
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_FileUUID_descriptor;
+      return PDM.internal_static_provenancegraph_datamodel_FileUUID_descriptor;
     }
 
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+    @Override
+    protected FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_FileUUID_fieldAccessorTable
+      return PDM.internal_static_provenancegraph_datamodel_FileUUID_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              provenancegraph.datamodel.PDM.FileUUID.class, provenancegraph.datamodel.PDM.FileUUID.Builder.class);
+              FileUUID.class, Builder.class);
     }
 
     public static final int FILEPATHHASH_FIELD_NUMBER = 1;
@@ -1395,13 +1395,13 @@ public final class PDM {
      * <code>uint64 filePathHash = 1;</code>
      * @return The filePathHash.
      */
-    @java.lang.Override
+    @Override
     public long getFilePathHash() {
       return filePathHash_;
     }
 
     private byte memoizedIsInitialized = -1;
-    @java.lang.Override
+    @Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -1411,7 +1411,7 @@ public final class PDM {
       return true;
     }
 
-    @java.lang.Override
+    @Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (filePathHash_ != 0L) {
@@ -1420,7 +1420,7 @@ public final class PDM {
       getUnknownFields().writeTo(output);
     }
 
-    @java.lang.Override
+    @Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -1435,15 +1435,15 @@ public final class PDM {
       return size;
     }
 
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
+    @Override
+    public boolean equals(final Object obj) {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof provenancegraph.datamodel.PDM.FileUUID)) {
+      if (!(obj instanceof FileUUID)) {
         return super.equals(obj);
       }
-      provenancegraph.datamodel.PDM.FileUUID other = (provenancegraph.datamodel.PDM.FileUUID) obj;
+      FileUUID other = (FileUUID) obj;
 
       if (getFilePathHash()
           != other.getFilePathHash()) return false;
@@ -1451,7 +1451,7 @@ public final class PDM {
       return true;
     }
 
-    @java.lang.Override
+    @Override
     public int hashCode() {
       if (memoizedHashCode != 0) {
         return memoizedHashCode;
@@ -1466,44 +1466,44 @@ public final class PDM {
       return hash;
     }
 
-    public static provenancegraph.datamodel.PDM.FileUUID parseFrom(
+    public static FileUUID parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static provenancegraph.datamodel.PDM.FileUUID parseFrom(
+    public static FileUUID parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.FileUUID parseFrom(
+    public static FileUUID parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static provenancegraph.datamodel.PDM.FileUUID parseFrom(
+    public static FileUUID parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.FileUUID parseFrom(byte[] data)
+    public static FileUUID parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static provenancegraph.datamodel.PDM.FileUUID parseFrom(
+    public static FileUUID parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.FileUUID parseFrom(java.io.InputStream input)
+    public static FileUUID parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static provenancegraph.datamodel.PDM.FileUUID parseFrom(
+    public static FileUUID parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -1511,26 +1511,26 @@ public final class PDM {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    public static provenancegraph.datamodel.PDM.FileUUID parseDelimitedFrom(java.io.InputStream input)
+    public static FileUUID parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
 
-    public static provenancegraph.datamodel.PDM.FileUUID parseDelimitedFrom(
+    public static FileUUID parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.FileUUID parseFrom(
+    public static FileUUID parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static provenancegraph.datamodel.PDM.FileUUID parseFrom(
+    public static FileUUID parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -1538,23 +1538,23 @@ public final class PDM {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    @java.lang.Override
+    @Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(provenancegraph.datamodel.PDM.FileUUID prototype) {
+    public static Builder newBuilder(FileUUID prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
-    @java.lang.Override
+    @Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
     }
 
-    @java.lang.Override
+    @Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -1564,18 +1564,18 @@ public final class PDM {
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:provenancegraph.datamodel.FileUUID)
-        provenancegraph.datamodel.PDM.FileUUIDOrBuilder {
+        FileUUIDOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_FileUUID_descriptor;
+        return PDM.internal_static_provenancegraph_datamodel_FileUUID_descriptor;
       }
 
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      @Override
+      protected FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_FileUUID_fieldAccessorTable
+        return PDM.internal_static_provenancegraph_datamodel_FileUUID_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                provenancegraph.datamodel.PDM.FileUUID.class, provenancegraph.datamodel.PDM.FileUUID.Builder.class);
+                FileUUID.class, Builder.class);
       }
 
       // Construct using provenancegraph.datamodel.PDM.FileUUID.newBuilder()
@@ -1584,11 +1584,11 @@ public final class PDM {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          BuilderParent parent) {
         super(parent);
 
       }
-      @java.lang.Override
+      @Override
       public Builder clear() {
         super.clear();
         bitField0_ = 0;
@@ -1596,85 +1596,85 @@ public final class PDM {
         return this;
       }
 
-      @java.lang.Override
+      @Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_FileUUID_descriptor;
+        return PDM.internal_static_provenancegraph_datamodel_FileUUID_descriptor;
       }
 
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.FileUUID getDefaultInstanceForType() {
-        return provenancegraph.datamodel.PDM.FileUUID.getDefaultInstance();
+      @Override
+      public FileUUID getDefaultInstanceForType() {
+        return FileUUID.getDefaultInstance();
       }
 
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.FileUUID build() {
-        provenancegraph.datamodel.PDM.FileUUID result = buildPartial();
+      @Override
+      public FileUUID build() {
+        FileUUID result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.FileUUID buildPartial() {
-        provenancegraph.datamodel.PDM.FileUUID result = new provenancegraph.datamodel.PDM.FileUUID(this);
+      @Override
+      public FileUUID buildPartial() {
+        FileUUID result = new FileUUID(this);
         if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
       }
 
-      private void buildPartial0(provenancegraph.datamodel.PDM.FileUUID result) {
+      private void buildPartial0(FileUUID result) {
         int from_bitField0_ = bitField0_;
         if (((from_bitField0_ & 0x00000001) != 0)) {
           result.filePathHash_ = filePathHash_;
         }
       }
 
-      @java.lang.Override
+      @Override
       public Builder clone() {
         return super.clone();
       }
-      @java.lang.Override
+      @Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return super.setField(field, value);
       }
-      @java.lang.Override
+      @Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return super.clearField(field);
       }
-      @java.lang.Override
+      @Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return super.clearOneof(oneof);
       }
-      @java.lang.Override
+      @Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
+          int index, Object value) {
         return super.setRepeatedField(field, index, value);
       }
-      @java.lang.Override
+      @Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return super.addRepeatedField(field, value);
       }
-      @java.lang.Override
+      @Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof provenancegraph.datamodel.PDM.FileUUID) {
-          return mergeFrom((provenancegraph.datamodel.PDM.FileUUID)other);
+        if (other instanceof FileUUID) {
+          return mergeFrom((FileUUID)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(provenancegraph.datamodel.PDM.FileUUID other) {
-        if (other == provenancegraph.datamodel.PDM.FileUUID.getDefaultInstance()) return this;
+      public Builder mergeFrom(FileUUID other) {
+        if (other == FileUUID.getDefaultInstance()) return this;
         if (other.getFilePathHash() != 0L) {
           setFilePathHash(other.getFilePathHash());
         }
@@ -1683,18 +1683,18 @@ public final class PDM {
         return this;
       }
 
-      @java.lang.Override
+      @Override
       public final boolean isInitialized() {
         return true;
       }
 
-      @java.lang.Override
+      @Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
         if (extensionRegistry == null) {
-          throw new java.lang.NullPointerException();
+          throw new NullPointerException();
         }
         try {
           boolean done = false;
@@ -1731,7 +1731,7 @@ public final class PDM {
        * <code>uint64 filePathHash = 1;</code>
        * @return The filePathHash.
        */
-      @java.lang.Override
+      @Override
       public long getFilePathHash() {
         return filePathHash_;
       }
@@ -1757,13 +1757,13 @@ public final class PDM {
         onChanged();
         return this;
       }
-      @java.lang.Override
+      @Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFields(unknownFields);
       }
 
-      @java.lang.Override
+      @Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -1774,18 +1774,18 @@ public final class PDM {
     }
 
     // @@protoc_insertion_point(class_scope:provenancegraph.datamodel.FileUUID)
-    private static final provenancegraph.datamodel.PDM.FileUUID DEFAULT_INSTANCE;
+    private static final FileUUID DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new provenancegraph.datamodel.PDM.FileUUID();
+      DEFAULT_INSTANCE = new FileUUID();
     }
 
-    public static provenancegraph.datamodel.PDM.FileUUID getDefaultInstance() {
+    public static FileUUID getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
     private static final com.google.protobuf.Parser<FileUUID>
         PARSER = new com.google.protobuf.AbstractParser<FileUUID>() {
-      @java.lang.Override
+      @Override
       public FileUUID parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -1809,13 +1809,13 @@ public final class PDM {
       return PARSER;
     }
 
-    @java.lang.Override
+    @Override
     public com.google.protobuf.Parser<FileUUID> getParserForType() {
       return PARSER;
     }
 
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.FileUUID getDefaultInstanceForType() {
+    @Override
+    public FileUUID getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -1834,11 +1834,11 @@ public final class PDM {
      * <code>.provenancegraph.datamodel.HostUUID clientID = 1;</code>
      * @return The clientID.
      */
-    provenancegraph.datamodel.PDM.HostUUID getClientID();
+    HostUUID getClientID();
     /**
      * <code>.provenancegraph.datamodel.HostUUID clientID = 1;</code>
      */
-    provenancegraph.datamodel.PDM.HostUUIDOrBuilder getClientIDOrBuilder();
+    HostUUIDOrBuilder getClientIDOrBuilder();
 
     /**
      * <code>.provenancegraph.datamodel.LogType type = 2;</code>
@@ -1849,7 +1849,7 @@ public final class PDM {
      * <code>.provenancegraph.datamodel.LogType type = 2;</code>
      * @return The type.
      */
-    provenancegraph.datamodel.PDM.LogType getType();
+    LogType getType();
 
     /**
      * <code>.provenancegraph.datamodel.LogContent content = 3;</code>
@@ -1860,7 +1860,7 @@ public final class PDM {
      * <code>.provenancegraph.datamodel.LogContent content = 3;</code>
      * @return The content.
      */
-    provenancegraph.datamodel.PDM.LogContent getContent();
+    LogContent getContent();
   }
   /**
    * Protobuf type {@code provenancegraph.datamodel.LogHeader}
@@ -1879,33 +1879,33 @@ public final class PDM {
       content_ = 0;
     }
 
-    @java.lang.Override
+    @Override
     @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
+    protected Object newInstance(
         UnusedPrivateParameter unused) {
       return new LogHeader();
     }
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_LogHeader_descriptor;
+      return PDM.internal_static_provenancegraph_datamodel_LogHeader_descriptor;
     }
 
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+    @Override
+    protected FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_LogHeader_fieldAccessorTable
+      return PDM.internal_static_provenancegraph_datamodel_LogHeader_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              provenancegraph.datamodel.PDM.LogHeader.class, provenancegraph.datamodel.PDM.LogHeader.Builder.class);
+              LogHeader.class, Builder.class);
     }
 
     public static final int CLIENTID_FIELD_NUMBER = 1;
-    private provenancegraph.datamodel.PDM.HostUUID clientID_;
+    private HostUUID clientID_;
     /**
      * <code>.provenancegraph.datamodel.HostUUID clientID = 1;</code>
      * @return Whether the clientID field is set.
      */
-    @java.lang.Override
+    @Override
     public boolean hasClientID() {
       return clientID_ != null;
     }
@@ -1913,16 +1913,16 @@ public final class PDM {
      * <code>.provenancegraph.datamodel.HostUUID clientID = 1;</code>
      * @return The clientID.
      */
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.HostUUID getClientID() {
-      return clientID_ == null ? provenancegraph.datamodel.PDM.HostUUID.getDefaultInstance() : clientID_;
+    @Override
+    public HostUUID getClientID() {
+      return clientID_ == null ? HostUUID.getDefaultInstance() : clientID_;
     }
     /**
      * <code>.provenancegraph.datamodel.HostUUID clientID = 1;</code>
      */
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.HostUUIDOrBuilder getClientIDOrBuilder() {
-      return clientID_ == null ? provenancegraph.datamodel.PDM.HostUUID.getDefaultInstance() : clientID_;
+    @Override
+    public HostUUIDOrBuilder getClientIDOrBuilder() {
+      return clientID_ == null ? HostUUID.getDefaultInstance() : clientID_;
     }
 
     public static final int TYPE_FIELD_NUMBER = 2;
@@ -1931,16 +1931,16 @@ public final class PDM {
      * <code>.provenancegraph.datamodel.LogType type = 2;</code>
      * @return The enum numeric value on the wire for type.
      */
-    @java.lang.Override public int getTypeValue() {
+    @Override public int getTypeValue() {
       return type_;
     }
     /**
      * <code>.provenancegraph.datamodel.LogType type = 2;</code>
      * @return The type.
      */
-    @java.lang.Override public provenancegraph.datamodel.PDM.LogType getType() {
-      provenancegraph.datamodel.PDM.LogType result = provenancegraph.datamodel.PDM.LogType.forNumber(type_);
-      return result == null ? provenancegraph.datamodel.PDM.LogType.UNRECOGNIZED : result;
+    @Override public LogType getType() {
+      LogType result = LogType.forNumber(type_);
+      return result == null ? LogType.UNRECOGNIZED : result;
     }
 
     public static final int CONTENT_FIELD_NUMBER = 3;
@@ -1949,20 +1949,20 @@ public final class PDM {
      * <code>.provenancegraph.datamodel.LogContent content = 3;</code>
      * @return The enum numeric value on the wire for content.
      */
-    @java.lang.Override public int getContentValue() {
+    @Override public int getContentValue() {
       return content_;
     }
     /**
      * <code>.provenancegraph.datamodel.LogContent content = 3;</code>
      * @return The content.
      */
-    @java.lang.Override public provenancegraph.datamodel.PDM.LogContent getContent() {
-      provenancegraph.datamodel.PDM.LogContent result = provenancegraph.datamodel.PDM.LogContent.forNumber(content_);
-      return result == null ? provenancegraph.datamodel.PDM.LogContent.UNRECOGNIZED : result;
+    @Override public LogContent getContent() {
+      LogContent result = LogContent.forNumber(content_);
+      return result == null ? LogContent.UNRECOGNIZED : result;
     }
 
     private byte memoizedIsInitialized = -1;
-    @java.lang.Override
+    @Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -1972,22 +1972,22 @@ public final class PDM {
       return true;
     }
 
-    @java.lang.Override
+    @Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (clientID_ != null) {
         output.writeMessage(1, getClientID());
       }
-      if (type_ != provenancegraph.datamodel.PDM.LogType.ENTITY.getNumber()) {
+      if (type_ != LogType.ENTITY.getNumber()) {
         output.writeEnum(2, type_);
       }
-      if (content_ != provenancegraph.datamodel.PDM.LogContent.CLIENT_ENTITY.getNumber()) {
+      if (content_ != LogContent.CLIENT_ENTITY.getNumber()) {
         output.writeEnum(3, content_);
       }
       getUnknownFields().writeTo(output);
     }
 
-    @java.lang.Override
+    @Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -1997,11 +1997,11 @@ public final class PDM {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, getClientID());
       }
-      if (type_ != provenancegraph.datamodel.PDM.LogType.ENTITY.getNumber()) {
+      if (type_ != LogType.ENTITY.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(2, type_);
       }
-      if (content_ != provenancegraph.datamodel.PDM.LogContent.CLIENT_ENTITY.getNumber()) {
+      if (content_ != LogContent.CLIENT_ENTITY.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(3, content_);
       }
@@ -2010,15 +2010,15 @@ public final class PDM {
       return size;
     }
 
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
+    @Override
+    public boolean equals(final Object obj) {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof provenancegraph.datamodel.PDM.LogHeader)) {
+      if (!(obj instanceof LogHeader)) {
         return super.equals(obj);
       }
-      provenancegraph.datamodel.PDM.LogHeader other = (provenancegraph.datamodel.PDM.LogHeader) obj;
+      LogHeader other = (LogHeader) obj;
 
       if (hasClientID() != other.hasClientID()) return false;
       if (hasClientID()) {
@@ -2031,7 +2031,7 @@ public final class PDM {
       return true;
     }
 
-    @java.lang.Override
+    @Override
     public int hashCode() {
       if (memoizedHashCode != 0) {
         return memoizedHashCode;
@@ -2051,44 +2051,44 @@ public final class PDM {
       return hash;
     }
 
-    public static provenancegraph.datamodel.PDM.LogHeader parseFrom(
+    public static LogHeader parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static provenancegraph.datamodel.PDM.LogHeader parseFrom(
+    public static LogHeader parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.LogHeader parseFrom(
+    public static LogHeader parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static provenancegraph.datamodel.PDM.LogHeader parseFrom(
+    public static LogHeader parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.LogHeader parseFrom(byte[] data)
+    public static LogHeader parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static provenancegraph.datamodel.PDM.LogHeader parseFrom(
+    public static LogHeader parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.LogHeader parseFrom(java.io.InputStream input)
+    public static LogHeader parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static provenancegraph.datamodel.PDM.LogHeader parseFrom(
+    public static LogHeader parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -2096,26 +2096,26 @@ public final class PDM {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    public static provenancegraph.datamodel.PDM.LogHeader parseDelimitedFrom(java.io.InputStream input)
+    public static LogHeader parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
 
-    public static provenancegraph.datamodel.PDM.LogHeader parseDelimitedFrom(
+    public static LogHeader parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.LogHeader parseFrom(
+    public static LogHeader parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static provenancegraph.datamodel.PDM.LogHeader parseFrom(
+    public static LogHeader parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -2123,23 +2123,23 @@ public final class PDM {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    @java.lang.Override
+    @Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(provenancegraph.datamodel.PDM.LogHeader prototype) {
+    public static Builder newBuilder(LogHeader prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
-    @java.lang.Override
+    @Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
     }
 
-    @java.lang.Override
+    @Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -2149,18 +2149,18 @@ public final class PDM {
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:provenancegraph.datamodel.LogHeader)
-        provenancegraph.datamodel.PDM.LogHeaderOrBuilder {
+        LogHeaderOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_LogHeader_descriptor;
+        return PDM.internal_static_provenancegraph_datamodel_LogHeader_descriptor;
       }
 
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      @Override
+      protected FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_LogHeader_fieldAccessorTable
+        return PDM.internal_static_provenancegraph_datamodel_LogHeader_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                provenancegraph.datamodel.PDM.LogHeader.class, provenancegraph.datamodel.PDM.LogHeader.Builder.class);
+                LogHeader.class, Builder.class);
       }
 
       // Construct using provenancegraph.datamodel.PDM.LogHeader.newBuilder()
@@ -2169,11 +2169,11 @@ public final class PDM {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          BuilderParent parent) {
         super(parent);
 
       }
-      @java.lang.Override
+      @Override
       public Builder clear() {
         super.clear();
         bitField0_ = 0;
@@ -2187,35 +2187,35 @@ public final class PDM {
         return this;
       }
 
-      @java.lang.Override
+      @Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_LogHeader_descriptor;
+        return PDM.internal_static_provenancegraph_datamodel_LogHeader_descriptor;
       }
 
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.LogHeader getDefaultInstanceForType() {
-        return provenancegraph.datamodel.PDM.LogHeader.getDefaultInstance();
+      @Override
+      public LogHeader getDefaultInstanceForType() {
+        return LogHeader.getDefaultInstance();
       }
 
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.LogHeader build() {
-        provenancegraph.datamodel.PDM.LogHeader result = buildPartial();
+      @Override
+      public LogHeader build() {
+        LogHeader result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.LogHeader buildPartial() {
-        provenancegraph.datamodel.PDM.LogHeader result = new provenancegraph.datamodel.PDM.LogHeader(this);
+      @Override
+      public LogHeader buildPartial() {
+        LogHeader result = new LogHeader(this);
         if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
       }
 
-      private void buildPartial0(provenancegraph.datamodel.PDM.LogHeader result) {
+      private void buildPartial0(LogHeader result) {
         int from_bitField0_ = bitField0_;
         if (((from_bitField0_ & 0x00000001) != 0)) {
           result.clientID_ = clientIDBuilder_ == null
@@ -2230,50 +2230,50 @@ public final class PDM {
         }
       }
 
-      @java.lang.Override
+      @Override
       public Builder clone() {
         return super.clone();
       }
-      @java.lang.Override
+      @Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return super.setField(field, value);
       }
-      @java.lang.Override
+      @Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return super.clearField(field);
       }
-      @java.lang.Override
+      @Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return super.clearOneof(oneof);
       }
-      @java.lang.Override
+      @Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
+          int index, Object value) {
         return super.setRepeatedField(field, index, value);
       }
-      @java.lang.Override
+      @Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return super.addRepeatedField(field, value);
       }
-      @java.lang.Override
+      @Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof provenancegraph.datamodel.PDM.LogHeader) {
-          return mergeFrom((provenancegraph.datamodel.PDM.LogHeader)other);
+        if (other instanceof LogHeader) {
+          return mergeFrom((LogHeader)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(provenancegraph.datamodel.PDM.LogHeader other) {
-        if (other == provenancegraph.datamodel.PDM.LogHeader.getDefaultInstance()) return this;
+      public Builder mergeFrom(LogHeader other) {
+        if (other == LogHeader.getDefaultInstance()) return this;
         if (other.hasClientID()) {
           mergeClientID(other.getClientID());
         }
@@ -2288,18 +2288,18 @@ public final class PDM {
         return this;
       }
 
-      @java.lang.Override
+      @Override
       public final boolean isInitialized() {
         return true;
       }
 
-      @java.lang.Override
+      @Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
         if (extensionRegistry == null) {
-          throw new java.lang.NullPointerException();
+          throw new NullPointerException();
         }
         try {
           boolean done = false;
@@ -2343,9 +2343,9 @@ public final class PDM {
       }
       private int bitField0_;
 
-      private provenancegraph.datamodel.PDM.HostUUID clientID_;
+      private HostUUID clientID_;
       private com.google.protobuf.SingleFieldBuilderV3<
-          provenancegraph.datamodel.PDM.HostUUID, provenancegraph.datamodel.PDM.HostUUID.Builder, provenancegraph.datamodel.PDM.HostUUIDOrBuilder> clientIDBuilder_;
+          HostUUID, HostUUID.Builder, HostUUIDOrBuilder> clientIDBuilder_;
       /**
        * <code>.provenancegraph.datamodel.HostUUID clientID = 1;</code>
        * @return Whether the clientID field is set.
@@ -2357,9 +2357,9 @@ public final class PDM {
        * <code>.provenancegraph.datamodel.HostUUID clientID = 1;</code>
        * @return The clientID.
        */
-      public provenancegraph.datamodel.PDM.HostUUID getClientID() {
+      public HostUUID getClientID() {
         if (clientIDBuilder_ == null) {
-          return clientID_ == null ? provenancegraph.datamodel.PDM.HostUUID.getDefaultInstance() : clientID_;
+          return clientID_ == null ? HostUUID.getDefaultInstance() : clientID_;
         } else {
           return clientIDBuilder_.getMessage();
         }
@@ -2367,7 +2367,7 @@ public final class PDM {
       /**
        * <code>.provenancegraph.datamodel.HostUUID clientID = 1;</code>
        */
-      public Builder setClientID(provenancegraph.datamodel.PDM.HostUUID value) {
+      public Builder setClientID(HostUUID value) {
         if (clientIDBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -2384,7 +2384,7 @@ public final class PDM {
        * <code>.provenancegraph.datamodel.HostUUID clientID = 1;</code>
        */
       public Builder setClientID(
-          provenancegraph.datamodel.PDM.HostUUID.Builder builderForValue) {
+          HostUUID.Builder builderForValue) {
         if (clientIDBuilder_ == null) {
           clientID_ = builderForValue.build();
         } else {
@@ -2397,11 +2397,11 @@ public final class PDM {
       /**
        * <code>.provenancegraph.datamodel.HostUUID clientID = 1;</code>
        */
-      public Builder mergeClientID(provenancegraph.datamodel.PDM.HostUUID value) {
+      public Builder mergeClientID(HostUUID value) {
         if (clientIDBuilder_ == null) {
           if (((bitField0_ & 0x00000001) != 0) &&
             clientID_ != null &&
-            clientID_ != provenancegraph.datamodel.PDM.HostUUID.getDefaultInstance()) {
+            clientID_ != HostUUID.getDefaultInstance()) {
             getClientIDBuilder().mergeFrom(value);
           } else {
             clientID_ = value;
@@ -2429,7 +2429,7 @@ public final class PDM {
       /**
        * <code>.provenancegraph.datamodel.HostUUID clientID = 1;</code>
        */
-      public provenancegraph.datamodel.PDM.HostUUID.Builder getClientIDBuilder() {
+      public HostUUID.Builder getClientIDBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getClientIDFieldBuilder().getBuilder();
@@ -2437,23 +2437,23 @@ public final class PDM {
       /**
        * <code>.provenancegraph.datamodel.HostUUID clientID = 1;</code>
        */
-      public provenancegraph.datamodel.PDM.HostUUIDOrBuilder getClientIDOrBuilder() {
+      public HostUUIDOrBuilder getClientIDOrBuilder() {
         if (clientIDBuilder_ != null) {
           return clientIDBuilder_.getMessageOrBuilder();
         } else {
           return clientID_ == null ?
-              provenancegraph.datamodel.PDM.HostUUID.getDefaultInstance() : clientID_;
+              HostUUID.getDefaultInstance() : clientID_;
         }
       }
       /**
        * <code>.provenancegraph.datamodel.HostUUID clientID = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          provenancegraph.datamodel.PDM.HostUUID, provenancegraph.datamodel.PDM.HostUUID.Builder, provenancegraph.datamodel.PDM.HostUUIDOrBuilder> 
+          HostUUID, HostUUID.Builder, HostUUIDOrBuilder>
           getClientIDFieldBuilder() {
         if (clientIDBuilder_ == null) {
           clientIDBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              provenancegraph.datamodel.PDM.HostUUID, provenancegraph.datamodel.PDM.HostUUID.Builder, provenancegraph.datamodel.PDM.HostUUIDOrBuilder>(
+              HostUUID, HostUUID.Builder, HostUUIDOrBuilder>(
                   getClientID(),
                   getParentForChildren(),
                   isClean());
@@ -2467,7 +2467,7 @@ public final class PDM {
        * <code>.provenancegraph.datamodel.LogType type = 2;</code>
        * @return The enum numeric value on the wire for type.
        */
-      @java.lang.Override public int getTypeValue() {
+      @Override public int getTypeValue() {
         return type_;
       }
       /**
@@ -2485,17 +2485,17 @@ public final class PDM {
        * <code>.provenancegraph.datamodel.LogType type = 2;</code>
        * @return The type.
        */
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.LogType getType() {
-        provenancegraph.datamodel.PDM.LogType result = provenancegraph.datamodel.PDM.LogType.forNumber(type_);
-        return result == null ? provenancegraph.datamodel.PDM.LogType.UNRECOGNIZED : result;
+      @Override
+      public LogType getType() {
+        LogType result = LogType.forNumber(type_);
+        return result == null ? LogType.UNRECOGNIZED : result;
       }
       /**
        * <code>.provenancegraph.datamodel.LogType type = 2;</code>
        * @param value The type to set.
        * @return This builder for chaining.
        */
-      public Builder setType(provenancegraph.datamodel.PDM.LogType value) {
+      public Builder setType(LogType value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -2520,7 +2520,7 @@ public final class PDM {
        * <code>.provenancegraph.datamodel.LogContent content = 3;</code>
        * @return The enum numeric value on the wire for content.
        */
-      @java.lang.Override public int getContentValue() {
+      @Override public int getContentValue() {
         return content_;
       }
       /**
@@ -2538,17 +2538,17 @@ public final class PDM {
        * <code>.provenancegraph.datamodel.LogContent content = 3;</code>
        * @return The content.
        */
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.LogContent getContent() {
-        provenancegraph.datamodel.PDM.LogContent result = provenancegraph.datamodel.PDM.LogContent.forNumber(content_);
-        return result == null ? provenancegraph.datamodel.PDM.LogContent.UNRECOGNIZED : result;
+      @Override
+      public LogContent getContent() {
+        LogContent result = LogContent.forNumber(content_);
+        return result == null ? LogContent.UNRECOGNIZED : result;
       }
       /**
        * <code>.provenancegraph.datamodel.LogContent content = 3;</code>
        * @param value The content to set.
        * @return This builder for chaining.
        */
-      public Builder setContent(provenancegraph.datamodel.PDM.LogContent value) {
+      public Builder setContent(LogContent value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -2567,13 +2567,13 @@ public final class PDM {
         onChanged();
         return this;
       }
-      @java.lang.Override
+      @Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFields(unknownFields);
       }
 
-      @java.lang.Override
+      @Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -2584,18 +2584,18 @@ public final class PDM {
     }
 
     // @@protoc_insertion_point(class_scope:provenancegraph.datamodel.LogHeader)
-    private static final provenancegraph.datamodel.PDM.LogHeader DEFAULT_INSTANCE;
+    private static final LogHeader DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new provenancegraph.datamodel.PDM.LogHeader();
+      DEFAULT_INSTANCE = new LogHeader();
     }
 
-    public static provenancegraph.datamodel.PDM.LogHeader getDefaultInstance() {
+    public static LogHeader getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
     private static final com.google.protobuf.Parser<LogHeader>
         PARSER = new com.google.protobuf.AbstractParser<LogHeader>() {
-      @java.lang.Override
+      @Override
       public LogHeader parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -2619,13 +2619,13 @@ public final class PDM {
       return PARSER;
     }
 
-    @java.lang.Override
+    @Override
     public com.google.protobuf.Parser<LogHeader> getParserForType() {
       return PARSER;
     }
 
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.LogHeader getDefaultInstanceForType() {
+    @Override
+    public LogHeader getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -2636,48 +2636,63 @@ public final class PDM {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 1;</code>
+     * <code>.provenancegraph.datamodel.HostUUID clientID = 1;</code>
+     * @return Whether the clientID field is set.
      */
-    java.util.List<provenancegraph.datamodel.PDM.IPAddress> 
+    boolean hasClientID();
+    /**
+     * <code>.provenancegraph.datamodel.HostUUID clientID = 1;</code>
+     * @return The clientID.
+     */
+    HostUUID getClientID();
+    /**
+     * <code>.provenancegraph.datamodel.HostUUID clientID = 1;</code>
+     */
+    HostUUIDOrBuilder getClientIDOrBuilder();
+
+    /**
+     * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 2;</code>
+     */
+    java.util.List<IPAddress>
         getIpListList();
     /**
-     * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 1;</code>
+     * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 2;</code>
      */
-    provenancegraph.datamodel.PDM.IPAddress getIpList(int index);
+    IPAddress getIpList(int index);
     /**
-     * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 1;</code>
+     * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 2;</code>
      */
     int getIpListCount();
     /**
-     * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 1;</code>
+     * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 2;</code>
      */
-    java.util.List<? extends provenancegraph.datamodel.PDM.IPAddressOrBuilder> 
+    java.util.List<? extends IPAddressOrBuilder>
         getIpListOrBuilderList();
     /**
-     * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 1;</code>
+     * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 2;</code>
      */
-    provenancegraph.datamodel.PDM.IPAddressOrBuilder getIpListOrBuilder(
+    IPAddressOrBuilder getIpListOrBuilder(
         int index);
 
     /**
-     * <code>string clientName = 2;</code>
+     * <code>string clientName = 3;</code>
      * @return The clientName.
      */
-    java.lang.String getClientName();
+    String getClientName();
     /**
-     * <code>string clientName = 2;</code>
+     * <code>string clientName = 3;</code>
      * @return The bytes for clientName.
      */
     com.google.protobuf.ByteString
         getClientNameBytes();
 
     /**
-     * <code>string collectorVersion = 3;</code>
+     * <code>string collectorVersion = 4;</code>
      * @return The collectorVersion.
      */
-    java.lang.String getCollectorVersion();
+    String getCollectorVersion();
     /**
-     * <code>string collectorVersion = 3;</code>
+     * <code>string collectorVersion = 4;</code>
      * @return The bytes for collectorVersion.
      */
     com.google.protobuf.ByteString
@@ -2701,99 +2716,125 @@ public final class PDM {
       collectorVersion_ = "";
     }
 
-    @java.lang.Override
+    @Override
     @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
+    protected Object newInstance(
         UnusedPrivateParameter unused) {
       return new Client();
     }
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_Client_descriptor;
+      return PDM.internal_static_provenancegraph_datamodel_Client_descriptor;
     }
 
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+    @Override
+    protected FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_Client_fieldAccessorTable
+      return PDM.internal_static_provenancegraph_datamodel_Client_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              provenancegraph.datamodel.PDM.Client.class, provenancegraph.datamodel.PDM.Client.Builder.class);
+              Client.class, Builder.class);
     }
 
-    public static final int IPLIST_FIELD_NUMBER = 1;
-    @SuppressWarnings("serial")
-    private java.util.List<provenancegraph.datamodel.PDM.IPAddress> ipList_;
+    public static final int CLIENTID_FIELD_NUMBER = 1;
+    private HostUUID clientID_;
     /**
-     * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 1;</code>
+     * <code>.provenancegraph.datamodel.HostUUID clientID = 1;</code>
+     * @return Whether the clientID field is set.
      */
-    @java.lang.Override
-    public java.util.List<provenancegraph.datamodel.PDM.IPAddress> getIpListList() {
+    @Override
+    public boolean hasClientID() {
+      return clientID_ != null;
+    }
+    /**
+     * <code>.provenancegraph.datamodel.HostUUID clientID = 1;</code>
+     * @return The clientID.
+     */
+    @Override
+    public HostUUID getClientID() {
+      return clientID_ == null ? HostUUID.getDefaultInstance() : clientID_;
+    }
+    /**
+     * <code>.provenancegraph.datamodel.HostUUID clientID = 1;</code>
+     */
+    @Override
+    public HostUUIDOrBuilder getClientIDOrBuilder() {
+      return clientID_ == null ? HostUUID.getDefaultInstance() : clientID_;
+    }
+
+    public static final int IPLIST_FIELD_NUMBER = 2;
+    @SuppressWarnings("serial")
+    private java.util.List<IPAddress> ipList_;
+    /**
+     * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 2;</code>
+     */
+    @Override
+    public java.util.List<IPAddress> getIpListList() {
       return ipList_;
     }
     /**
-     * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 1;</code>
+     * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 2;</code>
      */
-    @java.lang.Override
-    public java.util.List<? extends provenancegraph.datamodel.PDM.IPAddressOrBuilder> 
+    @Override
+    public java.util.List<? extends IPAddressOrBuilder>
         getIpListOrBuilderList() {
       return ipList_;
     }
     /**
-     * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 1;</code>
+     * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 2;</code>
      */
-    @java.lang.Override
+    @Override
     public int getIpListCount() {
       return ipList_.size();
     }
     /**
-     * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 1;</code>
+     * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 2;</code>
      */
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.IPAddress getIpList(int index) {
+    @Override
+    public IPAddress getIpList(int index) {
       return ipList_.get(index);
     }
     /**
-     * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 1;</code>
+     * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 2;</code>
      */
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.IPAddressOrBuilder getIpListOrBuilder(
+    @Override
+    public IPAddressOrBuilder getIpListOrBuilder(
         int index) {
       return ipList_.get(index);
     }
 
-    public static final int CLIENTNAME_FIELD_NUMBER = 2;
+    public static final int CLIENTNAME_FIELD_NUMBER = 3;
     @SuppressWarnings("serial")
-    private volatile java.lang.Object clientName_ = "";
+    private volatile Object clientName_ = "";
     /**
-     * <code>string clientName = 2;</code>
+     * <code>string clientName = 3;</code>
      * @return The clientName.
      */
-    @java.lang.Override
-    public java.lang.String getClientName() {
-      java.lang.Object ref = clientName_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
+    @Override
+    public String getClientName() {
+      Object ref = clientName_;
+      if (ref instanceof String) {
+        return (String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
+        String s = bs.toStringUtf8();
         clientName_ = s;
         return s;
       }
     }
     /**
-     * <code>string clientName = 2;</code>
+     * <code>string clientName = 3;</code>
      * @return The bytes for clientName.
      */
-    @java.lang.Override
+    @Override
     public com.google.protobuf.ByteString
         getClientNameBytes() {
-      java.lang.Object ref = clientName_;
-      if (ref instanceof java.lang.String) {
+      Object ref = clientName_;
+      if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+                (String) ref);
         clientName_ = b;
         return b;
       } else {
@@ -2801,38 +2842,38 @@ public final class PDM {
       }
     }
 
-    public static final int COLLECTORVERSION_FIELD_NUMBER = 3;
+    public static final int COLLECTORVERSION_FIELD_NUMBER = 4;
     @SuppressWarnings("serial")
-    private volatile java.lang.Object collectorVersion_ = "";
+    private volatile Object collectorVersion_ = "";
     /**
-     * <code>string collectorVersion = 3;</code>
+     * <code>string collectorVersion = 4;</code>
      * @return The collectorVersion.
      */
-    @java.lang.Override
-    public java.lang.String getCollectorVersion() {
-      java.lang.Object ref = collectorVersion_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
+    @Override
+    public String getCollectorVersion() {
+      Object ref = collectorVersion_;
+      if (ref instanceof String) {
+        return (String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
+        String s = bs.toStringUtf8();
         collectorVersion_ = s;
         return s;
       }
     }
     /**
-     * <code>string collectorVersion = 3;</code>
+     * <code>string collectorVersion = 4;</code>
      * @return The bytes for collectorVersion.
      */
-    @java.lang.Override
+    @Override
     public com.google.protobuf.ByteString
         getCollectorVersionBytes() {
-      java.lang.Object ref = collectorVersion_;
-      if (ref instanceof java.lang.String) {
+      Object ref = collectorVersion_;
+      if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+                (String) ref);
         collectorVersion_ = b;
         return b;
       } else {
@@ -2841,7 +2882,7 @@ public final class PDM {
     }
 
     private byte memoizedIsInitialized = -1;
-    @java.lang.Override
+    @Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -2851,52 +2892,64 @@ public final class PDM {
       return true;
     }
 
-    @java.lang.Override
+    @Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
+      if (clientID_ != null) {
+        output.writeMessage(1, getClientID());
+      }
       for (int i = 0; i < ipList_.size(); i++) {
-        output.writeMessage(1, ipList_.get(i));
+        output.writeMessage(2, ipList_.get(i));
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(clientName_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, clientName_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, clientName_);
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(collectorVersion_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, collectorVersion_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, collectorVersion_);
       }
       getUnknownFields().writeTo(output);
     }
 
-    @java.lang.Override
+    @Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
 
       size = 0;
+      if (clientID_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, getClientID());
+      }
       for (int i = 0; i < ipList_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, ipList_.get(i));
+          .computeMessageSize(2, ipList_.get(i));
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(clientName_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, clientName_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, clientName_);
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(collectorVersion_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, collectorVersion_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, collectorVersion_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
+    @Override
+    public boolean equals(final Object obj) {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof provenancegraph.datamodel.PDM.Client)) {
+      if (!(obj instanceof Client)) {
         return super.equals(obj);
       }
-      provenancegraph.datamodel.PDM.Client other = (provenancegraph.datamodel.PDM.Client) obj;
+      Client other = (Client) obj;
 
+      if (hasClientID() != other.hasClientID()) return false;
+      if (hasClientID()) {
+        if (!getClientID()
+            .equals(other.getClientID())) return false;
+      }
       if (!getIpListList()
           .equals(other.getIpListList())) return false;
       if (!getClientName()
@@ -2907,13 +2960,17 @@ public final class PDM {
       return true;
     }
 
-    @java.lang.Override
+    @Override
     public int hashCode() {
       if (memoizedHashCode != 0) {
         return memoizedHashCode;
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasClientID()) {
+        hash = (37 * hash) + CLIENTID_FIELD_NUMBER;
+        hash = (53 * hash) + getClientID().hashCode();
+      }
       if (getIpListCount() > 0) {
         hash = (37 * hash) + IPLIST_FIELD_NUMBER;
         hash = (53 * hash) + getIpListList().hashCode();
@@ -2927,44 +2984,44 @@ public final class PDM {
       return hash;
     }
 
-    public static provenancegraph.datamodel.PDM.Client parseFrom(
+    public static Client parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static provenancegraph.datamodel.PDM.Client parseFrom(
+    public static Client parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.Client parseFrom(
+    public static Client parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static provenancegraph.datamodel.PDM.Client parseFrom(
+    public static Client parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.Client parseFrom(byte[] data)
+    public static Client parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static provenancegraph.datamodel.PDM.Client parseFrom(
+    public static Client parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.Client parseFrom(java.io.InputStream input)
+    public static Client parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static provenancegraph.datamodel.PDM.Client parseFrom(
+    public static Client parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -2972,26 +3029,26 @@ public final class PDM {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    public static provenancegraph.datamodel.PDM.Client parseDelimitedFrom(java.io.InputStream input)
+    public static Client parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
 
-    public static provenancegraph.datamodel.PDM.Client parseDelimitedFrom(
+    public static Client parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.Client parseFrom(
+    public static Client parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static provenancegraph.datamodel.PDM.Client parseFrom(
+    public static Client parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -2999,23 +3056,23 @@ public final class PDM {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    @java.lang.Override
+    @Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(provenancegraph.datamodel.PDM.Client prototype) {
+    public static Builder newBuilder(Client prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
-    @java.lang.Override
+    @Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
     }
 
-    @java.lang.Override
+    @Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -3025,18 +3082,18 @@ public final class PDM {
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:provenancegraph.datamodel.Client)
-        provenancegraph.datamodel.PDM.ClientOrBuilder {
+        ClientOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_Client_descriptor;
+        return PDM.internal_static_provenancegraph_datamodel_Client_descriptor;
       }
 
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      @Override
+      protected FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_Client_fieldAccessorTable
+        return PDM.internal_static_provenancegraph_datamodel_Client_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                provenancegraph.datamodel.PDM.Client.class, provenancegraph.datamodel.PDM.Client.Builder.class);
+                Client.class, Builder.class);
       }
 
       // Construct using provenancegraph.datamodel.PDM.Client.newBuilder()
@@ -3045,60 +3102,65 @@ public final class PDM {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          BuilderParent parent) {
         super(parent);
 
       }
-      @java.lang.Override
+      @Override
       public Builder clear() {
         super.clear();
         bitField0_ = 0;
+        clientID_ = null;
+        if (clientIDBuilder_ != null) {
+          clientIDBuilder_.dispose();
+          clientIDBuilder_ = null;
+        }
         if (ipListBuilder_ == null) {
           ipList_ = java.util.Collections.emptyList();
         } else {
           ipList_ = null;
           ipListBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000001);
+        bitField0_ = (bitField0_ & ~0x00000002);
         clientName_ = "";
         collectorVersion_ = "";
         return this;
       }
 
-      @java.lang.Override
+      @Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_Client_descriptor;
+        return PDM.internal_static_provenancegraph_datamodel_Client_descriptor;
       }
 
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.Client getDefaultInstanceForType() {
-        return provenancegraph.datamodel.PDM.Client.getDefaultInstance();
+      @Override
+      public Client getDefaultInstanceForType() {
+        return Client.getDefaultInstance();
       }
 
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.Client build() {
-        provenancegraph.datamodel.PDM.Client result = buildPartial();
+      @Override
+      public Client build() {
+        Client result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.Client buildPartial() {
-        provenancegraph.datamodel.PDM.Client result = new provenancegraph.datamodel.PDM.Client(this);
+      @Override
+      public Client buildPartial() {
+        Client result = new Client(this);
         buildPartialRepeatedFields(result);
         if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
       }
 
-      private void buildPartialRepeatedFields(provenancegraph.datamodel.PDM.Client result) {
+      private void buildPartialRepeatedFields(Client result) {
         if (ipListBuilder_ == null) {
-          if (((bitField0_ & 0x00000001) != 0)) {
+          if (((bitField0_ & 0x00000002) != 0)) {
             ipList_ = java.util.Collections.unmodifiableList(ipList_);
-            bitField0_ = (bitField0_ & ~0x00000001);
+            bitField0_ = (bitField0_ & ~0x00000002);
           }
           result.ipList_ = ipList_;
         } else {
@@ -3106,65 +3168,73 @@ public final class PDM {
         }
       }
 
-      private void buildPartial0(provenancegraph.datamodel.PDM.Client result) {
+      private void buildPartial0(Client result) {
         int from_bitField0_ = bitField0_;
-        if (((from_bitField0_ & 0x00000002) != 0)) {
-          result.clientName_ = clientName_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.clientID_ = clientIDBuilder_ == null
+              ? clientID_
+              : clientIDBuilder_.build();
         }
         if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.clientName_ = clientName_;
+        }
+        if (((from_bitField0_ & 0x00000008) != 0)) {
           result.collectorVersion_ = collectorVersion_;
         }
       }
 
-      @java.lang.Override
+      @Override
       public Builder clone() {
         return super.clone();
       }
-      @java.lang.Override
+      @Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return super.setField(field, value);
       }
-      @java.lang.Override
+      @Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return super.clearField(field);
       }
-      @java.lang.Override
+      @Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return super.clearOneof(oneof);
       }
-      @java.lang.Override
+      @Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
+          int index, Object value) {
         return super.setRepeatedField(field, index, value);
       }
-      @java.lang.Override
+      @Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return super.addRepeatedField(field, value);
       }
-      @java.lang.Override
+      @Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof provenancegraph.datamodel.PDM.Client) {
-          return mergeFrom((provenancegraph.datamodel.PDM.Client)other);
+        if (other instanceof Client) {
+          return mergeFrom((Client)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(provenancegraph.datamodel.PDM.Client other) {
-        if (other == provenancegraph.datamodel.PDM.Client.getDefaultInstance()) return this;
+      public Builder mergeFrom(Client other) {
+        if (other == Client.getDefaultInstance()) return this;
+        if (other.hasClientID()) {
+          mergeClientID(other.getClientID());
+        }
         if (ipListBuilder_ == null) {
           if (!other.ipList_.isEmpty()) {
             if (ipList_.isEmpty()) {
               ipList_ = other.ipList_;
-              bitField0_ = (bitField0_ & ~0x00000001);
+              bitField0_ = (bitField0_ & ~0x00000002);
             } else {
               ensureIpListIsMutable();
               ipList_.addAll(other.ipList_);
@@ -3177,7 +3247,7 @@ public final class PDM {
               ipListBuilder_.dispose();
               ipListBuilder_ = null;
               ipList_ = other.ipList_;
-              bitField0_ = (bitField0_ & ~0x00000001);
+              bitField0_ = (bitField0_ & ~0x00000002);
               ipListBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getIpListFieldBuilder() : null;
@@ -3188,12 +3258,12 @@ public final class PDM {
         }
         if (!other.getClientName().isEmpty()) {
           clientName_ = other.clientName_;
-          bitField0_ |= 0x00000002;
+          bitField0_ |= 0x00000004;
           onChanged();
         }
         if (!other.getCollectorVersion().isEmpty()) {
           collectorVersion_ = other.collectorVersion_;
-          bitField0_ |= 0x00000004;
+          bitField0_ |= 0x00000008;
           onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
@@ -3201,18 +3271,18 @@ public final class PDM {
         return this;
       }
 
-      @java.lang.Override
+      @Override
       public final boolean isInitialized() {
         return true;
       }
 
-      @java.lang.Override
+      @Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
         if (extensionRegistry == null) {
-          throw new java.lang.NullPointerException();
+          throw new NullPointerException();
         }
         try {
           boolean done = false;
@@ -3223,9 +3293,16 @@ public final class PDM {
                 done = true;
                 break;
               case 10: {
-                provenancegraph.datamodel.PDM.IPAddress m =
+                input.readMessage(
+                    getClientIDFieldBuilder().getBuilder(),
+                    extensionRegistry);
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                IPAddress m =
                     input.readMessage(
-                        provenancegraph.datamodel.PDM.IPAddress.parser(),
+                        IPAddress.parser(),
                         extensionRegistry);
                 if (ipListBuilder_ == null) {
                   ensureIpListIsMutable();
@@ -3234,17 +3311,17 @@ public final class PDM {
                   ipListBuilder_.addMessage(m);
                 }
                 break;
-              } // case 10
-              case 18: {
-                clientName_ = input.readStringRequireUtf8();
-                bitField0_ |= 0x00000002;
-                break;
               } // case 18
               case 26: {
-                collectorVersion_ = input.readStringRequireUtf8();
+                clientName_ = input.readStringRequireUtf8();
                 bitField0_ |= 0x00000004;
                 break;
               } // case 26
+              case 34: {
+                collectorVersion_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000008;
+                break;
+              } // case 34
               default: {
                 if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                   done = true; // was an endgroup tag
@@ -3262,22 +3339,141 @@ public final class PDM {
       }
       private int bitField0_;
 
-      private java.util.List<provenancegraph.datamodel.PDM.IPAddress> ipList_ =
+      private HostUUID clientID_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          HostUUID, HostUUID.Builder, HostUUIDOrBuilder> clientIDBuilder_;
+      /**
+       * <code>.provenancegraph.datamodel.HostUUID clientID = 1;</code>
+       * @return Whether the clientID field is set.
+       */
+      public boolean hasClientID() {
+        return ((bitField0_ & 0x00000001) != 0);
+      }
+      /**
+       * <code>.provenancegraph.datamodel.HostUUID clientID = 1;</code>
+       * @return The clientID.
+       */
+      public HostUUID getClientID() {
+        if (clientIDBuilder_ == null) {
+          return clientID_ == null ? HostUUID.getDefaultInstance() : clientID_;
+        } else {
+          return clientIDBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.provenancegraph.datamodel.HostUUID clientID = 1;</code>
+       */
+      public Builder setClientID(HostUUID value) {
+        if (clientIDBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          clientID_ = value;
+        } else {
+          clientIDBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.provenancegraph.datamodel.HostUUID clientID = 1;</code>
+       */
+      public Builder setClientID(
+          HostUUID.Builder builderForValue) {
+        if (clientIDBuilder_ == null) {
+          clientID_ = builderForValue.build();
+        } else {
+          clientIDBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.provenancegraph.datamodel.HostUUID clientID = 1;</code>
+       */
+      public Builder mergeClientID(HostUUID value) {
+        if (clientIDBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) != 0) &&
+            clientID_ != null &&
+            clientID_ != HostUUID.getDefaultInstance()) {
+            getClientIDBuilder().mergeFrom(value);
+          } else {
+            clientID_ = value;
+          }
+        } else {
+          clientIDBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.provenancegraph.datamodel.HostUUID clientID = 1;</code>
+       */
+      public Builder clearClientID() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        clientID_ = null;
+        if (clientIDBuilder_ != null) {
+          clientIDBuilder_.dispose();
+          clientIDBuilder_ = null;
+        }
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.provenancegraph.datamodel.HostUUID clientID = 1;</code>
+       */
+      public HostUUID.Builder getClientIDBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getClientIDFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.provenancegraph.datamodel.HostUUID clientID = 1;</code>
+       */
+      public HostUUIDOrBuilder getClientIDOrBuilder() {
+        if (clientIDBuilder_ != null) {
+          return clientIDBuilder_.getMessageOrBuilder();
+        } else {
+          return clientID_ == null ?
+              HostUUID.getDefaultInstance() : clientID_;
+        }
+      }
+      /**
+       * <code>.provenancegraph.datamodel.HostUUID clientID = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          HostUUID, HostUUID.Builder, HostUUIDOrBuilder>
+          getClientIDFieldBuilder() {
+        if (clientIDBuilder_ == null) {
+          clientIDBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              HostUUID, HostUUID.Builder, HostUUIDOrBuilder>(
+                  getClientID(),
+                  getParentForChildren(),
+                  isClean());
+          clientID_ = null;
+        }
+        return clientIDBuilder_;
+      }
+
+      private java.util.List<IPAddress> ipList_ =
         java.util.Collections.emptyList();
       private void ensureIpListIsMutable() {
-        if (!((bitField0_ & 0x00000001) != 0)) {
-          ipList_ = new java.util.ArrayList<provenancegraph.datamodel.PDM.IPAddress>(ipList_);
-          bitField0_ |= 0x00000001;
+        if (!((bitField0_ & 0x00000002) != 0)) {
+          ipList_ = new java.util.ArrayList<IPAddress>(ipList_);
+          bitField0_ |= 0x00000002;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          provenancegraph.datamodel.PDM.IPAddress, provenancegraph.datamodel.PDM.IPAddress.Builder, provenancegraph.datamodel.PDM.IPAddressOrBuilder> ipListBuilder_;
+          IPAddress, IPAddress.Builder, IPAddressOrBuilder> ipListBuilder_;
 
       /**
-       * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 1;</code>
+       * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 2;</code>
        */
-      public java.util.List<provenancegraph.datamodel.PDM.IPAddress> getIpListList() {
+      public java.util.List<IPAddress> getIpListList() {
         if (ipListBuilder_ == null) {
           return java.util.Collections.unmodifiableList(ipList_);
         } else {
@@ -3285,7 +3481,7 @@ public final class PDM {
         }
       }
       /**
-       * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 1;</code>
+       * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 2;</code>
        */
       public int getIpListCount() {
         if (ipListBuilder_ == null) {
@@ -3295,9 +3491,9 @@ public final class PDM {
         }
       }
       /**
-       * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 1;</code>
+       * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 2;</code>
        */
-      public provenancegraph.datamodel.PDM.IPAddress getIpList(int index) {
+      public IPAddress getIpList(int index) {
         if (ipListBuilder_ == null) {
           return ipList_.get(index);
         } else {
@@ -3305,10 +3501,10 @@ public final class PDM {
         }
       }
       /**
-       * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 1;</code>
+       * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 2;</code>
        */
       public Builder setIpList(
-          int index, provenancegraph.datamodel.PDM.IPAddress value) {
+          int index, IPAddress value) {
         if (ipListBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -3322,10 +3518,10 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 1;</code>
+       * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 2;</code>
        */
       public Builder setIpList(
-          int index, provenancegraph.datamodel.PDM.IPAddress.Builder builderForValue) {
+          int index, IPAddress.Builder builderForValue) {
         if (ipListBuilder_ == null) {
           ensureIpListIsMutable();
           ipList_.set(index, builderForValue.build());
@@ -3336,9 +3532,9 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 1;</code>
+       * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 2;</code>
        */
-      public Builder addIpList(provenancegraph.datamodel.PDM.IPAddress value) {
+      public Builder addIpList(IPAddress value) {
         if (ipListBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -3352,10 +3548,10 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 1;</code>
+       * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 2;</code>
        */
       public Builder addIpList(
-          int index, provenancegraph.datamodel.PDM.IPAddress value) {
+          int index, IPAddress value) {
         if (ipListBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -3369,10 +3565,10 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 1;</code>
+       * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 2;</code>
        */
       public Builder addIpList(
-          provenancegraph.datamodel.PDM.IPAddress.Builder builderForValue) {
+          IPAddress.Builder builderForValue) {
         if (ipListBuilder_ == null) {
           ensureIpListIsMutable();
           ipList_.add(builderForValue.build());
@@ -3383,10 +3579,10 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 1;</code>
+       * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 2;</code>
        */
       public Builder addIpList(
-          int index, provenancegraph.datamodel.PDM.IPAddress.Builder builderForValue) {
+          int index, IPAddress.Builder builderForValue) {
         if (ipListBuilder_ == null) {
           ensureIpListIsMutable();
           ipList_.add(index, builderForValue.build());
@@ -3397,10 +3593,10 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 1;</code>
+       * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 2;</code>
        */
       public Builder addAllIpList(
-          java.lang.Iterable<? extends provenancegraph.datamodel.PDM.IPAddress> values) {
+          Iterable<? extends IPAddress> values) {
         if (ipListBuilder_ == null) {
           ensureIpListIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
@@ -3412,12 +3608,12 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 1;</code>
+       * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 2;</code>
        */
       public Builder clearIpList() {
         if (ipListBuilder_ == null) {
           ipList_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000001);
+          bitField0_ = (bitField0_ & ~0x00000002);
           onChanged();
         } else {
           ipListBuilder_.clear();
@@ -3425,7 +3621,7 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 1;</code>
+       * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 2;</code>
        */
       public Builder removeIpList(int index) {
         if (ipListBuilder_ == null) {
@@ -3438,16 +3634,16 @@ public final class PDM {
         return this;
       }
       /**
-       * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 1;</code>
+       * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 2;</code>
        */
-      public provenancegraph.datamodel.PDM.IPAddress.Builder getIpListBuilder(
+      public IPAddress.Builder getIpListBuilder(
           int index) {
         return getIpListFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 1;</code>
+       * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 2;</code>
        */
-      public provenancegraph.datamodel.PDM.IPAddressOrBuilder getIpListOrBuilder(
+      public IPAddressOrBuilder getIpListOrBuilder(
           int index) {
         if (ipListBuilder_ == null) {
           return ipList_.get(index);  } else {
@@ -3455,9 +3651,9 @@ public final class PDM {
         }
       }
       /**
-       * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 1;</code>
+       * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 2;</code>
        */
-      public java.util.List<? extends provenancegraph.datamodel.PDM.IPAddressOrBuilder> 
+      public java.util.List<? extends IPAddressOrBuilder>
            getIpListOrBuilderList() {
         if (ipListBuilder_ != null) {
           return ipListBuilder_.getMessageOrBuilderList();
@@ -3466,35 +3662,35 @@ public final class PDM {
         }
       }
       /**
-       * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 1;</code>
+       * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 2;</code>
        */
-      public provenancegraph.datamodel.PDM.IPAddress.Builder addIpListBuilder() {
+      public IPAddress.Builder addIpListBuilder() {
         return getIpListFieldBuilder().addBuilder(
-            provenancegraph.datamodel.PDM.IPAddress.getDefaultInstance());
+            IPAddress.getDefaultInstance());
       }
       /**
-       * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 1;</code>
+       * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 2;</code>
        */
-      public provenancegraph.datamodel.PDM.IPAddress.Builder addIpListBuilder(
+      public IPAddress.Builder addIpListBuilder(
           int index) {
         return getIpListFieldBuilder().addBuilder(
-            index, provenancegraph.datamodel.PDM.IPAddress.getDefaultInstance());
+            index, IPAddress.getDefaultInstance());
       }
       /**
-       * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 1;</code>
+       * <code>repeated .provenancegraph.datamodel.IPAddress ipList = 2;</code>
        */
-      public java.util.List<provenancegraph.datamodel.PDM.IPAddress.Builder> 
+      public java.util.List<IPAddress.Builder>
            getIpListBuilderList() {
         return getIpListFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          provenancegraph.datamodel.PDM.IPAddress, provenancegraph.datamodel.PDM.IPAddress.Builder, provenancegraph.datamodel.PDM.IPAddressOrBuilder> 
+          IPAddress, IPAddress.Builder, IPAddressOrBuilder>
           getIpListFieldBuilder() {
         if (ipListBuilder_ == null) {
           ipListBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-              provenancegraph.datamodel.PDM.IPAddress, provenancegraph.datamodel.PDM.IPAddress.Builder, provenancegraph.datamodel.PDM.IPAddressOrBuilder>(
+              IPAddress, IPAddress.Builder, IPAddressOrBuilder>(
                   ipList_,
-                  ((bitField0_ & 0x00000001) != 0),
+                  ((bitField0_ & 0x00000002) != 0),
                   getParentForChildren(),
                   isClean());
           ipList_ = null;
@@ -3502,34 +3698,34 @@ public final class PDM {
         return ipListBuilder_;
       }
 
-      private java.lang.Object clientName_ = "";
+      private Object clientName_ = "";
       /**
-       * <code>string clientName = 2;</code>
+       * <code>string clientName = 3;</code>
        * @return The clientName.
        */
-      public java.lang.String getClientName() {
-        java.lang.Object ref = clientName_;
-        if (!(ref instanceof java.lang.String)) {
+      public String getClientName() {
+        Object ref = clientName_;
+        if (!(ref instanceof String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
+          String s = bs.toStringUtf8();
           clientName_ = s;
           return s;
         } else {
-          return (java.lang.String) ref;
+          return (String) ref;
         }
       }
       /**
-       * <code>string clientName = 2;</code>
+       * <code>string clientName = 3;</code>
        * @return The bytes for clientName.
        */
       public com.google.protobuf.ByteString
           getClientNameBytes() {
-        java.lang.Object ref = clientName_;
+        Object ref = clientName_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+                  (String) ref);
           clientName_ = b;
           return b;
         } else {
@@ -3537,30 +3733,30 @@ public final class PDM {
         }
       }
       /**
-       * <code>string clientName = 2;</code>
+       * <code>string clientName = 3;</code>
        * @param value The clientName to set.
        * @return This builder for chaining.
        */
       public Builder setClientName(
-          java.lang.String value) {
+          String value) {
         if (value == null) { throw new NullPointerException(); }
         clientName_ = value;
-        bitField0_ |= 0x00000002;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
       /**
-       * <code>string clientName = 2;</code>
+       * <code>string clientName = 3;</code>
        * @return This builder for chaining.
        */
       public Builder clearClientName() {
         clientName_ = getDefaultInstance().getClientName();
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000004);
         onChanged();
         return this;
       }
       /**
-       * <code>string clientName = 2;</code>
+       * <code>string clientName = 3;</code>
        * @param value The bytes for clientName to set.
        * @return This builder for chaining.
        */
@@ -3569,39 +3765,39 @@ public final class PDM {
         if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
         clientName_ = value;
-        bitField0_ |= 0x00000002;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
 
-      private java.lang.Object collectorVersion_ = "";
+      private Object collectorVersion_ = "";
       /**
-       * <code>string collectorVersion = 3;</code>
+       * <code>string collectorVersion = 4;</code>
        * @return The collectorVersion.
        */
-      public java.lang.String getCollectorVersion() {
-        java.lang.Object ref = collectorVersion_;
-        if (!(ref instanceof java.lang.String)) {
+      public String getCollectorVersion() {
+        Object ref = collectorVersion_;
+        if (!(ref instanceof String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
+          String s = bs.toStringUtf8();
           collectorVersion_ = s;
           return s;
         } else {
-          return (java.lang.String) ref;
+          return (String) ref;
         }
       }
       /**
-       * <code>string collectorVersion = 3;</code>
+       * <code>string collectorVersion = 4;</code>
        * @return The bytes for collectorVersion.
        */
       public com.google.protobuf.ByteString
           getCollectorVersionBytes() {
-        java.lang.Object ref = collectorVersion_;
+        Object ref = collectorVersion_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+                  (String) ref);
           collectorVersion_ = b;
           return b;
         } else {
@@ -3609,30 +3805,30 @@ public final class PDM {
         }
       }
       /**
-       * <code>string collectorVersion = 3;</code>
+       * <code>string collectorVersion = 4;</code>
        * @param value The collectorVersion to set.
        * @return This builder for chaining.
        */
       public Builder setCollectorVersion(
-          java.lang.String value) {
+          String value) {
         if (value == null) { throw new NullPointerException(); }
         collectorVersion_ = value;
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000008;
         onChanged();
         return this;
       }
       /**
-       * <code>string collectorVersion = 3;</code>
+       * <code>string collectorVersion = 4;</code>
        * @return This builder for chaining.
        */
       public Builder clearCollectorVersion() {
         collectorVersion_ = getDefaultInstance().getCollectorVersion();
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000008);
         onChanged();
         return this;
       }
       /**
-       * <code>string collectorVersion = 3;</code>
+       * <code>string collectorVersion = 4;</code>
        * @param value The bytes for collectorVersion to set.
        * @return This builder for chaining.
        */
@@ -3641,17 +3837,17 @@ public final class PDM {
         if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
         collectorVersion_ = value;
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000008;
         onChanged();
         return this;
       }
-      @java.lang.Override
+      @Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFields(unknownFields);
       }
 
-      @java.lang.Override
+      @Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -3662,18 +3858,18 @@ public final class PDM {
     }
 
     // @@protoc_insertion_point(class_scope:provenancegraph.datamodel.Client)
-    private static final provenancegraph.datamodel.PDM.Client DEFAULT_INSTANCE;
+    private static final Client DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new provenancegraph.datamodel.PDM.Client();
+      DEFAULT_INSTANCE = new Client();
     }
 
-    public static provenancegraph.datamodel.PDM.Client getDefaultInstance() {
+    public static Client getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
     private static final com.google.protobuf.Parser<Client>
         PARSER = new com.google.protobuf.AbstractParser<Client>() {
-      @java.lang.Override
+      @Override
       public Client parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -3697,13 +3893,13 @@ public final class PDM {
       return PARSER;
     }
 
-    @java.lang.Override
+    @Override
     public com.google.protobuf.Parser<Client> getParserForType() {
       return PARSER;
     }
 
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.Client getDefaultInstanceForType() {
+    @Override
+    public Client getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -3722,11 +3918,11 @@ public final class PDM {
      * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 1;</code>
      * @return The procUUID.
      */
-    provenancegraph.datamodel.PDM.ProcessUUID getProcUUID();
+    ProcessUUID getProcUUID();
     /**
      * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 1;</code>
      */
-    provenancegraph.datamodel.PDM.ProcessUUIDOrBuilder getProcUUIDOrBuilder();
+    ProcessUUIDOrBuilder getProcUUIDOrBuilder();
 
     /**
      * <code>.provenancegraph.datamodel.ProcessUUID parentProcUUID = 2;</code>
@@ -3737,17 +3933,17 @@ public final class PDM {
      * <code>.provenancegraph.datamodel.ProcessUUID parentProcUUID = 2;</code>
      * @return The parentProcUUID.
      */
-    provenancegraph.datamodel.PDM.ProcessUUID getParentProcUUID();
+    ProcessUUID getParentProcUUID();
     /**
      * <code>.provenancegraph.datamodel.ProcessUUID parentProcUUID = 2;</code>
      */
-    provenancegraph.datamodel.PDM.ProcessUUIDOrBuilder getParentProcUUIDOrBuilder();
+    ProcessUUIDOrBuilder getParentProcUUIDOrBuilder();
 
     /**
      * <code>string processName = 3;</code>
      * @return The processName.
      */
-    java.lang.String getProcessName();
+    String getProcessName();
     /**
      * <code>string processName = 3;</code>
      * @return The bytes for processName.
@@ -3759,7 +3955,7 @@ public final class PDM {
      * <code>string cmdline = 4;</code>
      * @return The cmdline.
      */
-    java.lang.String getCmdline();
+    String getCmdline();
     /**
      * <code>string cmdline = 4;</code>
      * @return The bytes for cmdline.
@@ -3776,17 +3972,17 @@ public final class PDM {
      * <code>.provenancegraph.datamodel.FileUUID fileUUID = 5;</code>
      * @return The fileUUID.
      */
-    provenancegraph.datamodel.PDM.FileUUID getFileUUID();
+    FileUUID getFileUUID();
     /**
      * <code>.provenancegraph.datamodel.FileUUID fileUUID = 5;</code>
      */
-    provenancegraph.datamodel.PDM.FileUUIDOrBuilder getFileUUIDOrBuilder();
+    FileUUIDOrBuilder getFileUUIDOrBuilder();
 
     /**
      * <code>string exePath = 6;</code>
      * @return The exePath.
      */
-    java.lang.String getExePath();
+    String getExePath();
     /**
      * <code>string exePath = 6;</code>
      * @return The bytes for exePath.
@@ -3812,33 +4008,33 @@ public final class PDM {
       exePath_ = "";
     }
 
-    @java.lang.Override
+    @Override
     @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
+    protected Object newInstance(
         UnusedPrivateParameter unused) {
       return new Process();
     }
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_Process_descriptor;
+      return PDM.internal_static_provenancegraph_datamodel_Process_descriptor;
     }
 
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+    @Override
+    protected FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_Process_fieldAccessorTable
+      return PDM.internal_static_provenancegraph_datamodel_Process_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              provenancegraph.datamodel.PDM.Process.class, provenancegraph.datamodel.PDM.Process.Builder.class);
+              Process.class, Builder.class);
     }
 
     public static final int PROCUUID_FIELD_NUMBER = 1;
-    private provenancegraph.datamodel.PDM.ProcessUUID procUUID_;
+    private ProcessUUID procUUID_;
     /**
      * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 1;</code>
      * @return Whether the procUUID field is set.
      */
-    @java.lang.Override
+    @Override
     public boolean hasProcUUID() {
       return procUUID_ != null;
     }
@@ -3846,25 +4042,25 @@ public final class PDM {
      * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 1;</code>
      * @return The procUUID.
      */
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.ProcessUUID getProcUUID() {
-      return procUUID_ == null ? provenancegraph.datamodel.PDM.ProcessUUID.getDefaultInstance() : procUUID_;
+    @Override
+    public ProcessUUID getProcUUID() {
+      return procUUID_ == null ? ProcessUUID.getDefaultInstance() : procUUID_;
     }
     /**
      * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 1;</code>
      */
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.ProcessUUIDOrBuilder getProcUUIDOrBuilder() {
-      return procUUID_ == null ? provenancegraph.datamodel.PDM.ProcessUUID.getDefaultInstance() : procUUID_;
+    @Override
+    public ProcessUUIDOrBuilder getProcUUIDOrBuilder() {
+      return procUUID_ == null ? ProcessUUID.getDefaultInstance() : procUUID_;
     }
 
     public static final int PARENTPROCUUID_FIELD_NUMBER = 2;
-    private provenancegraph.datamodel.PDM.ProcessUUID parentProcUUID_;
+    private ProcessUUID parentProcUUID_;
     /**
      * <code>.provenancegraph.datamodel.ProcessUUID parentProcUUID = 2;</code>
      * @return Whether the parentProcUUID field is set.
      */
-    @java.lang.Override
+    @Override
     public boolean hasParentProcUUID() {
       return parentProcUUID_ != null;
     }
@@ -3872,34 +4068,34 @@ public final class PDM {
      * <code>.provenancegraph.datamodel.ProcessUUID parentProcUUID = 2;</code>
      * @return The parentProcUUID.
      */
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.ProcessUUID getParentProcUUID() {
-      return parentProcUUID_ == null ? provenancegraph.datamodel.PDM.ProcessUUID.getDefaultInstance() : parentProcUUID_;
+    @Override
+    public ProcessUUID getParentProcUUID() {
+      return parentProcUUID_ == null ? ProcessUUID.getDefaultInstance() : parentProcUUID_;
     }
     /**
      * <code>.provenancegraph.datamodel.ProcessUUID parentProcUUID = 2;</code>
      */
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.ProcessUUIDOrBuilder getParentProcUUIDOrBuilder() {
-      return parentProcUUID_ == null ? provenancegraph.datamodel.PDM.ProcessUUID.getDefaultInstance() : parentProcUUID_;
+    @Override
+    public ProcessUUIDOrBuilder getParentProcUUIDOrBuilder() {
+      return parentProcUUID_ == null ? ProcessUUID.getDefaultInstance() : parentProcUUID_;
     }
 
     public static final int PROCESSNAME_FIELD_NUMBER = 3;
     @SuppressWarnings("serial")
-    private volatile java.lang.Object processName_ = "";
+    private volatile Object processName_ = "";
     /**
      * <code>string processName = 3;</code>
      * @return The processName.
      */
-    @java.lang.Override
-    public java.lang.String getProcessName() {
-      java.lang.Object ref = processName_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
+    @Override
+    public String getProcessName() {
+      Object ref = processName_;
+      if (ref instanceof String) {
+        return (String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
+        String s = bs.toStringUtf8();
         processName_ = s;
         return s;
       }
@@ -3908,14 +4104,14 @@ public final class PDM {
      * <code>string processName = 3;</code>
      * @return The bytes for processName.
      */
-    @java.lang.Override
+    @Override
     public com.google.protobuf.ByteString
         getProcessNameBytes() {
-      java.lang.Object ref = processName_;
-      if (ref instanceof java.lang.String) {
+      Object ref = processName_;
+      if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+                (String) ref);
         processName_ = b;
         return b;
       } else {
@@ -3925,20 +4121,20 @@ public final class PDM {
 
     public static final int CMDLINE_FIELD_NUMBER = 4;
     @SuppressWarnings("serial")
-    private volatile java.lang.Object cmdline_ = "";
+    private volatile Object cmdline_ = "";
     /**
      * <code>string cmdline = 4;</code>
      * @return The cmdline.
      */
-    @java.lang.Override
-    public java.lang.String getCmdline() {
-      java.lang.Object ref = cmdline_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
+    @Override
+    public String getCmdline() {
+      Object ref = cmdline_;
+      if (ref instanceof String) {
+        return (String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
+        String s = bs.toStringUtf8();
         cmdline_ = s;
         return s;
       }
@@ -3947,14 +4143,14 @@ public final class PDM {
      * <code>string cmdline = 4;</code>
      * @return The bytes for cmdline.
      */
-    @java.lang.Override
+    @Override
     public com.google.protobuf.ByteString
         getCmdlineBytes() {
-      java.lang.Object ref = cmdline_;
-      if (ref instanceof java.lang.String) {
+      Object ref = cmdline_;
+      if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+                (String) ref);
         cmdline_ = b;
         return b;
       } else {
@@ -3963,12 +4159,12 @@ public final class PDM {
     }
 
     public static final int FILEUUID_FIELD_NUMBER = 5;
-    private provenancegraph.datamodel.PDM.FileUUID fileUUID_;
+    private FileUUID fileUUID_;
     /**
      * <code>.provenancegraph.datamodel.FileUUID fileUUID = 5;</code>
      * @return Whether the fileUUID field is set.
      */
-    @java.lang.Override
+    @Override
     public boolean hasFileUUID() {
       return fileUUID_ != null;
     }
@@ -3976,34 +4172,34 @@ public final class PDM {
      * <code>.provenancegraph.datamodel.FileUUID fileUUID = 5;</code>
      * @return The fileUUID.
      */
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.FileUUID getFileUUID() {
-      return fileUUID_ == null ? provenancegraph.datamodel.PDM.FileUUID.getDefaultInstance() : fileUUID_;
+    @Override
+    public FileUUID getFileUUID() {
+      return fileUUID_ == null ? FileUUID.getDefaultInstance() : fileUUID_;
     }
     /**
      * <code>.provenancegraph.datamodel.FileUUID fileUUID = 5;</code>
      */
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.FileUUIDOrBuilder getFileUUIDOrBuilder() {
-      return fileUUID_ == null ? provenancegraph.datamodel.PDM.FileUUID.getDefaultInstance() : fileUUID_;
+    @Override
+    public FileUUIDOrBuilder getFileUUIDOrBuilder() {
+      return fileUUID_ == null ? FileUUID.getDefaultInstance() : fileUUID_;
     }
 
     public static final int EXEPATH_FIELD_NUMBER = 6;
     @SuppressWarnings("serial")
-    private volatile java.lang.Object exePath_ = "";
+    private volatile Object exePath_ = "";
     /**
      * <code>string exePath = 6;</code>
      * @return The exePath.
      */
-    @java.lang.Override
-    public java.lang.String getExePath() {
-      java.lang.Object ref = exePath_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
+    @Override
+    public String getExePath() {
+      Object ref = exePath_;
+      if (ref instanceof String) {
+        return (String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
+        String s = bs.toStringUtf8();
         exePath_ = s;
         return s;
       }
@@ -4012,14 +4208,14 @@ public final class PDM {
      * <code>string exePath = 6;</code>
      * @return The bytes for exePath.
      */
-    @java.lang.Override
+    @Override
     public com.google.protobuf.ByteString
         getExePathBytes() {
-      java.lang.Object ref = exePath_;
-      if (ref instanceof java.lang.String) {
+      Object ref = exePath_;
+      if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+                (String) ref);
         exePath_ = b;
         return b;
       } else {
@@ -4028,7 +4224,7 @@ public final class PDM {
     }
 
     private byte memoizedIsInitialized = -1;
-    @java.lang.Override
+    @Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -4038,7 +4234,7 @@ public final class PDM {
       return true;
     }
 
-    @java.lang.Override
+    @Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (procUUID_ != null) {
@@ -4062,7 +4258,7 @@ public final class PDM {
       getUnknownFields().writeTo(output);
     }
 
-    @java.lang.Override
+    @Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -4094,15 +4290,15 @@ public final class PDM {
       return size;
     }
 
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
+    @Override
+    public boolean equals(final Object obj) {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof provenancegraph.datamodel.PDM.Process)) {
+      if (!(obj instanceof Process)) {
         return super.equals(obj);
       }
-      provenancegraph.datamodel.PDM.Process other = (provenancegraph.datamodel.PDM.Process) obj;
+      Process other = (Process) obj;
 
       if (hasProcUUID() != other.hasProcUUID()) return false;
       if (hasProcUUID()) {
@@ -4129,7 +4325,7 @@ public final class PDM {
       return true;
     }
 
-    @java.lang.Override
+    @Override
     public int hashCode() {
       if (memoizedHashCode != 0) {
         return memoizedHashCode;
@@ -4159,44 +4355,44 @@ public final class PDM {
       return hash;
     }
 
-    public static provenancegraph.datamodel.PDM.Process parseFrom(
+    public static Process parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static provenancegraph.datamodel.PDM.Process parseFrom(
+    public static Process parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.Process parseFrom(
+    public static Process parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static provenancegraph.datamodel.PDM.Process parseFrom(
+    public static Process parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.Process parseFrom(byte[] data)
+    public static Process parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static provenancegraph.datamodel.PDM.Process parseFrom(
+    public static Process parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.Process parseFrom(java.io.InputStream input)
+    public static Process parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static provenancegraph.datamodel.PDM.Process parseFrom(
+    public static Process parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -4204,26 +4400,26 @@ public final class PDM {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    public static provenancegraph.datamodel.PDM.Process parseDelimitedFrom(java.io.InputStream input)
+    public static Process parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
 
-    public static provenancegraph.datamodel.PDM.Process parseDelimitedFrom(
+    public static Process parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.Process parseFrom(
+    public static Process parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static provenancegraph.datamodel.PDM.Process parseFrom(
+    public static Process parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -4231,23 +4427,23 @@ public final class PDM {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    @java.lang.Override
+    @Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(provenancegraph.datamodel.PDM.Process prototype) {
+    public static Builder newBuilder(Process prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
-    @java.lang.Override
+    @Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
     }
 
-    @java.lang.Override
+    @Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -4257,18 +4453,18 @@ public final class PDM {
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:provenancegraph.datamodel.Process)
-        provenancegraph.datamodel.PDM.ProcessOrBuilder {
+        ProcessOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_Process_descriptor;
+        return PDM.internal_static_provenancegraph_datamodel_Process_descriptor;
       }
 
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      @Override
+      protected FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_Process_fieldAccessorTable
+        return PDM.internal_static_provenancegraph_datamodel_Process_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                provenancegraph.datamodel.PDM.Process.class, provenancegraph.datamodel.PDM.Process.Builder.class);
+                Process.class, Builder.class);
       }
 
       // Construct using provenancegraph.datamodel.PDM.Process.newBuilder()
@@ -4277,11 +4473,11 @@ public final class PDM {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          BuilderParent parent) {
         super(parent);
 
       }
-      @java.lang.Override
+      @Override
       public Builder clear() {
         super.clear();
         bitField0_ = 0;
@@ -4306,35 +4502,35 @@ public final class PDM {
         return this;
       }
 
-      @java.lang.Override
+      @Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_Process_descriptor;
+        return PDM.internal_static_provenancegraph_datamodel_Process_descriptor;
       }
 
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.Process getDefaultInstanceForType() {
-        return provenancegraph.datamodel.PDM.Process.getDefaultInstance();
+      @Override
+      public Process getDefaultInstanceForType() {
+        return Process.getDefaultInstance();
       }
 
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.Process build() {
-        provenancegraph.datamodel.PDM.Process result = buildPartial();
+      @Override
+      public Process build() {
+        Process result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.Process buildPartial() {
-        provenancegraph.datamodel.PDM.Process result = new provenancegraph.datamodel.PDM.Process(this);
+      @Override
+      public Process buildPartial() {
+        Process result = new Process(this);
         if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
       }
 
-      private void buildPartial0(provenancegraph.datamodel.PDM.Process result) {
+      private void buildPartial0(Process result) {
         int from_bitField0_ = bitField0_;
         if (((from_bitField0_ & 0x00000001) != 0)) {
           result.procUUID_ = procUUIDBuilder_ == null
@@ -4362,50 +4558,50 @@ public final class PDM {
         }
       }
 
-      @java.lang.Override
+      @Override
       public Builder clone() {
         return super.clone();
       }
-      @java.lang.Override
+      @Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return super.setField(field, value);
       }
-      @java.lang.Override
+      @Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return super.clearField(field);
       }
-      @java.lang.Override
+      @Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return super.clearOneof(oneof);
       }
-      @java.lang.Override
+      @Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
+          int index, Object value) {
         return super.setRepeatedField(field, index, value);
       }
-      @java.lang.Override
+      @Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return super.addRepeatedField(field, value);
       }
-      @java.lang.Override
+      @Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof provenancegraph.datamodel.PDM.Process) {
-          return mergeFrom((provenancegraph.datamodel.PDM.Process)other);
+        if (other instanceof Process) {
+          return mergeFrom((Process)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(provenancegraph.datamodel.PDM.Process other) {
-        if (other == provenancegraph.datamodel.PDM.Process.getDefaultInstance()) return this;
+      public Builder mergeFrom(Process other) {
+        if (other == Process.getDefaultInstance()) return this;
         if (other.hasProcUUID()) {
           mergeProcUUID(other.getProcUUID());
         }
@@ -4435,18 +4631,18 @@ public final class PDM {
         return this;
       }
 
-      @java.lang.Override
+      @Override
       public final boolean isInitialized() {
         return true;
       }
 
-      @java.lang.Override
+      @Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
         if (extensionRegistry == null) {
-          throw new java.lang.NullPointerException();
+          throw new NullPointerException();
         }
         try {
           boolean done = false;
@@ -4509,9 +4705,9 @@ public final class PDM {
       }
       private int bitField0_;
 
-      private provenancegraph.datamodel.PDM.ProcessUUID procUUID_;
+      private ProcessUUID procUUID_;
       private com.google.protobuf.SingleFieldBuilderV3<
-          provenancegraph.datamodel.PDM.ProcessUUID, provenancegraph.datamodel.PDM.ProcessUUID.Builder, provenancegraph.datamodel.PDM.ProcessUUIDOrBuilder> procUUIDBuilder_;
+          ProcessUUID, ProcessUUID.Builder, ProcessUUIDOrBuilder> procUUIDBuilder_;
       /**
        * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 1;</code>
        * @return Whether the procUUID field is set.
@@ -4523,9 +4719,9 @@ public final class PDM {
        * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 1;</code>
        * @return The procUUID.
        */
-      public provenancegraph.datamodel.PDM.ProcessUUID getProcUUID() {
+      public ProcessUUID getProcUUID() {
         if (procUUIDBuilder_ == null) {
-          return procUUID_ == null ? provenancegraph.datamodel.PDM.ProcessUUID.getDefaultInstance() : procUUID_;
+          return procUUID_ == null ? ProcessUUID.getDefaultInstance() : procUUID_;
         } else {
           return procUUIDBuilder_.getMessage();
         }
@@ -4533,7 +4729,7 @@ public final class PDM {
       /**
        * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 1;</code>
        */
-      public Builder setProcUUID(provenancegraph.datamodel.PDM.ProcessUUID value) {
+      public Builder setProcUUID(ProcessUUID value) {
         if (procUUIDBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -4550,7 +4746,7 @@ public final class PDM {
        * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 1;</code>
        */
       public Builder setProcUUID(
-          provenancegraph.datamodel.PDM.ProcessUUID.Builder builderForValue) {
+          ProcessUUID.Builder builderForValue) {
         if (procUUIDBuilder_ == null) {
           procUUID_ = builderForValue.build();
         } else {
@@ -4563,11 +4759,11 @@ public final class PDM {
       /**
        * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 1;</code>
        */
-      public Builder mergeProcUUID(provenancegraph.datamodel.PDM.ProcessUUID value) {
+      public Builder mergeProcUUID(ProcessUUID value) {
         if (procUUIDBuilder_ == null) {
           if (((bitField0_ & 0x00000001) != 0) &&
             procUUID_ != null &&
-            procUUID_ != provenancegraph.datamodel.PDM.ProcessUUID.getDefaultInstance()) {
+            procUUID_ != ProcessUUID.getDefaultInstance()) {
             getProcUUIDBuilder().mergeFrom(value);
           } else {
             procUUID_ = value;
@@ -4595,7 +4791,7 @@ public final class PDM {
       /**
        * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 1;</code>
        */
-      public provenancegraph.datamodel.PDM.ProcessUUID.Builder getProcUUIDBuilder() {
+      public ProcessUUID.Builder getProcUUIDBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getProcUUIDFieldBuilder().getBuilder();
@@ -4603,23 +4799,23 @@ public final class PDM {
       /**
        * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 1;</code>
        */
-      public provenancegraph.datamodel.PDM.ProcessUUIDOrBuilder getProcUUIDOrBuilder() {
+      public ProcessUUIDOrBuilder getProcUUIDOrBuilder() {
         if (procUUIDBuilder_ != null) {
           return procUUIDBuilder_.getMessageOrBuilder();
         } else {
           return procUUID_ == null ?
-              provenancegraph.datamodel.PDM.ProcessUUID.getDefaultInstance() : procUUID_;
+              ProcessUUID.getDefaultInstance() : procUUID_;
         }
       }
       /**
        * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          provenancegraph.datamodel.PDM.ProcessUUID, provenancegraph.datamodel.PDM.ProcessUUID.Builder, provenancegraph.datamodel.PDM.ProcessUUIDOrBuilder> 
+          ProcessUUID, ProcessUUID.Builder, ProcessUUIDOrBuilder>
           getProcUUIDFieldBuilder() {
         if (procUUIDBuilder_ == null) {
           procUUIDBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              provenancegraph.datamodel.PDM.ProcessUUID, provenancegraph.datamodel.PDM.ProcessUUID.Builder, provenancegraph.datamodel.PDM.ProcessUUIDOrBuilder>(
+              ProcessUUID, ProcessUUID.Builder, ProcessUUIDOrBuilder>(
                   getProcUUID(),
                   getParentForChildren(),
                   isClean());
@@ -4628,9 +4824,9 @@ public final class PDM {
         return procUUIDBuilder_;
       }
 
-      private provenancegraph.datamodel.PDM.ProcessUUID parentProcUUID_;
+      private ProcessUUID parentProcUUID_;
       private com.google.protobuf.SingleFieldBuilderV3<
-          provenancegraph.datamodel.PDM.ProcessUUID, provenancegraph.datamodel.PDM.ProcessUUID.Builder, provenancegraph.datamodel.PDM.ProcessUUIDOrBuilder> parentProcUUIDBuilder_;
+          ProcessUUID, ProcessUUID.Builder, ProcessUUIDOrBuilder> parentProcUUIDBuilder_;
       /**
        * <code>.provenancegraph.datamodel.ProcessUUID parentProcUUID = 2;</code>
        * @return Whether the parentProcUUID field is set.
@@ -4642,9 +4838,9 @@ public final class PDM {
        * <code>.provenancegraph.datamodel.ProcessUUID parentProcUUID = 2;</code>
        * @return The parentProcUUID.
        */
-      public provenancegraph.datamodel.PDM.ProcessUUID getParentProcUUID() {
+      public ProcessUUID getParentProcUUID() {
         if (parentProcUUIDBuilder_ == null) {
-          return parentProcUUID_ == null ? provenancegraph.datamodel.PDM.ProcessUUID.getDefaultInstance() : parentProcUUID_;
+          return parentProcUUID_ == null ? ProcessUUID.getDefaultInstance() : parentProcUUID_;
         } else {
           return parentProcUUIDBuilder_.getMessage();
         }
@@ -4652,7 +4848,7 @@ public final class PDM {
       /**
        * <code>.provenancegraph.datamodel.ProcessUUID parentProcUUID = 2;</code>
        */
-      public Builder setParentProcUUID(provenancegraph.datamodel.PDM.ProcessUUID value) {
+      public Builder setParentProcUUID(ProcessUUID value) {
         if (parentProcUUIDBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -4669,7 +4865,7 @@ public final class PDM {
        * <code>.provenancegraph.datamodel.ProcessUUID parentProcUUID = 2;</code>
        */
       public Builder setParentProcUUID(
-          provenancegraph.datamodel.PDM.ProcessUUID.Builder builderForValue) {
+          ProcessUUID.Builder builderForValue) {
         if (parentProcUUIDBuilder_ == null) {
           parentProcUUID_ = builderForValue.build();
         } else {
@@ -4682,11 +4878,11 @@ public final class PDM {
       /**
        * <code>.provenancegraph.datamodel.ProcessUUID parentProcUUID = 2;</code>
        */
-      public Builder mergeParentProcUUID(provenancegraph.datamodel.PDM.ProcessUUID value) {
+      public Builder mergeParentProcUUID(ProcessUUID value) {
         if (parentProcUUIDBuilder_ == null) {
           if (((bitField0_ & 0x00000002) != 0) &&
             parentProcUUID_ != null &&
-            parentProcUUID_ != provenancegraph.datamodel.PDM.ProcessUUID.getDefaultInstance()) {
+            parentProcUUID_ != ProcessUUID.getDefaultInstance()) {
             getParentProcUUIDBuilder().mergeFrom(value);
           } else {
             parentProcUUID_ = value;
@@ -4714,7 +4910,7 @@ public final class PDM {
       /**
        * <code>.provenancegraph.datamodel.ProcessUUID parentProcUUID = 2;</code>
        */
-      public provenancegraph.datamodel.PDM.ProcessUUID.Builder getParentProcUUIDBuilder() {
+      public ProcessUUID.Builder getParentProcUUIDBuilder() {
         bitField0_ |= 0x00000002;
         onChanged();
         return getParentProcUUIDFieldBuilder().getBuilder();
@@ -4722,23 +4918,23 @@ public final class PDM {
       /**
        * <code>.provenancegraph.datamodel.ProcessUUID parentProcUUID = 2;</code>
        */
-      public provenancegraph.datamodel.PDM.ProcessUUIDOrBuilder getParentProcUUIDOrBuilder() {
+      public ProcessUUIDOrBuilder getParentProcUUIDOrBuilder() {
         if (parentProcUUIDBuilder_ != null) {
           return parentProcUUIDBuilder_.getMessageOrBuilder();
         } else {
           return parentProcUUID_ == null ?
-              provenancegraph.datamodel.PDM.ProcessUUID.getDefaultInstance() : parentProcUUID_;
+              ProcessUUID.getDefaultInstance() : parentProcUUID_;
         }
       }
       /**
        * <code>.provenancegraph.datamodel.ProcessUUID parentProcUUID = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          provenancegraph.datamodel.PDM.ProcessUUID, provenancegraph.datamodel.PDM.ProcessUUID.Builder, provenancegraph.datamodel.PDM.ProcessUUIDOrBuilder> 
+          ProcessUUID, ProcessUUID.Builder, ProcessUUIDOrBuilder>
           getParentProcUUIDFieldBuilder() {
         if (parentProcUUIDBuilder_ == null) {
           parentProcUUIDBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              provenancegraph.datamodel.PDM.ProcessUUID, provenancegraph.datamodel.PDM.ProcessUUID.Builder, provenancegraph.datamodel.PDM.ProcessUUIDOrBuilder>(
+              ProcessUUID, ProcessUUID.Builder, ProcessUUIDOrBuilder>(
                   getParentProcUUID(),
                   getParentForChildren(),
                   isClean());
@@ -4747,21 +4943,21 @@ public final class PDM {
         return parentProcUUIDBuilder_;
       }
 
-      private java.lang.Object processName_ = "";
+      private Object processName_ = "";
       /**
        * <code>string processName = 3;</code>
        * @return The processName.
        */
-      public java.lang.String getProcessName() {
-        java.lang.Object ref = processName_;
-        if (!(ref instanceof java.lang.String)) {
+      public String getProcessName() {
+        Object ref = processName_;
+        if (!(ref instanceof String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
+          String s = bs.toStringUtf8();
           processName_ = s;
           return s;
         } else {
-          return (java.lang.String) ref;
+          return (String) ref;
         }
       }
       /**
@@ -4770,11 +4966,11 @@ public final class PDM {
        */
       public com.google.protobuf.ByteString
           getProcessNameBytes() {
-        java.lang.Object ref = processName_;
+        Object ref = processName_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+                  (String) ref);
           processName_ = b;
           return b;
         } else {
@@ -4787,7 +4983,7 @@ public final class PDM {
        * @return This builder for chaining.
        */
       public Builder setProcessName(
-          java.lang.String value) {
+          String value) {
         if (value == null) { throw new NullPointerException(); }
         processName_ = value;
         bitField0_ |= 0x00000004;
@@ -4819,21 +5015,21 @@ public final class PDM {
         return this;
       }
 
-      private java.lang.Object cmdline_ = "";
+      private Object cmdline_ = "";
       /**
        * <code>string cmdline = 4;</code>
        * @return The cmdline.
        */
-      public java.lang.String getCmdline() {
-        java.lang.Object ref = cmdline_;
-        if (!(ref instanceof java.lang.String)) {
+      public String getCmdline() {
+        Object ref = cmdline_;
+        if (!(ref instanceof String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
+          String s = bs.toStringUtf8();
           cmdline_ = s;
           return s;
         } else {
-          return (java.lang.String) ref;
+          return (String) ref;
         }
       }
       /**
@@ -4842,11 +5038,11 @@ public final class PDM {
        */
       public com.google.protobuf.ByteString
           getCmdlineBytes() {
-        java.lang.Object ref = cmdline_;
+        Object ref = cmdline_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+                  (String) ref);
           cmdline_ = b;
           return b;
         } else {
@@ -4859,7 +5055,7 @@ public final class PDM {
        * @return This builder for chaining.
        */
       public Builder setCmdline(
-          java.lang.String value) {
+          String value) {
         if (value == null) { throw new NullPointerException(); }
         cmdline_ = value;
         bitField0_ |= 0x00000008;
@@ -4891,9 +5087,9 @@ public final class PDM {
         return this;
       }
 
-      private provenancegraph.datamodel.PDM.FileUUID fileUUID_;
+      private FileUUID fileUUID_;
       private com.google.protobuf.SingleFieldBuilderV3<
-          provenancegraph.datamodel.PDM.FileUUID, provenancegraph.datamodel.PDM.FileUUID.Builder, provenancegraph.datamodel.PDM.FileUUIDOrBuilder> fileUUIDBuilder_;
+          FileUUID, FileUUID.Builder, FileUUIDOrBuilder> fileUUIDBuilder_;
       /**
        * <code>.provenancegraph.datamodel.FileUUID fileUUID = 5;</code>
        * @return Whether the fileUUID field is set.
@@ -4905,9 +5101,9 @@ public final class PDM {
        * <code>.provenancegraph.datamodel.FileUUID fileUUID = 5;</code>
        * @return The fileUUID.
        */
-      public provenancegraph.datamodel.PDM.FileUUID getFileUUID() {
+      public FileUUID getFileUUID() {
         if (fileUUIDBuilder_ == null) {
-          return fileUUID_ == null ? provenancegraph.datamodel.PDM.FileUUID.getDefaultInstance() : fileUUID_;
+          return fileUUID_ == null ? FileUUID.getDefaultInstance() : fileUUID_;
         } else {
           return fileUUIDBuilder_.getMessage();
         }
@@ -4915,7 +5111,7 @@ public final class PDM {
       /**
        * <code>.provenancegraph.datamodel.FileUUID fileUUID = 5;</code>
        */
-      public Builder setFileUUID(provenancegraph.datamodel.PDM.FileUUID value) {
+      public Builder setFileUUID(FileUUID value) {
         if (fileUUIDBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -4932,7 +5128,7 @@ public final class PDM {
        * <code>.provenancegraph.datamodel.FileUUID fileUUID = 5;</code>
        */
       public Builder setFileUUID(
-          provenancegraph.datamodel.PDM.FileUUID.Builder builderForValue) {
+          FileUUID.Builder builderForValue) {
         if (fileUUIDBuilder_ == null) {
           fileUUID_ = builderForValue.build();
         } else {
@@ -4945,11 +5141,11 @@ public final class PDM {
       /**
        * <code>.provenancegraph.datamodel.FileUUID fileUUID = 5;</code>
        */
-      public Builder mergeFileUUID(provenancegraph.datamodel.PDM.FileUUID value) {
+      public Builder mergeFileUUID(FileUUID value) {
         if (fileUUIDBuilder_ == null) {
           if (((bitField0_ & 0x00000010) != 0) &&
             fileUUID_ != null &&
-            fileUUID_ != provenancegraph.datamodel.PDM.FileUUID.getDefaultInstance()) {
+            fileUUID_ != FileUUID.getDefaultInstance()) {
             getFileUUIDBuilder().mergeFrom(value);
           } else {
             fileUUID_ = value;
@@ -4977,7 +5173,7 @@ public final class PDM {
       /**
        * <code>.provenancegraph.datamodel.FileUUID fileUUID = 5;</code>
        */
-      public provenancegraph.datamodel.PDM.FileUUID.Builder getFileUUIDBuilder() {
+      public FileUUID.Builder getFileUUIDBuilder() {
         bitField0_ |= 0x00000010;
         onChanged();
         return getFileUUIDFieldBuilder().getBuilder();
@@ -4985,23 +5181,23 @@ public final class PDM {
       /**
        * <code>.provenancegraph.datamodel.FileUUID fileUUID = 5;</code>
        */
-      public provenancegraph.datamodel.PDM.FileUUIDOrBuilder getFileUUIDOrBuilder() {
+      public FileUUIDOrBuilder getFileUUIDOrBuilder() {
         if (fileUUIDBuilder_ != null) {
           return fileUUIDBuilder_.getMessageOrBuilder();
         } else {
           return fileUUID_ == null ?
-              provenancegraph.datamodel.PDM.FileUUID.getDefaultInstance() : fileUUID_;
+              FileUUID.getDefaultInstance() : fileUUID_;
         }
       }
       /**
        * <code>.provenancegraph.datamodel.FileUUID fileUUID = 5;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          provenancegraph.datamodel.PDM.FileUUID, provenancegraph.datamodel.PDM.FileUUID.Builder, provenancegraph.datamodel.PDM.FileUUIDOrBuilder> 
+          FileUUID, FileUUID.Builder, FileUUIDOrBuilder>
           getFileUUIDFieldBuilder() {
         if (fileUUIDBuilder_ == null) {
           fileUUIDBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              provenancegraph.datamodel.PDM.FileUUID, provenancegraph.datamodel.PDM.FileUUID.Builder, provenancegraph.datamodel.PDM.FileUUIDOrBuilder>(
+              FileUUID, FileUUID.Builder, FileUUIDOrBuilder>(
                   getFileUUID(),
                   getParentForChildren(),
                   isClean());
@@ -5010,21 +5206,21 @@ public final class PDM {
         return fileUUIDBuilder_;
       }
 
-      private java.lang.Object exePath_ = "";
+      private Object exePath_ = "";
       /**
        * <code>string exePath = 6;</code>
        * @return The exePath.
        */
-      public java.lang.String getExePath() {
-        java.lang.Object ref = exePath_;
-        if (!(ref instanceof java.lang.String)) {
+      public String getExePath() {
+        Object ref = exePath_;
+        if (!(ref instanceof String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
+          String s = bs.toStringUtf8();
           exePath_ = s;
           return s;
         } else {
-          return (java.lang.String) ref;
+          return (String) ref;
         }
       }
       /**
@@ -5033,11 +5229,11 @@ public final class PDM {
        */
       public com.google.protobuf.ByteString
           getExePathBytes() {
-        java.lang.Object ref = exePath_;
+        Object ref = exePath_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+                  (String) ref);
           exePath_ = b;
           return b;
         } else {
@@ -5050,7 +5246,7 @@ public final class PDM {
        * @return This builder for chaining.
        */
       public Builder setExePath(
-          java.lang.String value) {
+          String value) {
         if (value == null) { throw new NullPointerException(); }
         exePath_ = value;
         bitField0_ |= 0x00000020;
@@ -5081,13 +5277,13 @@ public final class PDM {
         onChanged();
         return this;
       }
-      @java.lang.Override
+      @Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFields(unknownFields);
       }
 
-      @java.lang.Override
+      @Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -5098,18 +5294,18 @@ public final class PDM {
     }
 
     // @@protoc_insertion_point(class_scope:provenancegraph.datamodel.Process)
-    private static final provenancegraph.datamodel.PDM.Process DEFAULT_INSTANCE;
+    private static final Process DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new provenancegraph.datamodel.PDM.Process();
+      DEFAULT_INSTANCE = new Process();
     }
 
-    public static provenancegraph.datamodel.PDM.Process getDefaultInstance() {
+    public static Process getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
     private static final com.google.protobuf.Parser<Process>
         PARSER = new com.google.protobuf.AbstractParser<Process>() {
-      @java.lang.Override
+      @Override
       public Process parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -5133,13 +5329,13 @@ public final class PDM {
       return PARSER;
     }
 
-    @java.lang.Override
+    @Override
     public com.google.protobuf.Parser<Process> getParserForType() {
       return PARSER;
     }
 
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.Process getDefaultInstanceForType() {
+    @Override
+    public Process getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -5158,11 +5354,11 @@ public final class PDM {
      * <code>.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
      * @return The fileUUID.
      */
-    provenancegraph.datamodel.PDM.FileUUID getFileUUID();
+    FileUUID getFileUUID();
     /**
      * <code>.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
      */
-    provenancegraph.datamodel.PDM.FileUUIDOrBuilder getFileUUIDOrBuilder();
+    FileUUIDOrBuilder getFileUUIDOrBuilder();
 
     /**
      * <code>.provenancegraph.datamodel.File.FileType fileType = 2;</code>
@@ -5173,7 +5369,7 @@ public final class PDM {
      * <code>.provenancegraph.datamodel.File.FileType fileType = 2;</code>
      * @return The fileType.
      */
-    provenancegraph.datamodel.PDM.File.FileType getFileType();
+    File.FileType getFileType();
 
     /**
      * <code>uint32 permission = 3;</code>
@@ -5185,7 +5381,7 @@ public final class PDM {
      * <code>string filePath = 4;</code>
      * @return The filePath.
      */
-    java.lang.String getFilePath();
+    String getFilePath();
     /**
      * <code>string filePath = 4;</code>
      * @return The bytes for filePath.
@@ -5210,24 +5406,24 @@ public final class PDM {
       filePath_ = "";
     }
 
-    @java.lang.Override
+    @Override
     @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
+    protected Object newInstance(
         UnusedPrivateParameter unused) {
       return new File();
     }
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_File_descriptor;
+      return PDM.internal_static_provenancegraph_datamodel_File_descriptor;
     }
 
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+    @Override
+    protected FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_File_fieldAccessorTable
+      return PDM.internal_static_provenancegraph_datamodel_File_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              provenancegraph.datamodel.PDM.File.class, provenancegraph.datamodel.PDM.File.Builder.class);
+              File.class, Builder.class);
     }
 
     /**
@@ -5330,7 +5526,7 @@ public final class PDM {
 
       public final int getNumber() {
         if (this == UNRECOGNIZED) {
-          throw new java.lang.IllegalArgumentException(
+          throw new IllegalArgumentException(
               "Can't get the number of an unknown enum value.");
         }
         return value;
@@ -5341,7 +5537,7 @@ public final class PDM {
        * @return The enum associated with the given numeric wire value.
        * @deprecated Use {@link #forNumber(int)} instead.
        */
-      @java.lang.Deprecated
+      @Deprecated
       public static FileType valueOf(int value) {
         return forNumber(value);
       }
@@ -5377,7 +5573,7 @@ public final class PDM {
       public final com.google.protobuf.Descriptors.EnumValueDescriptor
           getValueDescriptor() {
         if (this == UNRECOGNIZED) {
-          throw new java.lang.IllegalStateException(
+          throw new IllegalStateException(
               "Can't get the descriptor of an unrecognized enum value.");
         }
         return getDescriptor().getValues().get(ordinal());
@@ -5388,7 +5584,7 @@ public final class PDM {
       }
       public static final com.google.protobuf.Descriptors.EnumDescriptor
           getDescriptor() {
-        return provenancegraph.datamodel.PDM.File.getDescriptor().getEnumTypes().get(0);
+        return File.getDescriptor().getEnumTypes().get(0);
       }
 
       private static final FileType[] VALUES = values();
@@ -5396,7 +5592,7 @@ public final class PDM {
       public static FileType valueOf(
           com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
         if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
+          throw new IllegalArgumentException(
             "EnumValueDescriptor is not for this type.");
         }
         if (desc.getIndex() == -1) {
@@ -5415,12 +5611,12 @@ public final class PDM {
     }
 
     public static final int FILEUUID_FIELD_NUMBER = 1;
-    private provenancegraph.datamodel.PDM.FileUUID fileUUID_;
+    private FileUUID fileUUID_;
     /**
      * <code>.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
      * @return Whether the fileUUID field is set.
      */
-    @java.lang.Override
+    @Override
     public boolean hasFileUUID() {
       return fileUUID_ != null;
     }
@@ -5428,16 +5624,16 @@ public final class PDM {
      * <code>.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
      * @return The fileUUID.
      */
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.FileUUID getFileUUID() {
-      return fileUUID_ == null ? provenancegraph.datamodel.PDM.FileUUID.getDefaultInstance() : fileUUID_;
+    @Override
+    public FileUUID getFileUUID() {
+      return fileUUID_ == null ? FileUUID.getDefaultInstance() : fileUUID_;
     }
     /**
      * <code>.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
      */
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.FileUUIDOrBuilder getFileUUIDOrBuilder() {
-      return fileUUID_ == null ? provenancegraph.datamodel.PDM.FileUUID.getDefaultInstance() : fileUUID_;
+    @Override
+    public FileUUIDOrBuilder getFileUUIDOrBuilder() {
+      return fileUUID_ == null ? FileUUID.getDefaultInstance() : fileUUID_;
     }
 
     public static final int FILETYPE_FIELD_NUMBER = 2;
@@ -5446,16 +5642,16 @@ public final class PDM {
      * <code>.provenancegraph.datamodel.File.FileType fileType = 2;</code>
      * @return The enum numeric value on the wire for fileType.
      */
-    @java.lang.Override public int getFileTypeValue() {
+    @Override public int getFileTypeValue() {
       return fileType_;
     }
     /**
      * <code>.provenancegraph.datamodel.File.FileType fileType = 2;</code>
      * @return The fileType.
      */
-    @java.lang.Override public provenancegraph.datamodel.PDM.File.FileType getFileType() {
-      provenancegraph.datamodel.PDM.File.FileType result = provenancegraph.datamodel.PDM.File.FileType.forNumber(fileType_);
-      return result == null ? provenancegraph.datamodel.PDM.File.FileType.UNRECOGNIZED : result;
+    @Override public FileType getFileType() {
+      FileType result = FileType.forNumber(fileType_);
+      return result == null ? FileType.UNRECOGNIZED : result;
     }
 
     public static final int PERMISSION_FIELD_NUMBER = 3;
@@ -5464,27 +5660,27 @@ public final class PDM {
      * <code>uint32 permission = 3;</code>
      * @return The permission.
      */
-    @java.lang.Override
+    @Override
     public int getPermission() {
       return permission_;
     }
 
     public static final int FILEPATH_FIELD_NUMBER = 4;
     @SuppressWarnings("serial")
-    private volatile java.lang.Object filePath_ = "";
+    private volatile Object filePath_ = "";
     /**
      * <code>string filePath = 4;</code>
      * @return The filePath.
      */
-    @java.lang.Override
-    public java.lang.String getFilePath() {
-      java.lang.Object ref = filePath_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
+    @Override
+    public String getFilePath() {
+      Object ref = filePath_;
+      if (ref instanceof String) {
+        return (String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
+        String s = bs.toStringUtf8();
         filePath_ = s;
         return s;
       }
@@ -5493,14 +5689,14 @@ public final class PDM {
      * <code>string filePath = 4;</code>
      * @return The bytes for filePath.
      */
-    @java.lang.Override
+    @Override
     public com.google.protobuf.ByteString
         getFilePathBytes() {
-      java.lang.Object ref = filePath_;
-      if (ref instanceof java.lang.String) {
+      Object ref = filePath_;
+      if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+                (String) ref);
         filePath_ = b;
         return b;
       } else {
@@ -5509,7 +5705,7 @@ public final class PDM {
     }
 
     private byte memoizedIsInitialized = -1;
-    @java.lang.Override
+    @Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -5519,13 +5715,13 @@ public final class PDM {
       return true;
     }
 
-    @java.lang.Override
+    @Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (fileUUID_ != null) {
         output.writeMessage(1, getFileUUID());
       }
-      if (fileType_ != provenancegraph.datamodel.PDM.File.FileType.FILE_UNKNOWN.getNumber()) {
+      if (fileType_ != FileType.FILE_UNKNOWN.getNumber()) {
         output.writeEnum(2, fileType_);
       }
       if (permission_ != 0) {
@@ -5537,7 +5733,7 @@ public final class PDM {
       getUnknownFields().writeTo(output);
     }
 
-    @java.lang.Override
+    @Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -5547,7 +5743,7 @@ public final class PDM {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, getFileUUID());
       }
-      if (fileType_ != provenancegraph.datamodel.PDM.File.FileType.FILE_UNKNOWN.getNumber()) {
+      if (fileType_ != FileType.FILE_UNKNOWN.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(2, fileType_);
       }
@@ -5563,15 +5759,15 @@ public final class PDM {
       return size;
     }
 
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
+    @Override
+    public boolean equals(final Object obj) {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof provenancegraph.datamodel.PDM.File)) {
+      if (!(obj instanceof File)) {
         return super.equals(obj);
       }
-      provenancegraph.datamodel.PDM.File other = (provenancegraph.datamodel.PDM.File) obj;
+      File other = (File) obj;
 
       if (hasFileUUID() != other.hasFileUUID()) return false;
       if (hasFileUUID()) {
@@ -5587,7 +5783,7 @@ public final class PDM {
       return true;
     }
 
-    @java.lang.Override
+    @Override
     public int hashCode() {
       if (memoizedHashCode != 0) {
         return memoizedHashCode;
@@ -5609,44 +5805,44 @@ public final class PDM {
       return hash;
     }
 
-    public static provenancegraph.datamodel.PDM.File parseFrom(
+    public static File parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static provenancegraph.datamodel.PDM.File parseFrom(
+    public static File parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.File parseFrom(
+    public static File parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static provenancegraph.datamodel.PDM.File parseFrom(
+    public static File parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.File parseFrom(byte[] data)
+    public static File parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static provenancegraph.datamodel.PDM.File parseFrom(
+    public static File parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.File parseFrom(java.io.InputStream input)
+    public static File parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static provenancegraph.datamodel.PDM.File parseFrom(
+    public static File parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -5654,26 +5850,26 @@ public final class PDM {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    public static provenancegraph.datamodel.PDM.File parseDelimitedFrom(java.io.InputStream input)
+    public static File parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
 
-    public static provenancegraph.datamodel.PDM.File parseDelimitedFrom(
+    public static File parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.File parseFrom(
+    public static File parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static provenancegraph.datamodel.PDM.File parseFrom(
+    public static File parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -5681,23 +5877,23 @@ public final class PDM {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    @java.lang.Override
+    @Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(provenancegraph.datamodel.PDM.File prototype) {
+    public static Builder newBuilder(File prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
-    @java.lang.Override
+    @Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
     }
 
-    @java.lang.Override
+    @Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -5707,18 +5903,18 @@ public final class PDM {
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:provenancegraph.datamodel.File)
-        provenancegraph.datamodel.PDM.FileOrBuilder {
+        FileOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_File_descriptor;
+        return PDM.internal_static_provenancegraph_datamodel_File_descriptor;
       }
 
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      @Override
+      protected FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_File_fieldAccessorTable
+        return PDM.internal_static_provenancegraph_datamodel_File_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                provenancegraph.datamodel.PDM.File.class, provenancegraph.datamodel.PDM.File.Builder.class);
+                File.class, Builder.class);
       }
 
       // Construct using provenancegraph.datamodel.PDM.File.newBuilder()
@@ -5727,11 +5923,11 @@ public final class PDM {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          BuilderParent parent) {
         super(parent);
 
       }
-      @java.lang.Override
+      @Override
       public Builder clear() {
         super.clear();
         bitField0_ = 0;
@@ -5746,35 +5942,35 @@ public final class PDM {
         return this;
       }
 
-      @java.lang.Override
+      @Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_File_descriptor;
+        return PDM.internal_static_provenancegraph_datamodel_File_descriptor;
       }
 
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.File getDefaultInstanceForType() {
-        return provenancegraph.datamodel.PDM.File.getDefaultInstance();
+      @Override
+      public File getDefaultInstanceForType() {
+        return File.getDefaultInstance();
       }
 
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.File build() {
-        provenancegraph.datamodel.PDM.File result = buildPartial();
+      @Override
+      public File build() {
+        File result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.File buildPartial() {
-        provenancegraph.datamodel.PDM.File result = new provenancegraph.datamodel.PDM.File(this);
+      @Override
+      public File buildPartial() {
+        File result = new File(this);
         if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
       }
 
-      private void buildPartial0(provenancegraph.datamodel.PDM.File result) {
+      private void buildPartial0(File result) {
         int from_bitField0_ = bitField0_;
         if (((from_bitField0_ & 0x00000001) != 0)) {
           result.fileUUID_ = fileUUIDBuilder_ == null
@@ -5792,50 +5988,50 @@ public final class PDM {
         }
       }
 
-      @java.lang.Override
+      @Override
       public Builder clone() {
         return super.clone();
       }
-      @java.lang.Override
+      @Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return super.setField(field, value);
       }
-      @java.lang.Override
+      @Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return super.clearField(field);
       }
-      @java.lang.Override
+      @Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return super.clearOneof(oneof);
       }
-      @java.lang.Override
+      @Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
+          int index, Object value) {
         return super.setRepeatedField(field, index, value);
       }
-      @java.lang.Override
+      @Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return super.addRepeatedField(field, value);
       }
-      @java.lang.Override
+      @Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof provenancegraph.datamodel.PDM.File) {
-          return mergeFrom((provenancegraph.datamodel.PDM.File)other);
+        if (other instanceof File) {
+          return mergeFrom((File)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(provenancegraph.datamodel.PDM.File other) {
-        if (other == provenancegraph.datamodel.PDM.File.getDefaultInstance()) return this;
+      public Builder mergeFrom(File other) {
+        if (other == File.getDefaultInstance()) return this;
         if (other.hasFileUUID()) {
           mergeFileUUID(other.getFileUUID());
         }
@@ -5855,18 +6051,18 @@ public final class PDM {
         return this;
       }
 
-      @java.lang.Override
+      @Override
       public final boolean isInitialized() {
         return true;
       }
 
-      @java.lang.Override
+      @Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
         if (extensionRegistry == null) {
-          throw new java.lang.NullPointerException();
+          throw new NullPointerException();
         }
         try {
           boolean done = false;
@@ -5915,9 +6111,9 @@ public final class PDM {
       }
       private int bitField0_;
 
-      private provenancegraph.datamodel.PDM.FileUUID fileUUID_;
+      private FileUUID fileUUID_;
       private com.google.protobuf.SingleFieldBuilderV3<
-          provenancegraph.datamodel.PDM.FileUUID, provenancegraph.datamodel.PDM.FileUUID.Builder, provenancegraph.datamodel.PDM.FileUUIDOrBuilder> fileUUIDBuilder_;
+          FileUUID, FileUUID.Builder, FileUUIDOrBuilder> fileUUIDBuilder_;
       /**
        * <code>.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
        * @return Whether the fileUUID field is set.
@@ -5929,9 +6125,9 @@ public final class PDM {
        * <code>.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
        * @return The fileUUID.
        */
-      public provenancegraph.datamodel.PDM.FileUUID getFileUUID() {
+      public FileUUID getFileUUID() {
         if (fileUUIDBuilder_ == null) {
-          return fileUUID_ == null ? provenancegraph.datamodel.PDM.FileUUID.getDefaultInstance() : fileUUID_;
+          return fileUUID_ == null ? FileUUID.getDefaultInstance() : fileUUID_;
         } else {
           return fileUUIDBuilder_.getMessage();
         }
@@ -5939,7 +6135,7 @@ public final class PDM {
       /**
        * <code>.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
        */
-      public Builder setFileUUID(provenancegraph.datamodel.PDM.FileUUID value) {
+      public Builder setFileUUID(FileUUID value) {
         if (fileUUIDBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -5956,7 +6152,7 @@ public final class PDM {
        * <code>.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
        */
       public Builder setFileUUID(
-          provenancegraph.datamodel.PDM.FileUUID.Builder builderForValue) {
+          FileUUID.Builder builderForValue) {
         if (fileUUIDBuilder_ == null) {
           fileUUID_ = builderForValue.build();
         } else {
@@ -5969,11 +6165,11 @@ public final class PDM {
       /**
        * <code>.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
        */
-      public Builder mergeFileUUID(provenancegraph.datamodel.PDM.FileUUID value) {
+      public Builder mergeFileUUID(FileUUID value) {
         if (fileUUIDBuilder_ == null) {
           if (((bitField0_ & 0x00000001) != 0) &&
             fileUUID_ != null &&
-            fileUUID_ != provenancegraph.datamodel.PDM.FileUUID.getDefaultInstance()) {
+            fileUUID_ != FileUUID.getDefaultInstance()) {
             getFileUUIDBuilder().mergeFrom(value);
           } else {
             fileUUID_ = value;
@@ -6001,7 +6197,7 @@ public final class PDM {
       /**
        * <code>.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
        */
-      public provenancegraph.datamodel.PDM.FileUUID.Builder getFileUUIDBuilder() {
+      public FileUUID.Builder getFileUUIDBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getFileUUIDFieldBuilder().getBuilder();
@@ -6009,23 +6205,23 @@ public final class PDM {
       /**
        * <code>.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
        */
-      public provenancegraph.datamodel.PDM.FileUUIDOrBuilder getFileUUIDOrBuilder() {
+      public FileUUIDOrBuilder getFileUUIDOrBuilder() {
         if (fileUUIDBuilder_ != null) {
           return fileUUIDBuilder_.getMessageOrBuilder();
         } else {
           return fileUUID_ == null ?
-              provenancegraph.datamodel.PDM.FileUUID.getDefaultInstance() : fileUUID_;
+              FileUUID.getDefaultInstance() : fileUUID_;
         }
       }
       /**
        * <code>.provenancegraph.datamodel.FileUUID fileUUID = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          provenancegraph.datamodel.PDM.FileUUID, provenancegraph.datamodel.PDM.FileUUID.Builder, provenancegraph.datamodel.PDM.FileUUIDOrBuilder> 
+          FileUUID, FileUUID.Builder, FileUUIDOrBuilder>
           getFileUUIDFieldBuilder() {
         if (fileUUIDBuilder_ == null) {
           fileUUIDBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              provenancegraph.datamodel.PDM.FileUUID, provenancegraph.datamodel.PDM.FileUUID.Builder, provenancegraph.datamodel.PDM.FileUUIDOrBuilder>(
+              FileUUID, FileUUID.Builder, FileUUIDOrBuilder>(
                   getFileUUID(),
                   getParentForChildren(),
                   isClean());
@@ -6039,7 +6235,7 @@ public final class PDM {
        * <code>.provenancegraph.datamodel.File.FileType fileType = 2;</code>
        * @return The enum numeric value on the wire for fileType.
        */
-      @java.lang.Override public int getFileTypeValue() {
+      @Override public int getFileTypeValue() {
         return fileType_;
       }
       /**
@@ -6057,17 +6253,17 @@ public final class PDM {
        * <code>.provenancegraph.datamodel.File.FileType fileType = 2;</code>
        * @return The fileType.
        */
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.File.FileType getFileType() {
-        provenancegraph.datamodel.PDM.File.FileType result = provenancegraph.datamodel.PDM.File.FileType.forNumber(fileType_);
-        return result == null ? provenancegraph.datamodel.PDM.File.FileType.UNRECOGNIZED : result;
+      @Override
+      public FileType getFileType() {
+        FileType result = FileType.forNumber(fileType_);
+        return result == null ? FileType.UNRECOGNIZED : result;
       }
       /**
        * <code>.provenancegraph.datamodel.File.FileType fileType = 2;</code>
        * @param value The fileType to set.
        * @return This builder for chaining.
        */
-      public Builder setFileType(provenancegraph.datamodel.PDM.File.FileType value) {
+      public Builder setFileType(FileType value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -6092,7 +6288,7 @@ public final class PDM {
        * <code>uint32 permission = 3;</code>
        * @return The permission.
        */
-      @java.lang.Override
+      @Override
       public int getPermission() {
         return permission_;
       }
@@ -6119,21 +6315,21 @@ public final class PDM {
         return this;
       }
 
-      private java.lang.Object filePath_ = "";
+      private Object filePath_ = "";
       /**
        * <code>string filePath = 4;</code>
        * @return The filePath.
        */
-      public java.lang.String getFilePath() {
-        java.lang.Object ref = filePath_;
-        if (!(ref instanceof java.lang.String)) {
+      public String getFilePath() {
+        Object ref = filePath_;
+        if (!(ref instanceof String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
+          String s = bs.toStringUtf8();
           filePath_ = s;
           return s;
         } else {
-          return (java.lang.String) ref;
+          return (String) ref;
         }
       }
       /**
@@ -6142,11 +6338,11 @@ public final class PDM {
        */
       public com.google.protobuf.ByteString
           getFilePathBytes() {
-        java.lang.Object ref = filePath_;
+        Object ref = filePath_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+                  (String) ref);
           filePath_ = b;
           return b;
         } else {
@@ -6159,7 +6355,7 @@ public final class PDM {
        * @return This builder for chaining.
        */
       public Builder setFilePath(
-          java.lang.String value) {
+          String value) {
         if (value == null) { throw new NullPointerException(); }
         filePath_ = value;
         bitField0_ |= 0x00000008;
@@ -6190,13 +6386,13 @@ public final class PDM {
         onChanged();
         return this;
       }
-      @java.lang.Override
+      @Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFields(unknownFields);
       }
 
-      @java.lang.Override
+      @Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -6207,18 +6403,18 @@ public final class PDM {
     }
 
     // @@protoc_insertion_point(class_scope:provenancegraph.datamodel.File)
-    private static final provenancegraph.datamodel.PDM.File DEFAULT_INSTANCE;
+    private static final File DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new provenancegraph.datamodel.PDM.File();
+      DEFAULT_INSTANCE = new File();
     }
 
-    public static provenancegraph.datamodel.PDM.File getDefaultInstance() {
+    public static File getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
     private static final com.google.protobuf.Parser<File>
         PARSER = new com.google.protobuf.AbstractParser<File>() {
-      @java.lang.Override
+      @Override
       public File parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -6242,13 +6438,13 @@ public final class PDM {
       return PARSER;
     }
 
-    @java.lang.Override
+    @Override
     public com.google.protobuf.Parser<File> getParserForType() {
       return PARSER;
     }
 
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.File getDefaultInstanceForType() {
+    @Override
+    public File getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -6265,25 +6461,31 @@ public final class PDM {
     long getTs();
 
     /**
-     * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 2;</code>
-     * @return Whether the procUUID field is set.
+     * <pre>
+     *    int32 hostTid = 3;
+     * </pre>
+     *
+     * <code>.provenancegraph.datamodel.Process proc = 2;</code>
+     * @return Whether the proc field is set.
      */
-    boolean hasProcUUID();
+    boolean hasProc();
     /**
-     * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 2;</code>
-     * @return The procUUID.
+     * <pre>
+     *    int32 hostTid = 3;
+     * </pre>
+     *
+     * <code>.provenancegraph.datamodel.Process proc = 2;</code>
+     * @return The proc.
      */
-    provenancegraph.datamodel.PDM.ProcessUUID getProcUUID();
+    Process getProc();
     /**
-     * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 2;</code>
+     * <pre>
+     *    int32 hostTid = 3;
+     * </pre>
+     *
+     * <code>.provenancegraph.datamodel.Process proc = 2;</code>
      */
-    provenancegraph.datamodel.PDM.ProcessUUIDOrBuilder getProcUUIDOrBuilder();
-
-    /**
-     * <code>int32 hostTid = 3;</code>
-     * @return The hostTid.
-     */
-    int getHostTid();
+    ProcessOrBuilder getProcOrBuilder();
   }
   /**
    * <pre>
@@ -6304,24 +6506,24 @@ public final class PDM {
     private EventHeader() {
     }
 
-    @java.lang.Override
+    @Override
     @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
+    protected Object newInstance(
         UnusedPrivateParameter unused) {
       return new EventHeader();
     }
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_EventHeader_descriptor;
+      return PDM.internal_static_provenancegraph_datamodel_EventHeader_descriptor;
     }
 
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+    @Override
+    protected FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_EventHeader_fieldAccessorTable
+      return PDM.internal_static_provenancegraph_datamodel_EventHeader_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              provenancegraph.datamodel.PDM.EventHeader.class, provenancegraph.datamodel.PDM.EventHeader.Builder.class);
+              EventHeader.class, Builder.class);
     }
 
     public static final int TS_FIELD_NUMBER = 1;
@@ -6330,50 +6532,51 @@ public final class PDM {
      * <code>uint64 ts = 1;</code>
      * @return The ts.
      */
-    @java.lang.Override
+    @Override
     public long getTs() {
       return ts_;
     }
 
-    public static final int PROCUUID_FIELD_NUMBER = 2;
-    private provenancegraph.datamodel.PDM.ProcessUUID procUUID_;
+    public static final int PROC_FIELD_NUMBER = 2;
+    private Process proc_;
     /**
-     * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 2;</code>
-     * @return Whether the procUUID field is set.
+     * <pre>
+     *    int32 hostTid = 3;
+     * </pre>
+     *
+     * <code>.provenancegraph.datamodel.Process proc = 2;</code>
+     * @return Whether the proc field is set.
      */
-    @java.lang.Override
-    public boolean hasProcUUID() {
-      return procUUID_ != null;
+    @Override
+    public boolean hasProc() {
+      return proc_ != null;
     }
     /**
-     * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 2;</code>
-     * @return The procUUID.
+     * <pre>
+     *    int32 hostTid = 3;
+     * </pre>
+     *
+     * <code>.provenancegraph.datamodel.Process proc = 2;</code>
+     * @return The proc.
      */
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.ProcessUUID getProcUUID() {
-      return procUUID_ == null ? provenancegraph.datamodel.PDM.ProcessUUID.getDefaultInstance() : procUUID_;
+    @Override
+    public Process getProc() {
+      return proc_ == null ? Process.getDefaultInstance() : proc_;
     }
     /**
-     * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 2;</code>
+     * <pre>
+     *    int32 hostTid = 3;
+     * </pre>
+     *
+     * <code>.provenancegraph.datamodel.Process proc = 2;</code>
      */
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.ProcessUUIDOrBuilder getProcUUIDOrBuilder() {
-      return procUUID_ == null ? provenancegraph.datamodel.PDM.ProcessUUID.getDefaultInstance() : procUUID_;
-    }
-
-    public static final int HOSTTID_FIELD_NUMBER = 3;
-    private int hostTid_ = 0;
-    /**
-     * <code>int32 hostTid = 3;</code>
-     * @return The hostTid.
-     */
-    @java.lang.Override
-    public int getHostTid() {
-      return hostTid_;
+    @Override
+    public ProcessOrBuilder getProcOrBuilder() {
+      return proc_ == null ? Process.getDefaultInstance() : proc_;
     }
 
     private byte memoizedIsInitialized = -1;
-    @java.lang.Override
+    @Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -6383,22 +6586,19 @@ public final class PDM {
       return true;
     }
 
-    @java.lang.Override
+    @Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (ts_ != 0L) {
         output.writeUInt64(1, ts_);
       }
-      if (procUUID_ != null) {
-        output.writeMessage(2, getProcUUID());
-      }
-      if (hostTid_ != 0) {
-        output.writeInt32(3, hostTid_);
+      if (proc_ != null) {
+        output.writeMessage(2, getProc());
       }
       getUnknownFields().writeTo(output);
     }
 
-    @java.lang.Override
+    @Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -6408,43 +6608,37 @@ public final class PDM {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt64Size(1, ts_);
       }
-      if (procUUID_ != null) {
+      if (proc_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, getProcUUID());
-      }
-      if (hostTid_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, hostTid_);
+          .computeMessageSize(2, getProc());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
+    @Override
+    public boolean equals(final Object obj) {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof provenancegraph.datamodel.PDM.EventHeader)) {
+      if (!(obj instanceof EventHeader)) {
         return super.equals(obj);
       }
-      provenancegraph.datamodel.PDM.EventHeader other = (provenancegraph.datamodel.PDM.EventHeader) obj;
+      EventHeader other = (EventHeader) obj;
 
       if (getTs()
           != other.getTs()) return false;
-      if (hasProcUUID() != other.hasProcUUID()) return false;
-      if (hasProcUUID()) {
-        if (!getProcUUID()
-            .equals(other.getProcUUID())) return false;
+      if (hasProc() != other.hasProc()) return false;
+      if (hasProc()) {
+        if (!getProc()
+            .equals(other.getProc())) return false;
       }
-      if (getHostTid()
-          != other.getHostTid()) return false;
       if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
-    @java.lang.Override
+    @Override
     public int hashCode() {
       if (memoizedHashCode != 0) {
         return memoizedHashCode;
@@ -6454,55 +6648,53 @@ public final class PDM {
       hash = (37 * hash) + TS_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getTs());
-      if (hasProcUUID()) {
-        hash = (37 * hash) + PROCUUID_FIELD_NUMBER;
-        hash = (53 * hash) + getProcUUID().hashCode();
+      if (hasProc()) {
+        hash = (37 * hash) + PROC_FIELD_NUMBER;
+        hash = (53 * hash) + getProc().hashCode();
       }
-      hash = (37 * hash) + HOSTTID_FIELD_NUMBER;
-      hash = (53 * hash) + getHostTid();
       hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
 
-    public static provenancegraph.datamodel.PDM.EventHeader parseFrom(
+    public static EventHeader parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static provenancegraph.datamodel.PDM.EventHeader parseFrom(
+    public static EventHeader parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.EventHeader parseFrom(
+    public static EventHeader parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static provenancegraph.datamodel.PDM.EventHeader parseFrom(
+    public static EventHeader parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.EventHeader parseFrom(byte[] data)
+    public static EventHeader parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static provenancegraph.datamodel.PDM.EventHeader parseFrom(
+    public static EventHeader parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.EventHeader parseFrom(java.io.InputStream input)
+    public static EventHeader parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static provenancegraph.datamodel.PDM.EventHeader parseFrom(
+    public static EventHeader parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -6510,26 +6702,26 @@ public final class PDM {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    public static provenancegraph.datamodel.PDM.EventHeader parseDelimitedFrom(java.io.InputStream input)
+    public static EventHeader parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
 
-    public static provenancegraph.datamodel.PDM.EventHeader parseDelimitedFrom(
+    public static EventHeader parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.EventHeader parseFrom(
+    public static EventHeader parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static provenancegraph.datamodel.PDM.EventHeader parseFrom(
+    public static EventHeader parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -6537,23 +6729,23 @@ public final class PDM {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    @java.lang.Override
+    @Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(provenancegraph.datamodel.PDM.EventHeader prototype) {
+    public static Builder newBuilder(EventHeader prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
-    @java.lang.Override
+    @Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
     }
 
-    @java.lang.Override
+    @Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -6567,18 +6759,18 @@ public final class PDM {
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:provenancegraph.datamodel.EventHeader)
-        provenancegraph.datamodel.PDM.EventHeaderOrBuilder {
+        EventHeaderOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_EventHeader_descriptor;
+        return PDM.internal_static_provenancegraph_datamodel_EventHeader_descriptor;
       }
 
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      @Override
+      protected FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_EventHeader_fieldAccessorTable
+        return PDM.internal_static_provenancegraph_datamodel_EventHeader_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                provenancegraph.datamodel.PDM.EventHeader.class, provenancegraph.datamodel.PDM.EventHeader.Builder.class);
+                EventHeader.class, Builder.class);
       }
 
       // Construct using provenancegraph.datamodel.PDM.EventHeader.newBuilder()
@@ -6587,137 +6779,130 @@ public final class PDM {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          BuilderParent parent) {
         super(parent);
 
       }
-      @java.lang.Override
+      @Override
       public Builder clear() {
         super.clear();
         bitField0_ = 0;
         ts_ = 0L;
-        procUUID_ = null;
-        if (procUUIDBuilder_ != null) {
-          procUUIDBuilder_.dispose();
-          procUUIDBuilder_ = null;
+        proc_ = null;
+        if (procBuilder_ != null) {
+          procBuilder_.dispose();
+          procBuilder_ = null;
         }
-        hostTid_ = 0;
         return this;
       }
 
-      @java.lang.Override
+      @Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_EventHeader_descriptor;
+        return PDM.internal_static_provenancegraph_datamodel_EventHeader_descriptor;
       }
 
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.EventHeader getDefaultInstanceForType() {
-        return provenancegraph.datamodel.PDM.EventHeader.getDefaultInstance();
+      @Override
+      public EventHeader getDefaultInstanceForType() {
+        return EventHeader.getDefaultInstance();
       }
 
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.EventHeader build() {
-        provenancegraph.datamodel.PDM.EventHeader result = buildPartial();
+      @Override
+      public EventHeader build() {
+        EventHeader result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.EventHeader buildPartial() {
-        provenancegraph.datamodel.PDM.EventHeader result = new provenancegraph.datamodel.PDM.EventHeader(this);
+      @Override
+      public EventHeader buildPartial() {
+        EventHeader result = new EventHeader(this);
         if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
       }
 
-      private void buildPartial0(provenancegraph.datamodel.PDM.EventHeader result) {
+      private void buildPartial0(EventHeader result) {
         int from_bitField0_ = bitField0_;
         if (((from_bitField0_ & 0x00000001) != 0)) {
           result.ts_ = ts_;
         }
         if (((from_bitField0_ & 0x00000002) != 0)) {
-          result.procUUID_ = procUUIDBuilder_ == null
-              ? procUUID_
-              : procUUIDBuilder_.build();
-        }
-        if (((from_bitField0_ & 0x00000004) != 0)) {
-          result.hostTid_ = hostTid_;
+          result.proc_ = procBuilder_ == null
+              ? proc_
+              : procBuilder_.build();
         }
       }
 
-      @java.lang.Override
+      @Override
       public Builder clone() {
         return super.clone();
       }
-      @java.lang.Override
+      @Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return super.setField(field, value);
       }
-      @java.lang.Override
+      @Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return super.clearField(field);
       }
-      @java.lang.Override
+      @Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return super.clearOneof(oneof);
       }
-      @java.lang.Override
+      @Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
+          int index, Object value) {
         return super.setRepeatedField(field, index, value);
       }
-      @java.lang.Override
+      @Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return super.addRepeatedField(field, value);
       }
-      @java.lang.Override
+      @Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof provenancegraph.datamodel.PDM.EventHeader) {
-          return mergeFrom((provenancegraph.datamodel.PDM.EventHeader)other);
+        if (other instanceof EventHeader) {
+          return mergeFrom((EventHeader)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(provenancegraph.datamodel.PDM.EventHeader other) {
-        if (other == provenancegraph.datamodel.PDM.EventHeader.getDefaultInstance()) return this;
+      public Builder mergeFrom(EventHeader other) {
+        if (other == EventHeader.getDefaultInstance()) return this;
         if (other.getTs() != 0L) {
           setTs(other.getTs());
         }
-        if (other.hasProcUUID()) {
-          mergeProcUUID(other.getProcUUID());
-        }
-        if (other.getHostTid() != 0) {
-          setHostTid(other.getHostTid());
+        if (other.hasProc()) {
+          mergeProc(other.getProc());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
 
-      @java.lang.Override
+      @Override
       public final boolean isInitialized() {
         return true;
       }
 
-      @java.lang.Override
+      @Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
         if (extensionRegistry == null) {
-          throw new java.lang.NullPointerException();
+          throw new NullPointerException();
         }
         try {
           boolean done = false;
@@ -6734,16 +6919,11 @@ public final class PDM {
               } // case 8
               case 18: {
                 input.readMessage(
-                    getProcUUIDFieldBuilder().getBuilder(),
+                    getProcFieldBuilder().getBuilder(),
                     extensionRegistry);
                 bitField0_ |= 0x00000002;
                 break;
               } // case 18
-              case 24: {
-                hostTid_ = input.readInt32();
-                bitField0_ |= 0x00000004;
-                break;
-              } // case 24
               default: {
                 if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                   done = true; // was an endgroup tag
@@ -6766,7 +6946,7 @@ public final class PDM {
        * <code>uint64 ts = 1;</code>
        * @return The ts.
        */
-      @java.lang.Override
+      @Override
       public long getTs() {
         return ts_;
       }
@@ -6793,163 +6973,167 @@ public final class PDM {
         return this;
       }
 
-      private provenancegraph.datamodel.PDM.ProcessUUID procUUID_;
+      private Process proc_;
       private com.google.protobuf.SingleFieldBuilderV3<
-          provenancegraph.datamodel.PDM.ProcessUUID, provenancegraph.datamodel.PDM.ProcessUUID.Builder, provenancegraph.datamodel.PDM.ProcessUUIDOrBuilder> procUUIDBuilder_;
+          Process, Process.Builder, ProcessOrBuilder> procBuilder_;
       /**
-       * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 2;</code>
-       * @return Whether the procUUID field is set.
+       * <pre>
+       *    int32 hostTid = 3;
+       * </pre>
+       *
+       * <code>.provenancegraph.datamodel.Process proc = 2;</code>
+       * @return Whether the proc field is set.
        */
-      public boolean hasProcUUID() {
+      public boolean hasProc() {
         return ((bitField0_ & 0x00000002) != 0);
       }
       /**
-       * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 2;</code>
-       * @return The procUUID.
+       * <pre>
+       *    int32 hostTid = 3;
+       * </pre>
+       *
+       * <code>.provenancegraph.datamodel.Process proc = 2;</code>
+       * @return The proc.
        */
-      public provenancegraph.datamodel.PDM.ProcessUUID getProcUUID() {
-        if (procUUIDBuilder_ == null) {
-          return procUUID_ == null ? provenancegraph.datamodel.PDM.ProcessUUID.getDefaultInstance() : procUUID_;
+      public Process getProc() {
+        if (procBuilder_ == null) {
+          return proc_ == null ? Process.getDefaultInstance() : proc_;
         } else {
-          return procUUIDBuilder_.getMessage();
+          return procBuilder_.getMessage();
         }
       }
       /**
-       * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 2;</code>
+       * <pre>
+       *    int32 hostTid = 3;
+       * </pre>
+       *
+       * <code>.provenancegraph.datamodel.Process proc = 2;</code>
        */
-      public Builder setProcUUID(provenancegraph.datamodel.PDM.ProcessUUID value) {
-        if (procUUIDBuilder_ == null) {
+      public Builder setProc(Process value) {
+        if (procBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          procUUID_ = value;
+          proc_ = value;
         } else {
-          procUUIDBuilder_.setMessage(value);
+          procBuilder_.setMessage(value);
         }
         bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
       /**
-       * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 2;</code>
+       * <pre>
+       *    int32 hostTid = 3;
+       * </pre>
+       *
+       * <code>.provenancegraph.datamodel.Process proc = 2;</code>
        */
-      public Builder setProcUUID(
-          provenancegraph.datamodel.PDM.ProcessUUID.Builder builderForValue) {
-        if (procUUIDBuilder_ == null) {
-          procUUID_ = builderForValue.build();
+      public Builder setProc(
+          Process.Builder builderForValue) {
+        if (procBuilder_ == null) {
+          proc_ = builderForValue.build();
         } else {
-          procUUIDBuilder_.setMessage(builderForValue.build());
+          procBuilder_.setMessage(builderForValue.build());
         }
         bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
       /**
-       * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 2;</code>
+       * <pre>
+       *    int32 hostTid = 3;
+       * </pre>
+       *
+       * <code>.provenancegraph.datamodel.Process proc = 2;</code>
        */
-      public Builder mergeProcUUID(provenancegraph.datamodel.PDM.ProcessUUID value) {
-        if (procUUIDBuilder_ == null) {
+      public Builder mergeProc(Process value) {
+        if (procBuilder_ == null) {
           if (((bitField0_ & 0x00000002) != 0) &&
-            procUUID_ != null &&
-            procUUID_ != provenancegraph.datamodel.PDM.ProcessUUID.getDefaultInstance()) {
-            getProcUUIDBuilder().mergeFrom(value);
+            proc_ != null &&
+            proc_ != Process.getDefaultInstance()) {
+            getProcBuilder().mergeFrom(value);
           } else {
-            procUUID_ = value;
+            proc_ = value;
           }
         } else {
-          procUUIDBuilder_.mergeFrom(value);
+          procBuilder_.mergeFrom(value);
         }
         bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
       /**
-       * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 2;</code>
+       * <pre>
+       *    int32 hostTid = 3;
+       * </pre>
+       *
+       * <code>.provenancegraph.datamodel.Process proc = 2;</code>
        */
-      public Builder clearProcUUID() {
+      public Builder clearProc() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        procUUID_ = null;
-        if (procUUIDBuilder_ != null) {
-          procUUIDBuilder_.dispose();
-          procUUIDBuilder_ = null;
+        proc_ = null;
+        if (procBuilder_ != null) {
+          procBuilder_.dispose();
+          procBuilder_ = null;
         }
         onChanged();
         return this;
       }
       /**
-       * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 2;</code>
+       * <pre>
+       *    int32 hostTid = 3;
+       * </pre>
+       *
+       * <code>.provenancegraph.datamodel.Process proc = 2;</code>
        */
-      public provenancegraph.datamodel.PDM.ProcessUUID.Builder getProcUUIDBuilder() {
+      public Process.Builder getProcBuilder() {
         bitField0_ |= 0x00000002;
         onChanged();
-        return getProcUUIDFieldBuilder().getBuilder();
+        return getProcFieldBuilder().getBuilder();
       }
       /**
-       * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 2;</code>
+       * <pre>
+       *    int32 hostTid = 3;
+       * </pre>
+       *
+       * <code>.provenancegraph.datamodel.Process proc = 2;</code>
        */
-      public provenancegraph.datamodel.PDM.ProcessUUIDOrBuilder getProcUUIDOrBuilder() {
-        if (procUUIDBuilder_ != null) {
-          return procUUIDBuilder_.getMessageOrBuilder();
+      public ProcessOrBuilder getProcOrBuilder() {
+        if (procBuilder_ != null) {
+          return procBuilder_.getMessageOrBuilder();
         } else {
-          return procUUID_ == null ?
-              provenancegraph.datamodel.PDM.ProcessUUID.getDefaultInstance() : procUUID_;
+          return proc_ == null ?
+              Process.getDefaultInstance() : proc_;
         }
       }
       /**
-       * <code>.provenancegraph.datamodel.ProcessUUID procUUID = 2;</code>
+       * <pre>
+       *    int32 hostTid = 3;
+       * </pre>
+       *
+       * <code>.provenancegraph.datamodel.Process proc = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          provenancegraph.datamodel.PDM.ProcessUUID, provenancegraph.datamodel.PDM.ProcessUUID.Builder, provenancegraph.datamodel.PDM.ProcessUUIDOrBuilder> 
-          getProcUUIDFieldBuilder() {
-        if (procUUIDBuilder_ == null) {
-          procUUIDBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              provenancegraph.datamodel.PDM.ProcessUUID, provenancegraph.datamodel.PDM.ProcessUUID.Builder, provenancegraph.datamodel.PDM.ProcessUUIDOrBuilder>(
-                  getProcUUID(),
+          Process, Process.Builder, ProcessOrBuilder>
+          getProcFieldBuilder() {
+        if (procBuilder_ == null) {
+          procBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              Process, Process.Builder, ProcessOrBuilder>(
+                  getProc(),
                   getParentForChildren(),
                   isClean());
-          procUUID_ = null;
+          proc_ = null;
         }
-        return procUUIDBuilder_;
+        return procBuilder_;
       }
-
-      private int hostTid_ ;
-      /**
-       * <code>int32 hostTid = 3;</code>
-       * @return The hostTid.
-       */
-      @java.lang.Override
-      public int getHostTid() {
-        return hostTid_;
-      }
-      /**
-       * <code>int32 hostTid = 3;</code>
-       * @param value The hostTid to set.
-       * @return This builder for chaining.
-       */
-      public Builder setHostTid(int value) {
-
-        hostTid_ = value;
-        bitField0_ |= 0x00000004;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>int32 hostTid = 3;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearHostTid() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        hostTid_ = 0;
-        onChanged();
-        return this;
-      }
-      @java.lang.Override
+      @Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFields(unknownFields);
       }
 
-      @java.lang.Override
+      @Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -6960,18 +7144,18 @@ public final class PDM {
     }
 
     // @@protoc_insertion_point(class_scope:provenancegraph.datamodel.EventHeader)
-    private static final provenancegraph.datamodel.PDM.EventHeader DEFAULT_INSTANCE;
+    private static final EventHeader DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new provenancegraph.datamodel.PDM.EventHeader();
+      DEFAULT_INSTANCE = new EventHeader();
     }
 
-    public static provenancegraph.datamodel.PDM.EventHeader getDefaultInstance() {
+    public static EventHeader getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
     private static final com.google.protobuf.Parser<EventHeader>
         PARSER = new com.google.protobuf.AbstractParser<EventHeader>() {
-      @java.lang.Override
+      @Override
       public EventHeader parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -6995,13 +7179,13 @@ public final class PDM {
       return PARSER;
     }
 
-    @java.lang.Override
+    @Override
     public com.google.protobuf.Parser<EventHeader> getParserForType() {
       return PARSER;
     }
 
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.EventHeader getDefaultInstanceForType() {
+    @Override
+    public EventHeader getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -7054,24 +7238,24 @@ public final class PDM {
     private IPAddress() {
     }
 
-    @java.lang.Override
+    @Override
     @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
+    protected Object newInstance(
         UnusedPrivateParameter unused) {
       return new IPAddress();
     }
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_IPAddress_descriptor;
+      return PDM.internal_static_provenancegraph_datamodel_IPAddress_descriptor;
     }
 
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+    @Override
+    protected FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_IPAddress_fieldAccessorTable
+      return PDM.internal_static_provenancegraph_datamodel_IPAddress_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              provenancegraph.datamodel.PDM.IPAddress.class, provenancegraph.datamodel.PDM.IPAddress.Builder.class);
+              IPAddress.class, Builder.class);
     }
 
     public static final int ADDRESS_FIELD_NUMBER = 1;
@@ -7080,7 +7264,7 @@ public final class PDM {
      * <code>uint32 address = 1;</code>
      * @return The address.
      */
-    @java.lang.Override
+    @Override
     public int getAddress() {
       return address_;
     }
@@ -7091,7 +7275,7 @@ public final class PDM {
      * <code>uint32 address_1 = 2;</code>
      * @return The address1.
      */
-    @java.lang.Override
+    @Override
     public int getAddress1() {
       return address1_;
     }
@@ -7102,7 +7286,7 @@ public final class PDM {
      * <code>uint32 address_2 = 3;</code>
      * @return The address2.
      */
-    @java.lang.Override
+    @Override
     public int getAddress2() {
       return address2_;
     }
@@ -7113,13 +7297,13 @@ public final class PDM {
      * <code>uint32 address_3 = 4;</code>
      * @return The address3.
      */
-    @java.lang.Override
+    @Override
     public int getAddress3() {
       return address3_;
     }
 
     private byte memoizedIsInitialized = -1;
-    @java.lang.Override
+    @Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -7129,7 +7313,7 @@ public final class PDM {
       return true;
     }
 
-    @java.lang.Override
+    @Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (address_ != 0) {
@@ -7147,7 +7331,7 @@ public final class PDM {
       getUnknownFields().writeTo(output);
     }
 
-    @java.lang.Override
+    @Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -7174,15 +7358,15 @@ public final class PDM {
       return size;
     }
 
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
+    @Override
+    public boolean equals(final Object obj) {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof provenancegraph.datamodel.PDM.IPAddress)) {
+      if (!(obj instanceof IPAddress)) {
         return super.equals(obj);
       }
-      provenancegraph.datamodel.PDM.IPAddress other = (provenancegraph.datamodel.PDM.IPAddress) obj;
+      IPAddress other = (IPAddress) obj;
 
       if (getAddress()
           != other.getAddress()) return false;
@@ -7196,7 +7380,7 @@ public final class PDM {
       return true;
     }
 
-    @java.lang.Override
+    @Override
     public int hashCode() {
       if (memoizedHashCode != 0) {
         return memoizedHashCode;
@@ -7216,44 +7400,44 @@ public final class PDM {
       return hash;
     }
 
-    public static provenancegraph.datamodel.PDM.IPAddress parseFrom(
+    public static IPAddress parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static provenancegraph.datamodel.PDM.IPAddress parseFrom(
+    public static IPAddress parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.IPAddress parseFrom(
+    public static IPAddress parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static provenancegraph.datamodel.PDM.IPAddress parseFrom(
+    public static IPAddress parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.IPAddress parseFrom(byte[] data)
+    public static IPAddress parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static provenancegraph.datamodel.PDM.IPAddress parseFrom(
+    public static IPAddress parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.IPAddress parseFrom(java.io.InputStream input)
+    public static IPAddress parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static provenancegraph.datamodel.PDM.IPAddress parseFrom(
+    public static IPAddress parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -7261,26 +7445,26 @@ public final class PDM {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    public static provenancegraph.datamodel.PDM.IPAddress parseDelimitedFrom(java.io.InputStream input)
+    public static IPAddress parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
 
-    public static provenancegraph.datamodel.PDM.IPAddress parseDelimitedFrom(
+    public static IPAddress parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.IPAddress parseFrom(
+    public static IPAddress parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static provenancegraph.datamodel.PDM.IPAddress parseFrom(
+    public static IPAddress parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -7288,23 +7472,23 @@ public final class PDM {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    @java.lang.Override
+    @Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(provenancegraph.datamodel.PDM.IPAddress prototype) {
+    public static Builder newBuilder(IPAddress prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
-    @java.lang.Override
+    @Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
     }
 
-    @java.lang.Override
+    @Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -7318,18 +7502,18 @@ public final class PDM {
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:provenancegraph.datamodel.IPAddress)
-        provenancegraph.datamodel.PDM.IPAddressOrBuilder {
+        IPAddressOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_IPAddress_descriptor;
+        return PDM.internal_static_provenancegraph_datamodel_IPAddress_descriptor;
       }
 
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      @Override
+      protected FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_IPAddress_fieldAccessorTable
+        return PDM.internal_static_provenancegraph_datamodel_IPAddress_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                provenancegraph.datamodel.PDM.IPAddress.class, provenancegraph.datamodel.PDM.IPAddress.Builder.class);
+                IPAddress.class, Builder.class);
       }
 
       // Construct using provenancegraph.datamodel.PDM.IPAddress.newBuilder()
@@ -7338,11 +7522,11 @@ public final class PDM {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          BuilderParent parent) {
         super(parent);
 
       }
-      @java.lang.Override
+      @Override
       public Builder clear() {
         super.clear();
         bitField0_ = 0;
@@ -7353,35 +7537,35 @@ public final class PDM {
         return this;
       }
 
-      @java.lang.Override
+      @Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_IPAddress_descriptor;
+        return PDM.internal_static_provenancegraph_datamodel_IPAddress_descriptor;
       }
 
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.IPAddress getDefaultInstanceForType() {
-        return provenancegraph.datamodel.PDM.IPAddress.getDefaultInstance();
+      @Override
+      public IPAddress getDefaultInstanceForType() {
+        return IPAddress.getDefaultInstance();
       }
 
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.IPAddress build() {
-        provenancegraph.datamodel.PDM.IPAddress result = buildPartial();
+      @Override
+      public IPAddress build() {
+        IPAddress result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.IPAddress buildPartial() {
-        provenancegraph.datamodel.PDM.IPAddress result = new provenancegraph.datamodel.PDM.IPAddress(this);
+      @Override
+      public IPAddress buildPartial() {
+        IPAddress result = new IPAddress(this);
         if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
       }
 
-      private void buildPartial0(provenancegraph.datamodel.PDM.IPAddress result) {
+      private void buildPartial0(IPAddress result) {
         int from_bitField0_ = bitField0_;
         if (((from_bitField0_ & 0x00000001) != 0)) {
           result.address_ = address_;
@@ -7397,50 +7581,50 @@ public final class PDM {
         }
       }
 
-      @java.lang.Override
+      @Override
       public Builder clone() {
         return super.clone();
       }
-      @java.lang.Override
+      @Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return super.setField(field, value);
       }
-      @java.lang.Override
+      @Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return super.clearField(field);
       }
-      @java.lang.Override
+      @Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return super.clearOneof(oneof);
       }
-      @java.lang.Override
+      @Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
+          int index, Object value) {
         return super.setRepeatedField(field, index, value);
       }
-      @java.lang.Override
+      @Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return super.addRepeatedField(field, value);
       }
-      @java.lang.Override
+      @Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof provenancegraph.datamodel.PDM.IPAddress) {
-          return mergeFrom((provenancegraph.datamodel.PDM.IPAddress)other);
+        if (other instanceof IPAddress) {
+          return mergeFrom((IPAddress)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(provenancegraph.datamodel.PDM.IPAddress other) {
-        if (other == provenancegraph.datamodel.PDM.IPAddress.getDefaultInstance()) return this;
+      public Builder mergeFrom(IPAddress other) {
+        if (other == IPAddress.getDefaultInstance()) return this;
         if (other.getAddress() != 0) {
           setAddress(other.getAddress());
         }
@@ -7458,18 +7642,18 @@ public final class PDM {
         return this;
       }
 
-      @java.lang.Override
+      @Override
       public final boolean isInitialized() {
         return true;
       }
 
-      @java.lang.Override
+      @Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
         if (extensionRegistry == null) {
-          throw new java.lang.NullPointerException();
+          throw new NullPointerException();
         }
         try {
           boolean done = false;
@@ -7521,7 +7705,7 @@ public final class PDM {
        * <code>uint32 address = 1;</code>
        * @return The address.
        */
-      @java.lang.Override
+      @Override
       public int getAddress() {
         return address_;
       }
@@ -7553,7 +7737,7 @@ public final class PDM {
        * <code>uint32 address_1 = 2;</code>
        * @return The address1.
        */
-      @java.lang.Override
+      @Override
       public int getAddress1() {
         return address1_;
       }
@@ -7585,7 +7769,7 @@ public final class PDM {
        * <code>uint32 address_2 = 3;</code>
        * @return The address2.
        */
-      @java.lang.Override
+      @Override
       public int getAddress2() {
         return address2_;
       }
@@ -7617,7 +7801,7 @@ public final class PDM {
        * <code>uint32 address_3 = 4;</code>
        * @return The address3.
        */
-      @java.lang.Override
+      @Override
       public int getAddress3() {
         return address3_;
       }
@@ -7643,13 +7827,13 @@ public final class PDM {
         onChanged();
         return this;
       }
-      @java.lang.Override
+      @Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFields(unknownFields);
       }
 
-      @java.lang.Override
+      @Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -7660,18 +7844,18 @@ public final class PDM {
     }
 
     // @@protoc_insertion_point(class_scope:provenancegraph.datamodel.IPAddress)
-    private static final provenancegraph.datamodel.PDM.IPAddress DEFAULT_INSTANCE;
+    private static final IPAddress DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new provenancegraph.datamodel.PDM.IPAddress();
+      DEFAULT_INSTANCE = new IPAddress();
     }
 
-    public static provenancegraph.datamodel.PDM.IPAddress getDefaultInstance() {
+    public static IPAddress getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
     private static final com.google.protobuf.Parser<IPAddress>
         PARSER = new com.google.protobuf.AbstractParser<IPAddress>() {
-      @java.lang.Override
+      @Override
       public IPAddress parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -7695,13 +7879,13 @@ public final class PDM {
       return PARSER;
     }
 
-    @java.lang.Override
+    @Override
     public com.google.protobuf.Parser<IPAddress> getParserForType() {
       return PARSER;
     }
 
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.IPAddress getDefaultInstanceForType() {
+    @Override
+    public IPAddress getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -7720,11 +7904,11 @@ public final class PDM {
      * <code>.provenancegraph.datamodel.IPAddress sip = 1;</code>
      * @return The sip.
      */
-    provenancegraph.datamodel.PDM.IPAddress getSip();
+    IPAddress getSip();
     /**
      * <code>.provenancegraph.datamodel.IPAddress sip = 1;</code>
      */
-    provenancegraph.datamodel.PDM.IPAddressOrBuilder getSipOrBuilder();
+    IPAddressOrBuilder getSipOrBuilder();
 
     /**
      * <code>.provenancegraph.datamodel.IPAddress dip = 2;</code>
@@ -7735,11 +7919,11 @@ public final class PDM {
      * <code>.provenancegraph.datamodel.IPAddress dip = 2;</code>
      * @return The dip.
      */
-    provenancegraph.datamodel.PDM.IPAddress getDip();
+    IPAddress getDip();
     /**
      * <code>.provenancegraph.datamodel.IPAddress dip = 2;</code>
      */
-    provenancegraph.datamodel.PDM.IPAddressOrBuilder getDipOrBuilder();
+    IPAddressOrBuilder getDipOrBuilder();
 
     /**
      * <code>uint32 sport = 3;</code>
@@ -7768,7 +7952,7 @@ public final class PDM {
      * <code>.provenancegraph.datamodel.NetEvent.Direction direct = 6;</code>
      * @return The direct.
      */
-    provenancegraph.datamodel.PDM.NetEvent.Direction getDirect();
+    NetEvent.Direction getDirect();
   }
   /**
    * Protobuf type {@code provenancegraph.datamodel.NetEvent}
@@ -7786,24 +7970,24 @@ public final class PDM {
       direct_ = 0;
     }
 
-    @java.lang.Override
+    @Override
     @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
+    protected Object newInstance(
         UnusedPrivateParameter unused) {
       return new NetEvent();
     }
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_NetEvent_descriptor;
+      return PDM.internal_static_provenancegraph_datamodel_NetEvent_descriptor;
     }
 
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+    @Override
+    protected FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_NetEvent_fieldAccessorTable
+      return PDM.internal_static_provenancegraph_datamodel_NetEvent_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              provenancegraph.datamodel.PDM.NetEvent.class, provenancegraph.datamodel.PDM.NetEvent.Builder.class);
+              NetEvent.class, Builder.class);
     }
 
     /**
@@ -7842,7 +8026,7 @@ public final class PDM {
 
       public final int getNumber() {
         if (this == UNRECOGNIZED) {
-          throw new java.lang.IllegalArgumentException(
+          throw new IllegalArgumentException(
               "Can't get the number of an unknown enum value.");
         }
         return value;
@@ -7853,7 +8037,7 @@ public final class PDM {
        * @return The enum associated with the given numeric wire value.
        * @deprecated Use {@link #forNumber(int)} instead.
        */
-      @java.lang.Deprecated
+      @Deprecated
       public static Direction valueOf(int value) {
         return forNumber(value);
       }
@@ -7886,7 +8070,7 @@ public final class PDM {
       public final com.google.protobuf.Descriptors.EnumValueDescriptor
           getValueDescriptor() {
         if (this == UNRECOGNIZED) {
-          throw new java.lang.IllegalStateException(
+          throw new IllegalStateException(
               "Can't get the descriptor of an unrecognized enum value.");
         }
         return getDescriptor().getValues().get(ordinal());
@@ -7897,7 +8081,7 @@ public final class PDM {
       }
       public static final com.google.protobuf.Descriptors.EnumDescriptor
           getDescriptor() {
-        return provenancegraph.datamodel.PDM.NetEvent.getDescriptor().getEnumTypes().get(0);
+        return NetEvent.getDescriptor().getEnumTypes().get(0);
       }
 
       private static final Direction[] VALUES = values();
@@ -7905,7 +8089,7 @@ public final class PDM {
       public static Direction valueOf(
           com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
         if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
+          throw new IllegalArgumentException(
             "EnumValueDescriptor is not for this type.");
         }
         if (desc.getIndex() == -1) {
@@ -7924,12 +8108,12 @@ public final class PDM {
     }
 
     public static final int SIP_FIELD_NUMBER = 1;
-    private provenancegraph.datamodel.PDM.IPAddress sip_;
+    private IPAddress sip_;
     /**
      * <code>.provenancegraph.datamodel.IPAddress sip = 1;</code>
      * @return Whether the sip field is set.
      */
-    @java.lang.Override
+    @Override
     public boolean hasSip() {
       return sip_ != null;
     }
@@ -7937,25 +8121,25 @@ public final class PDM {
      * <code>.provenancegraph.datamodel.IPAddress sip = 1;</code>
      * @return The sip.
      */
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.IPAddress getSip() {
-      return sip_ == null ? provenancegraph.datamodel.PDM.IPAddress.getDefaultInstance() : sip_;
+    @Override
+    public IPAddress getSip() {
+      return sip_ == null ? IPAddress.getDefaultInstance() : sip_;
     }
     /**
      * <code>.provenancegraph.datamodel.IPAddress sip = 1;</code>
      */
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.IPAddressOrBuilder getSipOrBuilder() {
-      return sip_ == null ? provenancegraph.datamodel.PDM.IPAddress.getDefaultInstance() : sip_;
+    @Override
+    public IPAddressOrBuilder getSipOrBuilder() {
+      return sip_ == null ? IPAddress.getDefaultInstance() : sip_;
     }
 
     public static final int DIP_FIELD_NUMBER = 2;
-    private provenancegraph.datamodel.PDM.IPAddress dip_;
+    private IPAddress dip_;
     /**
      * <code>.provenancegraph.datamodel.IPAddress dip = 2;</code>
      * @return Whether the dip field is set.
      */
-    @java.lang.Override
+    @Override
     public boolean hasDip() {
       return dip_ != null;
     }
@@ -7963,16 +8147,16 @@ public final class PDM {
      * <code>.provenancegraph.datamodel.IPAddress dip = 2;</code>
      * @return The dip.
      */
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.IPAddress getDip() {
-      return dip_ == null ? provenancegraph.datamodel.PDM.IPAddress.getDefaultInstance() : dip_;
+    @Override
+    public IPAddress getDip() {
+      return dip_ == null ? IPAddress.getDefaultInstance() : dip_;
     }
     /**
      * <code>.provenancegraph.datamodel.IPAddress dip = 2;</code>
      */
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.IPAddressOrBuilder getDipOrBuilder() {
-      return dip_ == null ? provenancegraph.datamodel.PDM.IPAddress.getDefaultInstance() : dip_;
+    @Override
+    public IPAddressOrBuilder getDipOrBuilder() {
+      return dip_ == null ? IPAddress.getDefaultInstance() : dip_;
     }
 
     public static final int SPORT_FIELD_NUMBER = 3;
@@ -7981,7 +8165,7 @@ public final class PDM {
      * <code>uint32 sport = 3;</code>
      * @return The sport.
      */
-    @java.lang.Override
+    @Override
     public int getSport() {
       return sport_;
     }
@@ -7992,7 +8176,7 @@ public final class PDM {
      * <code>uint32 dport = 4;</code>
      * @return The dport.
      */
-    @java.lang.Override
+    @Override
     public int getDport() {
       return dport_;
     }
@@ -8003,7 +8187,7 @@ public final class PDM {
      * <code>uint32 protocol = 5;</code>
      * @return The protocol.
      */
-    @java.lang.Override
+    @Override
     public int getProtocol() {
       return protocol_;
     }
@@ -8014,20 +8198,20 @@ public final class PDM {
      * <code>.provenancegraph.datamodel.NetEvent.Direction direct = 6;</code>
      * @return The enum numeric value on the wire for direct.
      */
-    @java.lang.Override public int getDirectValue() {
+    @Override public int getDirectValue() {
       return direct_;
     }
     /**
      * <code>.provenancegraph.datamodel.NetEvent.Direction direct = 6;</code>
      * @return The direct.
      */
-    @java.lang.Override public provenancegraph.datamodel.PDM.NetEvent.Direction getDirect() {
-      provenancegraph.datamodel.PDM.NetEvent.Direction result = provenancegraph.datamodel.PDM.NetEvent.Direction.forNumber(direct_);
-      return result == null ? provenancegraph.datamodel.PDM.NetEvent.Direction.UNRECOGNIZED : result;
+    @Override public Direction getDirect() {
+      Direction result = Direction.forNumber(direct_);
+      return result == null ? Direction.UNRECOGNIZED : result;
     }
 
     private byte memoizedIsInitialized = -1;
-    @java.lang.Override
+    @Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -8037,7 +8221,7 @@ public final class PDM {
       return true;
     }
 
-    @java.lang.Override
+    @Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (sip_ != null) {
@@ -8055,13 +8239,13 @@ public final class PDM {
       if (protocol_ != 0) {
         output.writeUInt32(5, protocol_);
       }
-      if (direct_ != provenancegraph.datamodel.PDM.NetEvent.Direction.IN.getNumber()) {
+      if (direct_ != Direction.IN.getNumber()) {
         output.writeEnum(6, direct_);
       }
       getUnknownFields().writeTo(output);
     }
 
-    @java.lang.Override
+    @Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -8087,7 +8271,7 @@ public final class PDM {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(5, protocol_);
       }
-      if (direct_ != provenancegraph.datamodel.PDM.NetEvent.Direction.IN.getNumber()) {
+      if (direct_ != Direction.IN.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(6, direct_);
       }
@@ -8096,15 +8280,15 @@ public final class PDM {
       return size;
     }
 
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
+    @Override
+    public boolean equals(final Object obj) {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof provenancegraph.datamodel.PDM.NetEvent)) {
+      if (!(obj instanceof NetEvent)) {
         return super.equals(obj);
       }
-      provenancegraph.datamodel.PDM.NetEvent other = (provenancegraph.datamodel.PDM.NetEvent) obj;
+      NetEvent other = (NetEvent) obj;
 
       if (hasSip() != other.hasSip()) return false;
       if (hasSip()) {
@@ -8127,7 +8311,7 @@ public final class PDM {
       return true;
     }
 
-    @java.lang.Override
+    @Override
     public int hashCode() {
       if (memoizedHashCode != 0) {
         return memoizedHashCode;
@@ -8155,44 +8339,44 @@ public final class PDM {
       return hash;
     }
 
-    public static provenancegraph.datamodel.PDM.NetEvent parseFrom(
+    public static NetEvent parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static provenancegraph.datamodel.PDM.NetEvent parseFrom(
+    public static NetEvent parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.NetEvent parseFrom(
+    public static NetEvent parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static provenancegraph.datamodel.PDM.NetEvent parseFrom(
+    public static NetEvent parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.NetEvent parseFrom(byte[] data)
+    public static NetEvent parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static provenancegraph.datamodel.PDM.NetEvent parseFrom(
+    public static NetEvent parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.NetEvent parseFrom(java.io.InputStream input)
+    public static NetEvent parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static provenancegraph.datamodel.PDM.NetEvent parseFrom(
+    public static NetEvent parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -8200,26 +8384,26 @@ public final class PDM {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    public static provenancegraph.datamodel.PDM.NetEvent parseDelimitedFrom(java.io.InputStream input)
+    public static NetEvent parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
 
-    public static provenancegraph.datamodel.PDM.NetEvent parseDelimitedFrom(
+    public static NetEvent parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.NetEvent parseFrom(
+    public static NetEvent parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static provenancegraph.datamodel.PDM.NetEvent parseFrom(
+    public static NetEvent parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -8227,23 +8411,23 @@ public final class PDM {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    @java.lang.Override
+    @Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(provenancegraph.datamodel.PDM.NetEvent prototype) {
+    public static Builder newBuilder(NetEvent prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
-    @java.lang.Override
+    @Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
     }
 
-    @java.lang.Override
+    @Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -8253,18 +8437,18 @@ public final class PDM {
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:provenancegraph.datamodel.NetEvent)
-        provenancegraph.datamodel.PDM.NetEventOrBuilder {
+        NetEventOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_NetEvent_descriptor;
+        return PDM.internal_static_provenancegraph_datamodel_NetEvent_descriptor;
       }
 
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      @Override
+      protected FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_NetEvent_fieldAccessorTable
+        return PDM.internal_static_provenancegraph_datamodel_NetEvent_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                provenancegraph.datamodel.PDM.NetEvent.class, provenancegraph.datamodel.PDM.NetEvent.Builder.class);
+                NetEvent.class, Builder.class);
       }
 
       // Construct using provenancegraph.datamodel.PDM.NetEvent.newBuilder()
@@ -8273,11 +8457,11 @@ public final class PDM {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          BuilderParent parent) {
         super(parent);
 
       }
-      @java.lang.Override
+      @Override
       public Builder clear() {
         super.clear();
         bitField0_ = 0;
@@ -8298,35 +8482,35 @@ public final class PDM {
         return this;
       }
 
-      @java.lang.Override
+      @Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_NetEvent_descriptor;
+        return PDM.internal_static_provenancegraph_datamodel_NetEvent_descriptor;
       }
 
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.NetEvent getDefaultInstanceForType() {
-        return provenancegraph.datamodel.PDM.NetEvent.getDefaultInstance();
+      @Override
+      public NetEvent getDefaultInstanceForType() {
+        return NetEvent.getDefaultInstance();
       }
 
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.NetEvent build() {
-        provenancegraph.datamodel.PDM.NetEvent result = buildPartial();
+      @Override
+      public NetEvent build() {
+        NetEvent result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.NetEvent buildPartial() {
-        provenancegraph.datamodel.PDM.NetEvent result = new provenancegraph.datamodel.PDM.NetEvent(this);
+      @Override
+      public NetEvent buildPartial() {
+        NetEvent result = new NetEvent(this);
         if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
       }
 
-      private void buildPartial0(provenancegraph.datamodel.PDM.NetEvent result) {
+      private void buildPartial0(NetEvent result) {
         int from_bitField0_ = bitField0_;
         if (((from_bitField0_ & 0x00000001) != 0)) {
           result.sip_ = sipBuilder_ == null
@@ -8352,50 +8536,50 @@ public final class PDM {
         }
       }
 
-      @java.lang.Override
+      @Override
       public Builder clone() {
         return super.clone();
       }
-      @java.lang.Override
+      @Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return super.setField(field, value);
       }
-      @java.lang.Override
+      @Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return super.clearField(field);
       }
-      @java.lang.Override
+      @Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return super.clearOneof(oneof);
       }
-      @java.lang.Override
+      @Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
+          int index, Object value) {
         return super.setRepeatedField(field, index, value);
       }
-      @java.lang.Override
+      @Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return super.addRepeatedField(field, value);
       }
-      @java.lang.Override
+      @Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof provenancegraph.datamodel.PDM.NetEvent) {
-          return mergeFrom((provenancegraph.datamodel.PDM.NetEvent)other);
+        if (other instanceof NetEvent) {
+          return mergeFrom((NetEvent)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(provenancegraph.datamodel.PDM.NetEvent other) {
-        if (other == provenancegraph.datamodel.PDM.NetEvent.getDefaultInstance()) return this;
+      public Builder mergeFrom(NetEvent other) {
+        if (other == NetEvent.getDefaultInstance()) return this;
         if (other.hasSip()) {
           mergeSip(other.getSip());
         }
@@ -8419,18 +8603,18 @@ public final class PDM {
         return this;
       }
 
-      @java.lang.Override
+      @Override
       public final boolean isInitialized() {
         return true;
       }
 
-      @java.lang.Override
+      @Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
         if (extensionRegistry == null) {
-          throw new java.lang.NullPointerException();
+          throw new NullPointerException();
         }
         try {
           boolean done = false;
@@ -8491,9 +8675,9 @@ public final class PDM {
       }
       private int bitField0_;
 
-      private provenancegraph.datamodel.PDM.IPAddress sip_;
+      private IPAddress sip_;
       private com.google.protobuf.SingleFieldBuilderV3<
-          provenancegraph.datamodel.PDM.IPAddress, provenancegraph.datamodel.PDM.IPAddress.Builder, provenancegraph.datamodel.PDM.IPAddressOrBuilder> sipBuilder_;
+          IPAddress, IPAddress.Builder, IPAddressOrBuilder> sipBuilder_;
       /**
        * <code>.provenancegraph.datamodel.IPAddress sip = 1;</code>
        * @return Whether the sip field is set.
@@ -8505,9 +8689,9 @@ public final class PDM {
        * <code>.provenancegraph.datamodel.IPAddress sip = 1;</code>
        * @return The sip.
        */
-      public provenancegraph.datamodel.PDM.IPAddress getSip() {
+      public IPAddress getSip() {
         if (sipBuilder_ == null) {
-          return sip_ == null ? provenancegraph.datamodel.PDM.IPAddress.getDefaultInstance() : sip_;
+          return sip_ == null ? IPAddress.getDefaultInstance() : sip_;
         } else {
           return sipBuilder_.getMessage();
         }
@@ -8515,7 +8699,7 @@ public final class PDM {
       /**
        * <code>.provenancegraph.datamodel.IPAddress sip = 1;</code>
        */
-      public Builder setSip(provenancegraph.datamodel.PDM.IPAddress value) {
+      public Builder setSip(IPAddress value) {
         if (sipBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -8532,7 +8716,7 @@ public final class PDM {
        * <code>.provenancegraph.datamodel.IPAddress sip = 1;</code>
        */
       public Builder setSip(
-          provenancegraph.datamodel.PDM.IPAddress.Builder builderForValue) {
+          IPAddress.Builder builderForValue) {
         if (sipBuilder_ == null) {
           sip_ = builderForValue.build();
         } else {
@@ -8545,11 +8729,11 @@ public final class PDM {
       /**
        * <code>.provenancegraph.datamodel.IPAddress sip = 1;</code>
        */
-      public Builder mergeSip(provenancegraph.datamodel.PDM.IPAddress value) {
+      public Builder mergeSip(IPAddress value) {
         if (sipBuilder_ == null) {
           if (((bitField0_ & 0x00000001) != 0) &&
             sip_ != null &&
-            sip_ != provenancegraph.datamodel.PDM.IPAddress.getDefaultInstance()) {
+            sip_ != IPAddress.getDefaultInstance()) {
             getSipBuilder().mergeFrom(value);
           } else {
             sip_ = value;
@@ -8577,7 +8761,7 @@ public final class PDM {
       /**
        * <code>.provenancegraph.datamodel.IPAddress sip = 1;</code>
        */
-      public provenancegraph.datamodel.PDM.IPAddress.Builder getSipBuilder() {
+      public IPAddress.Builder getSipBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getSipFieldBuilder().getBuilder();
@@ -8585,23 +8769,23 @@ public final class PDM {
       /**
        * <code>.provenancegraph.datamodel.IPAddress sip = 1;</code>
        */
-      public provenancegraph.datamodel.PDM.IPAddressOrBuilder getSipOrBuilder() {
+      public IPAddressOrBuilder getSipOrBuilder() {
         if (sipBuilder_ != null) {
           return sipBuilder_.getMessageOrBuilder();
         } else {
           return sip_ == null ?
-              provenancegraph.datamodel.PDM.IPAddress.getDefaultInstance() : sip_;
+              IPAddress.getDefaultInstance() : sip_;
         }
       }
       /**
        * <code>.provenancegraph.datamodel.IPAddress sip = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          provenancegraph.datamodel.PDM.IPAddress, provenancegraph.datamodel.PDM.IPAddress.Builder, provenancegraph.datamodel.PDM.IPAddressOrBuilder> 
+          IPAddress, IPAddress.Builder, IPAddressOrBuilder>
           getSipFieldBuilder() {
         if (sipBuilder_ == null) {
           sipBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              provenancegraph.datamodel.PDM.IPAddress, provenancegraph.datamodel.PDM.IPAddress.Builder, provenancegraph.datamodel.PDM.IPAddressOrBuilder>(
+              IPAddress, IPAddress.Builder, IPAddressOrBuilder>(
                   getSip(),
                   getParentForChildren(),
                   isClean());
@@ -8610,9 +8794,9 @@ public final class PDM {
         return sipBuilder_;
       }
 
-      private provenancegraph.datamodel.PDM.IPAddress dip_;
+      private IPAddress dip_;
       private com.google.protobuf.SingleFieldBuilderV3<
-          provenancegraph.datamodel.PDM.IPAddress, provenancegraph.datamodel.PDM.IPAddress.Builder, provenancegraph.datamodel.PDM.IPAddressOrBuilder> dipBuilder_;
+          IPAddress, IPAddress.Builder, IPAddressOrBuilder> dipBuilder_;
       /**
        * <code>.provenancegraph.datamodel.IPAddress dip = 2;</code>
        * @return Whether the dip field is set.
@@ -8624,9 +8808,9 @@ public final class PDM {
        * <code>.provenancegraph.datamodel.IPAddress dip = 2;</code>
        * @return The dip.
        */
-      public provenancegraph.datamodel.PDM.IPAddress getDip() {
+      public IPAddress getDip() {
         if (dipBuilder_ == null) {
-          return dip_ == null ? provenancegraph.datamodel.PDM.IPAddress.getDefaultInstance() : dip_;
+          return dip_ == null ? IPAddress.getDefaultInstance() : dip_;
         } else {
           return dipBuilder_.getMessage();
         }
@@ -8634,7 +8818,7 @@ public final class PDM {
       /**
        * <code>.provenancegraph.datamodel.IPAddress dip = 2;</code>
        */
-      public Builder setDip(provenancegraph.datamodel.PDM.IPAddress value) {
+      public Builder setDip(IPAddress value) {
         if (dipBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -8651,7 +8835,7 @@ public final class PDM {
        * <code>.provenancegraph.datamodel.IPAddress dip = 2;</code>
        */
       public Builder setDip(
-          provenancegraph.datamodel.PDM.IPAddress.Builder builderForValue) {
+          IPAddress.Builder builderForValue) {
         if (dipBuilder_ == null) {
           dip_ = builderForValue.build();
         } else {
@@ -8664,11 +8848,11 @@ public final class PDM {
       /**
        * <code>.provenancegraph.datamodel.IPAddress dip = 2;</code>
        */
-      public Builder mergeDip(provenancegraph.datamodel.PDM.IPAddress value) {
+      public Builder mergeDip(IPAddress value) {
         if (dipBuilder_ == null) {
           if (((bitField0_ & 0x00000002) != 0) &&
             dip_ != null &&
-            dip_ != provenancegraph.datamodel.PDM.IPAddress.getDefaultInstance()) {
+            dip_ != IPAddress.getDefaultInstance()) {
             getDipBuilder().mergeFrom(value);
           } else {
             dip_ = value;
@@ -8696,7 +8880,7 @@ public final class PDM {
       /**
        * <code>.provenancegraph.datamodel.IPAddress dip = 2;</code>
        */
-      public provenancegraph.datamodel.PDM.IPAddress.Builder getDipBuilder() {
+      public IPAddress.Builder getDipBuilder() {
         bitField0_ |= 0x00000002;
         onChanged();
         return getDipFieldBuilder().getBuilder();
@@ -8704,23 +8888,23 @@ public final class PDM {
       /**
        * <code>.provenancegraph.datamodel.IPAddress dip = 2;</code>
        */
-      public provenancegraph.datamodel.PDM.IPAddressOrBuilder getDipOrBuilder() {
+      public IPAddressOrBuilder getDipOrBuilder() {
         if (dipBuilder_ != null) {
           return dipBuilder_.getMessageOrBuilder();
         } else {
           return dip_ == null ?
-              provenancegraph.datamodel.PDM.IPAddress.getDefaultInstance() : dip_;
+              IPAddress.getDefaultInstance() : dip_;
         }
       }
       /**
        * <code>.provenancegraph.datamodel.IPAddress dip = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          provenancegraph.datamodel.PDM.IPAddress, provenancegraph.datamodel.PDM.IPAddress.Builder, provenancegraph.datamodel.PDM.IPAddressOrBuilder> 
+          IPAddress, IPAddress.Builder, IPAddressOrBuilder>
           getDipFieldBuilder() {
         if (dipBuilder_ == null) {
           dipBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              provenancegraph.datamodel.PDM.IPAddress, provenancegraph.datamodel.PDM.IPAddress.Builder, provenancegraph.datamodel.PDM.IPAddressOrBuilder>(
+              IPAddress, IPAddress.Builder, IPAddressOrBuilder>(
                   getDip(),
                   getParentForChildren(),
                   isClean());
@@ -8734,7 +8918,7 @@ public final class PDM {
        * <code>uint32 sport = 3;</code>
        * @return The sport.
        */
-      @java.lang.Override
+      @Override
       public int getSport() {
         return sport_;
       }
@@ -8766,7 +8950,7 @@ public final class PDM {
        * <code>uint32 dport = 4;</code>
        * @return The dport.
        */
-      @java.lang.Override
+      @Override
       public int getDport() {
         return dport_;
       }
@@ -8798,7 +8982,7 @@ public final class PDM {
        * <code>uint32 protocol = 5;</code>
        * @return The protocol.
        */
-      @java.lang.Override
+      @Override
       public int getProtocol() {
         return protocol_;
       }
@@ -8830,7 +9014,7 @@ public final class PDM {
        * <code>.provenancegraph.datamodel.NetEvent.Direction direct = 6;</code>
        * @return The enum numeric value on the wire for direct.
        */
-      @java.lang.Override public int getDirectValue() {
+      @Override public int getDirectValue() {
         return direct_;
       }
       /**
@@ -8848,17 +9032,17 @@ public final class PDM {
        * <code>.provenancegraph.datamodel.NetEvent.Direction direct = 6;</code>
        * @return The direct.
        */
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.NetEvent.Direction getDirect() {
-        provenancegraph.datamodel.PDM.NetEvent.Direction result = provenancegraph.datamodel.PDM.NetEvent.Direction.forNumber(direct_);
-        return result == null ? provenancegraph.datamodel.PDM.NetEvent.Direction.UNRECOGNIZED : result;
+      @Override
+      public Direction getDirect() {
+        Direction result = Direction.forNumber(direct_);
+        return result == null ? Direction.UNRECOGNIZED : result;
       }
       /**
        * <code>.provenancegraph.datamodel.NetEvent.Direction direct = 6;</code>
        * @param value The direct to set.
        * @return This builder for chaining.
        */
-      public Builder setDirect(provenancegraph.datamodel.PDM.NetEvent.Direction value) {
+      public Builder setDirect(Direction value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -8877,13 +9061,13 @@ public final class PDM {
         onChanged();
         return this;
       }
-      @java.lang.Override
+      @Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFields(unknownFields);
       }
 
-      @java.lang.Override
+      @Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -8894,18 +9078,18 @@ public final class PDM {
     }
 
     // @@protoc_insertion_point(class_scope:provenancegraph.datamodel.NetEvent)
-    private static final provenancegraph.datamodel.PDM.NetEvent DEFAULT_INSTANCE;
+    private static final NetEvent DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new provenancegraph.datamodel.PDM.NetEvent();
+      DEFAULT_INSTANCE = new NetEvent();
     }
 
-    public static provenancegraph.datamodel.PDM.NetEvent getDefaultInstance() {
+    public static NetEvent getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
     private static final com.google.protobuf.Parser<NetEvent>
         PARSER = new com.google.protobuf.AbstractParser<NetEvent>() {
-      @java.lang.Override
+      @Override
       public NetEvent parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -8929,13 +9113,13 @@ public final class PDM {
       return PARSER;
     }
 
-    @java.lang.Override
+    @Override
     public com.google.protobuf.Parser<NetEvent> getParserForType() {
       return PARSER;
     }
 
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.NetEvent getDefaultInstanceForType() {
+    @Override
+    public NetEvent getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -8962,7 +9146,7 @@ public final class PDM {
      * <code>.provenancegraph.datamodel.Process childProc = 1;</code>
      * @return The childProc.
      */
-    provenancegraph.datamodel.PDM.Process getChildProc();
+    Process getChildProc();
     /**
      * <pre>
      *    ProcessUUID childProcUUID = 1;
@@ -8970,7 +9154,7 @@ public final class PDM {
      *
      * <code>.provenancegraph.datamodel.Process childProc = 1;</code>
      */
-    provenancegraph.datamodel.PDM.ProcessOrBuilder getChildProcOrBuilder();
+    ProcessOrBuilder getChildProcOrBuilder();
   }
   /**
    * <pre>
@@ -8991,28 +9175,28 @@ public final class PDM {
     private ProcessEvent() {
     }
 
-    @java.lang.Override
+    @Override
     @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
+    protected Object newInstance(
         UnusedPrivateParameter unused) {
       return new ProcessEvent();
     }
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_ProcessEvent_descriptor;
+      return PDM.internal_static_provenancegraph_datamodel_ProcessEvent_descriptor;
     }
 
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+    @Override
+    protected FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_ProcessEvent_fieldAccessorTable
+      return PDM.internal_static_provenancegraph_datamodel_ProcessEvent_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              provenancegraph.datamodel.PDM.ProcessEvent.class, provenancegraph.datamodel.PDM.ProcessEvent.Builder.class);
+              ProcessEvent.class, Builder.class);
     }
 
     public static final int CHILDPROC_FIELD_NUMBER = 1;
-    private provenancegraph.datamodel.PDM.Process childProc_;
+    private Process childProc_;
     /**
      * <pre>
      *    ProcessUUID childProcUUID = 1;
@@ -9021,7 +9205,7 @@ public final class PDM {
      * <code>.provenancegraph.datamodel.Process childProc = 1;</code>
      * @return Whether the childProc field is set.
      */
-    @java.lang.Override
+    @Override
     public boolean hasChildProc() {
       return childProc_ != null;
     }
@@ -9033,9 +9217,9 @@ public final class PDM {
      * <code>.provenancegraph.datamodel.Process childProc = 1;</code>
      * @return The childProc.
      */
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.Process getChildProc() {
-      return childProc_ == null ? provenancegraph.datamodel.PDM.Process.getDefaultInstance() : childProc_;
+    @Override
+    public Process getChildProc() {
+      return childProc_ == null ? Process.getDefaultInstance() : childProc_;
     }
     /**
      * <pre>
@@ -9044,13 +9228,13 @@ public final class PDM {
      *
      * <code>.provenancegraph.datamodel.Process childProc = 1;</code>
      */
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.ProcessOrBuilder getChildProcOrBuilder() {
-      return childProc_ == null ? provenancegraph.datamodel.PDM.Process.getDefaultInstance() : childProc_;
+    @Override
+    public ProcessOrBuilder getChildProcOrBuilder() {
+      return childProc_ == null ? Process.getDefaultInstance() : childProc_;
     }
 
     private byte memoizedIsInitialized = -1;
-    @java.lang.Override
+    @Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -9060,7 +9244,7 @@ public final class PDM {
       return true;
     }
 
-    @java.lang.Override
+    @Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (childProc_ != null) {
@@ -9069,7 +9253,7 @@ public final class PDM {
       getUnknownFields().writeTo(output);
     }
 
-    @java.lang.Override
+    @Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -9084,15 +9268,15 @@ public final class PDM {
       return size;
     }
 
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
+    @Override
+    public boolean equals(final Object obj) {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof provenancegraph.datamodel.PDM.ProcessEvent)) {
+      if (!(obj instanceof ProcessEvent)) {
         return super.equals(obj);
       }
-      provenancegraph.datamodel.PDM.ProcessEvent other = (provenancegraph.datamodel.PDM.ProcessEvent) obj;
+      ProcessEvent other = (ProcessEvent) obj;
 
       if (hasChildProc() != other.hasChildProc()) return false;
       if (hasChildProc()) {
@@ -9103,7 +9287,7 @@ public final class PDM {
       return true;
     }
 
-    @java.lang.Override
+    @Override
     public int hashCode() {
       if (memoizedHashCode != 0) {
         return memoizedHashCode;
@@ -9119,44 +9303,44 @@ public final class PDM {
       return hash;
     }
 
-    public static provenancegraph.datamodel.PDM.ProcessEvent parseFrom(
+    public static ProcessEvent parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static provenancegraph.datamodel.PDM.ProcessEvent parseFrom(
+    public static ProcessEvent parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.ProcessEvent parseFrom(
+    public static ProcessEvent parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static provenancegraph.datamodel.PDM.ProcessEvent parseFrom(
+    public static ProcessEvent parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.ProcessEvent parseFrom(byte[] data)
+    public static ProcessEvent parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static provenancegraph.datamodel.PDM.ProcessEvent parseFrom(
+    public static ProcessEvent parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.ProcessEvent parseFrom(java.io.InputStream input)
+    public static ProcessEvent parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static provenancegraph.datamodel.PDM.ProcessEvent parseFrom(
+    public static ProcessEvent parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -9164,26 +9348,26 @@ public final class PDM {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    public static provenancegraph.datamodel.PDM.ProcessEvent parseDelimitedFrom(java.io.InputStream input)
+    public static ProcessEvent parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
 
-    public static provenancegraph.datamodel.PDM.ProcessEvent parseDelimitedFrom(
+    public static ProcessEvent parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.ProcessEvent parseFrom(
+    public static ProcessEvent parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static provenancegraph.datamodel.PDM.ProcessEvent parseFrom(
+    public static ProcessEvent parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -9191,23 +9375,23 @@ public final class PDM {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    @java.lang.Override
+    @Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(provenancegraph.datamodel.PDM.ProcessEvent prototype) {
+    public static Builder newBuilder(ProcessEvent prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
-    @java.lang.Override
+    @Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
     }
 
-    @java.lang.Override
+    @Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -9221,18 +9405,18 @@ public final class PDM {
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:provenancegraph.datamodel.ProcessEvent)
-        provenancegraph.datamodel.PDM.ProcessEventOrBuilder {
+        ProcessEventOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_ProcessEvent_descriptor;
+        return PDM.internal_static_provenancegraph_datamodel_ProcessEvent_descriptor;
       }
 
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      @Override
+      protected FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_ProcessEvent_fieldAccessorTable
+        return PDM.internal_static_provenancegraph_datamodel_ProcessEvent_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                provenancegraph.datamodel.PDM.ProcessEvent.class, provenancegraph.datamodel.PDM.ProcessEvent.Builder.class);
+                ProcessEvent.class, Builder.class);
       }
 
       // Construct using provenancegraph.datamodel.PDM.ProcessEvent.newBuilder()
@@ -9241,11 +9425,11 @@ public final class PDM {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          BuilderParent parent) {
         super(parent);
 
       }
-      @java.lang.Override
+      @Override
       public Builder clear() {
         super.clear();
         bitField0_ = 0;
@@ -9257,35 +9441,35 @@ public final class PDM {
         return this;
       }
 
-      @java.lang.Override
+      @Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_ProcessEvent_descriptor;
+        return PDM.internal_static_provenancegraph_datamodel_ProcessEvent_descriptor;
       }
 
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.ProcessEvent getDefaultInstanceForType() {
-        return provenancegraph.datamodel.PDM.ProcessEvent.getDefaultInstance();
+      @Override
+      public ProcessEvent getDefaultInstanceForType() {
+        return ProcessEvent.getDefaultInstance();
       }
 
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.ProcessEvent build() {
-        provenancegraph.datamodel.PDM.ProcessEvent result = buildPartial();
+      @Override
+      public ProcessEvent build() {
+        ProcessEvent result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.ProcessEvent buildPartial() {
-        provenancegraph.datamodel.PDM.ProcessEvent result = new provenancegraph.datamodel.PDM.ProcessEvent(this);
+      @Override
+      public ProcessEvent buildPartial() {
+        ProcessEvent result = new ProcessEvent(this);
         if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
       }
 
-      private void buildPartial0(provenancegraph.datamodel.PDM.ProcessEvent result) {
+      private void buildPartial0(ProcessEvent result) {
         int from_bitField0_ = bitField0_;
         if (((from_bitField0_ & 0x00000001) != 0)) {
           result.childProc_ = childProcBuilder_ == null
@@ -9294,50 +9478,50 @@ public final class PDM {
         }
       }
 
-      @java.lang.Override
+      @Override
       public Builder clone() {
         return super.clone();
       }
-      @java.lang.Override
+      @Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return super.setField(field, value);
       }
-      @java.lang.Override
+      @Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return super.clearField(field);
       }
-      @java.lang.Override
+      @Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return super.clearOneof(oneof);
       }
-      @java.lang.Override
+      @Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
+          int index, Object value) {
         return super.setRepeatedField(field, index, value);
       }
-      @java.lang.Override
+      @Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return super.addRepeatedField(field, value);
       }
-      @java.lang.Override
+      @Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof provenancegraph.datamodel.PDM.ProcessEvent) {
-          return mergeFrom((provenancegraph.datamodel.PDM.ProcessEvent)other);
+        if (other instanceof ProcessEvent) {
+          return mergeFrom((ProcessEvent)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(provenancegraph.datamodel.PDM.ProcessEvent other) {
-        if (other == provenancegraph.datamodel.PDM.ProcessEvent.getDefaultInstance()) return this;
+      public Builder mergeFrom(ProcessEvent other) {
+        if (other == ProcessEvent.getDefaultInstance()) return this;
         if (other.hasChildProc()) {
           mergeChildProc(other.getChildProc());
         }
@@ -9346,18 +9530,18 @@ public final class PDM {
         return this;
       }
 
-      @java.lang.Override
+      @Override
       public final boolean isInitialized() {
         return true;
       }
 
-      @java.lang.Override
+      @Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
         if (extensionRegistry == null) {
-          throw new java.lang.NullPointerException();
+          throw new NullPointerException();
         }
         try {
           boolean done = false;
@@ -9391,9 +9575,9 @@ public final class PDM {
       }
       private int bitField0_;
 
-      private provenancegraph.datamodel.PDM.Process childProc_;
+      private Process childProc_;
       private com.google.protobuf.SingleFieldBuilderV3<
-          provenancegraph.datamodel.PDM.Process, provenancegraph.datamodel.PDM.Process.Builder, provenancegraph.datamodel.PDM.ProcessOrBuilder> childProcBuilder_;
+          Process, Process.Builder, ProcessOrBuilder> childProcBuilder_;
       /**
        * <pre>
        *    ProcessUUID childProcUUID = 1;
@@ -9413,9 +9597,9 @@ public final class PDM {
        * <code>.provenancegraph.datamodel.Process childProc = 1;</code>
        * @return The childProc.
        */
-      public provenancegraph.datamodel.PDM.Process getChildProc() {
+      public Process getChildProc() {
         if (childProcBuilder_ == null) {
-          return childProc_ == null ? provenancegraph.datamodel.PDM.Process.getDefaultInstance() : childProc_;
+          return childProc_ == null ? Process.getDefaultInstance() : childProc_;
         } else {
           return childProcBuilder_.getMessage();
         }
@@ -9427,7 +9611,7 @@ public final class PDM {
        *
        * <code>.provenancegraph.datamodel.Process childProc = 1;</code>
        */
-      public Builder setChildProc(provenancegraph.datamodel.PDM.Process value) {
+      public Builder setChildProc(Process value) {
         if (childProcBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -9448,7 +9632,7 @@ public final class PDM {
        * <code>.provenancegraph.datamodel.Process childProc = 1;</code>
        */
       public Builder setChildProc(
-          provenancegraph.datamodel.PDM.Process.Builder builderForValue) {
+          Process.Builder builderForValue) {
         if (childProcBuilder_ == null) {
           childProc_ = builderForValue.build();
         } else {
@@ -9465,11 +9649,11 @@ public final class PDM {
        *
        * <code>.provenancegraph.datamodel.Process childProc = 1;</code>
        */
-      public Builder mergeChildProc(provenancegraph.datamodel.PDM.Process value) {
+      public Builder mergeChildProc(Process value) {
         if (childProcBuilder_ == null) {
           if (((bitField0_ & 0x00000001) != 0) &&
             childProc_ != null &&
-            childProc_ != provenancegraph.datamodel.PDM.Process.getDefaultInstance()) {
+            childProc_ != Process.getDefaultInstance()) {
             getChildProcBuilder().mergeFrom(value);
           } else {
             childProc_ = value;
@@ -9505,7 +9689,7 @@ public final class PDM {
        *
        * <code>.provenancegraph.datamodel.Process childProc = 1;</code>
        */
-      public provenancegraph.datamodel.PDM.Process.Builder getChildProcBuilder() {
+      public Process.Builder getChildProcBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getChildProcFieldBuilder().getBuilder();
@@ -9517,12 +9701,12 @@ public final class PDM {
        *
        * <code>.provenancegraph.datamodel.Process childProc = 1;</code>
        */
-      public provenancegraph.datamodel.PDM.ProcessOrBuilder getChildProcOrBuilder() {
+      public ProcessOrBuilder getChildProcOrBuilder() {
         if (childProcBuilder_ != null) {
           return childProcBuilder_.getMessageOrBuilder();
         } else {
           return childProc_ == null ?
-              provenancegraph.datamodel.PDM.Process.getDefaultInstance() : childProc_;
+              Process.getDefaultInstance() : childProc_;
         }
       }
       /**
@@ -9533,11 +9717,11 @@ public final class PDM {
        * <code>.provenancegraph.datamodel.Process childProc = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          provenancegraph.datamodel.PDM.Process, provenancegraph.datamodel.PDM.Process.Builder, provenancegraph.datamodel.PDM.ProcessOrBuilder> 
+          Process, Process.Builder, ProcessOrBuilder>
           getChildProcFieldBuilder() {
         if (childProcBuilder_ == null) {
           childProcBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              provenancegraph.datamodel.PDM.Process, provenancegraph.datamodel.PDM.Process.Builder, provenancegraph.datamodel.PDM.ProcessOrBuilder>(
+              Process, Process.Builder, ProcessOrBuilder>(
                   getChildProc(),
                   getParentForChildren(),
                   isClean());
@@ -9545,13 +9729,13 @@ public final class PDM {
         }
         return childProcBuilder_;
       }
-      @java.lang.Override
+      @Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFields(unknownFields);
       }
 
-      @java.lang.Override
+      @Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -9562,18 +9746,18 @@ public final class PDM {
     }
 
     // @@protoc_insertion_point(class_scope:provenancegraph.datamodel.ProcessEvent)
-    private static final provenancegraph.datamodel.PDM.ProcessEvent DEFAULT_INSTANCE;
+    private static final ProcessEvent DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new provenancegraph.datamodel.PDM.ProcessEvent();
+      DEFAULT_INSTANCE = new ProcessEvent();
     }
 
-    public static provenancegraph.datamodel.PDM.ProcessEvent getDefaultInstance() {
+    public static ProcessEvent getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
     private static final com.google.protobuf.Parser<ProcessEvent>
         PARSER = new com.google.protobuf.AbstractParser<ProcessEvent>() {
-      @java.lang.Override
+      @Override
       public ProcessEvent parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -9597,13 +9781,13 @@ public final class PDM {
       return PARSER;
     }
 
-    @java.lang.Override
+    @Override
     public com.google.protobuf.Parser<ProcessEvent> getParserForType() {
       return PARSER;
     }
 
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.ProcessEvent getDefaultInstanceForType() {
+    @Override
+    public ProcessEvent getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -9632,7 +9816,7 @@ public final class PDM {
      * <code>.provenancegraph.datamodel.File file = 1;</code>
      * @return The file.
      */
-    provenancegraph.datamodel.PDM.File getFile();
+    File getFile();
     /**
      * <pre>
      *    FileUUID fileUUID = 1;
@@ -9641,7 +9825,7 @@ public final class PDM {
      *
      * <code>.provenancegraph.datamodel.File file = 1;</code>
      */
-    provenancegraph.datamodel.PDM.FileOrBuilder getFileOrBuilder();
+    FileOrBuilder getFileOrBuilder();
 
     /**
      * <code>.provenancegraph.datamodel.File newFile = 2;</code>
@@ -9652,11 +9836,11 @@ public final class PDM {
      * <code>.provenancegraph.datamodel.File newFile = 2;</code>
      * @return The newFile.
      */
-    provenancegraph.datamodel.PDM.File getNewFile();
+    File getNewFile();
     /**
      * <code>.provenancegraph.datamodel.File newFile = 2;</code>
      */
-    provenancegraph.datamodel.PDM.FileOrBuilder getNewFileOrBuilder();
+    FileOrBuilder getNewFileOrBuilder();
 
     /**
      * <code>uint32 uid = 3;</code>
@@ -9699,28 +9883,28 @@ public final class PDM {
     private FileEvent() {
     }
 
-    @java.lang.Override
+    @Override
     @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
+    protected Object newInstance(
         UnusedPrivateParameter unused) {
       return new FileEvent();
     }
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_FileEvent_descriptor;
+      return PDM.internal_static_provenancegraph_datamodel_FileEvent_descriptor;
     }
 
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+    @Override
+    protected FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_FileEvent_fieldAccessorTable
+      return PDM.internal_static_provenancegraph_datamodel_FileEvent_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              provenancegraph.datamodel.PDM.FileEvent.class, provenancegraph.datamodel.PDM.FileEvent.Builder.class);
+              FileEvent.class, Builder.class);
     }
 
     public static final int FILE_FIELD_NUMBER = 1;
-    private provenancegraph.datamodel.PDM.File file_;
+    private File file_;
     /**
      * <pre>
      *    FileUUID fileUUID = 1;
@@ -9730,7 +9914,7 @@ public final class PDM {
      * <code>.provenancegraph.datamodel.File file = 1;</code>
      * @return Whether the file field is set.
      */
-    @java.lang.Override
+    @Override
     public boolean hasFile() {
       return file_ != null;
     }
@@ -9743,9 +9927,9 @@ public final class PDM {
      * <code>.provenancegraph.datamodel.File file = 1;</code>
      * @return The file.
      */
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.File getFile() {
-      return file_ == null ? provenancegraph.datamodel.PDM.File.getDefaultInstance() : file_;
+    @Override
+    public File getFile() {
+      return file_ == null ? File.getDefaultInstance() : file_;
     }
     /**
      * <pre>
@@ -9755,18 +9939,18 @@ public final class PDM {
      *
      * <code>.provenancegraph.datamodel.File file = 1;</code>
      */
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.FileOrBuilder getFileOrBuilder() {
-      return file_ == null ? provenancegraph.datamodel.PDM.File.getDefaultInstance() : file_;
+    @Override
+    public FileOrBuilder getFileOrBuilder() {
+      return file_ == null ? File.getDefaultInstance() : file_;
     }
 
     public static final int NEWFILE_FIELD_NUMBER = 2;
-    private provenancegraph.datamodel.PDM.File newFile_;
+    private File newFile_;
     /**
      * <code>.provenancegraph.datamodel.File newFile = 2;</code>
      * @return Whether the newFile field is set.
      */
-    @java.lang.Override
+    @Override
     public boolean hasNewFile() {
       return newFile_ != null;
     }
@@ -9774,16 +9958,16 @@ public final class PDM {
      * <code>.provenancegraph.datamodel.File newFile = 2;</code>
      * @return The newFile.
      */
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.File getNewFile() {
-      return newFile_ == null ? provenancegraph.datamodel.PDM.File.getDefaultInstance() : newFile_;
+    @Override
+    public File getNewFile() {
+      return newFile_ == null ? File.getDefaultInstance() : newFile_;
     }
     /**
      * <code>.provenancegraph.datamodel.File newFile = 2;</code>
      */
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.FileOrBuilder getNewFileOrBuilder() {
-      return newFile_ == null ? provenancegraph.datamodel.PDM.File.getDefaultInstance() : newFile_;
+    @Override
+    public FileOrBuilder getNewFileOrBuilder() {
+      return newFile_ == null ? File.getDefaultInstance() : newFile_;
     }
 
     public static final int UID_FIELD_NUMBER = 3;
@@ -9792,7 +9976,7 @@ public final class PDM {
      * <code>uint32 uid = 3;</code>
      * @return The uid.
      */
-    @java.lang.Override
+    @Override
     public int getUid() {
       return uid_;
     }
@@ -9803,7 +9987,7 @@ public final class PDM {
      * <code>uint32 gid = 4;</code>
      * @return The gid.
      */
-    @java.lang.Override
+    @Override
     public int getGid() {
       return gid_;
     }
@@ -9818,13 +10002,13 @@ public final class PDM {
      * <code>uint32 permission = 5;</code>
      * @return The permission.
      */
-    @java.lang.Override
+    @Override
     public int getPermission() {
       return permission_;
     }
 
     private byte memoizedIsInitialized = -1;
-    @java.lang.Override
+    @Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -9834,7 +10018,7 @@ public final class PDM {
       return true;
     }
 
-    @java.lang.Override
+    @Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (file_ != null) {
@@ -9855,7 +10039,7 @@ public final class PDM {
       getUnknownFields().writeTo(output);
     }
 
-    @java.lang.Override
+    @Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -9886,15 +10070,15 @@ public final class PDM {
       return size;
     }
 
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
+    @Override
+    public boolean equals(final Object obj) {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof provenancegraph.datamodel.PDM.FileEvent)) {
+      if (!(obj instanceof FileEvent)) {
         return super.equals(obj);
       }
-      provenancegraph.datamodel.PDM.FileEvent other = (provenancegraph.datamodel.PDM.FileEvent) obj;
+      FileEvent other = (FileEvent) obj;
 
       if (hasFile() != other.hasFile()) return false;
       if (hasFile()) {
@@ -9916,7 +10100,7 @@ public final class PDM {
       return true;
     }
 
-    @java.lang.Override
+    @Override
     public int hashCode() {
       if (memoizedHashCode != 0) {
         return memoizedHashCode;
@@ -9942,44 +10126,44 @@ public final class PDM {
       return hash;
     }
 
-    public static provenancegraph.datamodel.PDM.FileEvent parseFrom(
+    public static FileEvent parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static provenancegraph.datamodel.PDM.FileEvent parseFrom(
+    public static FileEvent parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.FileEvent parseFrom(
+    public static FileEvent parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static provenancegraph.datamodel.PDM.FileEvent parseFrom(
+    public static FileEvent parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.FileEvent parseFrom(byte[] data)
+    public static FileEvent parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static provenancegraph.datamodel.PDM.FileEvent parseFrom(
+    public static FileEvent parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.FileEvent parseFrom(java.io.InputStream input)
+    public static FileEvent parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static provenancegraph.datamodel.PDM.FileEvent parseFrom(
+    public static FileEvent parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -9987,26 +10171,26 @@ public final class PDM {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    public static provenancegraph.datamodel.PDM.FileEvent parseDelimitedFrom(java.io.InputStream input)
+    public static FileEvent parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
 
-    public static provenancegraph.datamodel.PDM.FileEvent parseDelimitedFrom(
+    public static FileEvent parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.FileEvent parseFrom(
+    public static FileEvent parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static provenancegraph.datamodel.PDM.FileEvent parseFrom(
+    public static FileEvent parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -10014,23 +10198,23 @@ public final class PDM {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    @java.lang.Override
+    @Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(provenancegraph.datamodel.PDM.FileEvent prototype) {
+    public static Builder newBuilder(FileEvent prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
-    @java.lang.Override
+    @Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
     }
 
-    @java.lang.Override
+    @Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -10044,18 +10228,18 @@ public final class PDM {
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:provenancegraph.datamodel.FileEvent)
-        provenancegraph.datamodel.PDM.FileEventOrBuilder {
+        FileEventOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_FileEvent_descriptor;
+        return PDM.internal_static_provenancegraph_datamodel_FileEvent_descriptor;
       }
 
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      @Override
+      protected FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_FileEvent_fieldAccessorTable
+        return PDM.internal_static_provenancegraph_datamodel_FileEvent_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                provenancegraph.datamodel.PDM.FileEvent.class, provenancegraph.datamodel.PDM.FileEvent.Builder.class);
+                FileEvent.class, Builder.class);
       }
 
       // Construct using provenancegraph.datamodel.PDM.FileEvent.newBuilder()
@@ -10064,11 +10248,11 @@ public final class PDM {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          BuilderParent parent) {
         super(parent);
 
       }
-      @java.lang.Override
+      @Override
       public Builder clear() {
         super.clear();
         bitField0_ = 0;
@@ -10088,35 +10272,35 @@ public final class PDM {
         return this;
       }
 
-      @java.lang.Override
+      @Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_FileEvent_descriptor;
+        return PDM.internal_static_provenancegraph_datamodel_FileEvent_descriptor;
       }
 
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.FileEvent getDefaultInstanceForType() {
-        return provenancegraph.datamodel.PDM.FileEvent.getDefaultInstance();
+      @Override
+      public FileEvent getDefaultInstanceForType() {
+        return FileEvent.getDefaultInstance();
       }
 
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.FileEvent build() {
-        provenancegraph.datamodel.PDM.FileEvent result = buildPartial();
+      @Override
+      public FileEvent build() {
+        FileEvent result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.FileEvent buildPartial() {
-        provenancegraph.datamodel.PDM.FileEvent result = new provenancegraph.datamodel.PDM.FileEvent(this);
+      @Override
+      public FileEvent buildPartial() {
+        FileEvent result = new FileEvent(this);
         if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
       }
 
-      private void buildPartial0(provenancegraph.datamodel.PDM.FileEvent result) {
+      private void buildPartial0(FileEvent result) {
         int from_bitField0_ = bitField0_;
         if (((from_bitField0_ & 0x00000001) != 0)) {
           result.file_ = fileBuilder_ == null
@@ -10139,50 +10323,50 @@ public final class PDM {
         }
       }
 
-      @java.lang.Override
+      @Override
       public Builder clone() {
         return super.clone();
       }
-      @java.lang.Override
+      @Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return super.setField(field, value);
       }
-      @java.lang.Override
+      @Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return super.clearField(field);
       }
-      @java.lang.Override
+      @Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return super.clearOneof(oneof);
       }
-      @java.lang.Override
+      @Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
+          int index, Object value) {
         return super.setRepeatedField(field, index, value);
       }
-      @java.lang.Override
+      @Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return super.addRepeatedField(field, value);
       }
-      @java.lang.Override
+      @Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof provenancegraph.datamodel.PDM.FileEvent) {
-          return mergeFrom((provenancegraph.datamodel.PDM.FileEvent)other);
+        if (other instanceof FileEvent) {
+          return mergeFrom((FileEvent)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(provenancegraph.datamodel.PDM.FileEvent other) {
-        if (other == provenancegraph.datamodel.PDM.FileEvent.getDefaultInstance()) return this;
+      public Builder mergeFrom(FileEvent other) {
+        if (other == FileEvent.getDefaultInstance()) return this;
         if (other.hasFile()) {
           mergeFile(other.getFile());
         }
@@ -10203,18 +10387,18 @@ public final class PDM {
         return this;
       }
 
-      @java.lang.Override
+      @Override
       public final boolean isInitialized() {
         return true;
       }
 
-      @java.lang.Override
+      @Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
         if (extensionRegistry == null) {
-          throw new java.lang.NullPointerException();
+          throw new NullPointerException();
         }
         try {
           boolean done = false;
@@ -10270,9 +10454,9 @@ public final class PDM {
       }
       private int bitField0_;
 
-      private provenancegraph.datamodel.PDM.File file_;
+      private File file_;
       private com.google.protobuf.SingleFieldBuilderV3<
-          provenancegraph.datamodel.PDM.File, provenancegraph.datamodel.PDM.File.Builder, provenancegraph.datamodel.PDM.FileOrBuilder> fileBuilder_;
+          File, File.Builder, FileOrBuilder> fileBuilder_;
       /**
        * <pre>
        *    FileUUID fileUUID = 1;
@@ -10294,9 +10478,9 @@ public final class PDM {
        * <code>.provenancegraph.datamodel.File file = 1;</code>
        * @return The file.
        */
-      public provenancegraph.datamodel.PDM.File getFile() {
+      public File getFile() {
         if (fileBuilder_ == null) {
-          return file_ == null ? provenancegraph.datamodel.PDM.File.getDefaultInstance() : file_;
+          return file_ == null ? File.getDefaultInstance() : file_;
         } else {
           return fileBuilder_.getMessage();
         }
@@ -10309,7 +10493,7 @@ public final class PDM {
        *
        * <code>.provenancegraph.datamodel.File file = 1;</code>
        */
-      public Builder setFile(provenancegraph.datamodel.PDM.File value) {
+      public Builder setFile(File value) {
         if (fileBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -10331,7 +10515,7 @@ public final class PDM {
        * <code>.provenancegraph.datamodel.File file = 1;</code>
        */
       public Builder setFile(
-          provenancegraph.datamodel.PDM.File.Builder builderForValue) {
+          File.Builder builderForValue) {
         if (fileBuilder_ == null) {
           file_ = builderForValue.build();
         } else {
@@ -10349,11 +10533,11 @@ public final class PDM {
        *
        * <code>.provenancegraph.datamodel.File file = 1;</code>
        */
-      public Builder mergeFile(provenancegraph.datamodel.PDM.File value) {
+      public Builder mergeFile(File value) {
         if (fileBuilder_ == null) {
           if (((bitField0_ & 0x00000001) != 0) &&
             file_ != null &&
-            file_ != provenancegraph.datamodel.PDM.File.getDefaultInstance()) {
+            file_ != File.getDefaultInstance()) {
             getFileBuilder().mergeFrom(value);
           } else {
             file_ = value;
@@ -10391,7 +10575,7 @@ public final class PDM {
        *
        * <code>.provenancegraph.datamodel.File file = 1;</code>
        */
-      public provenancegraph.datamodel.PDM.File.Builder getFileBuilder() {
+      public File.Builder getFileBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getFileFieldBuilder().getBuilder();
@@ -10404,12 +10588,12 @@ public final class PDM {
        *
        * <code>.provenancegraph.datamodel.File file = 1;</code>
        */
-      public provenancegraph.datamodel.PDM.FileOrBuilder getFileOrBuilder() {
+      public FileOrBuilder getFileOrBuilder() {
         if (fileBuilder_ != null) {
           return fileBuilder_.getMessageOrBuilder();
         } else {
           return file_ == null ?
-              provenancegraph.datamodel.PDM.File.getDefaultInstance() : file_;
+              File.getDefaultInstance() : file_;
         }
       }
       /**
@@ -10421,11 +10605,11 @@ public final class PDM {
        * <code>.provenancegraph.datamodel.File file = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          provenancegraph.datamodel.PDM.File, provenancegraph.datamodel.PDM.File.Builder, provenancegraph.datamodel.PDM.FileOrBuilder> 
+          File, File.Builder, FileOrBuilder>
           getFileFieldBuilder() {
         if (fileBuilder_ == null) {
           fileBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              provenancegraph.datamodel.PDM.File, provenancegraph.datamodel.PDM.File.Builder, provenancegraph.datamodel.PDM.FileOrBuilder>(
+              File, File.Builder, FileOrBuilder>(
                   getFile(),
                   getParentForChildren(),
                   isClean());
@@ -10434,9 +10618,9 @@ public final class PDM {
         return fileBuilder_;
       }
 
-      private provenancegraph.datamodel.PDM.File newFile_;
+      private File newFile_;
       private com.google.protobuf.SingleFieldBuilderV3<
-          provenancegraph.datamodel.PDM.File, provenancegraph.datamodel.PDM.File.Builder, provenancegraph.datamodel.PDM.FileOrBuilder> newFileBuilder_;
+          File, File.Builder, FileOrBuilder> newFileBuilder_;
       /**
        * <code>.provenancegraph.datamodel.File newFile = 2;</code>
        * @return Whether the newFile field is set.
@@ -10448,9 +10632,9 @@ public final class PDM {
        * <code>.provenancegraph.datamodel.File newFile = 2;</code>
        * @return The newFile.
        */
-      public provenancegraph.datamodel.PDM.File getNewFile() {
+      public File getNewFile() {
         if (newFileBuilder_ == null) {
-          return newFile_ == null ? provenancegraph.datamodel.PDM.File.getDefaultInstance() : newFile_;
+          return newFile_ == null ? File.getDefaultInstance() : newFile_;
         } else {
           return newFileBuilder_.getMessage();
         }
@@ -10458,7 +10642,7 @@ public final class PDM {
       /**
        * <code>.provenancegraph.datamodel.File newFile = 2;</code>
        */
-      public Builder setNewFile(provenancegraph.datamodel.PDM.File value) {
+      public Builder setNewFile(File value) {
         if (newFileBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -10475,7 +10659,7 @@ public final class PDM {
        * <code>.provenancegraph.datamodel.File newFile = 2;</code>
        */
       public Builder setNewFile(
-          provenancegraph.datamodel.PDM.File.Builder builderForValue) {
+          File.Builder builderForValue) {
         if (newFileBuilder_ == null) {
           newFile_ = builderForValue.build();
         } else {
@@ -10488,11 +10672,11 @@ public final class PDM {
       /**
        * <code>.provenancegraph.datamodel.File newFile = 2;</code>
        */
-      public Builder mergeNewFile(provenancegraph.datamodel.PDM.File value) {
+      public Builder mergeNewFile(File value) {
         if (newFileBuilder_ == null) {
           if (((bitField0_ & 0x00000002) != 0) &&
             newFile_ != null &&
-            newFile_ != provenancegraph.datamodel.PDM.File.getDefaultInstance()) {
+            newFile_ != File.getDefaultInstance()) {
             getNewFileBuilder().mergeFrom(value);
           } else {
             newFile_ = value;
@@ -10520,7 +10704,7 @@ public final class PDM {
       /**
        * <code>.provenancegraph.datamodel.File newFile = 2;</code>
        */
-      public provenancegraph.datamodel.PDM.File.Builder getNewFileBuilder() {
+      public File.Builder getNewFileBuilder() {
         bitField0_ |= 0x00000002;
         onChanged();
         return getNewFileFieldBuilder().getBuilder();
@@ -10528,23 +10712,23 @@ public final class PDM {
       /**
        * <code>.provenancegraph.datamodel.File newFile = 2;</code>
        */
-      public provenancegraph.datamodel.PDM.FileOrBuilder getNewFileOrBuilder() {
+      public FileOrBuilder getNewFileOrBuilder() {
         if (newFileBuilder_ != null) {
           return newFileBuilder_.getMessageOrBuilder();
         } else {
           return newFile_ == null ?
-              provenancegraph.datamodel.PDM.File.getDefaultInstance() : newFile_;
+              File.getDefaultInstance() : newFile_;
         }
       }
       /**
        * <code>.provenancegraph.datamodel.File newFile = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          provenancegraph.datamodel.PDM.File, provenancegraph.datamodel.PDM.File.Builder, provenancegraph.datamodel.PDM.FileOrBuilder> 
+          File, File.Builder, FileOrBuilder>
           getNewFileFieldBuilder() {
         if (newFileBuilder_ == null) {
           newFileBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              provenancegraph.datamodel.PDM.File, provenancegraph.datamodel.PDM.File.Builder, provenancegraph.datamodel.PDM.FileOrBuilder>(
+              File, File.Builder, FileOrBuilder>(
                   getNewFile(),
                   getParentForChildren(),
                   isClean());
@@ -10558,7 +10742,7 @@ public final class PDM {
        * <code>uint32 uid = 3;</code>
        * @return The uid.
        */
-      @java.lang.Override
+      @Override
       public int getUid() {
         return uid_;
       }
@@ -10590,7 +10774,7 @@ public final class PDM {
        * <code>uint32 gid = 4;</code>
        * @return The gid.
        */
-      @java.lang.Override
+      @Override
       public int getGid() {
         return gid_;
       }
@@ -10626,7 +10810,7 @@ public final class PDM {
        * <code>uint32 permission = 5;</code>
        * @return The permission.
        */
-      @java.lang.Override
+      @Override
       public int getPermission() {
         return permission_;
       }
@@ -10660,13 +10844,13 @@ public final class PDM {
         onChanged();
         return this;
       }
-      @java.lang.Override
+      @Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFields(unknownFields);
       }
 
-      @java.lang.Override
+      @Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -10677,18 +10861,18 @@ public final class PDM {
     }
 
     // @@protoc_insertion_point(class_scope:provenancegraph.datamodel.FileEvent)
-    private static final provenancegraph.datamodel.PDM.FileEvent DEFAULT_INSTANCE;
+    private static final FileEvent DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new provenancegraph.datamodel.PDM.FileEvent();
+      DEFAULT_INSTANCE = new FileEvent();
     }
 
-    public static provenancegraph.datamodel.PDM.FileEvent getDefaultInstance() {
+    public static FileEvent getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
     private static final com.google.protobuf.Parser<FileEvent>
         PARSER = new com.google.protobuf.AbstractParser<FileEvent>() {
-      @java.lang.Override
+      @Override
       public FileEvent parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -10712,13 +10896,13 @@ public final class PDM {
       return PARSER;
     }
 
-    @java.lang.Override
+    @Override
     public com.google.protobuf.Parser<FileEvent> getParserForType() {
       return PARSER;
     }
 
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.FileEvent getDefaultInstanceForType() {
+    @Override
+    public FileEvent getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -10759,24 +10943,24 @@ public final class PDM {
     private EventLost() {
     }
 
-    @java.lang.Override
+    @Override
     @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
+    protected Object newInstance(
         UnusedPrivateParameter unused) {
       return new EventLost();
     }
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_EventLost_descriptor;
+      return PDM.internal_static_provenancegraph_datamodel_EventLost_descriptor;
     }
 
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+    @Override
+    protected FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_EventLost_fieldAccessorTable
+      return PDM.internal_static_provenancegraph_datamodel_EventLost_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              provenancegraph.datamodel.PDM.EventLost.class, provenancegraph.datamodel.PDM.EventLost.Builder.class);
+              EventLost.class, Builder.class);
     }
 
     public static final int LOSTCPU_FIELD_NUMBER = 1;
@@ -10785,7 +10969,7 @@ public final class PDM {
      * <code>uint64 lostCpu = 1;</code>
      * @return The lostCpu.
      */
-    @java.lang.Override
+    @Override
     public long getLostCpu() {
       return lostCpu_;
     }
@@ -10796,13 +10980,13 @@ public final class PDM {
      * <code>uint64 lostSize = 2;</code>
      * @return The lostSize.
      */
-    @java.lang.Override
+    @Override
     public long getLostSize() {
       return lostSize_;
     }
 
     private byte memoizedIsInitialized = -1;
-    @java.lang.Override
+    @Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -10812,7 +10996,7 @@ public final class PDM {
       return true;
     }
 
-    @java.lang.Override
+    @Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (lostCpu_ != 0L) {
@@ -10824,7 +11008,7 @@ public final class PDM {
       getUnknownFields().writeTo(output);
     }
 
-    @java.lang.Override
+    @Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -10843,15 +11027,15 @@ public final class PDM {
       return size;
     }
 
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
+    @Override
+    public boolean equals(final Object obj) {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof provenancegraph.datamodel.PDM.EventLost)) {
+      if (!(obj instanceof EventLost)) {
         return super.equals(obj);
       }
-      provenancegraph.datamodel.PDM.EventLost other = (provenancegraph.datamodel.PDM.EventLost) obj;
+      EventLost other = (EventLost) obj;
 
       if (getLostCpu()
           != other.getLostCpu()) return false;
@@ -10861,7 +11045,7 @@ public final class PDM {
       return true;
     }
 
-    @java.lang.Override
+    @Override
     public int hashCode() {
       if (memoizedHashCode != 0) {
         return memoizedHashCode;
@@ -10879,44 +11063,44 @@ public final class PDM {
       return hash;
     }
 
-    public static provenancegraph.datamodel.PDM.EventLost parseFrom(
+    public static EventLost parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static provenancegraph.datamodel.PDM.EventLost parseFrom(
+    public static EventLost parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.EventLost parseFrom(
+    public static EventLost parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static provenancegraph.datamodel.PDM.EventLost parseFrom(
+    public static EventLost parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.EventLost parseFrom(byte[] data)
+    public static EventLost parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static provenancegraph.datamodel.PDM.EventLost parseFrom(
+    public static EventLost parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.EventLost parseFrom(java.io.InputStream input)
+    public static EventLost parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static provenancegraph.datamodel.PDM.EventLost parseFrom(
+    public static EventLost parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -10924,26 +11108,26 @@ public final class PDM {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    public static provenancegraph.datamodel.PDM.EventLost parseDelimitedFrom(java.io.InputStream input)
+    public static EventLost parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
 
-    public static provenancegraph.datamodel.PDM.EventLost parseDelimitedFrom(
+    public static EventLost parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.EventLost parseFrom(
+    public static EventLost parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static provenancegraph.datamodel.PDM.EventLost parseFrom(
+    public static EventLost parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -10951,23 +11135,23 @@ public final class PDM {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    @java.lang.Override
+    @Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(provenancegraph.datamodel.PDM.EventLost prototype) {
+    public static Builder newBuilder(EventLost prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
-    @java.lang.Override
+    @Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
     }
 
-    @java.lang.Override
+    @Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -10981,18 +11165,18 @@ public final class PDM {
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:provenancegraph.datamodel.EventLost)
-        provenancegraph.datamodel.PDM.EventLostOrBuilder {
+        EventLostOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_EventLost_descriptor;
+        return PDM.internal_static_provenancegraph_datamodel_EventLost_descriptor;
       }
 
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      @Override
+      protected FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_EventLost_fieldAccessorTable
+        return PDM.internal_static_provenancegraph_datamodel_EventLost_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                provenancegraph.datamodel.PDM.EventLost.class, provenancegraph.datamodel.PDM.EventLost.Builder.class);
+                EventLost.class, Builder.class);
       }
 
       // Construct using provenancegraph.datamodel.PDM.EventLost.newBuilder()
@@ -11001,11 +11185,11 @@ public final class PDM {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          BuilderParent parent) {
         super(parent);
 
       }
-      @java.lang.Override
+      @Override
       public Builder clear() {
         super.clear();
         bitField0_ = 0;
@@ -11014,35 +11198,35 @@ public final class PDM {
         return this;
       }
 
-      @java.lang.Override
+      @Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_EventLost_descriptor;
+        return PDM.internal_static_provenancegraph_datamodel_EventLost_descriptor;
       }
 
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.EventLost getDefaultInstanceForType() {
-        return provenancegraph.datamodel.PDM.EventLost.getDefaultInstance();
+      @Override
+      public EventLost getDefaultInstanceForType() {
+        return EventLost.getDefaultInstance();
       }
 
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.EventLost build() {
-        provenancegraph.datamodel.PDM.EventLost result = buildPartial();
+      @Override
+      public EventLost build() {
+        EventLost result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.EventLost buildPartial() {
-        provenancegraph.datamodel.PDM.EventLost result = new provenancegraph.datamodel.PDM.EventLost(this);
+      @Override
+      public EventLost buildPartial() {
+        EventLost result = new EventLost(this);
         if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
       }
 
-      private void buildPartial0(provenancegraph.datamodel.PDM.EventLost result) {
+      private void buildPartial0(EventLost result) {
         int from_bitField0_ = bitField0_;
         if (((from_bitField0_ & 0x00000001) != 0)) {
           result.lostCpu_ = lostCpu_;
@@ -11052,50 +11236,50 @@ public final class PDM {
         }
       }
 
-      @java.lang.Override
+      @Override
       public Builder clone() {
         return super.clone();
       }
-      @java.lang.Override
+      @Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return super.setField(field, value);
       }
-      @java.lang.Override
+      @Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return super.clearField(field);
       }
-      @java.lang.Override
+      @Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return super.clearOneof(oneof);
       }
-      @java.lang.Override
+      @Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
+          int index, Object value) {
         return super.setRepeatedField(field, index, value);
       }
-      @java.lang.Override
+      @Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return super.addRepeatedField(field, value);
       }
-      @java.lang.Override
+      @Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof provenancegraph.datamodel.PDM.EventLost) {
-          return mergeFrom((provenancegraph.datamodel.PDM.EventLost)other);
+        if (other instanceof EventLost) {
+          return mergeFrom((EventLost)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(provenancegraph.datamodel.PDM.EventLost other) {
-        if (other == provenancegraph.datamodel.PDM.EventLost.getDefaultInstance()) return this;
+      public Builder mergeFrom(EventLost other) {
+        if (other == EventLost.getDefaultInstance()) return this;
         if (other.getLostCpu() != 0L) {
           setLostCpu(other.getLostCpu());
         }
@@ -11107,18 +11291,18 @@ public final class PDM {
         return this;
       }
 
-      @java.lang.Override
+      @Override
       public final boolean isInitialized() {
         return true;
       }
 
-      @java.lang.Override
+      @Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
         if (extensionRegistry == null) {
-          throw new java.lang.NullPointerException();
+          throw new NullPointerException();
         }
         try {
           boolean done = false;
@@ -11160,7 +11344,7 @@ public final class PDM {
        * <code>uint64 lostCpu = 1;</code>
        * @return The lostCpu.
        */
-      @java.lang.Override
+      @Override
       public long getLostCpu() {
         return lostCpu_;
       }
@@ -11192,7 +11376,7 @@ public final class PDM {
        * <code>uint64 lostSize = 2;</code>
        * @return The lostSize.
        */
-      @java.lang.Override
+      @Override
       public long getLostSize() {
         return lostSize_;
       }
@@ -11218,13 +11402,13 @@ public final class PDM {
         onChanged();
         return this;
       }
-      @java.lang.Override
+      @Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFields(unknownFields);
       }
 
-      @java.lang.Override
+      @Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -11235,18 +11419,18 @@ public final class PDM {
     }
 
     // @@protoc_insertion_point(class_scope:provenancegraph.datamodel.EventLost)
-    private static final provenancegraph.datamodel.PDM.EventLost DEFAULT_INSTANCE;
+    private static final EventLost DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new provenancegraph.datamodel.PDM.EventLost();
+      DEFAULT_INSTANCE = new EventLost();
     }
 
-    public static provenancegraph.datamodel.PDM.EventLost getDefaultInstance() {
+    public static EventLost getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
     private static final com.google.protobuf.Parser<EventLost>
         PARSER = new com.google.protobuf.AbstractParser<EventLost>() {
-      @java.lang.Override
+      @Override
       public EventLost parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -11270,13 +11454,13 @@ public final class PDM {
       return PARSER;
     }
 
-    @java.lang.Override
+    @Override
     public com.google.protobuf.Parser<EventLost> getParserForType() {
       return PARSER;
     }
 
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.EventLost getDefaultInstanceForType() {
+    @Override
+    public EventLost getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -11295,11 +11479,11 @@ public final class PDM {
      * <code>.provenancegraph.datamodel.EventHeader eHeader = 1;</code>
      * @return The eHeader.
      */
-    provenancegraph.datamodel.PDM.EventHeader getEHeader();
+    EventHeader getEHeader();
     /**
      * <code>.provenancegraph.datamodel.EventHeader eHeader = 1;</code>
      */
-    provenancegraph.datamodel.PDM.EventHeaderOrBuilder getEHeaderOrBuilder();
+    EventHeaderOrBuilder getEHeaderOrBuilder();
 
     /**
      * <code>.provenancegraph.datamodel.ProcessEvent processEvent = 2;</code>
@@ -11310,11 +11494,11 @@ public final class PDM {
      * <code>.provenancegraph.datamodel.ProcessEvent processEvent = 2;</code>
      * @return The processEvent.
      */
-    provenancegraph.datamodel.PDM.ProcessEvent getProcessEvent();
+    ProcessEvent getProcessEvent();
     /**
      * <code>.provenancegraph.datamodel.ProcessEvent processEvent = 2;</code>
      */
-    provenancegraph.datamodel.PDM.ProcessEventOrBuilder getProcessEventOrBuilder();
+    ProcessEventOrBuilder getProcessEventOrBuilder();
 
     /**
      * <code>.provenancegraph.datamodel.FileEvent fileEvent = 3;</code>
@@ -11325,11 +11509,11 @@ public final class PDM {
      * <code>.provenancegraph.datamodel.FileEvent fileEvent = 3;</code>
      * @return The fileEvent.
      */
-    provenancegraph.datamodel.PDM.FileEvent getFileEvent();
+    FileEvent getFileEvent();
     /**
      * <code>.provenancegraph.datamodel.FileEvent fileEvent = 3;</code>
      */
-    provenancegraph.datamodel.PDM.FileEventOrBuilder getFileEventOrBuilder();
+    FileEventOrBuilder getFileEventOrBuilder();
 
     /**
      * <code>.provenancegraph.datamodel.NetEvent netEvent = 4;</code>
@@ -11340,13 +11524,13 @@ public final class PDM {
      * <code>.provenancegraph.datamodel.NetEvent netEvent = 4;</code>
      * @return The netEvent.
      */
-    provenancegraph.datamodel.PDM.NetEvent getNetEvent();
+    NetEvent getNetEvent();
     /**
      * <code>.provenancegraph.datamodel.NetEvent netEvent = 4;</code>
      */
-    provenancegraph.datamodel.PDM.NetEventOrBuilder getNetEventOrBuilder();
+    NetEventOrBuilder getNetEventOrBuilder();
 
-    provenancegraph.datamodel.PDM.EventData.DataCase getDataCase();
+    EventData.DataCase getDataCase();
   }
   /**
    * <pre>
@@ -11367,32 +11551,32 @@ public final class PDM {
     private EventData() {
     }
 
-    @java.lang.Override
+    @Override
     @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
+    protected Object newInstance(
         UnusedPrivateParameter unused) {
       return new EventData();
     }
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_EventData_descriptor;
+      return PDM.internal_static_provenancegraph_datamodel_EventData_descriptor;
     }
 
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+    @Override
+    protected FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_EventData_fieldAccessorTable
+      return PDM.internal_static_provenancegraph_datamodel_EventData_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              provenancegraph.datamodel.PDM.EventData.class, provenancegraph.datamodel.PDM.EventData.Builder.class);
+              EventData.class, Builder.class);
     }
 
     private int DataCase_ = 0;
     @SuppressWarnings("serial")
-    private java.lang.Object Data_;
+    private Object Data_;
     public enum DataCase
         implements com.google.protobuf.Internal.EnumLite,
-            com.google.protobuf.AbstractMessage.InternalOneOfEnum {
+            InternalOneOfEnum {
       PROCESSEVENT(2),
       FILEEVENT(3),
       NETEVENT(4),
@@ -11406,7 +11590,7 @@ public final class PDM {
        * @return The enum associated with the given number.
        * @deprecated Use {@link #forNumber(int)} instead.
        */
-      @java.lang.Deprecated
+      @Deprecated
       public static DataCase valueOf(int value) {
         return forNumber(value);
       }
@@ -11432,12 +11616,12 @@ public final class PDM {
     }
 
     public static final int EHEADER_FIELD_NUMBER = 1;
-    private provenancegraph.datamodel.PDM.EventHeader eHeader_;
+    private EventHeader eHeader_;
     /**
      * <code>.provenancegraph.datamodel.EventHeader eHeader = 1;</code>
      * @return Whether the eHeader field is set.
      */
-    @java.lang.Override
+    @Override
     public boolean hasEHeader() {
       return eHeader_ != null;
     }
@@ -11445,16 +11629,16 @@ public final class PDM {
      * <code>.provenancegraph.datamodel.EventHeader eHeader = 1;</code>
      * @return The eHeader.
      */
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.EventHeader getEHeader() {
-      return eHeader_ == null ? provenancegraph.datamodel.PDM.EventHeader.getDefaultInstance() : eHeader_;
+    @Override
+    public EventHeader getEHeader() {
+      return eHeader_ == null ? EventHeader.getDefaultInstance() : eHeader_;
     }
     /**
      * <code>.provenancegraph.datamodel.EventHeader eHeader = 1;</code>
      */
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.EventHeaderOrBuilder getEHeaderOrBuilder() {
-      return eHeader_ == null ? provenancegraph.datamodel.PDM.EventHeader.getDefaultInstance() : eHeader_;
+    @Override
+    public EventHeaderOrBuilder getEHeaderOrBuilder() {
+      return eHeader_ == null ? EventHeader.getDefaultInstance() : eHeader_;
     }
 
     public static final int PROCESSEVENT_FIELD_NUMBER = 2;
@@ -11462,7 +11646,7 @@ public final class PDM {
      * <code>.provenancegraph.datamodel.ProcessEvent processEvent = 2;</code>
      * @return Whether the processEvent field is set.
      */
-    @java.lang.Override
+    @Override
     public boolean hasProcessEvent() {
       return DataCase_ == 2;
     }
@@ -11470,22 +11654,22 @@ public final class PDM {
      * <code>.provenancegraph.datamodel.ProcessEvent processEvent = 2;</code>
      * @return The processEvent.
      */
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.ProcessEvent getProcessEvent() {
+    @Override
+    public ProcessEvent getProcessEvent() {
       if (DataCase_ == 2) {
-         return (provenancegraph.datamodel.PDM.ProcessEvent) Data_;
+         return (ProcessEvent) Data_;
       }
-      return provenancegraph.datamodel.PDM.ProcessEvent.getDefaultInstance();
+      return ProcessEvent.getDefaultInstance();
     }
     /**
      * <code>.provenancegraph.datamodel.ProcessEvent processEvent = 2;</code>
      */
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.ProcessEventOrBuilder getProcessEventOrBuilder() {
+    @Override
+    public ProcessEventOrBuilder getProcessEventOrBuilder() {
       if (DataCase_ == 2) {
-         return (provenancegraph.datamodel.PDM.ProcessEvent) Data_;
+         return (ProcessEvent) Data_;
       }
-      return provenancegraph.datamodel.PDM.ProcessEvent.getDefaultInstance();
+      return ProcessEvent.getDefaultInstance();
     }
 
     public static final int FILEEVENT_FIELD_NUMBER = 3;
@@ -11493,7 +11677,7 @@ public final class PDM {
      * <code>.provenancegraph.datamodel.FileEvent fileEvent = 3;</code>
      * @return Whether the fileEvent field is set.
      */
-    @java.lang.Override
+    @Override
     public boolean hasFileEvent() {
       return DataCase_ == 3;
     }
@@ -11501,22 +11685,22 @@ public final class PDM {
      * <code>.provenancegraph.datamodel.FileEvent fileEvent = 3;</code>
      * @return The fileEvent.
      */
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.FileEvent getFileEvent() {
+    @Override
+    public FileEvent getFileEvent() {
       if (DataCase_ == 3) {
-         return (provenancegraph.datamodel.PDM.FileEvent) Data_;
+         return (FileEvent) Data_;
       }
-      return provenancegraph.datamodel.PDM.FileEvent.getDefaultInstance();
+      return FileEvent.getDefaultInstance();
     }
     /**
      * <code>.provenancegraph.datamodel.FileEvent fileEvent = 3;</code>
      */
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.FileEventOrBuilder getFileEventOrBuilder() {
+    @Override
+    public FileEventOrBuilder getFileEventOrBuilder() {
       if (DataCase_ == 3) {
-         return (provenancegraph.datamodel.PDM.FileEvent) Data_;
+         return (FileEvent) Data_;
       }
-      return provenancegraph.datamodel.PDM.FileEvent.getDefaultInstance();
+      return FileEvent.getDefaultInstance();
     }
 
     public static final int NETEVENT_FIELD_NUMBER = 4;
@@ -11524,7 +11708,7 @@ public final class PDM {
      * <code>.provenancegraph.datamodel.NetEvent netEvent = 4;</code>
      * @return Whether the netEvent field is set.
      */
-    @java.lang.Override
+    @Override
     public boolean hasNetEvent() {
       return DataCase_ == 4;
     }
@@ -11532,26 +11716,26 @@ public final class PDM {
      * <code>.provenancegraph.datamodel.NetEvent netEvent = 4;</code>
      * @return The netEvent.
      */
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.NetEvent getNetEvent() {
+    @Override
+    public NetEvent getNetEvent() {
       if (DataCase_ == 4) {
-         return (provenancegraph.datamodel.PDM.NetEvent) Data_;
+         return (NetEvent) Data_;
       }
-      return provenancegraph.datamodel.PDM.NetEvent.getDefaultInstance();
+      return NetEvent.getDefaultInstance();
     }
     /**
      * <code>.provenancegraph.datamodel.NetEvent netEvent = 4;</code>
      */
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.NetEventOrBuilder getNetEventOrBuilder() {
+    @Override
+    public NetEventOrBuilder getNetEventOrBuilder() {
       if (DataCase_ == 4) {
-         return (provenancegraph.datamodel.PDM.NetEvent) Data_;
+         return (NetEvent) Data_;
       }
-      return provenancegraph.datamodel.PDM.NetEvent.getDefaultInstance();
+      return NetEvent.getDefaultInstance();
     }
 
     private byte memoizedIsInitialized = -1;
-    @java.lang.Override
+    @Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -11561,25 +11745,25 @@ public final class PDM {
       return true;
     }
 
-    @java.lang.Override
+    @Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (eHeader_ != null) {
         output.writeMessage(1, getEHeader());
       }
       if (DataCase_ == 2) {
-        output.writeMessage(2, (provenancegraph.datamodel.PDM.ProcessEvent) Data_);
+        output.writeMessage(2, (ProcessEvent) Data_);
       }
       if (DataCase_ == 3) {
-        output.writeMessage(3, (provenancegraph.datamodel.PDM.FileEvent) Data_);
+        output.writeMessage(3, (FileEvent) Data_);
       }
       if (DataCase_ == 4) {
-        output.writeMessage(4, (provenancegraph.datamodel.PDM.NetEvent) Data_);
+        output.writeMessage(4, (NetEvent) Data_);
       }
       getUnknownFields().writeTo(output);
     }
 
-    @java.lang.Override
+    @Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -11591,30 +11775,30 @@ public final class PDM {
       }
       if (DataCase_ == 2) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, (provenancegraph.datamodel.PDM.ProcessEvent) Data_);
+          .computeMessageSize(2, (ProcessEvent) Data_);
       }
       if (DataCase_ == 3) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, (provenancegraph.datamodel.PDM.FileEvent) Data_);
+          .computeMessageSize(3, (FileEvent) Data_);
       }
       if (DataCase_ == 4) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, (provenancegraph.datamodel.PDM.NetEvent) Data_);
+          .computeMessageSize(4, (NetEvent) Data_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
+    @Override
+    public boolean equals(final Object obj) {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof provenancegraph.datamodel.PDM.EventData)) {
+      if (!(obj instanceof EventData)) {
         return super.equals(obj);
       }
-      provenancegraph.datamodel.PDM.EventData other = (provenancegraph.datamodel.PDM.EventData) obj;
+      EventData other = (EventData) obj;
 
       if (hasEHeader() != other.hasEHeader()) return false;
       if (hasEHeader()) {
@@ -11642,7 +11826,7 @@ public final class PDM {
       return true;
     }
 
-    @java.lang.Override
+    @Override
     public int hashCode() {
       if (memoizedHashCode != 0) {
         return memoizedHashCode;
@@ -11674,44 +11858,44 @@ public final class PDM {
       return hash;
     }
 
-    public static provenancegraph.datamodel.PDM.EventData parseFrom(
+    public static EventData parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static provenancegraph.datamodel.PDM.EventData parseFrom(
+    public static EventData parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.EventData parseFrom(
+    public static EventData parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static provenancegraph.datamodel.PDM.EventData parseFrom(
+    public static EventData parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.EventData parseFrom(byte[] data)
+    public static EventData parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static provenancegraph.datamodel.PDM.EventData parseFrom(
+    public static EventData parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.EventData parseFrom(java.io.InputStream input)
+    public static EventData parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static provenancegraph.datamodel.PDM.EventData parseFrom(
+    public static EventData parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -11719,26 +11903,26 @@ public final class PDM {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    public static provenancegraph.datamodel.PDM.EventData parseDelimitedFrom(java.io.InputStream input)
+    public static EventData parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
 
-    public static provenancegraph.datamodel.PDM.EventData parseDelimitedFrom(
+    public static EventData parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.EventData parseFrom(
+    public static EventData parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static provenancegraph.datamodel.PDM.EventData parseFrom(
+    public static EventData parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -11746,23 +11930,23 @@ public final class PDM {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    @java.lang.Override
+    @Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(provenancegraph.datamodel.PDM.EventData prototype) {
+    public static Builder newBuilder(EventData prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
-    @java.lang.Override
+    @Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
     }
 
-    @java.lang.Override
+    @Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -11776,18 +11960,18 @@ public final class PDM {
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:provenancegraph.datamodel.EventData)
-        provenancegraph.datamodel.PDM.EventDataOrBuilder {
+        EventDataOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_EventData_descriptor;
+        return PDM.internal_static_provenancegraph_datamodel_EventData_descriptor;
       }
 
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      @Override
+      protected FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_EventData_fieldAccessorTable
+        return PDM.internal_static_provenancegraph_datamodel_EventData_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                provenancegraph.datamodel.PDM.EventData.class, provenancegraph.datamodel.PDM.EventData.Builder.class);
+                EventData.class, Builder.class);
       }
 
       // Construct using provenancegraph.datamodel.PDM.EventData.newBuilder()
@@ -11796,11 +11980,11 @@ public final class PDM {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          BuilderParent parent) {
         super(parent);
 
       }
-      @java.lang.Override
+      @Override
       public Builder clear() {
         super.clear();
         bitField0_ = 0;
@@ -11823,36 +12007,36 @@ public final class PDM {
         return this;
       }
 
-      @java.lang.Override
+      @Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_EventData_descriptor;
+        return PDM.internal_static_provenancegraph_datamodel_EventData_descriptor;
       }
 
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.EventData getDefaultInstanceForType() {
-        return provenancegraph.datamodel.PDM.EventData.getDefaultInstance();
+      @Override
+      public EventData getDefaultInstanceForType() {
+        return EventData.getDefaultInstance();
       }
 
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.EventData build() {
-        provenancegraph.datamodel.PDM.EventData result = buildPartial();
+      @Override
+      public EventData build() {
+        EventData result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.EventData buildPartial() {
-        provenancegraph.datamodel.PDM.EventData result = new provenancegraph.datamodel.PDM.EventData(this);
+      @Override
+      public EventData buildPartial() {
+        EventData result = new EventData(this);
         if (bitField0_ != 0) { buildPartial0(result); }
         buildPartialOneofs(result);
         onBuilt();
         return result;
       }
 
-      private void buildPartial0(provenancegraph.datamodel.PDM.EventData result) {
+      private void buildPartial0(EventData result) {
         int from_bitField0_ = bitField0_;
         if (((from_bitField0_ & 0x00000001) != 0)) {
           result.eHeader_ = eHeaderBuilder_ == null
@@ -11861,7 +12045,7 @@ public final class PDM {
         }
       }
 
-      private void buildPartialOneofs(provenancegraph.datamodel.PDM.EventData result) {
+      private void buildPartialOneofs(EventData result) {
         result.DataCase_ = DataCase_;
         result.Data_ = this.Data_;
         if (DataCase_ == 2 &&
@@ -11878,50 +12062,50 @@ public final class PDM {
         }
       }
 
-      @java.lang.Override
+      @Override
       public Builder clone() {
         return super.clone();
       }
-      @java.lang.Override
+      @Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return super.setField(field, value);
       }
-      @java.lang.Override
+      @Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return super.clearField(field);
       }
-      @java.lang.Override
+      @Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return super.clearOneof(oneof);
       }
-      @java.lang.Override
+      @Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
+          int index, Object value) {
         return super.setRepeatedField(field, index, value);
       }
-      @java.lang.Override
+      @Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return super.addRepeatedField(field, value);
       }
-      @java.lang.Override
+      @Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof provenancegraph.datamodel.PDM.EventData) {
-          return mergeFrom((provenancegraph.datamodel.PDM.EventData)other);
+        if (other instanceof EventData) {
+          return mergeFrom((EventData)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(provenancegraph.datamodel.PDM.EventData other) {
-        if (other == provenancegraph.datamodel.PDM.EventData.getDefaultInstance()) return this;
+      public Builder mergeFrom(EventData other) {
+        if (other == EventData.getDefaultInstance()) return this;
         if (other.hasEHeader()) {
           mergeEHeader(other.getEHeader());
         }
@@ -11947,18 +12131,18 @@ public final class PDM {
         return this;
       }
 
-      @java.lang.Override
+      @Override
       public final boolean isInitialized() {
         return true;
       }
 
-      @java.lang.Override
+      @Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
         if (extensionRegistry == null) {
-          throw new java.lang.NullPointerException();
+          throw new NullPointerException();
         }
         try {
           boolean done = false;
@@ -12012,7 +12196,7 @@ public final class PDM {
         return this;
       }
       private int DataCase_ = 0;
-      private java.lang.Object Data_;
+      private Object Data_;
       public DataCase
           getDataCase() {
         return DataCase.forNumber(
@@ -12028,9 +12212,9 @@ public final class PDM {
 
       private int bitField0_;
 
-      private provenancegraph.datamodel.PDM.EventHeader eHeader_;
+      private EventHeader eHeader_;
       private com.google.protobuf.SingleFieldBuilderV3<
-          provenancegraph.datamodel.PDM.EventHeader, provenancegraph.datamodel.PDM.EventHeader.Builder, provenancegraph.datamodel.PDM.EventHeaderOrBuilder> eHeaderBuilder_;
+          EventHeader, EventHeader.Builder, EventHeaderOrBuilder> eHeaderBuilder_;
       /**
        * <code>.provenancegraph.datamodel.EventHeader eHeader = 1;</code>
        * @return Whether the eHeader field is set.
@@ -12042,9 +12226,9 @@ public final class PDM {
        * <code>.provenancegraph.datamodel.EventHeader eHeader = 1;</code>
        * @return The eHeader.
        */
-      public provenancegraph.datamodel.PDM.EventHeader getEHeader() {
+      public EventHeader getEHeader() {
         if (eHeaderBuilder_ == null) {
-          return eHeader_ == null ? provenancegraph.datamodel.PDM.EventHeader.getDefaultInstance() : eHeader_;
+          return eHeader_ == null ? EventHeader.getDefaultInstance() : eHeader_;
         } else {
           return eHeaderBuilder_.getMessage();
         }
@@ -12052,7 +12236,7 @@ public final class PDM {
       /**
        * <code>.provenancegraph.datamodel.EventHeader eHeader = 1;</code>
        */
-      public Builder setEHeader(provenancegraph.datamodel.PDM.EventHeader value) {
+      public Builder setEHeader(EventHeader value) {
         if (eHeaderBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -12069,7 +12253,7 @@ public final class PDM {
        * <code>.provenancegraph.datamodel.EventHeader eHeader = 1;</code>
        */
       public Builder setEHeader(
-          provenancegraph.datamodel.PDM.EventHeader.Builder builderForValue) {
+          EventHeader.Builder builderForValue) {
         if (eHeaderBuilder_ == null) {
           eHeader_ = builderForValue.build();
         } else {
@@ -12082,11 +12266,11 @@ public final class PDM {
       /**
        * <code>.provenancegraph.datamodel.EventHeader eHeader = 1;</code>
        */
-      public Builder mergeEHeader(provenancegraph.datamodel.PDM.EventHeader value) {
+      public Builder mergeEHeader(EventHeader value) {
         if (eHeaderBuilder_ == null) {
           if (((bitField0_ & 0x00000001) != 0) &&
             eHeader_ != null &&
-            eHeader_ != provenancegraph.datamodel.PDM.EventHeader.getDefaultInstance()) {
+            eHeader_ != EventHeader.getDefaultInstance()) {
             getEHeaderBuilder().mergeFrom(value);
           } else {
             eHeader_ = value;
@@ -12114,7 +12298,7 @@ public final class PDM {
       /**
        * <code>.provenancegraph.datamodel.EventHeader eHeader = 1;</code>
        */
-      public provenancegraph.datamodel.PDM.EventHeader.Builder getEHeaderBuilder() {
+      public EventHeader.Builder getEHeaderBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getEHeaderFieldBuilder().getBuilder();
@@ -12122,23 +12306,23 @@ public final class PDM {
       /**
        * <code>.provenancegraph.datamodel.EventHeader eHeader = 1;</code>
        */
-      public provenancegraph.datamodel.PDM.EventHeaderOrBuilder getEHeaderOrBuilder() {
+      public EventHeaderOrBuilder getEHeaderOrBuilder() {
         if (eHeaderBuilder_ != null) {
           return eHeaderBuilder_.getMessageOrBuilder();
         } else {
           return eHeader_ == null ?
-              provenancegraph.datamodel.PDM.EventHeader.getDefaultInstance() : eHeader_;
+              EventHeader.getDefaultInstance() : eHeader_;
         }
       }
       /**
        * <code>.provenancegraph.datamodel.EventHeader eHeader = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          provenancegraph.datamodel.PDM.EventHeader, provenancegraph.datamodel.PDM.EventHeader.Builder, provenancegraph.datamodel.PDM.EventHeaderOrBuilder> 
+          EventHeader, EventHeader.Builder, EventHeaderOrBuilder>
           getEHeaderFieldBuilder() {
         if (eHeaderBuilder_ == null) {
           eHeaderBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              provenancegraph.datamodel.PDM.EventHeader, provenancegraph.datamodel.PDM.EventHeader.Builder, provenancegraph.datamodel.PDM.EventHeaderOrBuilder>(
+              EventHeader, EventHeader.Builder, EventHeaderOrBuilder>(
                   getEHeader(),
                   getParentForChildren(),
                   isClean());
@@ -12148,12 +12332,12 @@ public final class PDM {
       }
 
       private com.google.protobuf.SingleFieldBuilderV3<
-          provenancegraph.datamodel.PDM.ProcessEvent, provenancegraph.datamodel.PDM.ProcessEvent.Builder, provenancegraph.datamodel.PDM.ProcessEventOrBuilder> processEventBuilder_;
+          ProcessEvent, ProcessEvent.Builder, ProcessEventOrBuilder> processEventBuilder_;
       /**
        * <code>.provenancegraph.datamodel.ProcessEvent processEvent = 2;</code>
        * @return Whether the processEvent field is set.
        */
-      @java.lang.Override
+      @Override
       public boolean hasProcessEvent() {
         return DataCase_ == 2;
       }
@@ -12161,24 +12345,24 @@ public final class PDM {
        * <code>.provenancegraph.datamodel.ProcessEvent processEvent = 2;</code>
        * @return The processEvent.
        */
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.ProcessEvent getProcessEvent() {
+      @Override
+      public ProcessEvent getProcessEvent() {
         if (processEventBuilder_ == null) {
           if (DataCase_ == 2) {
-            return (provenancegraph.datamodel.PDM.ProcessEvent) Data_;
+            return (ProcessEvent) Data_;
           }
-          return provenancegraph.datamodel.PDM.ProcessEvent.getDefaultInstance();
+          return ProcessEvent.getDefaultInstance();
         } else {
           if (DataCase_ == 2) {
             return processEventBuilder_.getMessage();
           }
-          return provenancegraph.datamodel.PDM.ProcessEvent.getDefaultInstance();
+          return ProcessEvent.getDefaultInstance();
         }
       }
       /**
        * <code>.provenancegraph.datamodel.ProcessEvent processEvent = 2;</code>
        */
-      public Builder setProcessEvent(provenancegraph.datamodel.PDM.ProcessEvent value) {
+      public Builder setProcessEvent(ProcessEvent value) {
         if (processEventBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -12195,7 +12379,7 @@ public final class PDM {
        * <code>.provenancegraph.datamodel.ProcessEvent processEvent = 2;</code>
        */
       public Builder setProcessEvent(
-          provenancegraph.datamodel.PDM.ProcessEvent.Builder builderForValue) {
+          ProcessEvent.Builder builderForValue) {
         if (processEventBuilder_ == null) {
           Data_ = builderForValue.build();
           onChanged();
@@ -12208,11 +12392,11 @@ public final class PDM {
       /**
        * <code>.provenancegraph.datamodel.ProcessEvent processEvent = 2;</code>
        */
-      public Builder mergeProcessEvent(provenancegraph.datamodel.PDM.ProcessEvent value) {
+      public Builder mergeProcessEvent(ProcessEvent value) {
         if (processEventBuilder_ == null) {
           if (DataCase_ == 2 &&
-              Data_ != provenancegraph.datamodel.PDM.ProcessEvent.getDefaultInstance()) {
-            Data_ = provenancegraph.datamodel.PDM.ProcessEvent.newBuilder((provenancegraph.datamodel.PDM.ProcessEvent) Data_)
+              Data_ != ProcessEvent.getDefaultInstance()) {
+            Data_ = ProcessEvent.newBuilder((ProcessEvent) Data_)
                 .mergeFrom(value).buildPartial();
           } else {
             Data_ = value;
@@ -12250,36 +12434,36 @@ public final class PDM {
       /**
        * <code>.provenancegraph.datamodel.ProcessEvent processEvent = 2;</code>
        */
-      public provenancegraph.datamodel.PDM.ProcessEvent.Builder getProcessEventBuilder() {
+      public ProcessEvent.Builder getProcessEventBuilder() {
         return getProcessEventFieldBuilder().getBuilder();
       }
       /**
        * <code>.provenancegraph.datamodel.ProcessEvent processEvent = 2;</code>
        */
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.ProcessEventOrBuilder getProcessEventOrBuilder() {
+      @Override
+      public ProcessEventOrBuilder getProcessEventOrBuilder() {
         if ((DataCase_ == 2) && (processEventBuilder_ != null)) {
           return processEventBuilder_.getMessageOrBuilder();
         } else {
           if (DataCase_ == 2) {
-            return (provenancegraph.datamodel.PDM.ProcessEvent) Data_;
+            return (ProcessEvent) Data_;
           }
-          return provenancegraph.datamodel.PDM.ProcessEvent.getDefaultInstance();
+          return ProcessEvent.getDefaultInstance();
         }
       }
       /**
        * <code>.provenancegraph.datamodel.ProcessEvent processEvent = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          provenancegraph.datamodel.PDM.ProcessEvent, provenancegraph.datamodel.PDM.ProcessEvent.Builder, provenancegraph.datamodel.PDM.ProcessEventOrBuilder> 
+          ProcessEvent, ProcessEvent.Builder, ProcessEventOrBuilder>
           getProcessEventFieldBuilder() {
         if (processEventBuilder_ == null) {
           if (!(DataCase_ == 2)) {
-            Data_ = provenancegraph.datamodel.PDM.ProcessEvent.getDefaultInstance();
+            Data_ = ProcessEvent.getDefaultInstance();
           }
           processEventBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              provenancegraph.datamodel.PDM.ProcessEvent, provenancegraph.datamodel.PDM.ProcessEvent.Builder, provenancegraph.datamodel.PDM.ProcessEventOrBuilder>(
-                  (provenancegraph.datamodel.PDM.ProcessEvent) Data_,
+              ProcessEvent, ProcessEvent.Builder, ProcessEventOrBuilder>(
+                  (ProcessEvent) Data_,
                   getParentForChildren(),
                   isClean());
           Data_ = null;
@@ -12290,12 +12474,12 @@ public final class PDM {
       }
 
       private com.google.protobuf.SingleFieldBuilderV3<
-          provenancegraph.datamodel.PDM.FileEvent, provenancegraph.datamodel.PDM.FileEvent.Builder, provenancegraph.datamodel.PDM.FileEventOrBuilder> fileEventBuilder_;
+          FileEvent, FileEvent.Builder, FileEventOrBuilder> fileEventBuilder_;
       /**
        * <code>.provenancegraph.datamodel.FileEvent fileEvent = 3;</code>
        * @return Whether the fileEvent field is set.
        */
-      @java.lang.Override
+      @Override
       public boolean hasFileEvent() {
         return DataCase_ == 3;
       }
@@ -12303,24 +12487,24 @@ public final class PDM {
        * <code>.provenancegraph.datamodel.FileEvent fileEvent = 3;</code>
        * @return The fileEvent.
        */
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.FileEvent getFileEvent() {
+      @Override
+      public FileEvent getFileEvent() {
         if (fileEventBuilder_ == null) {
           if (DataCase_ == 3) {
-            return (provenancegraph.datamodel.PDM.FileEvent) Data_;
+            return (FileEvent) Data_;
           }
-          return provenancegraph.datamodel.PDM.FileEvent.getDefaultInstance();
+          return FileEvent.getDefaultInstance();
         } else {
           if (DataCase_ == 3) {
             return fileEventBuilder_.getMessage();
           }
-          return provenancegraph.datamodel.PDM.FileEvent.getDefaultInstance();
+          return FileEvent.getDefaultInstance();
         }
       }
       /**
        * <code>.provenancegraph.datamodel.FileEvent fileEvent = 3;</code>
        */
-      public Builder setFileEvent(provenancegraph.datamodel.PDM.FileEvent value) {
+      public Builder setFileEvent(FileEvent value) {
         if (fileEventBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -12337,7 +12521,7 @@ public final class PDM {
        * <code>.provenancegraph.datamodel.FileEvent fileEvent = 3;</code>
        */
       public Builder setFileEvent(
-          provenancegraph.datamodel.PDM.FileEvent.Builder builderForValue) {
+          FileEvent.Builder builderForValue) {
         if (fileEventBuilder_ == null) {
           Data_ = builderForValue.build();
           onChanged();
@@ -12350,11 +12534,11 @@ public final class PDM {
       /**
        * <code>.provenancegraph.datamodel.FileEvent fileEvent = 3;</code>
        */
-      public Builder mergeFileEvent(provenancegraph.datamodel.PDM.FileEvent value) {
+      public Builder mergeFileEvent(FileEvent value) {
         if (fileEventBuilder_ == null) {
           if (DataCase_ == 3 &&
-              Data_ != provenancegraph.datamodel.PDM.FileEvent.getDefaultInstance()) {
-            Data_ = provenancegraph.datamodel.PDM.FileEvent.newBuilder((provenancegraph.datamodel.PDM.FileEvent) Data_)
+              Data_ != FileEvent.getDefaultInstance()) {
+            Data_ = FileEvent.newBuilder((FileEvent) Data_)
                 .mergeFrom(value).buildPartial();
           } else {
             Data_ = value;
@@ -12392,36 +12576,36 @@ public final class PDM {
       /**
        * <code>.provenancegraph.datamodel.FileEvent fileEvent = 3;</code>
        */
-      public provenancegraph.datamodel.PDM.FileEvent.Builder getFileEventBuilder() {
+      public FileEvent.Builder getFileEventBuilder() {
         return getFileEventFieldBuilder().getBuilder();
       }
       /**
        * <code>.provenancegraph.datamodel.FileEvent fileEvent = 3;</code>
        */
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.FileEventOrBuilder getFileEventOrBuilder() {
+      @Override
+      public FileEventOrBuilder getFileEventOrBuilder() {
         if ((DataCase_ == 3) && (fileEventBuilder_ != null)) {
           return fileEventBuilder_.getMessageOrBuilder();
         } else {
           if (DataCase_ == 3) {
-            return (provenancegraph.datamodel.PDM.FileEvent) Data_;
+            return (FileEvent) Data_;
           }
-          return provenancegraph.datamodel.PDM.FileEvent.getDefaultInstance();
+          return FileEvent.getDefaultInstance();
         }
       }
       /**
        * <code>.provenancegraph.datamodel.FileEvent fileEvent = 3;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          provenancegraph.datamodel.PDM.FileEvent, provenancegraph.datamodel.PDM.FileEvent.Builder, provenancegraph.datamodel.PDM.FileEventOrBuilder> 
+          FileEvent, FileEvent.Builder, FileEventOrBuilder>
           getFileEventFieldBuilder() {
         if (fileEventBuilder_ == null) {
           if (!(DataCase_ == 3)) {
-            Data_ = provenancegraph.datamodel.PDM.FileEvent.getDefaultInstance();
+            Data_ = FileEvent.getDefaultInstance();
           }
           fileEventBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              provenancegraph.datamodel.PDM.FileEvent, provenancegraph.datamodel.PDM.FileEvent.Builder, provenancegraph.datamodel.PDM.FileEventOrBuilder>(
-                  (provenancegraph.datamodel.PDM.FileEvent) Data_,
+              FileEvent, FileEvent.Builder, FileEventOrBuilder>(
+                  (FileEvent) Data_,
                   getParentForChildren(),
                   isClean());
           Data_ = null;
@@ -12432,12 +12616,12 @@ public final class PDM {
       }
 
       private com.google.protobuf.SingleFieldBuilderV3<
-          provenancegraph.datamodel.PDM.NetEvent, provenancegraph.datamodel.PDM.NetEvent.Builder, provenancegraph.datamodel.PDM.NetEventOrBuilder> netEventBuilder_;
+          NetEvent, NetEvent.Builder, NetEventOrBuilder> netEventBuilder_;
       /**
        * <code>.provenancegraph.datamodel.NetEvent netEvent = 4;</code>
        * @return Whether the netEvent field is set.
        */
-      @java.lang.Override
+      @Override
       public boolean hasNetEvent() {
         return DataCase_ == 4;
       }
@@ -12445,24 +12629,24 @@ public final class PDM {
        * <code>.provenancegraph.datamodel.NetEvent netEvent = 4;</code>
        * @return The netEvent.
        */
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.NetEvent getNetEvent() {
+      @Override
+      public NetEvent getNetEvent() {
         if (netEventBuilder_ == null) {
           if (DataCase_ == 4) {
-            return (provenancegraph.datamodel.PDM.NetEvent) Data_;
+            return (NetEvent) Data_;
           }
-          return provenancegraph.datamodel.PDM.NetEvent.getDefaultInstance();
+          return NetEvent.getDefaultInstance();
         } else {
           if (DataCase_ == 4) {
             return netEventBuilder_.getMessage();
           }
-          return provenancegraph.datamodel.PDM.NetEvent.getDefaultInstance();
+          return NetEvent.getDefaultInstance();
         }
       }
       /**
        * <code>.provenancegraph.datamodel.NetEvent netEvent = 4;</code>
        */
-      public Builder setNetEvent(provenancegraph.datamodel.PDM.NetEvent value) {
+      public Builder setNetEvent(NetEvent value) {
         if (netEventBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -12479,7 +12663,7 @@ public final class PDM {
        * <code>.provenancegraph.datamodel.NetEvent netEvent = 4;</code>
        */
       public Builder setNetEvent(
-          provenancegraph.datamodel.PDM.NetEvent.Builder builderForValue) {
+          NetEvent.Builder builderForValue) {
         if (netEventBuilder_ == null) {
           Data_ = builderForValue.build();
           onChanged();
@@ -12492,11 +12676,11 @@ public final class PDM {
       /**
        * <code>.provenancegraph.datamodel.NetEvent netEvent = 4;</code>
        */
-      public Builder mergeNetEvent(provenancegraph.datamodel.PDM.NetEvent value) {
+      public Builder mergeNetEvent(NetEvent value) {
         if (netEventBuilder_ == null) {
           if (DataCase_ == 4 &&
-              Data_ != provenancegraph.datamodel.PDM.NetEvent.getDefaultInstance()) {
-            Data_ = provenancegraph.datamodel.PDM.NetEvent.newBuilder((provenancegraph.datamodel.PDM.NetEvent) Data_)
+              Data_ != NetEvent.getDefaultInstance()) {
+            Data_ = NetEvent.newBuilder((NetEvent) Data_)
                 .mergeFrom(value).buildPartial();
           } else {
             Data_ = value;
@@ -12534,36 +12718,36 @@ public final class PDM {
       /**
        * <code>.provenancegraph.datamodel.NetEvent netEvent = 4;</code>
        */
-      public provenancegraph.datamodel.PDM.NetEvent.Builder getNetEventBuilder() {
+      public NetEvent.Builder getNetEventBuilder() {
         return getNetEventFieldBuilder().getBuilder();
       }
       /**
        * <code>.provenancegraph.datamodel.NetEvent netEvent = 4;</code>
        */
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.NetEventOrBuilder getNetEventOrBuilder() {
+      @Override
+      public NetEventOrBuilder getNetEventOrBuilder() {
         if ((DataCase_ == 4) && (netEventBuilder_ != null)) {
           return netEventBuilder_.getMessageOrBuilder();
         } else {
           if (DataCase_ == 4) {
-            return (provenancegraph.datamodel.PDM.NetEvent) Data_;
+            return (NetEvent) Data_;
           }
-          return provenancegraph.datamodel.PDM.NetEvent.getDefaultInstance();
+          return NetEvent.getDefaultInstance();
         }
       }
       /**
        * <code>.provenancegraph.datamodel.NetEvent netEvent = 4;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          provenancegraph.datamodel.PDM.NetEvent, provenancegraph.datamodel.PDM.NetEvent.Builder, provenancegraph.datamodel.PDM.NetEventOrBuilder> 
+          NetEvent, NetEvent.Builder, NetEventOrBuilder>
           getNetEventFieldBuilder() {
         if (netEventBuilder_ == null) {
           if (!(DataCase_ == 4)) {
-            Data_ = provenancegraph.datamodel.PDM.NetEvent.getDefaultInstance();
+            Data_ = NetEvent.getDefaultInstance();
           }
           netEventBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              provenancegraph.datamodel.PDM.NetEvent, provenancegraph.datamodel.PDM.NetEvent.Builder, provenancegraph.datamodel.PDM.NetEventOrBuilder>(
-                  (provenancegraph.datamodel.PDM.NetEvent) Data_,
+              NetEvent, NetEvent.Builder, NetEventOrBuilder>(
+                  (NetEvent) Data_,
                   getParentForChildren(),
                   isClean());
           Data_ = null;
@@ -12572,13 +12756,13 @@ public final class PDM {
         onChanged();
         return netEventBuilder_;
       }
-      @java.lang.Override
+      @Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFields(unknownFields);
       }
 
-      @java.lang.Override
+      @Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -12589,18 +12773,18 @@ public final class PDM {
     }
 
     // @@protoc_insertion_point(class_scope:provenancegraph.datamodel.EventData)
-    private static final provenancegraph.datamodel.PDM.EventData DEFAULT_INSTANCE;
+    private static final EventData DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new provenancegraph.datamodel.PDM.EventData();
+      DEFAULT_INSTANCE = new EventData();
     }
 
-    public static provenancegraph.datamodel.PDM.EventData getDefaultInstance() {
+    public static EventData getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
     private static final com.google.protobuf.Parser<EventData>
         PARSER = new com.google.protobuf.AbstractParser<EventData>() {
-      @java.lang.Override
+      @Override
       public EventData parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -12624,13 +12808,13 @@ public final class PDM {
       return PARSER;
     }
 
-    @java.lang.Override
+    @Override
     public com.google.protobuf.Parser<EventData> getParserForType() {
       return PARSER;
     }
 
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.EventData getDefaultInstanceForType() {
+    @Override
+    public EventData getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -12649,11 +12833,11 @@ public final class PDM {
      * <code>.provenancegraph.datamodel.LogHeader uHeader = 1;</code>
      * @return The uHeader.
      */
-    provenancegraph.datamodel.PDM.LogHeader getUHeader();
+    LogHeader getUHeader();
     /**
      * <code>.provenancegraph.datamodel.LogHeader uHeader = 1;</code>
      */
-    provenancegraph.datamodel.PDM.LogHeaderOrBuilder getUHeaderOrBuilder();
+    LogHeaderOrBuilder getUHeaderOrBuilder();
 
     /**
      * <pre>
@@ -12674,7 +12858,7 @@ public final class PDM {
      * <code>.provenancegraph.datamodel.Client client = 2;</code>
      * @return The client.
      */
-    provenancegraph.datamodel.PDM.Client getClient();
+    Client getClient();
     /**
      * <pre>
      *        Process process = 2;
@@ -12683,7 +12867,7 @@ public final class PDM {
      *
      * <code>.provenancegraph.datamodel.Client client = 2;</code>
      */
-    provenancegraph.datamodel.PDM.ClientOrBuilder getClientOrBuilder();
+    ClientOrBuilder getClientOrBuilder();
 
     /**
      * <code>.provenancegraph.datamodel.EventData eventData = 3;</code>
@@ -12694,11 +12878,11 @@ public final class PDM {
      * <code>.provenancegraph.datamodel.EventData eventData = 3;</code>
      * @return The eventData.
      */
-    provenancegraph.datamodel.PDM.EventData getEventData();
+    EventData getEventData();
     /**
      * <code>.provenancegraph.datamodel.EventData eventData = 3;</code>
      */
-    provenancegraph.datamodel.PDM.EventDataOrBuilder getEventDataOrBuilder();
+    EventDataOrBuilder getEventDataOrBuilder();
 
     /**
      * <code>.provenancegraph.datamodel.EventLost lost = 4;</code>
@@ -12709,13 +12893,13 @@ public final class PDM {
      * <code>.provenancegraph.datamodel.EventLost lost = 4;</code>
      * @return The lost.
      */
-    provenancegraph.datamodel.PDM.EventLost getLost();
+    EventLost getLost();
     /**
      * <code>.provenancegraph.datamodel.EventLost lost = 4;</code>
      */
-    provenancegraph.datamodel.PDM.EventLostOrBuilder getLostOrBuilder();
+    EventLostOrBuilder getLostOrBuilder();
 
-    provenancegraph.datamodel.PDM.Log.DataCase getDataCase();
+    Log.DataCase getDataCase();
   }
   /**
    * <pre>
@@ -12736,32 +12920,32 @@ public final class PDM {
     private Log() {
     }
 
-    @java.lang.Override
+    @Override
     @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
+    protected Object newInstance(
         UnusedPrivateParameter unused) {
       return new Log();
     }
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_Log_descriptor;
+      return PDM.internal_static_provenancegraph_datamodel_Log_descriptor;
     }
 
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+    @Override
+    protected FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_Log_fieldAccessorTable
+      return PDM.internal_static_provenancegraph_datamodel_Log_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              provenancegraph.datamodel.PDM.Log.class, provenancegraph.datamodel.PDM.Log.Builder.class);
+              Log.class, Builder.class);
     }
 
     private int DataCase_ = 0;
     @SuppressWarnings("serial")
-    private java.lang.Object Data_;
+    private Object Data_;
     public enum DataCase
         implements com.google.protobuf.Internal.EnumLite,
-            com.google.protobuf.AbstractMessage.InternalOneOfEnum {
+            InternalOneOfEnum {
       CLIENT(2),
       EVENTDATA(3),
       LOST(4),
@@ -12775,7 +12959,7 @@ public final class PDM {
        * @return The enum associated with the given number.
        * @deprecated Use {@link #forNumber(int)} instead.
        */
-      @java.lang.Deprecated
+      @Deprecated
       public static DataCase valueOf(int value) {
         return forNumber(value);
       }
@@ -12801,12 +12985,12 @@ public final class PDM {
     }
 
     public static final int UHEADER_FIELD_NUMBER = 1;
-    private provenancegraph.datamodel.PDM.LogHeader uHeader_;
+    private LogHeader uHeader_;
     /**
      * <code>.provenancegraph.datamodel.LogHeader uHeader = 1;</code>
      * @return Whether the uHeader field is set.
      */
-    @java.lang.Override
+    @Override
     public boolean hasUHeader() {
       return uHeader_ != null;
     }
@@ -12814,16 +12998,16 @@ public final class PDM {
      * <code>.provenancegraph.datamodel.LogHeader uHeader = 1;</code>
      * @return The uHeader.
      */
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.LogHeader getUHeader() {
-      return uHeader_ == null ? provenancegraph.datamodel.PDM.LogHeader.getDefaultInstance() : uHeader_;
+    @Override
+    public LogHeader getUHeader() {
+      return uHeader_ == null ? LogHeader.getDefaultInstance() : uHeader_;
     }
     /**
      * <code>.provenancegraph.datamodel.LogHeader uHeader = 1;</code>
      */
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.LogHeaderOrBuilder getUHeaderOrBuilder() {
-      return uHeader_ == null ? provenancegraph.datamodel.PDM.LogHeader.getDefaultInstance() : uHeader_;
+    @Override
+    public LogHeaderOrBuilder getUHeaderOrBuilder() {
+      return uHeader_ == null ? LogHeader.getDefaultInstance() : uHeader_;
     }
 
     public static final int CLIENT_FIELD_NUMBER = 2;
@@ -12836,7 +13020,7 @@ public final class PDM {
      * <code>.provenancegraph.datamodel.Client client = 2;</code>
      * @return Whether the client field is set.
      */
-    @java.lang.Override
+    @Override
     public boolean hasClient() {
       return DataCase_ == 2;
     }
@@ -12849,12 +13033,12 @@ public final class PDM {
      * <code>.provenancegraph.datamodel.Client client = 2;</code>
      * @return The client.
      */
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.Client getClient() {
+    @Override
+    public Client getClient() {
       if (DataCase_ == 2) {
-         return (provenancegraph.datamodel.PDM.Client) Data_;
+         return (Client) Data_;
       }
-      return provenancegraph.datamodel.PDM.Client.getDefaultInstance();
+      return Client.getDefaultInstance();
     }
     /**
      * <pre>
@@ -12864,12 +13048,12 @@ public final class PDM {
      *
      * <code>.provenancegraph.datamodel.Client client = 2;</code>
      */
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.ClientOrBuilder getClientOrBuilder() {
+    @Override
+    public ClientOrBuilder getClientOrBuilder() {
       if (DataCase_ == 2) {
-         return (provenancegraph.datamodel.PDM.Client) Data_;
+         return (Client) Data_;
       }
-      return provenancegraph.datamodel.PDM.Client.getDefaultInstance();
+      return Client.getDefaultInstance();
     }
 
     public static final int EVENTDATA_FIELD_NUMBER = 3;
@@ -12877,7 +13061,7 @@ public final class PDM {
      * <code>.provenancegraph.datamodel.EventData eventData = 3;</code>
      * @return Whether the eventData field is set.
      */
-    @java.lang.Override
+    @Override
     public boolean hasEventData() {
       return DataCase_ == 3;
     }
@@ -12885,22 +13069,22 @@ public final class PDM {
      * <code>.provenancegraph.datamodel.EventData eventData = 3;</code>
      * @return The eventData.
      */
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.EventData getEventData() {
+    @Override
+    public EventData getEventData() {
       if (DataCase_ == 3) {
-         return (provenancegraph.datamodel.PDM.EventData) Data_;
+         return (EventData) Data_;
       }
-      return provenancegraph.datamodel.PDM.EventData.getDefaultInstance();
+      return EventData.getDefaultInstance();
     }
     /**
      * <code>.provenancegraph.datamodel.EventData eventData = 3;</code>
      */
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.EventDataOrBuilder getEventDataOrBuilder() {
+    @Override
+    public EventDataOrBuilder getEventDataOrBuilder() {
       if (DataCase_ == 3) {
-         return (provenancegraph.datamodel.PDM.EventData) Data_;
+         return (EventData) Data_;
       }
-      return provenancegraph.datamodel.PDM.EventData.getDefaultInstance();
+      return EventData.getDefaultInstance();
     }
 
     public static final int LOST_FIELD_NUMBER = 4;
@@ -12908,7 +13092,7 @@ public final class PDM {
      * <code>.provenancegraph.datamodel.EventLost lost = 4;</code>
      * @return Whether the lost field is set.
      */
-    @java.lang.Override
+    @Override
     public boolean hasLost() {
       return DataCase_ == 4;
     }
@@ -12916,26 +13100,26 @@ public final class PDM {
      * <code>.provenancegraph.datamodel.EventLost lost = 4;</code>
      * @return The lost.
      */
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.EventLost getLost() {
+    @Override
+    public EventLost getLost() {
       if (DataCase_ == 4) {
-         return (provenancegraph.datamodel.PDM.EventLost) Data_;
+         return (EventLost) Data_;
       }
-      return provenancegraph.datamodel.PDM.EventLost.getDefaultInstance();
+      return EventLost.getDefaultInstance();
     }
     /**
      * <code>.provenancegraph.datamodel.EventLost lost = 4;</code>
      */
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.EventLostOrBuilder getLostOrBuilder() {
+    @Override
+    public EventLostOrBuilder getLostOrBuilder() {
       if (DataCase_ == 4) {
-         return (provenancegraph.datamodel.PDM.EventLost) Data_;
+         return (EventLost) Data_;
       }
-      return provenancegraph.datamodel.PDM.EventLost.getDefaultInstance();
+      return EventLost.getDefaultInstance();
     }
 
     private byte memoizedIsInitialized = -1;
-    @java.lang.Override
+    @Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -12945,25 +13129,25 @@ public final class PDM {
       return true;
     }
 
-    @java.lang.Override
+    @Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (uHeader_ != null) {
         output.writeMessage(1, getUHeader());
       }
       if (DataCase_ == 2) {
-        output.writeMessage(2, (provenancegraph.datamodel.PDM.Client) Data_);
+        output.writeMessage(2, (Client) Data_);
       }
       if (DataCase_ == 3) {
-        output.writeMessage(3, (provenancegraph.datamodel.PDM.EventData) Data_);
+        output.writeMessage(3, (EventData) Data_);
       }
       if (DataCase_ == 4) {
-        output.writeMessage(4, (provenancegraph.datamodel.PDM.EventLost) Data_);
+        output.writeMessage(4, (EventLost) Data_);
       }
       getUnknownFields().writeTo(output);
     }
 
-    @java.lang.Override
+    @Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -12975,30 +13159,30 @@ public final class PDM {
       }
       if (DataCase_ == 2) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, (provenancegraph.datamodel.PDM.Client) Data_);
+          .computeMessageSize(2, (Client) Data_);
       }
       if (DataCase_ == 3) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, (provenancegraph.datamodel.PDM.EventData) Data_);
+          .computeMessageSize(3, (EventData) Data_);
       }
       if (DataCase_ == 4) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, (provenancegraph.datamodel.PDM.EventLost) Data_);
+          .computeMessageSize(4, (EventLost) Data_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
+    @Override
+    public boolean equals(final Object obj) {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof provenancegraph.datamodel.PDM.Log)) {
+      if (!(obj instanceof Log)) {
         return super.equals(obj);
       }
-      provenancegraph.datamodel.PDM.Log other = (provenancegraph.datamodel.PDM.Log) obj;
+      Log other = (Log) obj;
 
       if (hasUHeader() != other.hasUHeader()) return false;
       if (hasUHeader()) {
@@ -13026,7 +13210,7 @@ public final class PDM {
       return true;
     }
 
-    @java.lang.Override
+    @Override
     public int hashCode() {
       if (memoizedHashCode != 0) {
         return memoizedHashCode;
@@ -13058,44 +13242,44 @@ public final class PDM {
       return hash;
     }
 
-    public static provenancegraph.datamodel.PDM.Log parseFrom(
+    public static Log parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static provenancegraph.datamodel.PDM.Log parseFrom(
+    public static Log parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.Log parseFrom(
+    public static Log parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static provenancegraph.datamodel.PDM.Log parseFrom(
+    public static Log parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.Log parseFrom(byte[] data)
+    public static Log parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static provenancegraph.datamodel.PDM.Log parseFrom(
+    public static Log parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.Log parseFrom(java.io.InputStream input)
+    public static Log parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static provenancegraph.datamodel.PDM.Log parseFrom(
+    public static Log parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -13103,26 +13287,26 @@ public final class PDM {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    public static provenancegraph.datamodel.PDM.Log parseDelimitedFrom(java.io.InputStream input)
+    public static Log parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
 
-    public static provenancegraph.datamodel.PDM.Log parseDelimitedFrom(
+    public static Log parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.Log parseFrom(
+    public static Log parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static provenancegraph.datamodel.PDM.Log parseFrom(
+    public static Log parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -13130,23 +13314,23 @@ public final class PDM {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    @java.lang.Override
+    @Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(provenancegraph.datamodel.PDM.Log prototype) {
+    public static Builder newBuilder(Log prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
-    @java.lang.Override
+    @Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
     }
 
-    @java.lang.Override
+    @Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -13160,18 +13344,18 @@ public final class PDM {
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:provenancegraph.datamodel.Log)
-        provenancegraph.datamodel.PDM.LogOrBuilder {
+        LogOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_Log_descriptor;
+        return PDM.internal_static_provenancegraph_datamodel_Log_descriptor;
       }
 
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      @Override
+      protected FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_Log_fieldAccessorTable
+        return PDM.internal_static_provenancegraph_datamodel_Log_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                provenancegraph.datamodel.PDM.Log.class, provenancegraph.datamodel.PDM.Log.Builder.class);
+                Log.class, Builder.class);
       }
 
       // Construct using provenancegraph.datamodel.PDM.Log.newBuilder()
@@ -13180,11 +13364,11 @@ public final class PDM {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          BuilderParent parent) {
         super(parent);
 
       }
-      @java.lang.Override
+      @Override
       public Builder clear() {
         super.clear();
         bitField0_ = 0;
@@ -13207,36 +13391,36 @@ public final class PDM {
         return this;
       }
 
-      @java.lang.Override
+      @Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_Log_descriptor;
+        return PDM.internal_static_provenancegraph_datamodel_Log_descriptor;
       }
 
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.Log getDefaultInstanceForType() {
-        return provenancegraph.datamodel.PDM.Log.getDefaultInstance();
+      @Override
+      public Log getDefaultInstanceForType() {
+        return Log.getDefaultInstance();
       }
 
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.Log build() {
-        provenancegraph.datamodel.PDM.Log result = buildPartial();
+      @Override
+      public Log build() {
+        Log result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.Log buildPartial() {
-        provenancegraph.datamodel.PDM.Log result = new provenancegraph.datamodel.PDM.Log(this);
+      @Override
+      public Log buildPartial() {
+        Log result = new Log(this);
         if (bitField0_ != 0) { buildPartial0(result); }
         buildPartialOneofs(result);
         onBuilt();
         return result;
       }
 
-      private void buildPartial0(provenancegraph.datamodel.PDM.Log result) {
+      private void buildPartial0(Log result) {
         int from_bitField0_ = bitField0_;
         if (((from_bitField0_ & 0x00000001) != 0)) {
           result.uHeader_ = uHeaderBuilder_ == null
@@ -13245,7 +13429,7 @@ public final class PDM {
         }
       }
 
-      private void buildPartialOneofs(provenancegraph.datamodel.PDM.Log result) {
+      private void buildPartialOneofs(Log result) {
         result.DataCase_ = DataCase_;
         result.Data_ = this.Data_;
         if (DataCase_ == 2 &&
@@ -13262,50 +13446,50 @@ public final class PDM {
         }
       }
 
-      @java.lang.Override
+      @Override
       public Builder clone() {
         return super.clone();
       }
-      @java.lang.Override
+      @Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return super.setField(field, value);
       }
-      @java.lang.Override
+      @Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return super.clearField(field);
       }
-      @java.lang.Override
+      @Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return super.clearOneof(oneof);
       }
-      @java.lang.Override
+      @Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
+          int index, Object value) {
         return super.setRepeatedField(field, index, value);
       }
-      @java.lang.Override
+      @Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return super.addRepeatedField(field, value);
       }
-      @java.lang.Override
+      @Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof provenancegraph.datamodel.PDM.Log) {
-          return mergeFrom((provenancegraph.datamodel.PDM.Log)other);
+        if (other instanceof Log) {
+          return mergeFrom((Log)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(provenancegraph.datamodel.PDM.Log other) {
-        if (other == provenancegraph.datamodel.PDM.Log.getDefaultInstance()) return this;
+      public Builder mergeFrom(Log other) {
+        if (other == Log.getDefaultInstance()) return this;
         if (other.hasUHeader()) {
           mergeUHeader(other.getUHeader());
         }
@@ -13331,18 +13515,18 @@ public final class PDM {
         return this;
       }
 
-      @java.lang.Override
+      @Override
       public final boolean isInitialized() {
         return true;
       }
 
-      @java.lang.Override
+      @Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
         if (extensionRegistry == null) {
-          throw new java.lang.NullPointerException();
+          throw new NullPointerException();
         }
         try {
           boolean done = false;
@@ -13396,7 +13580,7 @@ public final class PDM {
         return this;
       }
       private int DataCase_ = 0;
-      private java.lang.Object Data_;
+      private Object Data_;
       public DataCase
           getDataCase() {
         return DataCase.forNumber(
@@ -13412,9 +13596,9 @@ public final class PDM {
 
       private int bitField0_;
 
-      private provenancegraph.datamodel.PDM.LogHeader uHeader_;
+      private LogHeader uHeader_;
       private com.google.protobuf.SingleFieldBuilderV3<
-          provenancegraph.datamodel.PDM.LogHeader, provenancegraph.datamodel.PDM.LogHeader.Builder, provenancegraph.datamodel.PDM.LogHeaderOrBuilder> uHeaderBuilder_;
+          LogHeader, LogHeader.Builder, LogHeaderOrBuilder> uHeaderBuilder_;
       /**
        * <code>.provenancegraph.datamodel.LogHeader uHeader = 1;</code>
        * @return Whether the uHeader field is set.
@@ -13426,9 +13610,9 @@ public final class PDM {
        * <code>.provenancegraph.datamodel.LogHeader uHeader = 1;</code>
        * @return The uHeader.
        */
-      public provenancegraph.datamodel.PDM.LogHeader getUHeader() {
+      public LogHeader getUHeader() {
         if (uHeaderBuilder_ == null) {
-          return uHeader_ == null ? provenancegraph.datamodel.PDM.LogHeader.getDefaultInstance() : uHeader_;
+          return uHeader_ == null ? LogHeader.getDefaultInstance() : uHeader_;
         } else {
           return uHeaderBuilder_.getMessage();
         }
@@ -13436,7 +13620,7 @@ public final class PDM {
       /**
        * <code>.provenancegraph.datamodel.LogHeader uHeader = 1;</code>
        */
-      public Builder setUHeader(provenancegraph.datamodel.PDM.LogHeader value) {
+      public Builder setUHeader(LogHeader value) {
         if (uHeaderBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -13453,7 +13637,7 @@ public final class PDM {
        * <code>.provenancegraph.datamodel.LogHeader uHeader = 1;</code>
        */
       public Builder setUHeader(
-          provenancegraph.datamodel.PDM.LogHeader.Builder builderForValue) {
+          LogHeader.Builder builderForValue) {
         if (uHeaderBuilder_ == null) {
           uHeader_ = builderForValue.build();
         } else {
@@ -13466,11 +13650,11 @@ public final class PDM {
       /**
        * <code>.provenancegraph.datamodel.LogHeader uHeader = 1;</code>
        */
-      public Builder mergeUHeader(provenancegraph.datamodel.PDM.LogHeader value) {
+      public Builder mergeUHeader(LogHeader value) {
         if (uHeaderBuilder_ == null) {
           if (((bitField0_ & 0x00000001) != 0) &&
             uHeader_ != null &&
-            uHeader_ != provenancegraph.datamodel.PDM.LogHeader.getDefaultInstance()) {
+            uHeader_ != LogHeader.getDefaultInstance()) {
             getUHeaderBuilder().mergeFrom(value);
           } else {
             uHeader_ = value;
@@ -13498,7 +13682,7 @@ public final class PDM {
       /**
        * <code>.provenancegraph.datamodel.LogHeader uHeader = 1;</code>
        */
-      public provenancegraph.datamodel.PDM.LogHeader.Builder getUHeaderBuilder() {
+      public LogHeader.Builder getUHeaderBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getUHeaderFieldBuilder().getBuilder();
@@ -13506,23 +13690,23 @@ public final class PDM {
       /**
        * <code>.provenancegraph.datamodel.LogHeader uHeader = 1;</code>
        */
-      public provenancegraph.datamodel.PDM.LogHeaderOrBuilder getUHeaderOrBuilder() {
+      public LogHeaderOrBuilder getUHeaderOrBuilder() {
         if (uHeaderBuilder_ != null) {
           return uHeaderBuilder_.getMessageOrBuilder();
         } else {
           return uHeader_ == null ?
-              provenancegraph.datamodel.PDM.LogHeader.getDefaultInstance() : uHeader_;
+              LogHeader.getDefaultInstance() : uHeader_;
         }
       }
       /**
        * <code>.provenancegraph.datamodel.LogHeader uHeader = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          provenancegraph.datamodel.PDM.LogHeader, provenancegraph.datamodel.PDM.LogHeader.Builder, provenancegraph.datamodel.PDM.LogHeaderOrBuilder> 
+          LogHeader, LogHeader.Builder, LogHeaderOrBuilder>
           getUHeaderFieldBuilder() {
         if (uHeaderBuilder_ == null) {
           uHeaderBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              provenancegraph.datamodel.PDM.LogHeader, provenancegraph.datamodel.PDM.LogHeader.Builder, provenancegraph.datamodel.PDM.LogHeaderOrBuilder>(
+              LogHeader, LogHeader.Builder, LogHeaderOrBuilder>(
                   getUHeader(),
                   getParentForChildren(),
                   isClean());
@@ -13532,7 +13716,7 @@ public final class PDM {
       }
 
       private com.google.protobuf.SingleFieldBuilderV3<
-          provenancegraph.datamodel.PDM.Client, provenancegraph.datamodel.PDM.Client.Builder, provenancegraph.datamodel.PDM.ClientOrBuilder> clientBuilder_;
+          Client, Client.Builder, ClientOrBuilder> clientBuilder_;
       /**
        * <pre>
        *        Process process = 2;
@@ -13542,7 +13726,7 @@ public final class PDM {
        * <code>.provenancegraph.datamodel.Client client = 2;</code>
        * @return Whether the client field is set.
        */
-      @java.lang.Override
+      @Override
       public boolean hasClient() {
         return DataCase_ == 2;
       }
@@ -13555,18 +13739,18 @@ public final class PDM {
        * <code>.provenancegraph.datamodel.Client client = 2;</code>
        * @return The client.
        */
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.Client getClient() {
+      @Override
+      public Client getClient() {
         if (clientBuilder_ == null) {
           if (DataCase_ == 2) {
-            return (provenancegraph.datamodel.PDM.Client) Data_;
+            return (Client) Data_;
           }
-          return provenancegraph.datamodel.PDM.Client.getDefaultInstance();
+          return Client.getDefaultInstance();
         } else {
           if (DataCase_ == 2) {
             return clientBuilder_.getMessage();
           }
-          return provenancegraph.datamodel.PDM.Client.getDefaultInstance();
+          return Client.getDefaultInstance();
         }
       }
       /**
@@ -13577,7 +13761,7 @@ public final class PDM {
        *
        * <code>.provenancegraph.datamodel.Client client = 2;</code>
        */
-      public Builder setClient(provenancegraph.datamodel.PDM.Client value) {
+      public Builder setClient(Client value) {
         if (clientBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -13599,7 +13783,7 @@ public final class PDM {
        * <code>.provenancegraph.datamodel.Client client = 2;</code>
        */
       public Builder setClient(
-          provenancegraph.datamodel.PDM.Client.Builder builderForValue) {
+          Client.Builder builderForValue) {
         if (clientBuilder_ == null) {
           Data_ = builderForValue.build();
           onChanged();
@@ -13617,11 +13801,11 @@ public final class PDM {
        *
        * <code>.provenancegraph.datamodel.Client client = 2;</code>
        */
-      public Builder mergeClient(provenancegraph.datamodel.PDM.Client value) {
+      public Builder mergeClient(Client value) {
         if (clientBuilder_ == null) {
           if (DataCase_ == 2 &&
-              Data_ != provenancegraph.datamodel.PDM.Client.getDefaultInstance()) {
-            Data_ = provenancegraph.datamodel.PDM.Client.newBuilder((provenancegraph.datamodel.PDM.Client) Data_)
+              Data_ != Client.getDefaultInstance()) {
+            Data_ = Client.newBuilder((Client) Data_)
                 .mergeFrom(value).buildPartial();
           } else {
             Data_ = value;
@@ -13669,7 +13853,7 @@ public final class PDM {
        *
        * <code>.provenancegraph.datamodel.Client client = 2;</code>
        */
-      public provenancegraph.datamodel.PDM.Client.Builder getClientBuilder() {
+      public Client.Builder getClientBuilder() {
         return getClientFieldBuilder().getBuilder();
       }
       /**
@@ -13680,15 +13864,15 @@ public final class PDM {
        *
        * <code>.provenancegraph.datamodel.Client client = 2;</code>
        */
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.ClientOrBuilder getClientOrBuilder() {
+      @Override
+      public ClientOrBuilder getClientOrBuilder() {
         if ((DataCase_ == 2) && (clientBuilder_ != null)) {
           return clientBuilder_.getMessageOrBuilder();
         } else {
           if (DataCase_ == 2) {
-            return (provenancegraph.datamodel.PDM.Client) Data_;
+            return (Client) Data_;
           }
-          return provenancegraph.datamodel.PDM.Client.getDefaultInstance();
+          return Client.getDefaultInstance();
         }
       }
       /**
@@ -13700,15 +13884,15 @@ public final class PDM {
        * <code>.provenancegraph.datamodel.Client client = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          provenancegraph.datamodel.PDM.Client, provenancegraph.datamodel.PDM.Client.Builder, provenancegraph.datamodel.PDM.ClientOrBuilder> 
+          Client, Client.Builder, ClientOrBuilder>
           getClientFieldBuilder() {
         if (clientBuilder_ == null) {
           if (!(DataCase_ == 2)) {
-            Data_ = provenancegraph.datamodel.PDM.Client.getDefaultInstance();
+            Data_ = Client.getDefaultInstance();
           }
           clientBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              provenancegraph.datamodel.PDM.Client, provenancegraph.datamodel.PDM.Client.Builder, provenancegraph.datamodel.PDM.ClientOrBuilder>(
-                  (provenancegraph.datamodel.PDM.Client) Data_,
+              Client, Client.Builder, ClientOrBuilder>(
+                  (Client) Data_,
                   getParentForChildren(),
                   isClean());
           Data_ = null;
@@ -13719,12 +13903,12 @@ public final class PDM {
       }
 
       private com.google.protobuf.SingleFieldBuilderV3<
-          provenancegraph.datamodel.PDM.EventData, provenancegraph.datamodel.PDM.EventData.Builder, provenancegraph.datamodel.PDM.EventDataOrBuilder> eventDataBuilder_;
+          EventData, EventData.Builder, EventDataOrBuilder> eventDataBuilder_;
       /**
        * <code>.provenancegraph.datamodel.EventData eventData = 3;</code>
        * @return Whether the eventData field is set.
        */
-      @java.lang.Override
+      @Override
       public boolean hasEventData() {
         return DataCase_ == 3;
       }
@@ -13732,24 +13916,24 @@ public final class PDM {
        * <code>.provenancegraph.datamodel.EventData eventData = 3;</code>
        * @return The eventData.
        */
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.EventData getEventData() {
+      @Override
+      public EventData getEventData() {
         if (eventDataBuilder_ == null) {
           if (DataCase_ == 3) {
-            return (provenancegraph.datamodel.PDM.EventData) Data_;
+            return (EventData) Data_;
           }
-          return provenancegraph.datamodel.PDM.EventData.getDefaultInstance();
+          return EventData.getDefaultInstance();
         } else {
           if (DataCase_ == 3) {
             return eventDataBuilder_.getMessage();
           }
-          return provenancegraph.datamodel.PDM.EventData.getDefaultInstance();
+          return EventData.getDefaultInstance();
         }
       }
       /**
        * <code>.provenancegraph.datamodel.EventData eventData = 3;</code>
        */
-      public Builder setEventData(provenancegraph.datamodel.PDM.EventData value) {
+      public Builder setEventData(EventData value) {
         if (eventDataBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -13766,7 +13950,7 @@ public final class PDM {
        * <code>.provenancegraph.datamodel.EventData eventData = 3;</code>
        */
       public Builder setEventData(
-          provenancegraph.datamodel.PDM.EventData.Builder builderForValue) {
+          EventData.Builder builderForValue) {
         if (eventDataBuilder_ == null) {
           Data_ = builderForValue.build();
           onChanged();
@@ -13779,11 +13963,11 @@ public final class PDM {
       /**
        * <code>.provenancegraph.datamodel.EventData eventData = 3;</code>
        */
-      public Builder mergeEventData(provenancegraph.datamodel.PDM.EventData value) {
+      public Builder mergeEventData(EventData value) {
         if (eventDataBuilder_ == null) {
           if (DataCase_ == 3 &&
-              Data_ != provenancegraph.datamodel.PDM.EventData.getDefaultInstance()) {
-            Data_ = provenancegraph.datamodel.PDM.EventData.newBuilder((provenancegraph.datamodel.PDM.EventData) Data_)
+              Data_ != EventData.getDefaultInstance()) {
+            Data_ = EventData.newBuilder((EventData) Data_)
                 .mergeFrom(value).buildPartial();
           } else {
             Data_ = value;
@@ -13821,36 +14005,36 @@ public final class PDM {
       /**
        * <code>.provenancegraph.datamodel.EventData eventData = 3;</code>
        */
-      public provenancegraph.datamodel.PDM.EventData.Builder getEventDataBuilder() {
+      public EventData.Builder getEventDataBuilder() {
         return getEventDataFieldBuilder().getBuilder();
       }
       /**
        * <code>.provenancegraph.datamodel.EventData eventData = 3;</code>
        */
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.EventDataOrBuilder getEventDataOrBuilder() {
+      @Override
+      public EventDataOrBuilder getEventDataOrBuilder() {
         if ((DataCase_ == 3) && (eventDataBuilder_ != null)) {
           return eventDataBuilder_.getMessageOrBuilder();
         } else {
           if (DataCase_ == 3) {
-            return (provenancegraph.datamodel.PDM.EventData) Data_;
+            return (EventData) Data_;
           }
-          return provenancegraph.datamodel.PDM.EventData.getDefaultInstance();
+          return EventData.getDefaultInstance();
         }
       }
       /**
        * <code>.provenancegraph.datamodel.EventData eventData = 3;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          provenancegraph.datamodel.PDM.EventData, provenancegraph.datamodel.PDM.EventData.Builder, provenancegraph.datamodel.PDM.EventDataOrBuilder> 
+          EventData, EventData.Builder, EventDataOrBuilder>
           getEventDataFieldBuilder() {
         if (eventDataBuilder_ == null) {
           if (!(DataCase_ == 3)) {
-            Data_ = provenancegraph.datamodel.PDM.EventData.getDefaultInstance();
+            Data_ = EventData.getDefaultInstance();
           }
           eventDataBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              provenancegraph.datamodel.PDM.EventData, provenancegraph.datamodel.PDM.EventData.Builder, provenancegraph.datamodel.PDM.EventDataOrBuilder>(
-                  (provenancegraph.datamodel.PDM.EventData) Data_,
+              EventData, EventData.Builder, EventDataOrBuilder>(
+                  (EventData) Data_,
                   getParentForChildren(),
                   isClean());
           Data_ = null;
@@ -13861,12 +14045,12 @@ public final class PDM {
       }
 
       private com.google.protobuf.SingleFieldBuilderV3<
-          provenancegraph.datamodel.PDM.EventLost, provenancegraph.datamodel.PDM.EventLost.Builder, provenancegraph.datamodel.PDM.EventLostOrBuilder> lostBuilder_;
+          EventLost, EventLost.Builder, EventLostOrBuilder> lostBuilder_;
       /**
        * <code>.provenancegraph.datamodel.EventLost lost = 4;</code>
        * @return Whether the lost field is set.
        */
-      @java.lang.Override
+      @Override
       public boolean hasLost() {
         return DataCase_ == 4;
       }
@@ -13874,24 +14058,24 @@ public final class PDM {
        * <code>.provenancegraph.datamodel.EventLost lost = 4;</code>
        * @return The lost.
        */
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.EventLost getLost() {
+      @Override
+      public EventLost getLost() {
         if (lostBuilder_ == null) {
           if (DataCase_ == 4) {
-            return (provenancegraph.datamodel.PDM.EventLost) Data_;
+            return (EventLost) Data_;
           }
-          return provenancegraph.datamodel.PDM.EventLost.getDefaultInstance();
+          return EventLost.getDefaultInstance();
         } else {
           if (DataCase_ == 4) {
             return lostBuilder_.getMessage();
           }
-          return provenancegraph.datamodel.PDM.EventLost.getDefaultInstance();
+          return EventLost.getDefaultInstance();
         }
       }
       /**
        * <code>.provenancegraph.datamodel.EventLost lost = 4;</code>
        */
-      public Builder setLost(provenancegraph.datamodel.PDM.EventLost value) {
+      public Builder setLost(EventLost value) {
         if (lostBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -13908,7 +14092,7 @@ public final class PDM {
        * <code>.provenancegraph.datamodel.EventLost lost = 4;</code>
        */
       public Builder setLost(
-          provenancegraph.datamodel.PDM.EventLost.Builder builderForValue) {
+          EventLost.Builder builderForValue) {
         if (lostBuilder_ == null) {
           Data_ = builderForValue.build();
           onChanged();
@@ -13921,11 +14105,11 @@ public final class PDM {
       /**
        * <code>.provenancegraph.datamodel.EventLost lost = 4;</code>
        */
-      public Builder mergeLost(provenancegraph.datamodel.PDM.EventLost value) {
+      public Builder mergeLost(EventLost value) {
         if (lostBuilder_ == null) {
           if (DataCase_ == 4 &&
-              Data_ != provenancegraph.datamodel.PDM.EventLost.getDefaultInstance()) {
-            Data_ = provenancegraph.datamodel.PDM.EventLost.newBuilder((provenancegraph.datamodel.PDM.EventLost) Data_)
+              Data_ != EventLost.getDefaultInstance()) {
+            Data_ = EventLost.newBuilder((EventLost) Data_)
                 .mergeFrom(value).buildPartial();
           } else {
             Data_ = value;
@@ -13963,36 +14147,36 @@ public final class PDM {
       /**
        * <code>.provenancegraph.datamodel.EventLost lost = 4;</code>
        */
-      public provenancegraph.datamodel.PDM.EventLost.Builder getLostBuilder() {
+      public EventLost.Builder getLostBuilder() {
         return getLostFieldBuilder().getBuilder();
       }
       /**
        * <code>.provenancegraph.datamodel.EventLost lost = 4;</code>
        */
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.EventLostOrBuilder getLostOrBuilder() {
+      @Override
+      public EventLostOrBuilder getLostOrBuilder() {
         if ((DataCase_ == 4) && (lostBuilder_ != null)) {
           return lostBuilder_.getMessageOrBuilder();
         } else {
           if (DataCase_ == 4) {
-            return (provenancegraph.datamodel.PDM.EventLost) Data_;
+            return (EventLost) Data_;
           }
-          return provenancegraph.datamodel.PDM.EventLost.getDefaultInstance();
+          return EventLost.getDefaultInstance();
         }
       }
       /**
        * <code>.provenancegraph.datamodel.EventLost lost = 4;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          provenancegraph.datamodel.PDM.EventLost, provenancegraph.datamodel.PDM.EventLost.Builder, provenancegraph.datamodel.PDM.EventLostOrBuilder> 
+          EventLost, EventLost.Builder, EventLostOrBuilder>
           getLostFieldBuilder() {
         if (lostBuilder_ == null) {
           if (!(DataCase_ == 4)) {
-            Data_ = provenancegraph.datamodel.PDM.EventLost.getDefaultInstance();
+            Data_ = EventLost.getDefaultInstance();
           }
           lostBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              provenancegraph.datamodel.PDM.EventLost, provenancegraph.datamodel.PDM.EventLost.Builder, provenancegraph.datamodel.PDM.EventLostOrBuilder>(
-                  (provenancegraph.datamodel.PDM.EventLost) Data_,
+              EventLost, EventLost.Builder, EventLostOrBuilder>(
+                  (EventLost) Data_,
                   getParentForChildren(),
                   isClean());
           Data_ = null;
@@ -14001,13 +14185,13 @@ public final class PDM {
         onChanged();
         return lostBuilder_;
       }
-      @java.lang.Override
+      @Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFields(unknownFields);
       }
 
-      @java.lang.Override
+      @Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -14018,18 +14202,18 @@ public final class PDM {
     }
 
     // @@protoc_insertion_point(class_scope:provenancegraph.datamodel.Log)
-    private static final provenancegraph.datamodel.PDM.Log DEFAULT_INSTANCE;
+    private static final Log DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new provenancegraph.datamodel.PDM.Log();
+      DEFAULT_INSTANCE = new Log();
     }
 
-    public static provenancegraph.datamodel.PDM.Log getDefaultInstance() {
+    public static Log getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
     private static final com.google.protobuf.Parser<Log>
         PARSER = new com.google.protobuf.AbstractParser<Log>() {
-      @java.lang.Override
+      @Override
       public Log parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -14053,13 +14237,13 @@ public final class PDM {
       return PARSER;
     }
 
-    @java.lang.Override
+    @Override
     public com.google.protobuf.Parser<Log> getParserForType() {
       return PARSER;
     }
 
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.Log getDefaultInstanceForType() {
+    @Override
+    public Log getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -14072,12 +14256,12 @@ public final class PDM {
     /**
      * <code>repeated .provenancegraph.datamodel.Log data = 1;</code>
      */
-    java.util.List<provenancegraph.datamodel.PDM.Log> 
+    java.util.List<Log>
         getDataList();
     /**
      * <code>repeated .provenancegraph.datamodel.Log data = 1;</code>
      */
-    provenancegraph.datamodel.PDM.Log getData(int index);
+    Log getData(int index);
     /**
      * <code>repeated .provenancegraph.datamodel.Log data = 1;</code>
      */
@@ -14085,12 +14269,12 @@ public final class PDM {
     /**
      * <code>repeated .provenancegraph.datamodel.Log data = 1;</code>
      */
-    java.util.List<? extends provenancegraph.datamodel.PDM.LogOrBuilder> 
+    java.util.List<? extends LogOrBuilder>
         getDataOrBuilderList();
     /**
      * <code>repeated .provenancegraph.datamodel.Log data = 1;</code>
      */
-    provenancegraph.datamodel.PDM.LogOrBuilder getDataOrBuilder(
+    LogOrBuilder getDataOrBuilder(
         int index);
   }
   /**
@@ -14109,69 +14293,69 @@ public final class PDM {
       data_ = java.util.Collections.emptyList();
     }
 
-    @java.lang.Override
+    @Override
     @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
+    protected Object newInstance(
         UnusedPrivateParameter unused) {
       return new LogPack();
     }
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_LogPack_descriptor;
+      return PDM.internal_static_provenancegraph_datamodel_LogPack_descriptor;
     }
 
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+    @Override
+    protected FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_LogPack_fieldAccessorTable
+      return PDM.internal_static_provenancegraph_datamodel_LogPack_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              provenancegraph.datamodel.PDM.LogPack.class, provenancegraph.datamodel.PDM.LogPack.Builder.class);
+              LogPack.class, Builder.class);
     }
 
     public static final int DATA_FIELD_NUMBER = 1;
     @SuppressWarnings("serial")
-    private java.util.List<provenancegraph.datamodel.PDM.Log> data_;
+    private java.util.List<Log> data_;
     /**
      * <code>repeated .provenancegraph.datamodel.Log data = 1;</code>
      */
-    @java.lang.Override
-    public java.util.List<provenancegraph.datamodel.PDM.Log> getDataList() {
+    @Override
+    public java.util.List<Log> getDataList() {
       return data_;
     }
     /**
      * <code>repeated .provenancegraph.datamodel.Log data = 1;</code>
      */
-    @java.lang.Override
-    public java.util.List<? extends provenancegraph.datamodel.PDM.LogOrBuilder> 
+    @Override
+    public java.util.List<? extends LogOrBuilder>
         getDataOrBuilderList() {
       return data_;
     }
     /**
      * <code>repeated .provenancegraph.datamodel.Log data = 1;</code>
      */
-    @java.lang.Override
+    @Override
     public int getDataCount() {
       return data_.size();
     }
     /**
      * <code>repeated .provenancegraph.datamodel.Log data = 1;</code>
      */
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.Log getData(int index) {
+    @Override
+    public Log getData(int index) {
       return data_.get(index);
     }
     /**
      * <code>repeated .provenancegraph.datamodel.Log data = 1;</code>
      */
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.LogOrBuilder getDataOrBuilder(
+    @Override
+    public LogOrBuilder getDataOrBuilder(
         int index) {
       return data_.get(index);
     }
 
     private byte memoizedIsInitialized = -1;
-    @java.lang.Override
+    @Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -14181,7 +14365,7 @@ public final class PDM {
       return true;
     }
 
-    @java.lang.Override
+    @Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       for (int i = 0; i < data_.size(); i++) {
@@ -14190,7 +14374,7 @@ public final class PDM {
       getUnknownFields().writeTo(output);
     }
 
-    @java.lang.Override
+    @Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -14205,15 +14389,15 @@ public final class PDM {
       return size;
     }
 
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
+    @Override
+    public boolean equals(final Object obj) {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof provenancegraph.datamodel.PDM.LogPack)) {
+      if (!(obj instanceof LogPack)) {
         return super.equals(obj);
       }
-      provenancegraph.datamodel.PDM.LogPack other = (provenancegraph.datamodel.PDM.LogPack) obj;
+      LogPack other = (LogPack) obj;
 
       if (!getDataList()
           .equals(other.getDataList())) return false;
@@ -14221,7 +14405,7 @@ public final class PDM {
       return true;
     }
 
-    @java.lang.Override
+    @Override
     public int hashCode() {
       if (memoizedHashCode != 0) {
         return memoizedHashCode;
@@ -14237,44 +14421,44 @@ public final class PDM {
       return hash;
     }
 
-    public static provenancegraph.datamodel.PDM.LogPack parseFrom(
+    public static LogPack parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static provenancegraph.datamodel.PDM.LogPack parseFrom(
+    public static LogPack parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.LogPack parseFrom(
+    public static LogPack parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static provenancegraph.datamodel.PDM.LogPack parseFrom(
+    public static LogPack parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.LogPack parseFrom(byte[] data)
+    public static LogPack parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static provenancegraph.datamodel.PDM.LogPack parseFrom(
+    public static LogPack parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.LogPack parseFrom(java.io.InputStream input)
+    public static LogPack parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static provenancegraph.datamodel.PDM.LogPack parseFrom(
+    public static LogPack parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -14282,26 +14466,26 @@ public final class PDM {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    public static provenancegraph.datamodel.PDM.LogPack parseDelimitedFrom(java.io.InputStream input)
+    public static LogPack parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
 
-    public static provenancegraph.datamodel.PDM.LogPack parseDelimitedFrom(
+    public static LogPack parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static provenancegraph.datamodel.PDM.LogPack parseFrom(
+    public static LogPack parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static provenancegraph.datamodel.PDM.LogPack parseFrom(
+    public static LogPack parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -14309,23 +14493,23 @@ public final class PDM {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    @java.lang.Override
+    @Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(provenancegraph.datamodel.PDM.LogPack prototype) {
+    public static Builder newBuilder(LogPack prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
-    @java.lang.Override
+    @Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
     }
 
-    @java.lang.Override
+    @Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -14335,18 +14519,18 @@ public final class PDM {
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:provenancegraph.datamodel.LogPack)
-        provenancegraph.datamodel.PDM.LogPackOrBuilder {
+        LogPackOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_LogPack_descriptor;
+        return PDM.internal_static_provenancegraph_datamodel_LogPack_descriptor;
       }
 
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      @Override
+      protected FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_LogPack_fieldAccessorTable
+        return PDM.internal_static_provenancegraph_datamodel_LogPack_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                provenancegraph.datamodel.PDM.LogPack.class, provenancegraph.datamodel.PDM.LogPack.Builder.class);
+                LogPack.class, Builder.class);
       }
 
       // Construct using provenancegraph.datamodel.PDM.LogPack.newBuilder()
@@ -14355,11 +14539,11 @@ public final class PDM {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          BuilderParent parent) {
         super(parent);
 
       }
-      @java.lang.Override
+      @Override
       public Builder clear() {
         super.clear();
         bitField0_ = 0;
@@ -14373,36 +14557,36 @@ public final class PDM {
         return this;
       }
 
-      @java.lang.Override
+      @Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return provenancegraph.datamodel.PDM.internal_static_provenancegraph_datamodel_LogPack_descriptor;
+        return PDM.internal_static_provenancegraph_datamodel_LogPack_descriptor;
       }
 
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.LogPack getDefaultInstanceForType() {
-        return provenancegraph.datamodel.PDM.LogPack.getDefaultInstance();
+      @Override
+      public LogPack getDefaultInstanceForType() {
+        return LogPack.getDefaultInstance();
       }
 
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.LogPack build() {
-        provenancegraph.datamodel.PDM.LogPack result = buildPartial();
+      @Override
+      public LogPack build() {
+        LogPack result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      @java.lang.Override
-      public provenancegraph.datamodel.PDM.LogPack buildPartial() {
-        provenancegraph.datamodel.PDM.LogPack result = new provenancegraph.datamodel.PDM.LogPack(this);
+      @Override
+      public LogPack buildPartial() {
+        LogPack result = new LogPack(this);
         buildPartialRepeatedFields(result);
         if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
       }
 
-      private void buildPartialRepeatedFields(provenancegraph.datamodel.PDM.LogPack result) {
+      private void buildPartialRepeatedFields(LogPack result) {
         if (dataBuilder_ == null) {
           if (((bitField0_ & 0x00000001) != 0)) {
             data_ = java.util.Collections.unmodifiableList(data_);
@@ -14414,54 +14598,54 @@ public final class PDM {
         }
       }
 
-      private void buildPartial0(provenancegraph.datamodel.PDM.LogPack result) {
+      private void buildPartial0(LogPack result) {
         int from_bitField0_ = bitField0_;
       }
 
-      @java.lang.Override
+      @Override
       public Builder clone() {
         return super.clone();
       }
-      @java.lang.Override
+      @Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return super.setField(field, value);
       }
-      @java.lang.Override
+      @Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return super.clearField(field);
       }
-      @java.lang.Override
+      @Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return super.clearOneof(oneof);
       }
-      @java.lang.Override
+      @Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
+          int index, Object value) {
         return super.setRepeatedField(field, index, value);
       }
-      @java.lang.Override
+      @Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return super.addRepeatedField(field, value);
       }
-      @java.lang.Override
+      @Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof provenancegraph.datamodel.PDM.LogPack) {
-          return mergeFrom((provenancegraph.datamodel.PDM.LogPack)other);
+        if (other instanceof LogPack) {
+          return mergeFrom((LogPack)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(provenancegraph.datamodel.PDM.LogPack other) {
-        if (other == provenancegraph.datamodel.PDM.LogPack.getDefaultInstance()) return this;
+      public Builder mergeFrom(LogPack other) {
+        if (other == LogPack.getDefaultInstance()) return this;
         if (dataBuilder_ == null) {
           if (!other.data_.isEmpty()) {
             if (data_.isEmpty()) {
@@ -14493,18 +14677,18 @@ public final class PDM {
         return this;
       }
 
-      @java.lang.Override
+      @Override
       public final boolean isInitialized() {
         return true;
       }
 
-      @java.lang.Override
+      @Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
         if (extensionRegistry == null) {
-          throw new java.lang.NullPointerException();
+          throw new NullPointerException();
         }
         try {
           boolean done = false;
@@ -14515,9 +14699,9 @@ public final class PDM {
                 done = true;
                 break;
               case 10: {
-                provenancegraph.datamodel.PDM.Log m =
+                Log m =
                     input.readMessage(
-                        provenancegraph.datamodel.PDM.Log.parser(),
+                        Log.parser(),
                         extensionRegistry);
                 if (dataBuilder_ == null) {
                   ensureDataIsMutable();
@@ -14544,22 +14728,22 @@ public final class PDM {
       }
       private int bitField0_;
 
-      private java.util.List<provenancegraph.datamodel.PDM.Log> data_ =
+      private java.util.List<Log> data_ =
         java.util.Collections.emptyList();
       private void ensureDataIsMutable() {
         if (!((bitField0_ & 0x00000001) != 0)) {
-          data_ = new java.util.ArrayList<provenancegraph.datamodel.PDM.Log>(data_);
+          data_ = new java.util.ArrayList<Log>(data_);
           bitField0_ |= 0x00000001;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          provenancegraph.datamodel.PDM.Log, provenancegraph.datamodel.PDM.Log.Builder, provenancegraph.datamodel.PDM.LogOrBuilder> dataBuilder_;
+          Log, Log.Builder, LogOrBuilder> dataBuilder_;
 
       /**
        * <code>repeated .provenancegraph.datamodel.Log data = 1;</code>
        */
-      public java.util.List<provenancegraph.datamodel.PDM.Log> getDataList() {
+      public java.util.List<Log> getDataList() {
         if (dataBuilder_ == null) {
           return java.util.Collections.unmodifiableList(data_);
         } else {
@@ -14579,7 +14763,7 @@ public final class PDM {
       /**
        * <code>repeated .provenancegraph.datamodel.Log data = 1;</code>
        */
-      public provenancegraph.datamodel.PDM.Log getData(int index) {
+      public Log getData(int index) {
         if (dataBuilder_ == null) {
           return data_.get(index);
         } else {
@@ -14590,7 +14774,7 @@ public final class PDM {
        * <code>repeated .provenancegraph.datamodel.Log data = 1;</code>
        */
       public Builder setData(
-          int index, provenancegraph.datamodel.PDM.Log value) {
+          int index, Log value) {
         if (dataBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -14607,7 +14791,7 @@ public final class PDM {
        * <code>repeated .provenancegraph.datamodel.Log data = 1;</code>
        */
       public Builder setData(
-          int index, provenancegraph.datamodel.PDM.Log.Builder builderForValue) {
+          int index, Log.Builder builderForValue) {
         if (dataBuilder_ == null) {
           ensureDataIsMutable();
           data_.set(index, builderForValue.build());
@@ -14620,7 +14804,7 @@ public final class PDM {
       /**
        * <code>repeated .provenancegraph.datamodel.Log data = 1;</code>
        */
-      public Builder addData(provenancegraph.datamodel.PDM.Log value) {
+      public Builder addData(Log value) {
         if (dataBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -14637,7 +14821,7 @@ public final class PDM {
        * <code>repeated .provenancegraph.datamodel.Log data = 1;</code>
        */
       public Builder addData(
-          int index, provenancegraph.datamodel.PDM.Log value) {
+          int index, Log value) {
         if (dataBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -14654,7 +14838,7 @@ public final class PDM {
        * <code>repeated .provenancegraph.datamodel.Log data = 1;</code>
        */
       public Builder addData(
-          provenancegraph.datamodel.PDM.Log.Builder builderForValue) {
+          Log.Builder builderForValue) {
         if (dataBuilder_ == null) {
           ensureDataIsMutable();
           data_.add(builderForValue.build());
@@ -14668,7 +14852,7 @@ public final class PDM {
        * <code>repeated .provenancegraph.datamodel.Log data = 1;</code>
        */
       public Builder addData(
-          int index, provenancegraph.datamodel.PDM.Log.Builder builderForValue) {
+          int index, Log.Builder builderForValue) {
         if (dataBuilder_ == null) {
           ensureDataIsMutable();
           data_.add(index, builderForValue.build());
@@ -14682,7 +14866,7 @@ public final class PDM {
        * <code>repeated .provenancegraph.datamodel.Log data = 1;</code>
        */
       public Builder addAllData(
-          java.lang.Iterable<? extends provenancegraph.datamodel.PDM.Log> values) {
+          Iterable<? extends Log> values) {
         if (dataBuilder_ == null) {
           ensureDataIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
@@ -14722,14 +14906,14 @@ public final class PDM {
       /**
        * <code>repeated .provenancegraph.datamodel.Log data = 1;</code>
        */
-      public provenancegraph.datamodel.PDM.Log.Builder getDataBuilder(
+      public Log.Builder getDataBuilder(
           int index) {
         return getDataFieldBuilder().getBuilder(index);
       }
       /**
        * <code>repeated .provenancegraph.datamodel.Log data = 1;</code>
        */
-      public provenancegraph.datamodel.PDM.LogOrBuilder getDataOrBuilder(
+      public LogOrBuilder getDataOrBuilder(
           int index) {
         if (dataBuilder_ == null) {
           return data_.get(index);  } else {
@@ -14739,7 +14923,7 @@ public final class PDM {
       /**
        * <code>repeated .provenancegraph.datamodel.Log data = 1;</code>
        */
-      public java.util.List<? extends provenancegraph.datamodel.PDM.LogOrBuilder> 
+      public java.util.List<? extends LogOrBuilder>
            getDataOrBuilderList() {
         if (dataBuilder_ != null) {
           return dataBuilder_.getMessageOrBuilderList();
@@ -14750,31 +14934,31 @@ public final class PDM {
       /**
        * <code>repeated .provenancegraph.datamodel.Log data = 1;</code>
        */
-      public provenancegraph.datamodel.PDM.Log.Builder addDataBuilder() {
+      public Log.Builder addDataBuilder() {
         return getDataFieldBuilder().addBuilder(
-            provenancegraph.datamodel.PDM.Log.getDefaultInstance());
+            Log.getDefaultInstance());
       }
       /**
        * <code>repeated .provenancegraph.datamodel.Log data = 1;</code>
        */
-      public provenancegraph.datamodel.PDM.Log.Builder addDataBuilder(
+      public Log.Builder addDataBuilder(
           int index) {
         return getDataFieldBuilder().addBuilder(
-            index, provenancegraph.datamodel.PDM.Log.getDefaultInstance());
+            index, Log.getDefaultInstance());
       }
       /**
        * <code>repeated .provenancegraph.datamodel.Log data = 1;</code>
        */
-      public java.util.List<provenancegraph.datamodel.PDM.Log.Builder> 
+      public java.util.List<Log.Builder>
            getDataBuilderList() {
         return getDataFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          provenancegraph.datamodel.PDM.Log, provenancegraph.datamodel.PDM.Log.Builder, provenancegraph.datamodel.PDM.LogOrBuilder> 
+          Log, Log.Builder, LogOrBuilder>
           getDataFieldBuilder() {
         if (dataBuilder_ == null) {
           dataBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-              provenancegraph.datamodel.PDM.Log, provenancegraph.datamodel.PDM.Log.Builder, provenancegraph.datamodel.PDM.LogOrBuilder>(
+              Log, Log.Builder, LogOrBuilder>(
                   data_,
                   ((bitField0_ & 0x00000001) != 0),
                   getParentForChildren(),
@@ -14783,13 +14967,13 @@ public final class PDM {
         }
         return dataBuilder_;
       }
-      @java.lang.Override
+      @Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFields(unknownFields);
       }
 
-      @java.lang.Override
+      @Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -14800,18 +14984,18 @@ public final class PDM {
     }
 
     // @@protoc_insertion_point(class_scope:provenancegraph.datamodel.LogPack)
-    private static final provenancegraph.datamodel.PDM.LogPack DEFAULT_INSTANCE;
+    private static final LogPack DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new provenancegraph.datamodel.PDM.LogPack();
+      DEFAULT_INSTANCE = new LogPack();
     }
 
-    public static provenancegraph.datamodel.PDM.LogPack getDefaultInstance() {
+    public static LogPack getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
     private static final com.google.protobuf.Parser<LogPack>
         PARSER = new com.google.protobuf.AbstractParser<LogPack>() {
-      @java.lang.Override
+      @Override
       public LogPack parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -14835,13 +15019,13 @@ public final class PDM {
       return PARSER;
     }
 
-    @java.lang.Override
+    @Override
     public com.google.protobuf.Parser<LogPack> getParserForType() {
       return PARSER;
     }
 
-    @java.lang.Override
-    public provenancegraph.datamodel.PDM.LogPack getDefaultInstanceForType() {
+    @Override
+    public LogPack getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -14935,7 +15119,7 @@ public final class PDM {
   private static  com.google.protobuf.Descriptors.FileDescriptor
       descriptor;
   static {
-    java.lang.String[] descriptorData = {
+    String[] descriptorData = {
       "\n\tPDM.proto\022\031provenancegraph.datamodel\"\034" +
       "\n\010HostUUID\022\020\n\010hostUUID\030\001 \001(\004\"&\n\013ProcessU" +
       "UID\022\013\n\003pid\030\001 \001(\005\022\n\n\002ts\030\002 \001(\004\" \n\010FileUUID" +
@@ -14943,61 +15127,62 @@ public final class PDM {
       "clientID\030\001 \001(\0132#.provenancegraph.datamod" +
       "el.HostUUID\0220\n\004type\030\002 \001(\0162\".provenancegr" +
       "aph.datamodel.LogType\0226\n\007content\030\003 \001(\0162%" +
-      ".provenancegraph.datamodel.LogContent\"l\n" +
-      "\006Client\0224\n\006ipList\030\001 \003(\0132$.provenancegrap" +
-      "h.datamodel.IPAddress\022\022\n\nclientName\030\002 \001(" +
-      "\t\022\030\n\020collectorVersion\030\003 \001(\t\"\361\001\n\007Process\022" +
-      "8\n\010procUUID\030\001 \001(\0132&.provenancegraph.data" +
-      "model.ProcessUUID\022>\n\016parentProcUUID\030\002 \001(" +
-      "\0132&.provenancegraph.datamodel.ProcessUUI" +
-      "D\022\023\n\013processName\030\003 \001(\t\022\017\n\007cmdline\030\004 \001(\t\022" +
-      "5\n\010fileUUID\030\005 \001(\0132#.provenancegraph.data" +
-      "model.FileUUID\022\017\n\007exePath\030\006 \001(\t\"\205\002\n\004File" +
-      "\0225\n\010fileUUID\030\001 \001(\0132#.provenancegraph.dat" +
-      "amodel.FileUUID\022:\n\010fileType\030\002 \001(\0162(.prov" +
-      "enancegraph.datamodel.File.FileType\022\022\n\np" +
-      "ermission\030\003 \001(\r\022\020\n\010filePath\030\004 \001(\t\"d\n\010Fil" +
-      "eType\022\020\n\014FILE_UNKNOWN\020\000\022\014\n\010FILE_REG\020\001\022\014\n" +
-      "\010FILE_DIR\020\002\022\014\n\010FILE_LNK\020\003\022\r\n\tFILE_SOCK\020\004" +
-      "\022\r\n\tFILE_FIFO\020\005\"d\n\013EventHeader\022\n\n\002ts\030\001 \001" +
-      "(\004\0228\n\010procUUID\030\002 \001(\0132&.provenancegraph.d" +
-      "atamodel.ProcessUUID\022\017\n\007hostTid\030\003 \001(\005\"U\n" +
-      "\tIPAddress\022\017\n\007address\030\001 \001(\r\022\021\n\taddress_1" +
-      "\030\002 \001(\r\022\021\n\taddress_2\030\003 \001(\r\022\021\n\taddress_3\030\004" +
-      " \001(\r\"\207\002\n\010NetEvent\0221\n\003sip\030\001 \001(\0132$.provena" +
-      "ncegraph.datamodel.IPAddress\0221\n\003dip\030\002 \001(" +
-      "\0132$.provenancegraph.datamodel.IPAddress\022" +
-      "\r\n\005sport\030\003 \001(\r\022\r\n\005dport\030\004 \001(\r\022\020\n\010protoco" +
-      "l\030\005 \001(\r\022=\n\006direct\030\006 \001(\0162-.provenancegrap" +
-      "h.datamodel.NetEvent.Direction\"&\n\tDirect" +
-      "ion\022\006\n\002IN\020\000\022\007\n\003OUT\020\001\022\010\n\004NONE\020\002\"E\n\014Proces" +
-      "sEvent\0225\n\tchildProc\030\001 \001(\0132\".provenancegr" +
-      "aph.datamodel.Process\"\232\001\n\tFileEvent\022-\n\004f" +
-      "ile\030\001 \001(\0132\037.provenancegraph.datamodel.Fi" +
-      "le\0220\n\007newFile\030\002 \001(\0132\037.provenancegraph.da" +
-      "tamodel.File\022\013\n\003uid\030\003 \001(\r\022\013\n\003gid\030\004 \001(\r\022\022" +
-      "\n\npermission\030\005 \001(\r\".\n\tEventLost\022\017\n\007lostC" +
-      "pu\030\001 \001(\004\022\020\n\010lostSize\030\002 \001(\004\"\202\002\n\tEventData" +
-      "\0227\n\007eHeader\030\001 \001(\0132&.provenancegraph.data" +
-      "model.EventHeader\022?\n\014processEvent\030\002 \001(\0132" +
-      "\'.provenancegraph.datamodel.ProcessEvent" +
-      "H\000\0229\n\tfileEvent\030\003 \001(\0132$.provenancegraph." +
-      "datamodel.FileEventH\000\0227\n\010netEvent\030\004 \001(\0132" +
-      "#.provenancegraph.datamodel.NetEventH\000B\007" +
-      "\n\005_data\"\353\001\n\003Log\0225\n\007uHeader\030\001 \001(\0132$.prove" +
-      "nancegraph.datamodel.LogHeader\0223\n\006client" +
-      "\030\002 \001(\0132!.provenancegraph.datamodel.Clien" +
-      "tH\000\0229\n\teventData\030\003 \001(\0132$.provenancegraph" +
-      ".datamodel.EventDataH\000\0224\n\004lost\030\004 \001(\0132$.p" +
-      "rovenancegraph.datamodel.EventLostH\000B\007\n\005" +
-      "_data\"7\n\007LogPack\022,\n\004data\030\001 \003(\0132\036.provena" +
-      "ncegraph.datamodel.Log*\270\001\n\nLogContent\022\021\n" +
-      "\rCLIENT_ENTITY\020\000\022\022\n\016PROCESS_ENTITY\020\001\022\017\n\013" +
-      "FILE_ENTITY\020\002\022\020\n\014PROCESS_FORK\020\003\022\020\n\014PROCE" +
-      "SS_EXEC\020\004\022\017\n\013FILE_CREATE\020\005\022\r\n\tFILE_OPEN\020" +
-      "\006\022\r\n\tFILE_READ\020\007\022\016\n\nFILE_WRITE\020\010\022\017\n\013NET_" +
-      "CONNECT\020\t* \n\007LogType\022\n\n\006ENTITY\020\000\022\t\n\005EVEN" +
-      "T\020\001b\006proto3"
+      ".provenancegraph.datamodel.LogContent\"\243\001" +
+      "\n\006Client\0225\n\010clientID\030\001 \001(\0132#.provenanceg" +
+      "raph.datamodel.HostUUID\0224\n\006ipList\030\002 \003(\0132" +
+      "$.provenancegraph.datamodel.IPAddress\022\022\n" +
+      "\nclientName\030\003 \001(\t\022\030\n\020collectorVersion\030\004 " +
+      "\001(\t\"\361\001\n\007Process\0228\n\010procUUID\030\001 \001(\0132&.prov" +
+      "enancegraph.datamodel.ProcessUUID\022>\n\016par" +
+      "entProcUUID\030\002 \001(\0132&.provenancegraph.data" +
+      "model.ProcessUUID\022\023\n\013processName\030\003 \001(\t\022\017" +
+      "\n\007cmdline\030\004 \001(\t\0225\n\010fileUUID\030\005 \001(\0132#.prov" +
+      "enancegraph.datamodel.FileUUID\022\017\n\007exePat" +
+      "h\030\006 \001(\t\"\205\002\n\004File\0225\n\010fileUUID\030\001 \001(\0132#.pro" +
+      "venancegraph.datamodel.FileUUID\022:\n\010fileT" +
+      "ype\030\002 \001(\0162(.provenancegraph.datamodel.Fi" +
+      "le.FileType\022\022\n\npermission\030\003 \001(\r\022\020\n\010fileP" +
+      "ath\030\004 \001(\t\"d\n\010FileType\022\020\n\014FILE_UNKNOWN\020\000\022" +
+      "\014\n\010FILE_REG\020\001\022\014\n\010FILE_DIR\020\002\022\014\n\010FILE_LNK\020" +
+      "\003\022\r\n\tFILE_SOCK\020\004\022\r\n\tFILE_FIFO\020\005\"K\n\013Event" +
+      "Header\022\n\n\002ts\030\001 \001(\004\0220\n\004proc\030\002 \001(\0132\".prove" +
+      "nancegraph.datamodel.Process\"U\n\tIPAddres" +
+      "s\022\017\n\007address\030\001 \001(\r\022\021\n\taddress_1\030\002 \001(\r\022\021\n" +
+      "\taddress_2\030\003 \001(\r\022\021\n\taddress_3\030\004 \001(\r\"\207\002\n\010" +
+      "NetEvent\0221\n\003sip\030\001 \001(\0132$.provenancegraph." +
+      "datamodel.IPAddress\0221\n\003dip\030\002 \001(\0132$.prove" +
+      "nancegraph.datamodel.IPAddress\022\r\n\005sport\030" +
+      "\003 \001(\r\022\r\n\005dport\030\004 \001(\r\022\020\n\010protocol\030\005 \001(\r\022=" +
+      "\n\006direct\030\006 \001(\0162-.provenancegraph.datamod" +
+      "el.NetEvent.Direction\"&\n\tDirection\022\006\n\002IN" +
+      "\020\000\022\007\n\003OUT\020\001\022\010\n\004NONE\020\002\"E\n\014ProcessEvent\0225\n" +
+      "\tchildProc\030\001 \001(\0132\".provenancegraph.datam" +
+      "odel.Process\"\232\001\n\tFileEvent\022-\n\004file\030\001 \001(\013" +
+      "2\037.provenancegraph.datamodel.File\0220\n\007new" +
+      "File\030\002 \001(\0132\037.provenancegraph.datamodel.F" +
+      "ile\022\013\n\003uid\030\003 \001(\r\022\013\n\003gid\030\004 \001(\r\022\022\n\npermiss" +
+      "ion\030\005 \001(\r\".\n\tEventLost\022\017\n\007lostCpu\030\001 \001(\004\022" +
+      "\020\n\010lostSize\030\002 \001(\004\"\202\002\n\tEventData\0227\n\007eHead" +
+      "er\030\001 \001(\0132&.provenancegraph.datamodel.Eve" +
+      "ntHeader\022?\n\014processEvent\030\002 \001(\0132\'.provena" +
+      "ncegraph.datamodel.ProcessEventH\000\0229\n\tfil" +
+      "eEvent\030\003 \001(\0132$.provenancegraph.datamodel" +
+      ".FileEventH\000\0227\n\010netEvent\030\004 \001(\0132#.provena" +
+      "ncegraph.datamodel.NetEventH\000B\007\n\005_data\"\353" +
+      "\001\n\003Log\0225\n\007uHeader\030\001 \001(\0132$.provenancegrap" +
+      "h.datamodel.LogHeader\0223\n\006client\030\002 \001(\0132!." +
+      "provenancegraph.datamodel.ClientH\000\0229\n\tev" +
+      "entData\030\003 \001(\0132$.provenancegraph.datamode" +
+      "l.EventDataH\000\0224\n\004lost\030\004 \001(\0132$.provenance" +
+      "graph.datamodel.EventLostH\000B\007\n\005_data\"7\n\007" +
+      "LogPack\022,\n\004data\030\001 \003(\0132\036.provenancegraph." +
+      "datamodel.Log*\271\001\n\nLogContent\022\021\n\rCLIENT_E" +
+      "NTITY\020\000\022\022\n\016PROCESS_ENTITY\020\001\022\017\n\013FILE_ENTI" +
+      "TY\020\002\022\020\n\014PROCESS_FORK\020\003\022\020\n\014PROCESS_EXEC\020\004" +
+      "\022\020\n\014PROCESS_LOAD\020\005\022\r\n\tFILE_OPEN\020\006\022\r\n\tFIL" +
+      "E_READ\020\007\022\016\n\nFILE_WRITE\020\010\022\017\n\013NET_CONNECT\020" +
+      "\t* \n\007LogType\022\n\n\006ENTITY\020\000\022\t\n\005EVENT\020\001b\006pro" +
+      "to3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -15008,97 +15193,97 @@ public final class PDM {
     internal_static_provenancegraph_datamodel_HostUUID_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_provenancegraph_datamodel_HostUUID_descriptor,
-        new java.lang.String[] { "HostUUID", });
+        new String[] { "HostUUID", });
     internal_static_provenancegraph_datamodel_ProcessUUID_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_provenancegraph_datamodel_ProcessUUID_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_provenancegraph_datamodel_ProcessUUID_descriptor,
-        new java.lang.String[] { "Pid", "Ts", });
+        new String[] { "Pid", "Ts", });
     internal_static_provenancegraph_datamodel_FileUUID_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_provenancegraph_datamodel_FileUUID_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_provenancegraph_datamodel_FileUUID_descriptor,
-        new java.lang.String[] { "FilePathHash", });
+        new String[] { "FilePathHash", });
     internal_static_provenancegraph_datamodel_LogHeader_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_provenancegraph_datamodel_LogHeader_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_provenancegraph_datamodel_LogHeader_descriptor,
-        new java.lang.String[] { "ClientID", "Type", "Content", });
+        new String[] { "ClientID", "Type", "Content", });
     internal_static_provenancegraph_datamodel_Client_descriptor =
       getDescriptor().getMessageTypes().get(4);
     internal_static_provenancegraph_datamodel_Client_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_provenancegraph_datamodel_Client_descriptor,
-        new java.lang.String[] { "IpList", "ClientName", "CollectorVersion", });
+        new String[] { "ClientID", "IpList", "ClientName", "CollectorVersion", });
     internal_static_provenancegraph_datamodel_Process_descriptor =
       getDescriptor().getMessageTypes().get(5);
     internal_static_provenancegraph_datamodel_Process_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_provenancegraph_datamodel_Process_descriptor,
-        new java.lang.String[] { "ProcUUID", "ParentProcUUID", "ProcessName", "Cmdline", "FileUUID", "ExePath", });
+        new String[] { "ProcUUID", "ParentProcUUID", "ProcessName", "Cmdline", "FileUUID", "ExePath", });
     internal_static_provenancegraph_datamodel_File_descriptor =
       getDescriptor().getMessageTypes().get(6);
     internal_static_provenancegraph_datamodel_File_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_provenancegraph_datamodel_File_descriptor,
-        new java.lang.String[] { "FileUUID", "FileType", "Permission", "FilePath", });
+        new String[] { "FileUUID", "FileType", "Permission", "FilePath", });
     internal_static_provenancegraph_datamodel_EventHeader_descriptor =
       getDescriptor().getMessageTypes().get(7);
     internal_static_provenancegraph_datamodel_EventHeader_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_provenancegraph_datamodel_EventHeader_descriptor,
-        new java.lang.String[] { "Ts", "ProcUUID", "HostTid", });
+        new String[] { "Ts", "Proc", });
     internal_static_provenancegraph_datamodel_IPAddress_descriptor =
       getDescriptor().getMessageTypes().get(8);
     internal_static_provenancegraph_datamodel_IPAddress_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_provenancegraph_datamodel_IPAddress_descriptor,
-        new java.lang.String[] { "Address", "Address1", "Address2", "Address3", });
+        new String[] { "Address", "Address1", "Address2", "Address3", });
     internal_static_provenancegraph_datamodel_NetEvent_descriptor =
       getDescriptor().getMessageTypes().get(9);
     internal_static_provenancegraph_datamodel_NetEvent_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_provenancegraph_datamodel_NetEvent_descriptor,
-        new java.lang.String[] { "Sip", "Dip", "Sport", "Dport", "Protocol", "Direct", });
+        new String[] { "Sip", "Dip", "Sport", "Dport", "Protocol", "Direct", });
     internal_static_provenancegraph_datamodel_ProcessEvent_descriptor =
       getDescriptor().getMessageTypes().get(10);
     internal_static_provenancegraph_datamodel_ProcessEvent_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_provenancegraph_datamodel_ProcessEvent_descriptor,
-        new java.lang.String[] { "ChildProc", });
+        new String[] { "ChildProc", });
     internal_static_provenancegraph_datamodel_FileEvent_descriptor =
       getDescriptor().getMessageTypes().get(11);
     internal_static_provenancegraph_datamodel_FileEvent_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_provenancegraph_datamodel_FileEvent_descriptor,
-        new java.lang.String[] { "File", "NewFile", "Uid", "Gid", "Permission", });
+        new String[] { "File", "NewFile", "Uid", "Gid", "Permission", });
     internal_static_provenancegraph_datamodel_EventLost_descriptor =
       getDescriptor().getMessageTypes().get(12);
     internal_static_provenancegraph_datamodel_EventLost_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_provenancegraph_datamodel_EventLost_descriptor,
-        new java.lang.String[] { "LostCpu", "LostSize", });
+        new String[] { "LostCpu", "LostSize", });
     internal_static_provenancegraph_datamodel_EventData_descriptor =
       getDescriptor().getMessageTypes().get(13);
     internal_static_provenancegraph_datamodel_EventData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_provenancegraph_datamodel_EventData_descriptor,
-        new java.lang.String[] { "EHeader", "ProcessEvent", "FileEvent", "NetEvent", "Data", });
+        new String[] { "EHeader", "ProcessEvent", "FileEvent", "NetEvent", "Data", });
     internal_static_provenancegraph_datamodel_Log_descriptor =
       getDescriptor().getMessageTypes().get(14);
     internal_static_provenancegraph_datamodel_Log_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_provenancegraph_datamodel_Log_descriptor,
-        new java.lang.String[] { "UHeader", "Client", "EventData", "Lost", "Data", });
+        new String[] { "UHeader", "Client", "EventData", "Lost", "Data", });
     internal_static_provenancegraph_datamodel_LogPack_descriptor =
       getDescriptor().getMessageTypes().get(15);
     internal_static_provenancegraph_datamodel_LogPack_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_provenancegraph_datamodel_LogPack_descriptor,
-        new java.lang.String[] { "Data", });
+        new String[] { "Data", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

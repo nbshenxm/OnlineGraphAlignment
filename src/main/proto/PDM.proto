@@ -11,7 +11,7 @@ enum LogContent {
     // Event
     PROCESS_FORK = 3;
     PROCESS_EXEC = 4;
-    FILE_CREATE = 5;
+    PROCESS_LOAD = 5;
     FILE_OPEN = 6;
     FILE_READ = 7;
     FILE_WRITE = 8;
@@ -82,8 +82,8 @@ message File {
 // Event header
 message EventHeader {
     uint64 ts = 1;
-    ProcessUUID procUUID = 2;
-    int32 hostTid = 3;
+    Process proc = 2;
+//    int32 hostTid = 3;
 }
 
 // Network-related event data
