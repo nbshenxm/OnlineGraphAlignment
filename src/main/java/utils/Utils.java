@@ -3,13 +3,15 @@ package utils;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Properties;
 
 public class Utils {
     public static Properties loadProperties(String propertyFilePath) throws IOException {
-        InputStream inputStream = new FileInputStream(propertyFilePath);
+        InputStream inputStream = Files.newInputStream(Paths.get(propertyFilePath));
         Properties properties = new Properties();
         properties.load(inputStream);
         inputStream.close();

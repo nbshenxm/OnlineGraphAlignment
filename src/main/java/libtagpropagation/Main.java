@@ -10,6 +10,7 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
+import provenancegraph.parser.LocalParser;
 
 public class Main {
 
@@ -26,8 +27,9 @@ public class Main {
 //        stream.print();
         final DataStream<JsonElement> json_stream = stream.map(Main::convertToJson).name("json-source");
 
-        json_stream.keyBy(jsonElement -> jsonElement.getAsJsonObject().get("uuid").getAsString())
-                // TODO: map data entry -> associatedEvent
+        json_stream
+                .map(LocalParser::initAssociatedEvent)
+                .keyBy(associatedEvent -> associatedEvent.hostUUID)
                 .process(new GraphAlignmentLocalProcessFunction());
 
 

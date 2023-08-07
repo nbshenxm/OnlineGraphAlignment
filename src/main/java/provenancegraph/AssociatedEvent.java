@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.UUID;
 
 public class AssociatedEvent extends BasicEdge implements Serializable {
     public BasicNode sourceNode;
@@ -17,6 +18,8 @@ public class AssociatedEvent extends BasicEdge implements Serializable {
 
     private String relationship;
     public Long timeStamp;
+
+    public UUID hostUUID;
 
     private AssociatedEvent generalizedEvent = null;
 
