@@ -1,11 +1,13 @@
 package provenancegraph.parser;
 
+import org.apache.flink.util.Collector;
 import provenancegraph.AssociatedEvent;
 import provenancegraph.BasicEdge;
 import provenancegraph.BasicNode;
 import provenancegraph.NodeProperties;
 import provenancegraph.datamodel.PDM;
 
+import java.util.List;
 import java.util.UUID;
 import com.google.common.primitives.Bytes;
 import com.google.common.primitives.Ints;
@@ -92,6 +94,13 @@ public class PDMParser {
 
     public static AssociatedEvent initAssociatedEvent(PDM.Log log){
         return null;
+    }
+
+    public static void Unpack(PDM.LogPack logPack, Collector<PDM.Log> logCollector) {
+        List<PDM.Log> logList = logPack.getDataList();
+        for (PDM.Log log : logList) {
+            logCollector.collect(log);
+        }
     }
 
 //    ToDo: Change UDM item to PDM item.

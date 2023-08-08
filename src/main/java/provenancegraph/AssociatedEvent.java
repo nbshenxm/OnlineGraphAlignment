@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
 
+// TODO: discuss what information we need: 1) if we still need variables in BasicEdge; 2) anything we need to add
 public class AssociatedEvent extends BasicEdge implements Serializable {
     public BasicNode sourceNode;
     public BasicNode sinkNode;
