@@ -43,8 +43,13 @@ public class LocalParser {
         return loc;
     }
     public static BasicNode initBasicSourceNode(JsonElement jsonElement, String eventType, String eventName){
-
-        String processId = getJsonArgField("process_uuid", jsonElement);
+        String processId;
+        if(getJsonField("log_category", jsonElement).equals("Process") && ! getJsonField("event_type", jsonElement).equals("38")){
+            processId = getJsonArgField("parent_process_uuid", jsonElement);
+        }
+        else{
+            processId = getJsonArgField("process_uuid", jsonElement);
+        }
 
         int lastNum = getLastDashOrNum(processId);
 
@@ -62,13 +67,33 @@ public class LocalParser {
     public static BasicNode initBasicSinkNode(JsonElement jsonElement){
         String nodeType = getJsonField("log_category", jsonElement);
 
-        String processId = getJsonArgField("process_uuid", jsonElement);
+        String processId;
+        switch(getJsonField("log_category", jsonElement)){
+            case "Process":
+                if(! getJsonField("event_type", jsonElement).equals("38")) processId = getJsonArgField("process_uuid", jsonElement);
+                else processId = "";
+                int lastNum = getLastDashOrNum(processId);
+                processId = processId.substring(0, lastNum);
+                break;
+            case "File":
+                processId = getJsonArgField("file_uuid", jsonElement);
+                break;
+            case "Network":
+                //unsure so far
+                processId = "";
+                break;
+            default:
+                processId = "";
+        }
 
-        int lastNum = getLastDashOrNum(processId);
-
-        System.out.println(processId.substring(0, lastNum));
         System.out.println(processId);
-        String idTemp = processId.substring(0, lastNum).replace("-", "");
+        String idTemp = processId.replace("-", "");
+        idTemp = idTemp.replace(".", "");
+        if(idTemp.length() < 32){
+            String zero = "0";
+            idTemp += new String(new char[32 - idTemp.length()]).replace("\0", "0");;
+        }
+        System.out.println(idTemp);
         UUID id = new UUID(
                 new BigInteger(idTemp.substring(0, 16), 16).longValue(),
                 new BigInteger(idTemp.substring(16), 16).longValue());
@@ -152,7 +177,10 @@ public class LocalParser {
 
         event.setRelationship(eventTypeName);
         BasicNode sink = initBasicSourceNode(jsonElement, eventTypeNum, eventTypeName);
+        System.out.println("tf");
         BasicNode source = initBasicSinkNode(jsonElement);
+        event.setSinkNode(sink);
+        event.setSourceNode(source);
 //        System.out.println("Node UUID: " + sink.getNodeId());
 //        System.out.println("Node Name: " + sink.getNodeName());
 //        System.out.println("Node Type: " + sink.getNodeType());
