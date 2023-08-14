@@ -1,6 +1,7 @@
 package provenancegraph.parser;
 
 import com.google.gson.JsonElement;
+import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.math3.ml.neuralnet.Network;
 import provenancegraph.*;
 
@@ -42,7 +43,7 @@ public class LocalParser {
         }
         return loc;
     }
-    public static BasicNode initBasicSourceNode(JsonElement jsonElement, String eventType, String eventName){
+    public static BasicNode initBasicSourceNode(JsonElement jsonElement){
         String processId;
         if(getJsonField("log_category", jsonElement).equals("Process") && ! getJsonField("event_type", jsonElement).equals("38")){
             processId = getJsonArgField("parent_process_uuid", jsonElement);
@@ -53,8 +54,8 @@ public class LocalParser {
 
         int lastNum = getLastDashOrNum(processId);
 
-        System.out.println(processId.substring(0, lastNum));
-        System.out.println(processId);
+//        System.out.println(processId.substring(0, lastNum));
+//        System.out.println(processId);
         String idTemp = processId.substring(0, lastNum).replace("-", "");
         UUID id = new UUID(
                 new BigInteger(idTemp.substring(0, 16), 16).longValue(),
@@ -66,7 +67,6 @@ public class LocalParser {
     //initialize a sink node, given that it's a specific event type
     public static BasicNode initBasicSinkNode(JsonElement jsonElement){
         String nodeType = getJsonField("log_category", jsonElement);
-
         String processId;
         switch(getJsonField("log_category", jsonElement)){
             case "Process":
@@ -80,20 +80,20 @@ public class LocalParser {
                 break;
             case "Network":
                 //unsure so far
-                processId = "";
+                processId = getJsonArgField("process_timestamp", jsonElement) + getJsonArgField("destination_ip", jsonElement);
                 break;
             default:
                 processId = "";
         }
 
-        System.out.println(processId);
+//        System.out.println(processId);
         String idTemp = processId.replace("-", "");
         idTemp = idTemp.replace(".", "");
         if(idTemp.length() < 32){
             String zero = "0";
             idTemp += new String(new char[32 - idTemp.length()]).replace("\0", "0");;
         }
-        System.out.println(idTemp);
+//        System.out.println(idTemp);
         UUID id = new UUID(
                 new BigInteger(idTemp.substring(0, 16), 16).longValue(),
                 new BigInteger(idTemp.substring(16), 16).longValue());
@@ -102,19 +102,49 @@ public class LocalParser {
 
     }
 
-    public static NodeProperties initNodeProperties(JsonElement jsonElement, String nodeType){
+    public static NodeProperties initSourceNodeProperties(JsonElement jsonElement){
+        String nodeType = getJsonField("log_category", jsonElement);
+        NodeProperties n;
+        switch(nodeType){
+            case "File":
+            case "Network":
+//                System.out.println(jsonElement.toString());
+                String cmd;
+                try {
+                    cmd = getJsonArgField("process_commandline", jsonElement);
+                }
+                catch(NullPointerException e){
+                    cmd = getJsonArgField("process_path", jsonElement);
+                }
+                n = new ProcessNodeProperties(Integer.parseInt(getJsonArgField("process_id", jsonElement)), getJsonArgField("process_path", jsonElement), cmd);
+                break;
+            case "Process":
+                n = new ProcessNodeProperties(Integer.parseInt(getJsonArgField("parent_process_id", jsonElement)), getJsonArgField("parent_process_path", jsonElement), getJsonArgField("parent_process_commandline", jsonElement));
+                break;
+            default:
+                n = null;
+        }
+        return n;
+    }
+    public static NodeProperties initSinkNodeProperties(JsonElement jsonElement){
+        String nodeType = getJsonField("log_category", jsonElement);
         NodeProperties n;
         switch(nodeType){
 
             case "File":
-                n = new FileNodeProperties(getJsonField("filepath", jsonElement));
+                n = new FileNodeProperties(getJsonArgField("filepath", jsonElement));
+                break;
             case "Network":
-                n = new NetworkNodeProperties(getJsonField("filepath", jsonElement), getJsonField("filepath", jsonElement), 1);
+                n = new NetworkNodeProperties(getJsonArgField("destination_ip", jsonElement), getJsonArgField("destination_port", jsonElement), Integer.parseInt(getJsonArgField("direction", jsonElement)));
+                break;
             case "Process":
-                n = new ProcessNodeProperties(1, getJsonField("filepath", jsonElement), getJsonField("filepath", jsonElement));
+                n = new ProcessNodeProperties(Integer.parseInt(getJsonArgField("process_id", jsonElement)), getJsonArgField("process_path", jsonElement), getJsonArgField("process_commandline", jsonElement));
+                break;
+            default:
+                n = null;
         }
 
-        return null;
+        return n;
     }
 
 
@@ -122,16 +152,27 @@ public class LocalParser {
         String eventTypeNum;
         String eventTypeName;
         String id = getJsonField("uuid", jsonElement);
-        System.out.println("uuid: " + id);
-        System.out.println(jsonElement.toString());
+//        System.out.println("uuid: " + id);
+//        System.out.println(jsonElement.toString());
         UUID hostUUID = new UUID(
                 new BigInteger(id.substring(0, 16), 16).longValue(),
                 new BigInteger(id.substring(16, 32), 16).longValue());
-        System.out.println(hostUUID.toString());
+//        System.out.println(hostUUID.toString());
         AssociatedEvent event = new AssociatedEvent();
         event.setHostUUID(hostUUID);
         event.setTimeStamp(Long.parseLong(getJsonField("timestamp", jsonElement)));
         //hostUUID, eventTypeName, Long.parseLong(getJsonField("timestamp", jsonElement))
+        try {
+            getJsonField("event_type", jsonElement);
+        }
+        catch(Exception e){
+            System.out.println("what did u do david");
+            System.out.println(jsonElement.toString());
+        }
+        if(getJsonField("log_category", jsonElement).equals("Domain")){
+            //temp for fill
+            return null;
+        }
         switch(getJsonField("event_type", jsonElement)){
             case "12":
             case "13":
@@ -176,17 +217,23 @@ public class LocalParser {
         }
 
         event.setRelationship(eventTypeName);
-        BasicNode sink = initBasicSourceNode(jsonElement, eventTypeNum, eventTypeName);
-        System.out.println("tf");
-        BasicNode source = initBasicSinkNode(jsonElement);
+        BasicNode sink = initBasicSinkNode(jsonElement);
+//        System.out.println("tf");
+//        System.out.println(jsonElement.toString());
+        BasicNode source = initBasicSourceNode(jsonElement);
         event.setSinkNode(sink);
         event.setSourceNode(source);
+//        System.out.println(source.toString());
+//        System.out.println(sink.toString());
 //        System.out.println("Node UUID: " + sink.getNodeId());
 //        System.out.println("Node Name: " + sink.getNodeName());
 //        System.out.println("Node Type: " + sink.getNodeType());
 //        System.out.println(jsonElement.toString());
 //        NodeProperties sinkProperties = initNodeProperties(jsonElement, sink.getNodeType());
-
+        sink.setProperties(initSinkNodeProperties(jsonElement));
+        source.setProperties(initSourceNodeProperties(jsonElement));
+        System.out.println(jsonElement.toString());
+        System.out.println(event.toJsonString());
         return event;
     }
 }

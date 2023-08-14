@@ -84,4 +84,8 @@ public class BasicNode implements Serializable {
     public NodeProperties getProperties() {
         return this.properties;
     }
+
+    public String toString(){
+        return "UUID: " + this.nodeId.toString() + ", Node Type: " + this.nodeType.toString() + ", Node Name: " + this.nodeName;
+    }
 }

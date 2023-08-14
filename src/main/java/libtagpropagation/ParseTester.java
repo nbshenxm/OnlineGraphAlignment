@@ -19,7 +19,7 @@ public class ParseTester {
     public static void main(String[] args) throws Exception{
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         DataStream<AssociatedEvent> event_stream;
-        final String inputDirectory = "SystemLog/apt1.log";
+        final String inputDirectory = "SystemLog/apt.log";
         final FileSource<String> source =
                 FileSource.forRecordStreamFormat(new TextLineInputFormat(), new Path(inputDirectory) ).build();
         final DataStream<String> stream =

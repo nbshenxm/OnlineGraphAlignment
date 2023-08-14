@@ -18,7 +18,7 @@ public class AssociatedEvent extends BasicEdge implements Serializable {
 //    public GenericTagCache sinkNodeTag = null;
 
     private String relationship;
-    public Long timeStamp;
+    public transient Long timeStamp;
 
     public UUID hostUUID;
 
