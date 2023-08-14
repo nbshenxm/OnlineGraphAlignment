@@ -28,7 +28,7 @@ public class LocalParser {
     private static int getLastDashOrNum(String s){
         boolean isNum = true;
         int loc = 0;
-        while(isNum){
+        while(isNum && loc < s.length()){
             try{
                 String curr = s.substring(loc, loc + 1);
                 if(! curr.equals("-")){
@@ -57,6 +57,11 @@ public class LocalParser {
 //        System.out.println(processId.substring(0, lastNum));
 //        System.out.println(processId);
         String idTemp = processId.substring(0, lastNum).replace("-", "");
+        idTemp = idTemp.replace(".", "");
+        if(idTemp.length() < 32){
+            String zero = "0";
+            idTemp += new String(new char[32 - idTemp.length()]).replace("\0", "0");;
+        }
         UUID id = new UUID(
                 new BigInteger(idTemp.substring(0, 16), 16).longValue(),
                 new BigInteger(idTemp.substring(16), 16).longValue());
@@ -112,17 +117,21 @@ public class LocalParser {
                 String cmd;
                 try {
                     cmd = getJsonArgField("process_commandline", jsonElement);
+
                 }
                 catch(NullPointerException e){
+                    System.out.println("heY");
+                    System.out.println(jsonElement.toString());
                     cmd = getJsonArgField("process_path", jsonElement);
                 }
                 n = new ProcessNodeProperties(Integer.parseInt(getJsonArgField("process_id", jsonElement)), getJsonArgField("process_path", jsonElement), cmd);
                 break;
             case "Process":
                 n = new ProcessNodeProperties(Integer.parseInt(getJsonArgField("parent_process_id", jsonElement)), getJsonArgField("parent_process_path", jsonElement), getJsonArgField("parent_process_commandline", jsonElement));
+
                 break;
             default:
-                n = null;
+                n = new FileNodeProperties("");
         }
         return n;
     }
@@ -141,7 +150,7 @@ public class LocalParser {
                 n = new ProcessNodeProperties(Integer.parseInt(getJsonArgField("process_id", jsonElement)), getJsonArgField("process_path", jsonElement), getJsonArgField("process_commandline", jsonElement));
                 break;
             default:
-                n = null;
+                n = new FileNodeProperties("");
         }
 
         return n;
@@ -149,6 +158,10 @@ public class LocalParser {
 
 
     public static AssociatedEvent initAssociatedEvent(JsonElement jsonElement){
+        if(getJsonField("operating", jsonElement).equals("Terminated")){
+            System.out.println("We caught it");
+            return new AssociatedEvent();
+        }
         String eventTypeNum;
         String eventTypeName;
         String id = getJsonField("uuid", jsonElement);
@@ -168,10 +181,11 @@ public class LocalParser {
         catch(Exception e){
             System.out.println("what did u do david");
             System.out.println(jsonElement.toString());
+            return new AssociatedEvent();
         }
         if(getJsonField("log_category", jsonElement).equals("Domain")){
             //temp for fill
-            return null;
+            return new AssociatedEvent();
         }
         switch(getJsonField("event_type", jsonElement)){
             case "12":
@@ -221,17 +235,11 @@ public class LocalParser {
 //        System.out.println("tf");
 //        System.out.println(jsonElement.toString());
         BasicNode source = initBasicSourceNode(jsonElement);
-        event.setSinkNode(sink);
-        event.setSourceNode(source);
-//        System.out.println(source.toString());
-//        System.out.println(sink.toString());
-//        System.out.println("Node UUID: " + sink.getNodeId());
-//        System.out.println("Node Name: " + sink.getNodeName());
-//        System.out.println("Node Type: " + sink.getNodeType());
-//        System.out.println(jsonElement.toString());
-//        NodeProperties sinkProperties = initNodeProperties(jsonElement, sink.getNodeType());
+
         sink.setProperties(initSinkNodeProperties(jsonElement));
         source.setProperties(initSourceNodeProperties(jsonElement));
+        event.setSinkNode(sink);
+        event.setSourceNode(source);
         System.out.println(jsonElement.toString());
         System.out.println(event.toJsonString());
         return event;

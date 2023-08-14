@@ -26,8 +26,9 @@ public class ParseTester {
                 env.fromSource(source, WatermarkStrategy.noWatermarks(), "file-source");
         final DataStream<JsonElement> json_stream = stream.map(ParseTester::convertToJson).name("json-source");
         event_stream = json_stream.map(LocalParser::initAssociatedEvent);
-        event_stream.keyBy(associatedEvent -> associatedEvent.hostUUID)
-                .process(new GraphAlignmentLocalProcessFunction());
+        event_stream.print();
+//        event_stream.keyBy(associatedEvent -> associatedEvent.hostUUID)
+//                .process(new GraphAlignmentLocalProcessFunction());
         env.execute("Test reading in Local JSON Files with Flink");
     }
     private static JsonElement convertToJson(String inputLine) {
