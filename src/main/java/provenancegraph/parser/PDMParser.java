@@ -1,12 +1,17 @@
 package provenancegraph.parser;
 
+import com.google.gson.JsonElement;
+import org.apache.flink.api.common.functions.FlatMapFunction;
 import org.apache.flink.util.Collector;
+import org.apache.kafka.common.protocol.types.Field;
 import provenancegraph.AssociatedEvent;
 import provenancegraph.BasicEdge;
 import provenancegraph.BasicNode;
-import provenancegraph.NodeProperties;
+//import provenancegraph.NodeProperties;
 import provenancegraph.datamodel.PDM;
+import provenancegraph.*;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.UUID;
 import com.google.common.primitives.Bytes;
@@ -14,7 +19,11 @@ import com.google.common.primitives.Ints;
 import com.google.common.primitives.Longs;
 import utils.Utils;
 
-public class PDMParser {
+import static provenancegraph.datamodel.PDM.LogContent.PROCESS_FORK;
+import static provenancegraph.datamodel.PDM.NetEvent.Direction.IN;
+import static provenancegraph.datamodel.PDM.NetEvent.Direction.OUT;
+
+public class PDMParser implements FlatMapFunction<PDM.LogPack, PDM.Log> {
     public static UUID processUuidToUuid(PDM.ProcessUUID processUuid) {
         return UUID.nameUUIDFromBytes(Bytes.concat(
                 Longs.toByteArray(processUuid.getTs()),
@@ -77,7 +86,7 @@ public class PDMParser {
             }
             else if (log.hasEventData() && log.getEventData().hasNetEvent()){
                 PDM.NetEvent netInfo = log.getEventData().getNetEvent();
-                if (netInfo.getDirect() == PDM.NetEvent.Direction.IN)
+                if (netInfo.getDirect() == IN)
                     nodeId = networkToUuid(netInfo.getSip(), netInfo.getSport());
                 else {
                     nodeId = networkToUuid(netInfo.getDip(), netInfo.getDport());
@@ -93,15 +102,164 @@ public class PDMParser {
     }
 
     public static AssociatedEvent initAssociatedEvent(PDM.Log log){
-        return null;
+        /**
+         *     private String relationship;
+         *     public transient Long timeStamp;
+         *     public UUID hostUUID;
+         *
+         *     public BasicNode sourceNode;
+         *     public BasicNode sinkNode;
+         *
+         *     public NodeProperties sourceNodeProperties;
+         *     public NodeProperties sinkNodeProperties;
+         */
+
+        AssociatedEvent event = new AssociatedEvent();
+        // set hostUUID,timeStamp and relationship
+        Long hostUUID = log.getUHeader().getClientID().getHostUUID();
+        event.setHostUUID(new UUID(hostUUID,hostUUID));
+        event.setTimeStamp(log.getEventData().getEHeader().getTs());
+        String content = log.getUHeader().getContent().toString();
+        event.setRelationship(content);
+
+        //set sourceNode and sinkNode
+        String log_category;
+        switch (content){
+            case "PROCESS_FORK":
+            case "PROCESS_EXEC":
+            case "PROCESS_LOAD":
+                log_category = "Process";break;
+            case "FILE_OPEN":
+            case "FILE_READ":
+            case "FILE_WRITE":
+                log_category = "File";break;
+            case "NET_CONNECT":
+                log_category = "Network";break;
+            default:
+                log_category = "";
+
+        }
+        BasicNode source = initBasicSourceNode(log, log_category);
+        BasicNode sink = initBasicSinkNode(log, log_category);
+
+        source.setProperties(initSourceNodeProperties(log));
+        source.setProperties(initSinkNodeProperties(log, log_category));
+
+        event.setSourceNode(source);
+        event.setSinkNode(sink);
+
+        System.out.println(event.toJsonString());
+        return event;
     }
 
-    public static void Unpack(PDM.LogPack logPack, Collector<PDM.Log> logCollector) {
+    //subject
+    public static BasicNode initBasicSourceNode(PDM.Log log, String log_category){
+        String ts = Long.toString(log.getEventData().getEHeader().getProc().getParentProcUUID().getTs());
+        String pid = Integer.toString(log.getEventData().getEHeader().getProc().getParentProcUUID().getPid());
+        UUID uuid = new UUID(new BigInteger(pid, 16).longValue(),
+                new BigInteger(ts, 16).longValue());
+
+        String nodeName;
+        switch (log_category) {
+            case "Process":
+                nodeName = "Process";
+                break;
+            case "File":
+                nodeName = "FileMonitor";
+                break;
+            case "Network":
+                nodeName = "Network";
+                break;
+            default:
+                nodeName = "";
+
+        }
+        return new BasicNode(uuid, "Process",nodeName);
+    }
+
+    //object
+    public static BasicNode initBasicSinkNode(PDM.Log log, String log_category) {
+        UUID uuid;
+
+        String nodeName;
+        String nodeType;
+//        System.out.println(log_category);
+        switch (log_category) {
+            case "Process":
+                String ts = Long.toString(log.getEventData().getProcessEvent().getChildProc().getProcUUID().getTs());
+                String pid = Integer.toString(log.getEventData().getProcessEvent().getChildProc().getProcUUID().getPid());
+                uuid = new UUID(new BigInteger(ts, 16).longValue(),
+                        new BigInteger(pid, 16).longValue());
+                nodeType = "Process";
+                nodeName = "Process";
+                break;
+            case "File":
+                String filePathHash = Long.toString(log.getEventData().getFileEvent().getFile().getFileUUID().getFilePathHash());
+                uuid = new UUID(new BigInteger(filePathHash, 16).longValue(),
+                        new BigInteger(filePathHash, 16).longValue());
+                nodeType = "File";
+                nodeName = "FileMonitor";
+                break;
+            case "Network":
+                String sip = Long.toString(log.getEventData().getNetEvent().getSip().getAddress());
+                String dip = Integer.toString(log.getEventData().getNetEvent().getDip().getAddress());
+                uuid = new UUID(new BigInteger(sip, 16).longValue(),
+                        new BigInteger(dip, 16).longValue());
+                nodeType="Network";
+                nodeName = "Network";
+                break;
+            default:
+                uuid = new UUID(0,0);
+                nodeType="";
+                nodeName = "";
+
+        }
+        return new BasicNode(uuid, nodeType, nodeName);
+    }
+
+    //add properties of subject (pid, path, cmd)
+    public static NodeProperties initSourceNodeProperties(PDM.Log log){
+        NodeProperties nodeProperties = new ProcessNodeProperties(log.getEventData().getEHeader().getProc().getProcUUID().getPid(),
+                        log.getEventData().getEHeader().getProc().getExePath(),
+                        log.getEventData().getEHeader().getProc().getCmdline());
+       return nodeProperties;
+    }
+
+    public static NodeProperties initSinkNodeProperties(PDM.Log log, String log_category){
+        NodeProperties nodeProperties;
+        switch (log_category) {
+            case "Process":
+                nodeProperties = new ProcessNodeProperties(log.getEventData().getProcessEvent().getChildProc().getProcUUID().getPid(),
+                        log.getEventData().getProcessEvent().getChildProc().getExePath(),
+                        log.getEventData().getProcessEvent().getChildProc().getCmdline());
+                break;
+            case "File":
+                nodeProperties = new FileNodeProperties(log.getEventData().getFileEvent().getFile().getFilePath());
+                break;
+            case "Network":
+                PDM.NetEvent.Direction direct = log.getEventData().getNetEvent().getDirect();
+                int dir = 2;
+                if (direct == IN) dir = 0;
+                if (direct == OUT) dir = 1;
+                nodeProperties = new NetworkNodeProperties(String.valueOf(log.getEventData().getNetEvent().getDip().getAddress()),
+                        String.valueOf(log.getEventData().getNetEvent().getDport()),
+                        dir);
+                break;
+            default:
+            nodeProperties = new FileNodeProperties("");
+        }
+        return nodeProperties;
+    }
+
+    @Override
+    public void flatMap(PDM.LogPack logPack, Collector<PDM.Log> logCollector) throws Exception{
         List<PDM.Log> logList = logPack.getDataList();
         for (PDM.Log log : logList) {
             logCollector.collect(log);
         }
     }
+
+
 
 //    ToDo: Change UDM item to PDM item.
 //    public static NodeProperties initNodeProperties(PDM.Log log) {

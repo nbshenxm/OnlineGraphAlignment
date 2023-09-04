@@ -43,6 +43,7 @@ public class LocalParser {
         }
         return loc;
     }
+
     public static BasicNode initBasicSourceNode(JsonElement jsonElement){
         String processId;
         if(getJsonField("log_category", jsonElement).equals("Process") && ! getJsonField("event_type", jsonElement).equals("38")){
@@ -135,6 +136,7 @@ public class LocalParser {
         }
         return n;
     }
+
     public static NodeProperties initSinkNodeProperties(JsonElement jsonElement){
         String nodeType = getJsonField("log_category", jsonElement);
         NodeProperties n;
@@ -166,16 +168,18 @@ public class LocalParser {
         String eventTypeName;
         String id = getJsonField("uuid", jsonElement);
 //        System.out.println("uuid: " + id);
-//        System.out.println(jsonElement.toString());
+//        System.out.println(jsonElement.toString())
         UUID hostUUID = new UUID(
                 new BigInteger(id.substring(0, 16), 16).longValue(),
                 new BigInteger(id.substring(16, 32), 16).longValue());
 //        System.out.println(hostUUID.toString());
+
         AssociatedEvent event = new AssociatedEvent();
         event.setHostUUID(hostUUID);
         event.setTimeStamp(Long.parseLong(getJsonField("timestamp", jsonElement)));
-        //hostUUID, eventTypeName, Long.parseLong(getJsonField("timestamp", jsonElement))
+        //hostUUID, eventTypeName, Long.parseLong(getJsonField("timestamp", jsonElement)
         try {
+            //**************************************************
             getJsonField("event_type", jsonElement);
         }
         catch(Exception e){
@@ -183,6 +187,7 @@ public class LocalParser {
             System.out.println(jsonElement.toString());
             return new AssociatedEvent();
         }
+        //*************************************
         if(getJsonField("log_category", jsonElement).equals("Domain")){
             //temp for fill
             return new AssociatedEvent();

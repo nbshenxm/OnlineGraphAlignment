@@ -10,6 +10,7 @@ import org.apache.flink.connector.kafka.source.KafkaSource;
 import org.apache.flink.connector.kafka.source.enumerator.initializer.OffsetsInitializer;
 import org.apache.flink.core.fs.Path;
 import org.apache.flink.streaming.api.datastream.DataStream;
+import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 
 import com.google.gson.Gson;
@@ -22,8 +23,9 @@ import provenancegraph.parser.LocalParser;
 import provenancegraph.parser.PDMParser;
 import utils.KafkaPDMDeserializer;
 
+
 import java.util.Objects;
-import java.util.Properties;
+
 
 import static org.apache.flink.util.IterableUtils.flatMap;
 
@@ -49,7 +51,7 @@ public class Main {
                     .build();
 
             DataStream<PDM.LogPack> logPack_stream = env.fromSource(source, WatermarkStrategy.noWatermarks(), "Kafka Source");
-            DataStream<PDM.Log> log_stream = logPack_stream.flatMap(PDMParser::Unpack);
+            DataStream<PDM.Log> log_stream = logPack_stream.flatMap(new PDMParser());
             event_stream = log_stream.map(PDMParser::initAssociatedEvent);
 
         }
