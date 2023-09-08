@@ -1,13 +1,9 @@
 package provenancegraph.parser;
 
-import com.google.gson.JsonElement;
 import org.apache.flink.api.common.functions.FlatMapFunction;
 import org.apache.flink.util.Collector;
-import org.apache.kafka.common.protocol.types.Field;
 import provenancegraph.AssociatedEvent;
-import provenancegraph.BasicEdge;
 import provenancegraph.BasicNode;
-//import provenancegraph.NodeProperties;
 import provenancegraph.datamodel.PDM;
 import provenancegraph.*;
 
@@ -19,7 +15,6 @@ import com.google.common.primitives.Ints;
 import com.google.common.primitives.Longs;
 import utils.Utils;
 
-import static provenancegraph.datamodel.PDM.LogContent.PROCESS_FORK;
 import static provenancegraph.datamodel.PDM.NetEvent.Direction.IN;
 import static provenancegraph.datamodel.PDM.NetEvent.Direction.OUT;
 
@@ -102,23 +97,13 @@ public class PDMParser implements FlatMapFunction<PDM.LogPack, PDM.Log> {
     }
 
     public static AssociatedEvent initAssociatedEvent(PDM.Log log){
-        /**
-         *     private String relationship;
-         *     public transient Long timeStamp;
-         *     public UUID hostUUID;
-         *
-         *     public BasicNode sourceNode;
-         *     public BasicNode sinkNode;
-         *
-         *     public NodeProperties sourceNodeProperties;
-         *     public NodeProperties sinkNodeProperties;
-         */
-
         AssociatedEvent event = new AssociatedEvent();
         // set hostUUID,timeStamp and relationship
         Long hostUUID = log.getUHeader().getClientID().getHostUUID();
         event.setHostUUID(new UUID(hostUUID,hostUUID));
-        event.setTimeStamp(log.getEventData().getEHeader().getTs());
+        long ts = log.getEventData().getEHeader().getTs();
+        event.setTimeStamp(ts);
+
         String content = log.getUHeader().getContent().toString();
         event.setRelationship(content);
 
@@ -136,26 +121,27 @@ public class PDMParser implements FlatMapFunction<PDM.LogPack, PDM.Log> {
             case "NET_CONNECT":
                 log_category = "Network";break;
             default:
-                log_category = "";
+               return null;
 
         }
         BasicNode source = initBasicSourceNode(log, log_category);
         BasicNode sink = initBasicSinkNode(log, log_category);
 
         source.setProperties(initSourceNodeProperties(log));
-        source.setProperties(initSinkNodeProperties(log, log_category));
+        sink.setProperties(initSinkNodeProperties(log, log_category));
 
         event.setSourceNode(source);
         event.setSinkNode(sink);
 
         System.out.println(event.toJsonString());
+//        System.out.println(event.timeStamp);
         return event;
     }
 
     //subject
     public static BasicNode initBasicSourceNode(PDM.Log log, String log_category){
-        String ts = Long.toString(log.getEventData().getEHeader().getProc().getParentProcUUID().getTs());
-        String pid = Integer.toString(log.getEventData().getEHeader().getProc().getParentProcUUID().getPid());
+        String ts = Long.toString(log.getEventData().getEHeader().getTs());
+        String pid = Integer.toString(log.getEventData().getEHeader().getProc().getProcUUID().getPid());
         UUID uuid = new UUID(new BigInteger(pid, 16).longValue(),
                 new BigInteger(ts, 16).longValue());
 
@@ -182,22 +168,18 @@ public class PDMParser implements FlatMapFunction<PDM.LogPack, PDM.Log> {
         UUID uuid;
 
         String nodeName;
-        String nodeType;
-//        System.out.println(log_category);
         switch (log_category) {
             case "Process":
                 String ts = Long.toString(log.getEventData().getProcessEvent().getChildProc().getProcUUID().getTs());
                 String pid = Integer.toString(log.getEventData().getProcessEvent().getChildProc().getProcUUID().getPid());
                 uuid = new UUID(new BigInteger(ts, 16).longValue(),
                         new BigInteger(pid, 16).longValue());
-                nodeType = "Process";
                 nodeName = "Process";
                 break;
             case "File":
                 String filePathHash = Long.toString(log.getEventData().getFileEvent().getFile().getFileUUID().getFilePathHash());
                 uuid = new UUID(new BigInteger(filePathHash, 16).longValue(),
                         new BigInteger(filePathHash, 16).longValue());
-                nodeType = "File";
                 nodeName = "FileMonitor";
                 break;
             case "Network":
@@ -205,16 +187,14 @@ public class PDMParser implements FlatMapFunction<PDM.LogPack, PDM.Log> {
                 String dip = Integer.toString(log.getEventData().getNetEvent().getDip().getAddress());
                 uuid = new UUID(new BigInteger(sip, 16).longValue(),
                         new BigInteger(dip, 16).longValue());
-                nodeType="Network";
                 nodeName = "Network";
                 break;
             default:
                 uuid = new UUID(0,0);
-                nodeType="";
                 nodeName = "";
 
         }
-        return new BasicNode(uuid, nodeType, nodeName);
+        return new BasicNode(uuid, "Process", nodeName);
     }
 
     //add properties of subject (pid, path, cmd)

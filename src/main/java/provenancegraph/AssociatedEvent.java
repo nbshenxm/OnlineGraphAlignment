@@ -132,4 +132,5 @@ public class AssociatedEvent extends BasicEdge implements Serializable {
     public void setTimeStamp(Long timeStamp){ this.timeStamp = timeStamp; }
 
     public void setHostUUID(UUID hostUUID){ this.hostUUID = hostUUID; };
+
 }
