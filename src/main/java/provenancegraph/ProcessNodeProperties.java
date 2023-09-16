@@ -17,6 +17,10 @@ public class ProcessNodeProperties extends NodeProperties {
         this.cmdLineArguments = cmdLineArguments;
     }
 
+    public String getExePath() {
+        return this.exePath;
+    }
+
     @Override
     public String toString() {
         return String.format("[%s: PID-%s, PATH-%s, ARGUMENTS-%s]", this.type.toString(), this.processId, this.exePath, this.cmdLineArguments);

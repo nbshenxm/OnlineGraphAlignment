@@ -1,11 +1,15 @@
 package libtagpropagation;
 
+import com.tinkerpop.blueprints.Direction;
 import com.tinkerpop.blueprints.Edge;
 import com.tinkerpop.blueprints.Vertex;
 import com.tinkerpop.blueprints.impls.tg.TinkerGraph;
 import com.tinkerpop.blueprints.util.io.graphml.GraphMLReader;
+import provenancegraph.*;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.Pattern;
@@ -54,7 +58,7 @@ public class TechniqueKnowledgeGraph {
         this.techniqueName = fileNameWithExtension.substring(0, fileNameWithExtension.lastIndexOf("."));
     }
 
-    public void loadFromGraphMLFile(String gmlFilePath) throws IOException {
+    private void loadFromGraphMLFile(String gmlFilePath) throws IOException {
         /**
          * @Description Init TKG with GraphML file */
         if (gmlFilePath == null) {
@@ -64,7 +68,7 @@ public class TechniqueKnowledgeGraph {
         this.tinkerGraph = new TinkerGraph();
         GraphMLReader reader = new GraphMLReader(this.tinkerGraph);
 
-        InputStream is = new BufferedInputStream(new FileInputStream(gmlFilePath));
+        InputStream is = new BufferedInputStream(Files.newInputStream(Paths.get(gmlFilePath)));
         reader.inputGraph(is);
     }
 
@@ -82,6 +86,7 @@ public class TechniqueKnowledgeGraph {
                 }
             }
             catch (NullPointerException e1) {
+                e1.printStackTrace();
             }
         }
 
@@ -92,10 +97,27 @@ public class TechniqueKnowledgeGraph {
                 }
             }
             catch (NullPointerException e2) {
+                e2.printStackTrace();
             }
         }
 
         return seedObjects;
+    }
+
+    public ArrayList<Vertex> getVertexList() {
+        ArrayList<Vertex> vertex_list = new ArrayList<>();
+        for (Vertex v: this.tinkerGraph.getVertices()) {
+            vertex_list.add(v);
+        }
+        return vertex_list;
+    }
+
+    public ArrayList<Edge> getEdgeList() {
+        ArrayList<Edge> edge_list = new ArrayList<>();
+        for (Edge e: this.tinkerGraph.getEdges()) {
+            edge_list.add(e);
+        }
+        return edge_list;
     }
 
     public static String getKeyPropertiesFromType(String type) {
@@ -109,6 +131,40 @@ public class TechniqueKnowledgeGraph {
         String kpKGNode = kgNode.getProperty(getKeyPropertiesFromType(kgNode.getProperty("type")));
         String kpPGNode = pgNode.getProperty(getKeyPropertiesFromType(pgNode.getProperty("type")));
         return Pattern.matches(kpKGNode, kpPGNode);
+    }
+
+    public static boolean isVertexAligned(Vertex seedNode, BasicNode n, NodeProperties np) {
+        TinkerGraph graph = new TinkerGraph();
+        Vertex temp_node = graph.addVertex("1");
+        switch (n.getNodeType()) {
+            case "File":
+                temp_node.setProperty("type", "file");
+                temp_node.setProperty("file_path", ((FileNodeProperties) np).getFilePath());
+                break;
+            case "Process":
+                temp_node.setProperty("type", "process");
+                temp_node.setProperty("process_name", ((ProcessNodeProperties) np).getExePath());
+                break;
+            case "Network":
+                temp_node.setProperty("type", "network");
+                temp_node.setProperty("url_ip", ((NetworkNodeProperties) np).getRemoteIp());
+                break;
+            default:
+                break;
+        }
+        return nodeMatch(seedNode, temp_node);
+    }
+
+    public static boolean isEdgeAligned(Edge seedEdge, AssociatedEvent e) {
+        String event = e.getRelationship();
+        if (Pattern.matches(seedEdge.getProperty("event_type"), event)) {
+            Vertex src = seedEdge.getVertex(Direction.OUT);
+            Vertex dest = seedEdge.getVertex(Direction.IN);
+            if (isVertexAligned(src, e.sourceNode, e.sourceNodeProperties)){
+                return isVertexAligned(dest, e.sinkNode, e.sinkNodeProperties);
+            }
+        }
+        return false;
     }
 
     public static float fuzzyNodeMatch(Vertex source, Vertex target){

@@ -16,6 +16,10 @@ public class NetworkNodeProperties extends NodeProperties {
         this.direction = direction;
     }
 
+    public String getRemoteIp() {
+        return this.remoteIp;
+    }
+
     @Override
     public String toString() {
         if (direction == 1)
