@@ -18,6 +18,11 @@ public class BasicNode implements Serializable {
         this.setNodeType(nodeType);
         this.setNodeName(nodeName);
     }
+    public BasicNode(){
+        this.setNodeId(new UUID(0, 0));
+        this.setNodeType("");
+        this.setNodeName("");
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -83,5 +88,9 @@ public class BasicNode implements Serializable {
 
     public NodeProperties getProperties() {
         return this.properties;
+    }
+
+    public String toString(){
+        return "UUID: " + this.nodeId.toString() + ", Node Type: " + this.nodeType.toString() + ", Node Name: " + this.nodeName;
     }
 }

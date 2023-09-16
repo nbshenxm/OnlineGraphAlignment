@@ -1,6 +1,7 @@
 package utils;
 
 import org.apache.flink.api.common.serialization.DeserializationSchema;
+import org.apache.flink.api.common.typeinfo.TypeHint;
 import org.apache.flink.api.common.typeinfo.TypeInformation;
 import org.apache.flink.connector.kafka.source.reader.deserializer.KafkaRecordDeserializationSchema;
 import org.apache.flink.streaming.connectors.kafka.KafkaDeserializationSchema;
@@ -23,6 +24,6 @@ public class KafkaPDMDeserializer implements DeserializationSchema<PDM.LogPack> 
 
     @Override
     public TypeInformation<PDM.LogPack> getProducedType() {
-        return null;
+        return TypeInformation.of(new TypeHint<PDM.LogPack>() {});
     }
 }
