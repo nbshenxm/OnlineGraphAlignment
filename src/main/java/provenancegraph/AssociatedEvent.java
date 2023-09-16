@@ -17,12 +17,27 @@ public class AssociatedEvent extends BasicEdge implements Serializable {
 //    public GenericTagCache sourceNodeTag = null;
 //    public GenericTagCache sinkNodeTag = null;
 
-    private String relationship; // TODO: change to enum?
-    public Long timeStamp;
+    private String relationship;
+    public transient Long timeStamp;
 
     public UUID hostUUID;
 
     private AssociatedEvent generalizedEvent = null;
+    public AssociatedEvent(){
+        this.sourceNode = new BasicNode();
+        this.sinkNode = new BasicNode();
+        this.sourceNodeProperties = new FileNodeProperties("");
+        this.sinkNodeProperties = new FileNodeProperties("");
+        this.relationship = "";
+        this.timeStamp = Long.valueOf(0);
+        this.hostUUID = new UUID(0, 0);
+
+    }
+    public AssociatedEvent(UUID hostUUID, String relationship, Long timeStamp){
+        this.hostUUID = hostUUID;
+        this.relationship = relationship;
+        this.timeStamp = timeStamp;
+    }
 
     public AssociatedEvent(BasicNode sourceNode, BasicNode sinkNode, String relationship, Long timeStamp) {
         this(sourceNode.getProperties(), sinkNode.getProperties(), relationship, timeStamp);
@@ -103,4 +118,19 @@ public class AssociatedEvent extends BasicEdge implements Serializable {
     public void setRelationship(String relationship) {
         this.relationship = relationship;
     }
+
+    public void setSourceNode(BasicNode sourceNode) {
+        this.sourceNode = sourceNode;
+        this.sourceNodeProperties = sourceNode.getProperties();
+    }
+
+    public void setSinkNode(BasicNode sinkNode) {
+        this.sinkNode = sinkNode;
+        this.sinkNodeProperties = sinkNode.getProperties();
+    }
+
+    public void setTimeStamp(Long timeStamp){ this.timeStamp = timeStamp; }
+
+    public void setHostUUID(UUID hostUUID){ this.hostUUID = hostUUID; };
+
 }

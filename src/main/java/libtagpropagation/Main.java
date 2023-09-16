@@ -1,7 +1,6 @@
 package libtagpropagation;
 
 import com.twitter.chill.protobuf.ProtobufSerializer;
-import org.apache.flink.api.common.serialization.SimpleStringSchema;
 import org.apache.flink.connector.file.src.FileSource;
 import org.apache.flink.connector.file.src.reader.TextLineInputFormat;
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
@@ -14,16 +13,15 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
-import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer;
-import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumerBase;
 import provenancegraph.AssociatedEvent;
 import provenancegraph.datamodel.PDM;
 import provenancegraph.parser.LocalParser;
 import provenancegraph.parser.PDMParser;
 import utils.KafkaPDMDeserializer;
 
+
 import java.util.Objects;
-import java.util.Properties;
+
 
 import static org.apache.flink.util.IterableUtils.flatMap;
 
@@ -34,7 +32,7 @@ public class Main {
         DataStream<AssociatedEvent> event_stream;
 
         if (Objects.equals(args[0], "online")){
-            String kafkaBroker = "10.53.112.123:9093,10.53.112.25:9093,10.53.112.129:9093";
+            String kafkaBroker = "192.168.10.102:9092";
             String kafkaTopic = "topic-HipsToMrd";
             String kafkaGroupId = "mergeAlert";
 
@@ -49,7 +47,7 @@ public class Main {
                     .build();
 
             DataStream<PDM.LogPack> logPack_stream = env.fromSource(source, WatermarkStrategy.noWatermarks(), "Kafka Source");
-            DataStream<PDM.Log> log_stream = logPack_stream.flatMap(PDMParser::Unpack);
+            DataStream<PDM.Log> log_stream = logPack_stream.flatMap(new PDMParser());
             event_stream = log_stream.map(PDMParser::initAssociatedEvent);
 
         }
