@@ -10,7 +10,11 @@ public class FileNodeProperties extends NodeProperties {
 
     public FileNodeProperties(String filePath) {
         this.type = NodeType.File;
-        this.filePath =filePath;
+        this.filePath = filePath;
+    }
+
+    public String getFilePath(){
+        return this.filePath;
     }
 
     @Override
