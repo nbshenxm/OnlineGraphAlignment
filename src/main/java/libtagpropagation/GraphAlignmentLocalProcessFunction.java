@@ -157,10 +157,24 @@ public class GraphAlignmentLocalProcessFunction
             // if there is a match in GraphAlignmentTag with current associatedEvent, prop the tag
             ArrayList<GraphAlignmentTag> tagList = graphAlignmentTagList.getTagList();
             for (GraphAlignmentTag tag: tagList) {
-                tag.propagate(associatedEvent, srcTagList, destTagList);
+                // tag align
+                tag.propagate(associatedEvent);
+
+                // tag merge
+                for (GraphAlignmentTag anotherTag : srcTagList.getTagList()) {
+                    if (tag.sameAs(anotherTag)) {
+                        tag.mergeStatus(tag);
+                        anotherTag.mergeStatus(tag);
+                    }
+                }
+
+                // score update
+                tag.updateMatchScore();
+                if (tag.isMatched()) {
+                    System.out.println("Technique detected.");
+                }
             }
         }
-        // TODO: check for node merge
     }
 
 

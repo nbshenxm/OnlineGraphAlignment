@@ -83,17 +83,11 @@ public class GraphAlignmentTag {
         }
     }
 
-    public void propagate(AssociatedEvent event, GraphAlignmentTagList srcTagList, GraphAlignmentTagList destTagList) {
+    public void propagate(AssociatedEvent event) {
         // tag align
         ArrayList<Edge> edge_list = tkg.getEdgeList();
         for (Edge e : edge_list) {
             alignEvent(e, event);
-        }
-        // tag merge
-        for (GraphAlignmentTag tag : srcTagList.getTagList()) {
-            if (this.sameAs(tag)) {
-                this.mergeStatus(tag);
-            }
         }
     }
 
