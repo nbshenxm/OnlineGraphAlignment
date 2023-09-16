@@ -1,51 +1,54 @@
 package libtagpropagation;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import org.apache.flink.api.common.state.ListState;
-import org.apache.flink.api.common.state.ListStateDescriptor;
-import org.apache.flink.api.common.state.MapStateDescriptor;
+import com.tinkerpop.blueprints.Direction;
+import com.tinkerpop.blueprints.impls.tg.TinkerGraph;
+import org.apache.flink.api.common.state.*;
 import org.apache.flink.configuration.Configuration;
-import provenancegraph.AssociatedEvent;
-import provenancegraph.BasicNode;
+import provenancegraph.*;
 
-import org.apache.flink.api.common.state.MapState;
 import org.apache.flink.streaming.api.functions.KeyedProcessFunction;
 import org.apache.flink.util.Collector;
-import provenancegraph.parser.LocalParser;
 
+import java.io.File;
 import java.io.IOException;
-import java.util.Properties;
+import java.util.ArrayList;
 import java.util.UUID;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import com.tinkerpop.blueprints.Edge;
 import com.tinkerpop.blueprints.Vertex;
 
-import static utils.Utils.loadProperties;
+import static libtagpropagation.TechniqueKnowledgeGraph.isEdgeAligned;
+import static libtagpropagation.TechniqueKnowledgeGraph.isVertexAligned;
+
 
 public class GraphAlignmentLocalProcessFunction
         extends KeyedProcessFunction<UUID, AssociatedEvent, String>{
 
     private static String knowledgeGraphPath = "TechniqueKnowledgeGraph/ManualCrafted";
-
-    private transient MapState<UUID, GraphAlignmentTag> tagsCacheMap;
+    private transient ValueState<Boolean> isInitialized;
+    private transient MapState<UUID, GraphAlignmentTagList> tagsCacheMap;
     private transient MapState<UUID, BasicNode> nodeInfoMap;
     private transient ListState<TechniqueKnowledgeGraph> tkgList;
     private transient MapState<Edge, TechniqueKnowledgeGraph> seedEventMap;
-    private transient MapState<Vertex, TechniqueKnowledgeGraph> seedNodeMap;
+    private transient MapState<Vertex, TechniqueKnowledgeGraph> seedNodeMap; // TODO: further divide nodes by types
 
-    public GraphAlignmentLocalProcessFunction() throws IOException {
-        init(knowledgeGraphPath);
-    }
 
     @Override
     public void open(Configuration parameter) {
-        MapStateDescriptor<UUID, GraphAlignmentTag> tagCacheStateDescriptor = new MapStateDescriptor<>("tagsCacheMap", UUID.class, GraphAlignmentTag.class);
+        ValueStateDescriptor<Boolean> isInitializedDescriptor =
+                new ValueStateDescriptor<>("isInitialized", Boolean.class, false);
+        this.isInitialized = getRuntimeContext().getState(isInitializedDescriptor);
+
+        MapStateDescriptor<UUID, GraphAlignmentTagList> tagCacheStateDescriptor =
+                new MapStateDescriptor<>("tagsCacheMap", UUID.class, GraphAlignmentTagList.class);
         tagsCacheMap = getRuntimeContext().getMapState(tagCacheStateDescriptor);
-        MapStateDescriptor<UUID, BasicNode> nodeInfoStateDescriptor = new MapStateDescriptor<>("nodeInfoMap", UUID.class, BasicNode.class);
+
+        MapStateDescriptor<UUID, BasicNode> nodeInfoStateDescriptor =
+                new MapStateDescriptor<>("nodeInfoMap", UUID.class, BasicNode.class);
         nodeInfoMap = getRuntimeContext().getMapState(nodeInfoStateDescriptor);
+
         ListStateDescriptor<TechniqueKnowledgeGraph> tkgListDescriptor =
                 new ListStateDescriptor<>("tkgListStatus", TechniqueKnowledgeGraph.class);
         this.tkgList = getRuntimeContext().getListState(tkgListDescriptor);
@@ -60,37 +63,114 @@ public class GraphAlignmentLocalProcessFunction
     }
 
     @Override
-    public void processElement(AssociatedEvent associatedEvent, KeyedProcessFunction<UUID, AssociatedEvent, String>.Context context, Collector<String> collector) throws Exception {
+    public void processElement(AssociatedEvent associatedEvent,
+                               KeyedProcessFunction<UUID, AssociatedEvent, String>.Context context,
+                               Collector<String> collector) throws IOException {
+        if (!this.isInitialized.value()){
+            init(knowledgeGraphPath);
+        }
         try {
             propGraphAlignmentTag(associatedEvent);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        try {
             initGraphAlignmentTag(associatedEvent);
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        GraphAlignmentTag graphAlignmentTag;
-
     }
 
     private void init(String knowledgeGraphPath) {
-
+        try {
+            initTechniqueKnowledgeGraphList(knowledgeGraphPath);
+            initTKGMatchingSeeds();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    private void initGraphAlignmentTag(AssociatedEvent associatedEvent) {
+    private void initTechniqueKnowledgeGraphList(String kgFilesPath) throws Exception {
+        File file = new File(kgFilesPath);
+        File[] kgFileList = file.listFiles();
+        assert kgFileList != null;
+        for (File kgFile : kgFileList) {
+            String kgFileName = kgFile.toString();
+            TechniqueKnowledgeGraph tkg = new TechniqueKnowledgeGraph(kgFileName);
+            this.tkgList.add(tkg);
+        }
+    }
 
+    private void initTKGMatchingSeeds() {
+        try {
+            for (TechniqueKnowledgeGraph tkg : this.tkgList.get()) {
+                ArrayList<Object> seedObjects = tkg.getSeedObjects();
+                for (Object seedObject: seedObjects) {
+                    if (seedObject instanceof Vertex) {
+                        this.seedNodeMap.put((Vertex) seedObject, tkg);
+                    } else if (seedObject instanceof Edge) {
+                        this.seedEventMap.put((Edge) seedObject, tkg);
+                    }
+                }
+            }
+        }
+        catch (Exception e) {
+            System.out.println("Something wrong in TechniqueKnowledgeGraph ListState.");
+        }
+    }
+
+    private void initGraphAlignmentTag(AssociatedEvent associatedEvent) throws Exception {
+        Iterable<Map.Entry<Vertex, TechniqueKnowledgeGraph>> node_entries = seedNodeMap.entries();
+        for (Map.Entry<Vertex, TechniqueKnowledgeGraph> entry : node_entries) {
+            Vertex seedNode = entry.getKey();
+            TechniqueKnowledgeGraph tkg = entry.getValue();
+            BasicNode srcNode = associatedEvent.sourceNode;
+            NodeProperties srcNodeProperties = associatedEvent.sourceNodeProperties;
+            if (isVertexAligned(seedNode, srcNode, srcNodeProperties)){
+                GraphAlignmentTag tag = new GraphAlignmentTag(seedNode, srcNode, tkg);
+                addTagToCache(tag, srcNode.getNodeId());
+            }
+            BasicNode destNode = associatedEvent.sinkNode;
+            NodeProperties destNodeProperties = associatedEvent.sinkNodeProperties;
+            if (isVertexAligned(seedNode, destNode, destNodeProperties)){
+                GraphAlignmentTag tag = new GraphAlignmentTag(seedNode, destNode, tkg);
+                addTagToCache(tag, destNode.getNodeId());
+            }
+        }
+
+        Iterable<Map.Entry<Edge, TechniqueKnowledgeGraph>> edge_entries = seedEventMap.entries();
+        for (Map.Entry<Edge, TechniqueKnowledgeGraph> entry : edge_entries) {
+            Edge seedEdge = entry.getKey();
+            TechniqueKnowledgeGraph tkg = entry.getValue();
+            if (isEdgeAligned(seedEdge, associatedEvent)) {
+                GraphAlignmentTag tag = new GraphAlignmentTag(seedEdge, associatedEvent, tkg);
+                addTagToCache(tag, associatedEvent.sourceNodeId);
+                addTagToCache(tag, associatedEvent.sinkNodeId);
+            }
+        }
     }
 
     private void propGraphAlignmentTag(AssociatedEvent associatedEvent) throws Exception {
-        Iterable<Map.Entry<UUID, GraphAlignmentTag>> entries = tagsCacheMap.entries();
-        for (Map.Entry<UUID, GraphAlignmentTag> entry : entries) {
-            UUID key = entry.getKey();
-            GraphAlignmentTag value = entry.getValue();
+        GraphAlignmentTagList srcTagList = tagsCacheMap.get(associatedEvent.sourceNodeId);
+        GraphAlignmentTagList destTagList = tagsCacheMap.get(associatedEvent.sinkNodeId);
+        // iterate through tagsCacheMap to check if any existing tags can be propagated
+        Iterable<Map.Entry<UUID, GraphAlignmentTagList>> entries = tagsCacheMap.entries();
+        for (Map.Entry<UUID, GraphAlignmentTagList> entry : entries) {
+            UUID nodeUUID = entry.getKey();
+            GraphAlignmentTagList graphAlignmentTagList = entry.getValue();
+            // if there is a match in GraphAlignmentTag with current associatedEvent, prop the tag
+            ArrayList<GraphAlignmentTag> tagList = graphAlignmentTagList.getTagList();
+            for (GraphAlignmentTag tag: tagList) {
+                tag.propagate(associatedEvent, srcTagList, destTagList);
+            }
         }
-
+        // TODO: check for node merge
     }
+
+
+
+    private void addTagToCache(GraphAlignmentTag tag, UUID nodeId) throws Exception {
+        if (!this.tagsCacheMap.contains(nodeId)){
+            GraphAlignmentTagList tagList = new GraphAlignmentTagList();
+            this.tagsCacheMap.put(nodeId, tagList);
+        }
+        this.tagsCacheMap.get(nodeId).addTag(tag);
+    }
+
 }

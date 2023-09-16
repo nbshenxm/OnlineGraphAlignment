@@ -17,7 +17,7 @@ public class AssociatedEvent extends BasicEdge implements Serializable {
 //    public GenericTagCache sourceNodeTag = null;
 //    public GenericTagCache sinkNodeTag = null;
 
-    private String relationship;
+    private String relationship; // TODO: change to enum?
     public Long timeStamp;
 
     public UUID hostUUID;
