@@ -166,7 +166,7 @@ public class PDMParser implements FlatMapFunction<PDM.LogPack, PDM.Log> {
     //object
     public static BasicNode initBasicSinkNode(PDM.Log log, String log_category) {
         UUID uuid;
-
+        String nodeType;
         String nodeName;
         switch (log_category) {
             case "Process":
@@ -174,12 +174,14 @@ public class PDMParser implements FlatMapFunction<PDM.LogPack, PDM.Log> {
                 String pid = Integer.toString(log.getEventData().getProcessEvent().getChildProc().getProcUUID().getPid());
                 uuid = new UUID(new BigInteger(ts, 16).longValue(),
                         new BigInteger(pid, 16).longValue());
+                nodeType = "Process";
                 nodeName = "Process";
                 break;
             case "File":
                 String filePathHash = Long.toString(log.getEventData().getFileEvent().getFile().getFileUUID().getFilePathHash());
                 uuid = new UUID(new BigInteger(filePathHash, 16).longValue(),
                         new BigInteger(filePathHash, 16).longValue());
+                nodeType = "File";
                 nodeName = "FileMonitor";
                 break;
             case "Network":
@@ -187,14 +189,16 @@ public class PDMParser implements FlatMapFunction<PDM.LogPack, PDM.Log> {
                 String dip = Integer.toString(log.getEventData().getNetEvent().getDip().getAddress());
                 uuid = new UUID(new BigInteger(sip, 16).longValue(),
                         new BigInteger(dip, 16).longValue());
+                nodeType = "Network";
                 nodeName = "Network";
                 break;
             default:
                 uuid = new UUID(0,0);
+                nodeType = "";
                 nodeName = "";
 
         }
-        return new BasicNode(uuid, "Process", nodeName);
+        return new BasicNode(uuid, nodeType, nodeName);
     }
 
     //add properties of subject (pid, path, cmd)
