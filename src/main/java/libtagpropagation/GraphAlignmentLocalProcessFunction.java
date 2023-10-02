@@ -68,6 +68,7 @@ public class GraphAlignmentLocalProcessFunction
                                Collector<String> collector) throws IOException {
         if (!this.isInitialized.value()){
             init(knowledgeGraphPath);
+            this.isInitialized.update(true);
         }
         try {
             propGraphAlignmentTag(associatedEvent);
@@ -112,6 +113,7 @@ public class GraphAlignmentLocalProcessFunction
         }
         catch (Exception e) {
             System.out.println("Something wrong in TechniqueKnowledgeGraph ListState.");
+            e.printStackTrace();
         }
     }
 
