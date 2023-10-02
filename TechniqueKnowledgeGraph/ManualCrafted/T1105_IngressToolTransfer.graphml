@@ -24,6 +24,7 @@
         <node id="n1">
             <data key="type">process</data>
             <data key="process_name">*</data>
+            <data key="is_seed_node">false</data>
         </node>
         <node id="n2">
             <data key="type">file</data>
@@ -40,6 +41,7 @@
         <edge source="n1" target="n2">
             <data key="event_type">read</data>
             <data key="sequence_num">2</data>
+            <data key="is_seed_edge">false</data>
         </edge>
     </graph>
 </graphml>
