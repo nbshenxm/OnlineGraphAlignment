@@ -1,5 +1,7 @@
 package provenancegraph.parser;
 
+
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.flink.api.common.functions.FlatMapFunction;
 import org.apache.flink.util.Collector;
 import provenancegraph.AssociatedEvent;
@@ -15,6 +17,8 @@ import com.google.common.primitives.Ints;
 import com.google.common.primitives.Longs;
 import utils.Utils;
 
+
+import static provenancegraph.datamodel.PDM.LogContent.*;
 import static provenancegraph.datamodel.PDM.NetEvent.Direction.IN;
 import static provenancegraph.datamodel.PDM.NetEvent.Direction.OUT;
 
@@ -49,7 +53,7 @@ public class PDMParser implements FlatMapFunction<PDM.LogPack, PDM.Log> {
     }
 
     public static BasicNode initBasicNode(PDM.Log log) {
-        if (log.getUHeader().getType() != PDM.LogType.ENTITY && !log.getEventData().hasNetEvent()) {
+        if (log.getUHeader().getType() == PDM.LogType.ENTITY && !log.getEventData().hasNetEvent()) {
             throw new RuntimeException("Cannot initBasicNode from non-entity logInfo!");
         }
         else {
@@ -108,6 +112,28 @@ public class PDMParser implements FlatMapFunction<PDM.LogPack, PDM.Log> {
         event.setRelationship(content);
 
         //set sourceNode and sinkNode
+        BasicNode source = initBasicSourceNode(log);
+        BasicNode sink = initBasicSinkNode(log);
+
+        source.setProperties(initSourceNodeProperties(log));
+        sink.setProperties(initSinkNodeProperties(log));
+
+        event.setSourceNode(source);
+        event.setSinkNode(sink);
+
+        System.out.println(event.toJsonString());
+//        System.out.println(event.timeStamp);
+        return event;
+    }
+
+    //subject
+    public static BasicNode initBasicSourceNode(PDM.Log log){
+        String ts = Long.toString(log.getEventData().getEHeader().getTs());
+        String pid = Integer.toString(log.getEventData().getEHeader().getProc().getProcUUID().getPid());
+        UUID uuid = new UUID(new BigInteger(pid, 16).longValue(),
+                new BigInteger(ts, 16).longValue());
+
+        String content = log.getUHeader().getContent().toString();
         String log_category;
         switch (content){
             case "PROCESS_FORK":
@@ -121,30 +147,9 @@ public class PDMParser implements FlatMapFunction<PDM.LogPack, PDM.Log> {
             case "NET_CONNECT":
                 log_category = "Network";break;
             default:
-               return null;
+                return null;
 
         }
-        BasicNode source = initBasicSourceNode(log, log_category);
-        BasicNode sink = initBasicSinkNode(log, log_category);
-
-        source.setProperties(initSourceNodeProperties(log));
-        sink.setProperties(initSinkNodeProperties(log, log_category));
-
-        event.setSourceNode(source);
-        event.setSinkNode(sink);
-
-        System.out.println(event.toJsonString());
-//        System.out.println(event.timeStamp);
-        return event;
-    }
-
-    //subject
-    public static BasicNode initBasicSourceNode(PDM.Log log, String log_category){
-        String ts = Long.toString(log.getEventData().getEHeader().getTs());
-        String pid = Integer.toString(log.getEventData().getEHeader().getProc().getProcUUID().getPid());
-        UUID uuid = new UUID(new BigInteger(pid, 16).longValue(),
-                new BigInteger(ts, 16).longValue());
-
         String nodeName;
         switch (log_category) {
             case "Process":
@@ -164,10 +169,27 @@ public class PDMParser implements FlatMapFunction<PDM.LogPack, PDM.Log> {
     }
 
     //object
-    public static BasicNode initBasicSinkNode(PDM.Log log, String log_category) {
+    public static BasicNode initBasicSinkNode(PDM.Log log) {
         UUID uuid;
         String nodeType;
         String nodeName;
+        String log_category;
+        String content = log.getUHeader().getContent().toString();
+        switch (content){
+            case "PROCESS_FORK":
+            case "PROCESS_EXEC":
+            case "PROCESS_LOAD":
+                log_category = "Process";break;
+            case "FILE_OPEN":
+            case "FILE_READ":
+            case "FILE_WRITE":
+                log_category = "File";break;
+            case "NET_CONNECT":
+                log_category = "Network";break;
+            default:
+                return null;
+
+        }
         switch (log_category) {
             case "Process":
                 String ts = Long.toString(log.getEventData().getProcessEvent().getChildProc().getProcUUID().getTs());
@@ -209,8 +231,25 @@ public class PDMParser implements FlatMapFunction<PDM.LogPack, PDM.Log> {
        return nodeProperties;
     }
 
-    public static NodeProperties initSinkNodeProperties(PDM.Log log, String log_category){
+    public static NodeProperties initSinkNodeProperties(PDM.Log log){
         NodeProperties nodeProperties;
+        String log_category;
+        String content = log.getUHeader().getContent().toString();
+        switch (content){
+            case "PROCESS_FORK":
+            case "PROCESS_EXEC":
+            case "PROCESS_LOAD":
+                log_category = "Process";break;
+            case "FILE_OPEN":
+            case "FILE_READ":
+            case "FILE_WRITE":
+                log_category = "File";break;
+            case "NET_CONNECT":
+                log_category = "Network";break;
+            default:
+                return null;
+
+        }
         switch (log_category) {
             case "Process":
                 nodeProperties = new ProcessNodeProperties(log.getEventData().getProcessEvent().getChildProc().getProcUUID().getPid(),
@@ -247,20 +286,20 @@ public class PDMParser implements FlatMapFunction<PDM.LogPack, PDM.Log> {
 
 //    ToDo: Change UDM item to PDM item.
 //    public static NodeProperties initNodeProperties(PDM.Log log) {
-//        if (log.getUHeader().getCategory() == PDM.LogType.ENTITY) {
-//            switch(log.getUHeader().getType()) {
+//        if (log.getUHeader().getType() == PDM.LogType.ENTITY) {
+//            switch(log.getUHeader().getContent()) {
 //                case CLIENT_ENTITY:
 //                    String clientIpString = "";
 //                    for (PDM.IPAddress ipAddress: log.getClient().getIpListList()) {
-//                        clientIpString += Util.intToIpv4(ipAddress.getAddress()) + ", ";
+////                        clientIpString += Util.intToIpv4(ipAddress.getAddress()) + ", ";
 //                    }
 //                    ClientProperties clientProperties = new ClientProperties(clientIpString);
 //                    return clientProperties;
 //                case PROCESS_ENTITY:
-//                    PDM.Process processInfo = log.getProcess();
+//                    PDM.Process processInfo = log.getEventData().getProcessEvent().getChildProc();
 //                    ProcessNodeProperties processNodeProperties =
 //                            new ProcessNodeProperties(
-//                                    processInfo.getVirtualPid(),
+////                                    processInfo.getVirtualPid(),
 //                                    processInfo.getExePath(),
 //                                    processInfo.getCmdline());
 //                    return processNodeProperties;
@@ -296,57 +335,56 @@ public class PDMParser implements FlatMapFunction<PDM.LogPack, PDM.Log> {
 //    }
 
 //    ToDo: Change UDM item to PDM item.
-//    public static BasicEdge initBasicEdge(PDM.Log log) {
-//        PDM.LogType eventType = log.getUHeader().getType();
-//        PDM.EventInfo eventInfo = log.getEventInfo();
-//        long timeStamp = eventInfo.getEHeader().getTs();
-//
-//        UUID sourceUuid;
-//        UUID sinkUuid;
-//        String type = eventType.toString();
-//
-//        switch (eventType) {
-//            case PROCESS_FORK:
-//            case PROCESS_EXEC:
-//                sourceUuid = processUuidToUuid(eventInfo.getEHeader().getProcUUID());
-//                sinkUuid = processUuidToUuid(eventInfo.getProcessInfo().getChildProcUUID());
-//                break;
-//            case FILE_CREATE:
-//            case FILE_WRITE:
-//                sourceUuid = processUuidToUuid(eventInfo.getEHeader().getProcUUID());
-//                sinkUuid = fileUuidToUuid(eventInfo.getFileInfo().getFileUUID());
-//                PDM.File.FILE_TYPE fileType = eventInfo.getFileInfo().getFileType();
-//                if (fileType == PDM.File.FILE_TYPE.FILE_FIFO || fileType == PDM.File.FILE_TYPE.FILE_SOCK) {
+    public static BasicEdge initBasicEdge(PDM.Log log) {
+        PDM.LogContent eventType = log.getUHeader().getContent();
+        PDM.EventData eventInfo = log.getEventData();
+        long timeStamp = eventInfo.getEHeader().getTs();
+
+        UUID sourceUuid;
+        UUID sinkUuid;
+        String type = eventType.toString();
+
+        switch (eventType) {
+            case PROCESS_FORK:
+            case PROCESS_EXEC:
+                sourceUuid = processUuidToUuid(eventInfo.getEHeader().getProc().getProcUUID());
+                sinkUuid = processUuidToUuid(eventInfo.getProcessEvent().getChildProc().getProcUUID());
+                break;
+            case FILE_WRITE:
+                sourceUuid = processUuidToUuid(eventInfo.getEHeader().getProc().getProcUUID());
+                sinkUuid = fileUuidToUuid(eventInfo.getFileEvent().getFile().getFileUUID());
+                PDM.File.FileType fileType = eventInfo.getFileEvent().getFile().getFileType();
+//                if (fileType == PDM.File.FileType.FILE_FIFO || fileType == PDM.File.FileType.FILE_SOCK) {
 //                    BasicEdge pipeIOEdge = UnNamedEntity.handleUnNamedEntity(sourceUuid, sinkUuid, UnNamedEntity.IODirection.WRITE, timeStamp, fileType);
 //                    return pipeIOEdge;
 //                }
-//                break;
-//            case FILE_READ:
-//            case FILE_OPEN:
-//                sourceUuid = fileUuidToUuid(eventInfo.getFileInfo().getFileUUID());
-//                sinkUuid = processUuidToUuid(eventInfo.getEHeader().getProcUUID());
-//                fileType = eventInfo.getFileInfo().getFileType();
+                break;
+            case FILE_READ:
+            case FILE_OPEN:
+                sourceUuid = processUuidToUuid(eventInfo.getEHeader().getProc().getProcUUID());
+                sinkUuid = processUuidToUuid(eventInfo.getEHeader().getProc().getProcUUID());
+                fileType = eventInfo.getFileEvent().getFile().getFileType();
 //                if (fileType == PDM.File.FILE_TYPE.FILE_FIFO || fileType == PDM.File.FILE_TYPE.FILE_SOCK) {
 //                    BasicEdge pipeIOEdge = UnNamedEntity.handleUnNamedEntity(sourceUuid, sinkUuid, UnNamedEntity.IODirection.READ, timeStamp, fileType);
 //                    return pipeIOEdge;
 //                }
-//                break;
-//            case NET_CONNECT:  // FixMe: NET_CONNECT has no direction
-//                PDM.NetEventInfo.Direction direction = eventInfo.getNetInfo().getDirect();
-//                if (direction == PDM.NetEventInfo.Direction.in) {
-//                    sourceUuid = networkToUuid(eventInfo.getNetInfo().getSip(), eventInfo.getNetInfo().getSport());
-//                    sinkUuid = processUuidToUuid(eventInfo.getEHeader().getProcUUID());
-//                }
-//                else if (direction == PDM.NetEventInfo.Direction.out) {
-//                    sourceUuid = networkToUuid(eventInfo.getNetInfo().getDip(), eventInfo.getNetInfo().getDport());
-//                    sinkUuid = processUuidToUuid(eventInfo.getEHeader().getProcUUID());
-//                }
-//                else return null;
-//                break;
-//            default:
-//                return null;
-//        }
-//
-//        return new BasicEdge(type, timeStamp, sourceUuid, sinkUuid);
-//    }
+                break;
+            case NET_CONNECT:  // FixMe: NET_CONNECT has no direction
+                PDM.NetEvent.Direction direction = eventInfo.getNetEvent().getDirect();
+                if (direction == IN) {
+                    sourceUuid = networkToUuid(eventInfo.getNetEvent().getSip(), eventInfo.getNetEvent().getSport());
+                    sinkUuid = processUuidToUuid(eventInfo.getEHeader().getProc().getProcUUID());
+                }
+                else if (direction == OUT) {
+                    sourceUuid = networkToUuid(eventInfo.getNetEvent().getDip(), eventInfo.getNetEvent().getDport());
+                    sinkUuid = processUuidToUuid(eventInfo.getEHeader().getProc().getProcUUID());
+                }
+                else return null;
+                break;
+            default:
+                return null;
+        }
+
+        return new BasicEdge(type, timeStamp, sourceUuid, sinkUuid);
+    }
 }

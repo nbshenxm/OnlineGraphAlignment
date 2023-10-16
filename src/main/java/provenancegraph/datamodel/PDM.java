@@ -4,6 +4,8 @@
 package provenancegraph.datamodel;
 
 public final class PDM {
+
+
   private PDM() {}
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistryLite registry) {

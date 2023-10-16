@@ -23,6 +23,8 @@ import utils.KafkaPDMDeserializer;
 import java.util.Objects;
 
 
+import static libtagpropagation.nodoze.EventFrequencyDBConstructionWithFlink.EventFrequencyDBConstructionHandler;
+import static libtagpropagation.nodoze.TagBasedAnomalyPathMiningOnFlink.AnomalyPathMiningHandler;
 import static org.apache.flink.util.IterableUtils.flatMap;
 
 public class Main {
@@ -42,13 +44,15 @@ public class Main {
                     .setBootstrapServers(kafkaBroker)
                     .setTopics(kafkaTopic)
                     .setGroupId(kafkaGroupId)
-                    .setStartingOffsets(OffsetsInitializer.earliest())
+                    .setStartingOffsets(OffsetsInitializer.latest())
                     .setValueOnlyDeserializer(new KafkaPDMDeserializer())
                     .build();
 
             DataStream<PDM.LogPack> logPack_stream = env.fromSource(source, WatermarkStrategy.noWatermarks(), "Kafka Source");
+//            AnomalyPathMiningHandler(logPack_stream);
+            EventFrequencyDBConstructionHandler(logPack_stream);
             DataStream<PDM.Log> log_stream = logPack_stream.flatMap(new PDMParser());
-            event_stream = log_stream.map(PDMParser::initAssociatedEvent);
+//            event_stream = log_stream.map(PDMParser::initAssociatedEvent);
 
         }
         else {
@@ -61,8 +65,8 @@ public class Main {
             event_stream = json_stream.map(LocalParser::initAssociatedEvent);
         }
 
-        event_stream.keyBy(associatedEvent -> associatedEvent.hostUUID)
-                .process(new GraphAlignmentLocalProcessFunction());
+//        event_stream.keyBy(associatedEvent -> associatedEvent.hostUUID)
+//                .process(new GraphAlignmentLocalProcessFunction());
 
         // Execute the Flink job
         env.execute("Read Local JSON Files with Flink");
