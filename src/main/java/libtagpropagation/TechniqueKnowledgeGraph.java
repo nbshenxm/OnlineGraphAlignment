@@ -70,6 +70,8 @@ public class TechniqueKnowledgeGraph {
 
         InputStream is = new BufferedInputStream(Files.newInputStream(Paths.get(gmlFilePath)));
         reader.inputGraph(is);
+//        System.out.println(this.printBasicInfo());
+
     }
 
     public String printBasicInfo() {
@@ -77,22 +79,26 @@ public class TechniqueKnowledgeGraph {
     }
 
     public ArrayList<Object> getSeedObjects() {
-        ArrayList<Object> seedObjects = new ArrayList<>();
+        ArrayList<Object> seedObjects = new ArrayList<Object>();
 
         for (Vertex v: this.tinkerGraph.getVertices()) {
             try {
-                if (v.getProperty("is_seed_node")) {
+//                System.out.println(v);
+////                System.out.println(v.getProperty("is_seed_node"));
+//                System.out.println("Problem?");
+                if ((Boolean)v.getProperty("is_seed_node")) { // nullpointerexception
                     seedObjects.add(v);
                 }
             }
             catch (NullPointerException e1) {
                 e1.printStackTrace();
+//                System.out.println(v);
             }
         }
 
         for (Edge e: this.tinkerGraph.getEdges()) {
             try {
-                if (e.getProperty("is_seed_edge")) {
+                if ((Boolean)e.getProperty("is_seed_edge")) { //nullpointerexception
                     seedObjects.add(e);
                 }
             }
@@ -125,7 +131,9 @@ public class TechniqueKnowledgeGraph {
     }
 
     public static boolean nodeMatch(Vertex kgNode, Vertex pgNode) {
-        if (kgNode.getProperty("type") != pgNode.getProperty("type")) {
+        System.out.println(kgNode.getProperty("type").toString());
+        System.out.println(pgNode.getProperty("type").toString());
+        if (! kgNode.getProperty("type").equals(pgNode.getProperty("type").toString())) {
             return false;
         }
         String kpKGNode = kgNode.getProperty(getKeyPropertiesFromType(kgNode.getProperty("type")));
@@ -136,6 +144,7 @@ public class TechniqueKnowledgeGraph {
     public static boolean isVertexAligned(Vertex seedNode, BasicNode n, NodeProperties np) {
         TinkerGraph graph = new TinkerGraph();
         Vertex temp_node = graph.addVertex("1");
+
         switch (n.getNodeType()) {
             case "File":
                 temp_node.setProperty("type", "file");
