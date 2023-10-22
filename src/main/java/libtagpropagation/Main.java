@@ -18,7 +18,7 @@ import provenancegraph.datamodel.PDM;
 import provenancegraph.parser.LocalParser;
 import provenancegraph.parser.PDMParser;
 import utils.KafkaPDMDeserializer;
-
+import java.io.File;
 
 import java.util.Objects;
 
@@ -53,23 +53,51 @@ public class Main {
             EventFrequencyDBConstructionHandler(logPack_stream);
             DataStream<PDM.Log> log_stream = logPack_stream.flatMap(new PDMParser());
 //            event_stream = log_stream.map(PDMParser::initAssociatedEvent);
+            event_stream = log_stream.map(PDMParser::initAssociatedEvent);
+            event_stream.keyBy(associatedEvent -> associatedEvent.hostUUID)
+                .process(new GraphAlignmentLocalProcessFunction());
+
+            // Execute the Flink job
+            env.execute("Read Local JSON Files with Flink");
 
         }
+        // figure out how to iterate through all files in a directory
+        // make new graphs for the zip file folders
         else {
-            final String inputDirectory = "SystemLog/apt.log";
+            final String inputDirectory = "SystemLog/test.log";
+            File dir = new File(inputDirectory);
+            File[] logs = dir.listFiles();
             final FileSource<String> source =
-                    FileSource.forRecordStreamFormat(new TextLineInputFormat(), new Path(inputDirectory) ).build();
+                    FileSource.forRecordStreamFormat(new TextLineInputFormat(), new Path(dir.getPath()) ).build();
             final DataStream<String> stream =
                     env.fromSource(source, WatermarkStrategy.noWatermarks(), "file-source");
             final DataStream<JsonElement> json_stream = stream.map(Main::convertToJson).name("json-source");
             event_stream = json_stream.map(LocalParser::initAssociatedEvent);
+            event_stream.keyBy(associatedEvent -> associatedEvent.hostUUID)
+                    .process(new GraphAlignmentLocalProcessFunction());
+
+            // Execute the Flink job
+            env.execute("Read Local JSON Files with Flink");
+//            if(logs != null){
+//                for (File log : logs){
+//                    System.out.println(log.getPath());
+//                    final FileSource<String> source =
+//                    FileSource.forRecordStreamFormat(new TextLineInputFormat(), new Path(log.getPath()) ).build();
+//                    final DataStream<String> stream =
+//                            env.fromSource(source, WatermarkStrategy.noWatermarks(), "file-source");
+//                    final DataStream<JsonElement> json_stream = stream.map(Main::convertToJson).name("json-source");
+//                    event_stream = json_stream.map(LocalParser::initAssociatedEvent);
+//                    event_stream.keyBy(associatedEvent -> associatedEvent.hostUUID)
+//                        .process(new GraphAlignmentLocalProcessFunction());
+//
+//                // Execute the Flink job
+//                    env.execute("Read Local JSON Files with Flink");
+//                }
+//            }
+            
         }
 
-//        event_stream.keyBy(associatedEvent -> associatedEvent.hostUUID)
-//                .process(new GraphAlignmentLocalProcessFunction());
-
-        // Execute the Flink job
-        env.execute("Read Local JSON Files with Flink");
+        
     }
 
     private static JsonElement convertToJson(String inputLine) {

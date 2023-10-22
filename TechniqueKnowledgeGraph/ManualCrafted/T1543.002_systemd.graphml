@@ -14,30 +14,42 @@
     <key id="sequence_num" for="edge" attr.name="sequence_num" attr.type="int"/>
     <key id="is_seed_edge" for="edge" attr.name="is_seed_edge" attr.type="boolean"/>
 
-    <graph id="T1037.004_RCScripts" edgedefault="directed">
+    <graph id="T1543.002_systemd" edgedefault="directed">
         <node id="n0">
             <data key="type">process</data>
-            <data key="file_path">*</data>
+            <data key="process_name">*</data>
             <data key="is_seed_node">false</data>
+            
         </node>
         <node id="n1">
             <data key="type">file</data>
-            <!-- <data key="process_name">/etc/(rc.local|rc.d|init.d)</data> -->
-            <data key="process_name">*/bin/bash</data>
-            <data key="is_seed_node">true</data>
+            <data key="file_path">*</data>
+            <data key="is_seed_node">false</data>
         </node>
+        
         <node id="n2">
+            <data key="type">process</data>
+            <data key="process_name">systemctl</data>
+            <data key="is_seed_node">true</data>
+            <!-- temporary seed node -->
+        </node>
+        <node id="n3">
+            <data key="type">file</data>
+            <data key="file_path">/etc/systemd/system/*</data>
+            <data key="is_seed_node">false</data>
+        </node>
+        <node id="n4">
             <data key="type">process</data>
             <data key="process_name">*</data>
             <data key="is_seed_node">false</data>
         </node>
-
-        <edge source="n0" target="n1">
-            <data key="event_type">write</data>
+        <!-- <ed -->
+        <edge source="n2" target="n3">
+            <data key="event_type">create</data>
             <data key="sequence_num">1</data>
             <data key="is_seed_edge">true</data>
         </edge>
-        <edge source="n2" target="n1">
+        <edge source="n2" target="n4">
             <data key="event_type">execute</data>
             <data key="sequence_num">2</data>
             <data key="is_seed_edge">false</data>

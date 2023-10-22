@@ -33,6 +33,7 @@ public class GraphAlignmentTag {
 
     public GraphAlignmentTag(Vertex seedNode, BasicNode alignedElement, TechniqueKnowledgeGraph tkg) {
         init(tkg);
+        System.out.println("Made it");
         alignNode(seedNode, alignedElement);
     }
 
@@ -52,11 +53,13 @@ public class GraphAlignmentTag {
 
             for (Edge edge : vertex.getEdges(Direction.IN)) {
                 Vertex src = edge.getVertex(Direction.OUT);
-                String srcId = src.getProperty("id");
-                String destId = vertex.getProperty("id");
+                String srcId = src.getId().toString();
+                String destId = vertex.getId().toString();
                 Pair<String, String> nodePair = new Pair<>(srcId, destId);
                 edgeMatchMap.put(nodePair, new EdgeAlignmentStatus( // TODO: change to source and target
-                        edge.getProperty("type")));
+                        // CURRENT: THIS IS BUGGING OUT
+                        edge.getProperty("event_type")));
+
             }
         }
     }
@@ -65,13 +68,17 @@ public class GraphAlignmentTag {
         String nodeId = v.getProperty("id");
         NodeAlignmentStatus nodeAlignmentStatus = nodeMatchMap.get(nodeId);
         nodeAlignmentStatus.align(node);
+        System.out.println(v);
+        for (String s : v.getPropertyKeys()){
+            System.out.println(s + ": " + v.getProperty(s));
+        }
     }
 
     private void alignEvent(Edge e, AssociatedEvent event) {
         Vertex srcNode = e.getVertex(Direction.OUT);
-        String srcId = srcNode.getProperty("id");
+        String srcId = srcNode.getId().toString();
         Vertex destNode = e.getVertex(Direction.IN);
-        String destId = destNode.getProperty("id");
+        String destId = destNode.getId().toString();
         Pair<String, String> nodePair = new Pair<>(srcId, destId);
         EdgeAlignmentStatus edgeAlignmentStatus = edgeMatchMap.get(nodePair);
         if (edgeAlignmentStatus.getMatchedScore() < 1F) {
@@ -80,6 +87,9 @@ public class GraphAlignmentTag {
                 alignNode(srcNode, event.sourceNode);
                 alignNode(destNode, event.sinkNode);
             }
+        }
+        for (String s : e.getPropertyKeys()){
+            System.out.println(s + ": " + e.getProperty(s));
         }
     }
 
