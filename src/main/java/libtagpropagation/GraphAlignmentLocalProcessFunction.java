@@ -31,8 +31,10 @@ public class GraphAlignmentLocalProcessFunction
     private transient MapState<UUID, GraphAlignmentTagList> tagsCacheMap;
     private transient MapState<UUID, BasicNode> nodeInfoMap;
     private transient ListState<TechniqueKnowledgeGraph> tkgList;
-    private transient MapState<Edge, TechniqueKnowledgeGraph> seedEventMap;
-    private transient MapState<Vertex, TechniqueKnowledgeGraph> seedNodeMap; // TODO: further divide nodes by types
+    private transient ListState<Vertex> seedNodeList;
+    private transient ListState<Edge> seedEdgeList;
+    private transient MapState<Object, TechniqueKnowledgeGraph> seedEventMap;
+    private transient MapState<Object, TechniqueKnowledgeGraph> seedNodeMap; // TODO: further divide nodes by types
 
 
     @Override
@@ -53,13 +55,21 @@ public class GraphAlignmentLocalProcessFunction
                 new ListStateDescriptor<>("tkgListStatus", TechniqueKnowledgeGraph.class);
         this.tkgList = getRuntimeContext().getListState(tkgListDescriptor);
 
-        MapStateDescriptor<Edge, TechniqueKnowledgeGraph> seedEventMapDescriptor =
-                new MapStateDescriptor<>("seedEventMap", Edge.class, TechniqueKnowledgeGraph.class);
+        MapStateDescriptor<Object, TechniqueKnowledgeGraph> seedEventMapDescriptor =
+                new MapStateDescriptor<>("seedEventMap", Object.class, TechniqueKnowledgeGraph.class);
         this.seedEventMap = getRuntimeContext().getMapState(seedEventMapDescriptor);
 
-        MapStateDescriptor<Vertex, TechniqueKnowledgeGraph> seedNodeMapDescriptor =
-                new MapStateDescriptor<Vertex, TechniqueKnowledgeGraph>("seedNodeMap", Vertex.class, TechniqueKnowledgeGraph.class);
+        MapStateDescriptor<Object, TechniqueKnowledgeGraph> seedNodeMapDescriptor =
+                new MapStateDescriptor<>("seedNodeMap", Object.class, TechniqueKnowledgeGraph.class);
         this.seedNodeMap = getRuntimeContext().getMapState(seedNodeMapDescriptor);
+
+        ListStateDescriptor<Vertex> seedNodeListDescriptor =
+                new ListStateDescriptor<>("seedNodeList", Vertex.class);
+        this.seedNodeList = getRuntimeContext().getListState(seedNodeListDescriptor);
+
+        ListStateDescriptor<Edge> seedEdgeListDescriptor =
+                new ListStateDescriptor<>("seedEdgeList", Edge.class);
+        this.seedEdgeList = getRuntimeContext().getListState(seedEdgeListDescriptor);
     }
 
     @Override
@@ -104,9 +114,11 @@ public class GraphAlignmentLocalProcessFunction
                 ArrayList<Object> seedObjects = tkg.getSeedObjects();
                 for (Object seedObject: seedObjects) {
                     if (seedObject instanceof Vertex) {
-                        this.seedNodeMap.put((Vertex) seedObject, tkg);
+                        this.seedNodeMap.put(((Vertex) seedObject).getId(), tkg);
+                        this.seedNodeList.add((Vertex) seedObject);
                     } else if (seedObject instanceof Edge) {
-                        this.seedEventMap.put((Edge) seedObject, tkg);
+                        this.seedEventMap.put(((Edge) seedObject).getId(), tkg);
+                        this.seedEdgeList.add((Edge) seedObject);
                     }
                 }
             }
@@ -118,10 +130,9 @@ public class GraphAlignmentLocalProcessFunction
     }
 
     private void initGraphAlignmentTag(AssociatedEvent associatedEvent) throws Exception {
-        Iterable<Map.Entry<Vertex, TechniqueKnowledgeGraph>> node_entries = seedNodeMap.entries();
-        for (Map.Entry<Vertex, TechniqueKnowledgeGraph> entry : node_entries) {
-            Vertex seedNode = entry.getKey();
-            TechniqueKnowledgeGraph tkg = entry.getValue();
+//        Iterable<Map.Entry<Vertex, TechniqueKnowledgeGraph>> node_entries = seedNodeMap.entries();
+        for (Vertex seedNode : this.seedNodeList.get()) {
+            TechniqueKnowledgeGraph tkg = this.seedNodeMap.get(seedNode.getId());
             BasicNode srcNode = associatedEvent.sourceNode;
             NodeProperties srcNodeProperties = associatedEvent.sourceNodeProperties;
             if (isVertexAligned(seedNode, srcNode, srcNodeProperties)){
@@ -136,10 +147,9 @@ public class GraphAlignmentLocalProcessFunction
             }
         }
 
-        Iterable<Map.Entry<Edge, TechniqueKnowledgeGraph>> edge_entries = seedEventMap.entries();
-        for (Map.Entry<Edge, TechniqueKnowledgeGraph> entry : edge_entries) {
-            Edge seedEdge = entry.getKey();
-            TechniqueKnowledgeGraph tkg = entry.getValue();
+//        Iterable<Map.Entry<Edge, TechniqueKnowledgeGraph>> edge_entries = seedEventMap.entries();
+        for (Edge seedEdge : this.seedEdgeList.get()) {
+            TechniqueKnowledgeGraph tkg = this.seedEventMap.get(seedEdge.getId());
             if (isEdgeAligned(seedEdge, associatedEvent)) {
                 GraphAlignmentTag tag = new GraphAlignmentTag(seedEdge, associatedEvent, tkg);
                 addTagToCache(tag, associatedEvent.sourceNodeId);
