@@ -12,7 +12,6 @@ import org.apache.flink.util.Collector;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.UUID;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -94,34 +93,14 @@ public class GraphAlignmentLocalProcessFunction
         assert kgFileList != null;
         for (File kgFile : kgFileList) {
             String kgFileName = kgFile.toString();
-//            System.out.println(kgFileName);
             TechniqueKnowledgeGraph tkg = new TechniqueKnowledgeGraph(kgFileName);
             this.tkgList.add(tkg);
         }
-        Iterable<TechniqueKnowledgeGraph> iter = this.tkgList.get();
-        System.out.println(iter.toString());
-        Iterator<TechniqueKnowledgeGraph> i = iter.iterator();
-        int count = 0;
-        while(i.hasNext()){
-            count ++;
-            TechniqueKnowledgeGraph x = i.next();
-            System.out.println(x.tinkerGraph);
-            System.out.println(x.techniqueName);
-        }
-        System.out.println(count);
-
     }
 
     private void initTKGMatchingSeeds() {
         try {
-//            System.out.println("Printing out tkgs");
-            Iterable<TechniqueKnowledgeGraph> iter = this.tkgList.get();
-//            System.out.println(iter.toString());
-            Iterator<TechniqueKnowledgeGraph> i = iter.iterator();
-            while (i.hasNext()) {
-                TechniqueKnowledgeGraph tkg = i.next();
-//                System.out.println(tkg.techniqueName);
-//                System.out.println(tkg.getSeedObjects());
+            for (TechniqueKnowledgeGraph tkg : this.tkgList.get()) {
                 ArrayList<Object> seedObjects = tkg.getSeedObjects();
                 for (Object seedObject: seedObjects) {
                     if (seedObject instanceof Vertex) {
@@ -131,11 +110,6 @@ public class GraphAlignmentLocalProcessFunction
                     }
                 }
             }
-            System.out.println("Printing out seed nodes");
-            for(Vertex v : this.seedNodeMap.keys()){
-                System.out.println(this.seedNodeMap.get(v).techniqueName);
-            }
-            System.out.println("Done");
         }
         catch (Exception e) {
             System.out.println("Something wrong in TechniqueKnowledgeGraph ListState.");
@@ -150,7 +124,6 @@ public class GraphAlignmentLocalProcessFunction
             TechniqueKnowledgeGraph tkg = entry.getValue();
             BasicNode srcNode = associatedEvent.sourceNode;
             NodeProperties srcNodeProperties = associatedEvent.sourceNodeProperties;
-
             if (isVertexAligned(seedNode, srcNode, srcNodeProperties)){
                 GraphAlignmentTag tag = new GraphAlignmentTag(seedNode, srcNode, tkg);
                 addTagToCache(tag, srcNode.getNodeId());
@@ -176,16 +149,8 @@ public class GraphAlignmentLocalProcessFunction
     }
 
     private void propGraphAlignmentTag(AssociatedEvent associatedEvent) throws Exception {
-        GraphAlignmentTagList srcTagList = tagsCacheMap.get(associatedEvent.sourceNode.getNodeId());
-        GraphAlignmentTagList destTagList = tagsCacheMap.get(associatedEvent.sinkNode.getNodeId());
-//        System.out.println(associatedEvent);
-//        System.out.println("heyo");
-//        System.out.println(tagsCacheMap.isEmpty());
-//        for(Map.Entry<UUID, GraphAlignmentTagList> e : tagsCacheMap.entries()){
-//            System.out.println(e.getKey());
-//            System.out.println(e.getValue());
-//        }
-//        System.out.println("done");
+        GraphAlignmentTagList srcTagList = tagsCacheMap.get(associatedEvent.sourceNodeId);
+        GraphAlignmentTagList destTagList = tagsCacheMap.get(associatedEvent.sinkNodeId);
         // iterate through tagsCacheMap to check if any existing tags can be propagated
         Iterable<Map.Entry<UUID, GraphAlignmentTagList>> entries = tagsCacheMap.entries();
         for (Map.Entry<UUID, GraphAlignmentTagList> entry : entries) {
@@ -195,14 +160,13 @@ public class GraphAlignmentLocalProcessFunction
             ArrayList<GraphAlignmentTag> tagList = graphAlignmentTagList.getTagList();
             for (GraphAlignmentTag tag: tagList) {
                 // tag align
-
                 tag.propagate(associatedEvent);
-                if(srcTagList != null){
-                    for (GraphAlignmentTag anotherTag : srcTagList.getTagList()) { // This srcTagList can be null rn. Happens when there is no tagsCacheMap key for the source node id.
-                        if (tag.sameAs(anotherTag)) {
-                            tag.mergeStatus(tag);
-                            anotherTag.mergeStatus(tag);
-                        }
+
+                // tag merge
+                for (GraphAlignmentTag anotherTag : srcTagList.getTagList()) {
+                    if (tag.sameAs(anotherTag)) {
+                        tag.mergeStatus(tag);
+                        anotherTag.mergeStatus(tag);
                     }
                 }
 

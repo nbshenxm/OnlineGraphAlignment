@@ -121,8 +121,8 @@ public class LocalParser {
 
                 }
                 catch(NullPointerException e){
-//                    System.out.println("heY");
-//                    System.out.println(jsonElement.toString());
+                    System.out.println("heY");
+                    System.out.println(jsonElement.toString());
                     cmd = getJsonArgField("process_path", jsonElement);
                 }
                 n = new ProcessNodeProperties(Integer.parseInt(getJsonArgField("process_id", jsonElement)), getJsonArgField("process_path", jsonElement), cmd);

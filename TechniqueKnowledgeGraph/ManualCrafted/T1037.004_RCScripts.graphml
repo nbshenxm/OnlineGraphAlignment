@@ -22,8 +22,7 @@
         </node>
         <node id="n1">
             <data key="type">file</data>
-            <!-- <data key="process_name">/etc/(rc.local|rc.d|init.d)</data> -->
-            <data key="process_name">*/bin/bash</data>
+            <data key="process_name">/etc/(rc.local|rc.d|init.d)</data>
             <data key="is_seed_node">true</data>
         </node>
         <node id="n2">
