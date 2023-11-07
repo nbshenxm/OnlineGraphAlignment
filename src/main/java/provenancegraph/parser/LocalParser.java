@@ -125,10 +125,10 @@ public class LocalParser {
                     System.out.println(jsonElement.toString());
                     cmd = getJsonArgField("process_path", jsonElement);
                 }
-                n = new ProcessNodeProperties(Integer.parseInt(getJsonArgField("process_id", jsonElement)), getJsonArgField("process_path", jsonElement), cmd);
+                n = new ProcessNodeProperties(Integer.parseInt(getJsonArgField("process_id", jsonElement)), getJsonArgField("process_path", jsonElement), cmd,  getJsonArgField("process_name", jsonElement));
                 break;
             case "Process":
-                n = new ProcessNodeProperties(Integer.parseInt(getJsonArgField("parent_process_id", jsonElement)), getJsonArgField("parent_process_path", jsonElement), getJsonArgField("parent_process_commandline", jsonElement));
+                n = new ProcessNodeProperties(Integer.parseInt(getJsonArgField("parent_process_id", jsonElement)), getJsonArgField("parent_process_path", jsonElement), getJsonArgField("parent_process_commandline", jsonElement), getJsonArgField("parent_process_name", jsonElement));
 
                 break;
             default:
@@ -149,7 +149,7 @@ public class LocalParser {
                 n = new NetworkNodeProperties(getJsonArgField("destination_ip", jsonElement), getJsonArgField("destination_port", jsonElement), Integer.parseInt(getJsonArgField("direction", jsonElement)));
                 break;
             case "Process":
-                n = new ProcessNodeProperties(Integer.parseInt(getJsonArgField("process_id", jsonElement)), getJsonArgField("process_path", jsonElement), getJsonArgField("process_commandline", jsonElement));
+                n = new ProcessNodeProperties(Integer.parseInt(getJsonArgField("process_id", jsonElement)), getJsonArgField("process_path", jsonElement), getJsonArgField("process_commandline", jsonElement), getJsonArgField("process_name", jsonElement));
                 break;
             default:
                 n = new FileNodeProperties("");
@@ -167,17 +167,14 @@ public class LocalParser {
         String eventTypeNum;
         String eventTypeName;
         String id = getJsonField("uuid", jsonElement);
-//        System.out.println("uuid: " + id);
-//        System.out.println(jsonElement.toString())
+
         UUID hostUUID = new UUID(
                 new BigInteger(id.substring(0, 16), 16).longValue(),
                 new BigInteger(id.substring(16, 32), 16).longValue());
-//        System.out.println(hostUUID.toString());
 
         AssociatedEvent event = new AssociatedEvent();
         event.setHostUUID(hostUUID);
         event.setTimeStamp(Long.parseLong(getJsonField("timestamp", jsonElement)));
-        //hostUUID, eventTypeName, Long.parseLong(getJsonField("timestamp", jsonElement)
         try {
             //**************************************************
             getJsonField("event_type", jsonElement);
@@ -187,7 +184,7 @@ public class LocalParser {
             System.out.println(jsonElement.toString());
             return new AssociatedEvent();
         }
-        //*************************************
+
         if(getJsonField("log_category", jsonElement).equals("Domain")){
             //temp for fill
             return new AssociatedEvent();
@@ -195,25 +192,20 @@ public class LocalParser {
         switch(getJsonField("event_type", jsonElement)){
             case "12":
             case "13":
-                eventTypeNum = "3";
                 eventTypeName = "PROCESS_FORK";
                 break;
             case "14":
-                eventTypeNum = "4";
                 eventTypeName = "PROCESS_EXEC";
                 break;
             case "35":
-                eventTypeNum = "5";
                 eventTypeName = "PROCESS_LOAD";
                 break;
             case "1":
             case "2":
-                eventTypeNum = "6";
                 eventTypeName = "FILE_OPEN";
                 break;
             case "4":
             case "5":
-                eventTypeNum = "7";
                 eventTypeName = "FILE_READ";
                 break;
             case "8":
@@ -222,15 +214,12 @@ public class LocalParser {
             case "11":
             case "22":
             case "23":
-                eventTypeNum = "8";
                 eventTypeName = "FILE_WRITE";
                 break;
             case "16":
-                eventTypeNum = "9";
                 eventTypeName = "NET_CONNECT";
                 break;
             default:
-                eventTypeNum = "6";
                 eventTypeName = "FILE_OPEN";
                 break;
         }

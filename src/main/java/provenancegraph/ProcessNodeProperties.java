@@ -8,16 +8,22 @@ import static utils.EntityGeneralizer.exeFilePathGeneralizer;
 public class ProcessNodeProperties extends NodeProperties {
     private int processId;
     private String exePath;
+    private String processName;
     private String cmdLineArguments;
 
-    public ProcessNodeProperties(int processId, String exePath, String cmdLineArguments) {
+    public ProcessNodeProperties(int processId, String exePath, String cmdLineArguments, String processName) {
         this.type = NodeType.Process;
         this.processId = processId;
         this.exePath = exePath;
+        this.processName = processName;
         this.cmdLineArguments = cmdLineArguments;
     }
 
     public String getExePath() {
+        return this.exePath;
+    }
+
+    public String getProcessName() {
         return this.exePath;
     }
 
@@ -56,7 +62,9 @@ public class ProcessNodeProperties extends NodeProperties {
         return new ProcessNodeProperties(
                 this.processId,
                 exeFilePathGeneralizer(exePath),
-                argumentsGeneralizer(cmdLineArguments)
+                argumentsGeneralizer(cmdLineArguments),
+                this.processName
         );
     }
+
 }
