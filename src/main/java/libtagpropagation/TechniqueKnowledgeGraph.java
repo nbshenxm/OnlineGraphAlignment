@@ -47,9 +47,9 @@ public class TechniqueKnowledgeGraph {
     public String techniqueName;
 
     private static final HashMap<String, String> KEY_PROPERTIES_MAP = new HashMap <String, String> (){{
-        put("network", "url_ip");
-        put("file", "file_path");
-        put("process", "process_name");
+        put("Network", "url_ip");
+        put("File", "file_path");
+        put("Process", "process_name");
     }};
 
     public TechniqueKnowledgeGraph(String gmlFilePath) throws IOException {
@@ -125,7 +125,9 @@ public class TechniqueKnowledgeGraph {
     }
 
     public static boolean nodeMatch(Vertex kgNode, Vertex pgNode) {
-        if (kgNode.getProperty("type") != pgNode.getProperty("type")) {
+        String kgNodeType = kgNode.getProperty("type");
+        String pgNodeType = pgNode.getProperty("type");
+        if (!kgNodeType.equals(pgNodeType)) {
             return false;
         }
         String kpKGNode = kgNode.getProperty(getKeyPropertiesFromType(kgNode.getProperty("type")));
@@ -138,15 +140,15 @@ public class TechniqueKnowledgeGraph {
         Vertex temp_node = graph.addVertex("1");
         switch (n.getNodeType()) {
             case "File":
-                temp_node.setProperty("type", "file");
+                temp_node.setProperty("type", "File");
                 temp_node.setProperty("file_path", ((FileNodeProperties) np).getFilePath());
                 break;
             case "Process":
-                temp_node.setProperty("type", "process");
+                temp_node.setProperty("type", "Process");
                 temp_node.setProperty("process_name", ((ProcessNodeProperties) np).getExePath());
                 break;
             case "Network":
-                temp_node.setProperty("type", "network");
+                temp_node.setProperty("type", "Network");
                 temp_node.setProperty("url_ip", ((NetworkNodeProperties) np).getRemoteIp());
                 break;
             default:

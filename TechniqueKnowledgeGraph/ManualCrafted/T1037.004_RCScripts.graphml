@@ -16,28 +16,28 @@
 
     <graph id="T1037.004_RCScripts" edgedefault="directed">
         <node id="n0">
-            <data key="type">process</data>
+            <data key="type">Process</data>
             <data key="process_name">.*?</data>
             <data key="is_seed_node">false</data>
         </node>
         <node id="n1">
-            <data key="type">file</data>
+            <data key="type">File</data>
             <data key="file_path">/etc/(rc.local|rc.d|init.d)</data>
             <data key="is_seed_node">true</data>
         </node>
         <node id="n2">
-            <data key="type">process</data>
+            <data key="type">Process</data>
             <data key="process_name">.*?</data>
             <data key="is_seed_node">false</data>
         </node>
 
         <edge source="n0" target="n1">
-            <data key="event_type">write</data>
+            <data key="event_type">FILE_WRITE</data>
             <data key="sequence_num">1</data>
             <data key="is_seed_edge">true</data>
         </edge>
         <edge source="n2" target="n1">
-            <data key="event_type">execute</data>
+            <data key="event_type">PROCESS_EXEC</data>
             <data key="sequence_num">2</data>
             <data key="is_seed_edge">false</data>
         </edge>
