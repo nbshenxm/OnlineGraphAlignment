@@ -46,14 +46,17 @@ public class GraphAlignmentTag {
         nodeMatchMap = new HashMap<>();
         edgeMatchMap = new HashMap<>();
         for (Vertex vertex : tkg.tinkerGraph.getVertices()) {
-            nodeMatchMap.put(vertex.getProperty("id"), new NodeAlignmentStatus(
+            // TODO change getProperty("id") to getId()
+            nodeMatchMap.put((String)vertex.getId(), new NodeAlignmentStatus(
                     vertex.getProperty("type"),
                     vertex.getProperty(TechniqueKnowledgeGraph.getKeyPropertiesFromType(vertex.getProperty("type")))));
 
             for (Edge edge : vertex.getEdges(Direction.IN)) {
                 Vertex src = edge.getVertex(Direction.OUT);
-                String srcId = src.getProperty("id");
-                String destId = vertex.getProperty("id");
+                String srcId = (String) src.getId();
+                String destId = (String) vertex.getId();
+//                String srcId = src.getProperty("id");
+//                String destId = vertex.getProperty("id");
                 Pair<String, String> nodePair = new Pair<>(srcId, destId);
                 edgeMatchMap.put(nodePair, new EdgeAlignmentStatus( // TODO: change to source and target
                         edge.getProperty("type")));
@@ -62,16 +65,19 @@ public class GraphAlignmentTag {
     }
 
     private void alignNode(Vertex v, BasicNode node) {
-        String nodeId = v.getProperty("id");
+//        String nodeId = v.getProperty("id");
+        String nodeId = (String) v.getId();
         NodeAlignmentStatus nodeAlignmentStatus = nodeMatchMap.get(nodeId);
         nodeAlignmentStatus.align(node);
     }
 
     private void alignEvent(Edge e, AssociatedEvent event) {
         Vertex srcNode = e.getVertex(Direction.OUT);
-        String srcId = srcNode.getProperty("id");
+        String srcId = (String) srcNode.getId();
         Vertex destNode = e.getVertex(Direction.IN);
-        String destId = destNode.getProperty("id");
+        String destId = (String) destNode.getId();
+
+
         Pair<String, String> nodePair = new Pair<>(srcId, destId);
         EdgeAlignmentStatus edgeAlignmentStatus = edgeMatchMap.get(nodePair);
         if (edgeAlignmentStatus.getMatchedScore() < 1F) {
