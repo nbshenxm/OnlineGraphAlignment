@@ -23,7 +23,7 @@
         </node>
         <node id="n1">
             <data key="type">process</data>
-            <data key="process_name">*</data>
+            <data key="process_name">.*?</data>
             <data key="is_seed_node">false</data>
         </node>
         <node id="n2">
