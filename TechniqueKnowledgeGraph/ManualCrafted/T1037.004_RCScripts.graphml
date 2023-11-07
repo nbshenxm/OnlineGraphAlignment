@@ -17,17 +17,17 @@
     <graph id="T1037.004_RCScripts" edgedefault="directed">
         <node id="n0">
             <data key="type">process</data>
-            <data key="file_path">*</data>
+            <data key="process_name">.*?</data>
             <data key="is_seed_node">false</data>
         </node>
         <node id="n1">
             <data key="type">file</data>
-            <data key="process_name">/etc/(rc.local|rc.d|init.d)</data>
+            <data key="file_path">/etc/(rc.local|rc.d|init.d)</data>
             <data key="is_seed_node">true</data>
         </node>
         <node id="n2">
             <data key="type">process</data>
-            <data key="process_name">*</data>
+            <data key="process_name">.*?</data>
             <data key="is_seed_node">false</data>
         </node>
 
