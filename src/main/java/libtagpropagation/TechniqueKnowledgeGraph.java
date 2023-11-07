@@ -145,7 +145,7 @@ public class TechniqueKnowledgeGraph {
                 break;
             case "Process":
                 temp_node.setProperty("type", "Process");
-                temp_node.setProperty("process_name", ((ProcessNodeProperties) np).getExePath());
+                temp_node.setProperty("process_name", ((ProcessNodeProperties) np).getProcessName());
                 break;
             case "Network":
                 temp_node.setProperty("type", "Network");
