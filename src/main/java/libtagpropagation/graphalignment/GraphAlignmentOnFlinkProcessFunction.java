@@ -1,7 +1,6 @@
-package libtagpropagation;
+package libtagpropagation.graphalignment;
 
 
-import provenancegraph.BasicEdge;
 import provenancegraph.BasicNode;
 
 import org.apache.flink.api.common.state.MapState;
@@ -12,7 +11,6 @@ import org.apache.flink.util.Collector;
 import provenancegraph.datamodel.PDM;
 import provenancegraph.parser.PDMParser;
 
-import java.util.ArrayList;
 import java.util.UUID;
 
 

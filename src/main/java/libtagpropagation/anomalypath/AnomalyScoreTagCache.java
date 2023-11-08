@@ -1,4 +1,4 @@
-package libtagpropagation.nodoze;
+package libtagpropagation.anomalypath;
 
 import org.apache.flink.api.java.tuple.Tuple3;
 import provenancegraph.AssociatedEvent;

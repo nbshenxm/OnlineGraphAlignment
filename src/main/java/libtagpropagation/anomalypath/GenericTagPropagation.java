@@ -1,11 +1,10 @@
-package libtagpropagation.nodoze;
+package libtagpropagation.anomalypath;
 
 
 import provenancegraph.BasicEdge;
 import provenancegraph.BasicNode;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public interface GenericTagPropagation <NODE extends BasicNode, EDGE extends BasicEdge, TAG_CACHE extends GenericTagCache, ALERT> {
 

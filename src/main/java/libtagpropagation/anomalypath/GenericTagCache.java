@@ -1,4 +1,4 @@
-package libtagpropagation.nodoze;
+package libtagpropagation.anomalypath;
 
 public abstract class GenericTagCache {
 

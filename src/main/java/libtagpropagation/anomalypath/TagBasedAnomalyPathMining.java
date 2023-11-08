@@ -1,4 +1,4 @@
-package libtagpropagation.nodoze;
+package libtagpropagation.anomalypath;
 
 
 import provenancegraph.AssociatedEvent;
@@ -6,7 +6,7 @@ import provenancegraph.BasicNode;
 
 import java.util.UUID;
 
-import static libtagpropagation.nodoze.TagBasedAnomalyPathMiningOnFlink.initTagRegularScoreThreshold;
+import static libtagpropagation.anomalypath.TagBasedAnomalyPathMiningOnFlink.initTagRegularScoreThreshold;
 
 public interface TagBasedAnomalyPathMining extends GenericTagPropagation <BasicNode, AssociatedEvent, AnomalyScoreTagCache, AnomalyScoreTagCache> {
     
