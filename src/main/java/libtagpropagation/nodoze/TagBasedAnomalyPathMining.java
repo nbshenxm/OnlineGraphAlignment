@@ -24,7 +24,7 @@ public interface TagBasedAnomalyPathMining extends GenericTagPropagation <BasicN
 
         AssociatedEvent generalizedEvent = associatedEvent.copyGeneralize();
         double eventRegularScore = getEventRegularScore(generalizedEvent);
-
+//        eventRegularScore = eventRegularScore * 0.001;
         if (eventRegularScore <= initTagRegularScoreThreshold){
             AnomalyScoreTagCache newTag = new AnomalyScoreTagCache(associatedEvent, eventRegularScore);
             if (associatedEvent.sinkNodeTag == null || ((AnomalyScoreTagCache)associatedEvent.sinkNodeTag).shouldReplaceTag(newTag)) {

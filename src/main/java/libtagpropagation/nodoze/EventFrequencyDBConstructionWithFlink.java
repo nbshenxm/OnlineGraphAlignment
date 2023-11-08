@@ -16,23 +16,19 @@ import org.apache.flink.types.Row;
 import org.apache.flink.util.Collector;
 
 import provenancegraph.AssociatedEvent;
-import provenancegraph.BasicEdge;
 import provenancegraph.BasicNode;
-import provenancegraph.NodeProperties;
 import provenancegraph.datamodel.PDM;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
+import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 import java.util.*;
 
 import static provenancegraph.AssociatedEvent.generalizeTime;
-import static provenancegraph.datamodel.PDM.NetEvent.Direction.IN;
 import static provenancegraph.parser.PDMParser.*;
-import static provenancegraph.parser.PDMParser.networkToUuid;
+
 
 public class EventFrequencyDBConstructionWithFlink extends KeyedProcessFunction<PDM.HostUUID, PDM.Log, Row> {
-    public static Long dbDumpEventCount = 300000L;
+    public static Long dbDumpEventCount = 100L;
     private transient MapState<UUID, BasicNode> nodeInfoMap;
 
     private transient MapState<AssociatedEvent, HashSet<String>> exactlyMatchEventFrequencyMap;
@@ -108,55 +104,20 @@ public class EventFrequencyDBConstructionWithFlink extends KeyedProcessFunction<
                     this.lostEventCountValue.value(),
                     new Date(log.getEventData().getEHeader().getTs() / 1000000)));
 
-            //dumpEventFrequencyDBToFile(); //String.valueOf(processedEventCount / DB_DUMP_EVENT_COUNT)
+            dumpEventFrequencyDBToFile(); //String.valueOf(processedEventCount / DB_DUMP_EVENT_COUNT)
             System.out.println("Continuing ...");
         }
 
         processedEventCountValue.update(processedEventCount);
         System.out.println(processedEventCountValue.value());
 
-        // process entities.
-        if (log.getUHeader().getType() == PDM.LogType.EVENT
-                || log.getUHeader().getContent() == PDM.LogContent.NET_CONNECT) {
-            BasicNode node = initBasicSinkNode(log);
-            NodeProperties properties = initSinkNodeProperties(log);
-            if (node == null || properties == null) {
-                lostEventCountValue.update(lostEventCountValue.value() + 1);
-                return;
-            }
-            node.setProperties(properties);
-            nodeInfoMap.put(node.getNodeId(), node);
-        }
-
         // process events.
         if (log.getUHeader().getType() == PDM.LogType.EVENT)
         {
-
             if (log.hasEventData())
             {
-                //
-//                BasicEdge edge = UDMTools.initBasicEdge(log);
-                BasicEdge edge = initBasicEdge(log);
-                if (edge == null) {
-//                    lostEventCountValue.update(lostEventCountValue.value() + 1);
-                    return;
-                }
-
-                // judge if event lost
-                if (!(nodeInfoMap.contains(edge.sourceNodeId) && nodeInfoMap.contains(edge.sinkNodeId))) {
-                    lostEventCountValue.update(lostEventCountValue.value() + 1);
-                    return;
-                }
-
-                // generate associatedevent
-                NodeProperties sourceNodeProperties = nodeInfoMap.get(edge.sourceNodeId).getProperties();
-                NodeProperties sinkNodeProperties = nodeInfoMap.get(edge.sinkNodeId).getProperties();
-                String eventType = edge.edgeType;
-
-                Long timeStamp = edge.timeStamp;
-                AssociatedEvent associatedEvent = new AssociatedEvent(sourceNodeProperties, sinkNodeProperties, eventType, timeStamp);
-                String item = log.getUHeader().getClientID().toString() + generalizeTime(timeStamp);
-
+                AssociatedEvent associatedEvent = initAssociatedEvent(log);
+                String item = log.getUHeader().getClientID().toString() + generalizeTime(log.getEventData().getEHeader().getTs());
 
                 // add item of event
                 AssociatedEvent eEvent = associatedEvent.copyGeneralize();
@@ -164,7 +125,7 @@ public class EventFrequencyDBConstructionWithFlink extends KeyedProcessFunction<
                     exactlyMatchEventFrequencyMap.put(eEvent, new HashSet<>());
                 }
                 exactlyMatchEventFrequencyMap.get(eEvent).add(item);
-
+//                System.out.println(exactlyMatchEventFrequencyMap.get(eEvent));
                 AssociatedEvent srEvent = eEvent.ignoreSink();
                 if (!sourceRelationshipMatchEventFrequencyMap.contains(srEvent)) {
                     sourceRelationshipMatchEventFrequencyMap.put(srEvent, new HashSet<>());
@@ -175,13 +136,6 @@ public class EventFrequencyDBConstructionWithFlink extends KeyedProcessFunction<
 
     }
 
-    public static String serializeObjectToString(Object input) throws IOException {
-        ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
-        ObjectOutputStream objectOut = new ObjectOutputStream(byteOut);
-        objectOut.writeObject(input);
-        String output = byteOut.toString("ISO-8859-1");
-        return output;
-    }
 
     public Map covertMapStateToMap(MapState<AssociatedEvent, HashSet<String>> mapState) throws Exception {
         HashMap map = new HashMap<>();
@@ -193,31 +147,17 @@ public class EventFrequencyDBConstructionWithFlink extends KeyedProcessFunction<
         return map;
     }
 
-    public Tuple2<String, String> dumpEventFrequencyDBToStrings() throws Exception {
-        Tuple2<String, String> output = new Tuple2<>(
-                serializeObjectToString(covertMapStateToMap(exactlyMatchEventFrequencyMap)),
-                serializeObjectToString(covertMapStateToMap(sourceRelationshipMatchEventFrequencyMap)));
-        return output;
-    }
     public void dumpEventFrequencyDBToFile() throws Exception {
-        Tuple2<String, String> dbStrings = dumpEventFrequencyDBToStrings();
-
-//        IOHandler eMapHandler;
-//        IOHandler srMapHandler;
-//
-//        if (isLocalTask){
-//            eMapHandler = new FsHandler(fsPath + eMapFileName, false);
-//            srMapHandler = new FsHandler(fsPath + srMapFileName, false);
-//        }
-//        else {
-//            eMapHandler = new HadoopHdfsHandler(hdfsServerUri, hdfsPath + eMapFileName, false, false);
-//            srMapHandler = new HadoopHdfsHandler(hdfsServerUri, hdfsPath + srMapFileName, false, false);
-//        }
-//        eMapHandler.writeString(dbStrings.f0);
-//        srMapHandler.writeString(dbStrings.f1);
+//        Tuple2<String, String> dbStrings = dumpEventFrequencyDBToStrings();
+        Tuple2<Map, Map> output = new Tuple2<>(
+                covertMapStateToMap(exactlyMatchEventFrequencyMap),
+                covertMapStateToMap(sourceRelationshipMatchEventFrequencyMap));
+        System.out.println("exactlyMatchEventFrequencyMap : " + output.f0.size());
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("SystemLog\\EventFrequencyDB.out"));
+        objectOutputStream.writeObject(output);
+        objectOutputStream.flush();
     }
 
-    // ? uuid
     public static PDM.HostUUID getHostType(PDM.HostUUID uuid) {
         return PDM.HostUUID.newBuilder().build();
     }

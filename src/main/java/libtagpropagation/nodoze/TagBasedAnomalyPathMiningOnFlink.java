@@ -6,22 +6,21 @@ import libtagpropagation.alert.MergedAlertGraph;
 import org.apache.flink.api.common.functions.FlatMapFunction;
 import org.apache.flink.api.common.state.*;
 import org.apache.flink.api.common.time.Time;
+import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.functions.KeyedProcessFunction;
 import org.apache.flink.util.Collector;
 import provenancegraph.AssociatedEvent;
-import provenancegraph.BasicEdge;
 import provenancegraph.BasicNode;
 import provenancegraph.NodeProperties;
 import provenancegraph.datamodel.PDM;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
-import static provenancegraph.datamodel.PDM.NetEvent.Direction.IN;
 import static provenancegraph.parser.PDMParser.*;
-import static provenancegraph.parser.PDMParser.processUuidToUuid;
+
 
 
 public class TagBasedAnomalyPathMiningOnFlink extends KeyedProcessFunction<PDM.HostUUID, PDM.Log, String> implements TagBasedAnomalyPathMining {
@@ -107,7 +106,7 @@ public class TagBasedAnomalyPathMiningOnFlink extends KeyedProcessFunction<PDM.H
 
     public static DataStream AnomalyPathMiningHandler(DataStream<PDM.LogPack> ds) throws Exception {
         TagBasedAnomalyPathMiningOnFlink detector = new TagBasedAnomalyPathMiningOnFlink();
-
+        calculateRegularScore();
         DataStream<String> dsStringOutput =  ds
                 .flatMap(new FlatMapFunction<PDM.LogPack, PDM.Log>() {
                     public void flatMap(PDM.LogPack logPack, Collector<PDM.Log> collector) throws Exception {
@@ -137,26 +136,13 @@ public class TagBasedAnomalyPathMiningOnFlink extends KeyedProcessFunction<PDM.H
 
         if (hostUuid == null) initProcessing(log);
 
-        // entity
-        if (log.getUHeader().getType() == PDM.LogType.EVENT
-                || log.getUHeader().getContent() == PDM.LogContent.NET_CONNECT) {
-            BasicNode source = initBasicSourceNode(log);
-            source.setProperties(initSourceNodeProperties(log));
-            nodeInfoMap.put(source.getNodeId(), source);
-//            if (properties instanceof ClientProperties){
-//                String ip = ((ClientProperties) properties).getHostIp();
-//                if (ip != null) hostIp.update(ip);
-//                return;
-//            }
-        }
-
         if (log.getUHeader().getType() == PDM.LogType.EVENT) {
             if (log.hasEventData()) {
                 Long processedEventCount = processedEventCountValue.value() + 1;
                 processedEventCountValue.update(processedEventCount);
                 eventCount += 1;
-
-                if (eventCount % 1000000L == 0) {
+                System.out.println(eventCount);
+                if (eventCount % 100L == 0) {
                     System.out.println(lostEventCount + "/" + processedEventCount + " of Events lost!");
                     updateStatisticInfo(log.getEventData().getEHeader().getTs());
                     printRegularInformation();
@@ -164,13 +150,7 @@ public class TagBasedAnomalyPathMiningOnFlink extends KeyedProcessFunction<PDM.H
 
                 AnomalyScoreTagCache tag;
                 try {
-                    BasicEdge edge = initBasicEdge(log);
-
-                    if (edge == null) return;
-
-                    AssociatedEvent associatedEvent = initAssociatedEvent(edge);
-
-                    if (associatedEvent == null) return;
+                    AssociatedEvent associatedEvent = initAssociatedEvent(log);
 
                     if (isNodeTagCached(associatedEvent.sourceNode)) associatedEvent.sourceNodeTag = getTagCache(associatedEvent.sourceNode);
                     if (isNodeTagCached(associatedEvent.sinkNode)) associatedEvent.sinkNodeTag = getTagCache(associatedEvent.sinkNode);
@@ -238,12 +218,6 @@ public class TagBasedAnomalyPathMiningOnFlink extends KeyedProcessFunction<PDM.H
          }
     }
 
-    public static void setProperties(Properties properties) {
-        TagBasedAnomalyPathMiningOnFlink.initTagRegularScoreThreshold = Double.valueOf(properties.getProperty("AnomalyPathMining.INIT_TAG_REGULAR_SCORE_THRESHOLD", "0.1"));
-        TagBasedAnomalyPathMiningOnFlink.unseenEventScore = Double.valueOf(properties.getProperty("AnomalyPathMining.UNSEEN_EVENT_SCORE", "0.1"));
-        TagBasedAnomalyPathMiningOnFlink.seenEventMinimumScore = Double.valueOf(properties.getProperty("AnomalyPathMining.SEEN_EVENT_MINIMUM_SCORE", "0.3"));
-        TagBasedAnomalyPathMiningOnFlink.outputTarget = String.valueOf(properties.getProperty("Output.Target"));
-    }
 
     @Override
     public void setTagCache(BasicNode node, AnomalyScoreTagCache tagCache) throws Exception {
@@ -268,17 +242,6 @@ public class TagBasedAnomalyPathMiningOnFlink extends KeyedProcessFunction<PDM.H
     @Override
     public void removeTagCache(BasicNode node) throws Exception {
         tagsCacheMap.remove(node.getNodeId());
-    }
-
-    private AssociatedEvent initAssociatedEvent(BasicEdge edge) throws Exception {
-        BasicNode sourceNode = getNodeInfo(edge.sourceNodeId);
-        BasicNode sinkNode = getNodeInfo(edge.sinkNodeId);
-
-        if (sourceNode == null || sinkNode == null)
-            return null;
-
-        AssociatedEvent associatedEvent = new AssociatedEvent(sourceNode, sinkNode, edge.edgeType, edge.timeStamp);
-        return associatedEvent;
     }
 
     @Override
@@ -345,6 +308,23 @@ public class TagBasedAnomalyPathMiningOnFlink extends KeyedProcessFunction<PDM.H
         if (eventTime == 0L) return;
         if (hostEventStartTime.value() == 0L) hostEventStartTime.update(eventTime);
         hostEventLatestTime.update(eventTime);
+    }
+
+    static void calculateRegularScore() throws IOException, ClassNotFoundException {
+        ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("SystemLog\\EventFrequencyDB.out"));
+        Tuple2<Map, Map> dbstring = (Tuple2<Map, Map>) objectInputStream.readObject();
+        Map<AssociatedEvent, HashSet<String>> exactlyMatchEventFrequencyMap = dbstring.f0;
+        Map<AssociatedEvent, HashSet<String>> sourceRelationshipMatchEventFrequencyMap = dbstring.f1;
+        Map<AssociatedEvent, Double> map = new HashMap<>();
+        for (AssociatedEvent key : exactlyMatchEventFrequencyMap.keySet())
+        {
+            double fre_e = exactlyMatchEventFrequencyMap.get(key).size();
+            double fre_src_rel = sourceRelationshipMatchEventFrequencyMap.get(key.ignoreSink()).size();
+            double score = fre_e / fre_src_rel;
+            map.put(key, score);
+        }
+        System.out.println(map.size());
+        setEventRelativeFrequencyMap(map);
     }
 
 }
