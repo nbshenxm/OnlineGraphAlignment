@@ -1,7 +1,7 @@
 package provenancegraph;
 
 import com.google.gson.Gson;
-import libtagpropagation.nodoze.AnomalyScoreTagCache;
+import libtagpropagation.anomalypath.AnomalyScoreTagCache;
 
 import java.io.Serializable;
 import java.util.Objects;

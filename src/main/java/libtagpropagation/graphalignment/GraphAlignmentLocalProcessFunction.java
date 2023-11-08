@@ -1,7 +1,5 @@
-package libtagpropagation;
+package libtagpropagation.graphalignment;
 
-import com.tinkerpop.blueprints.Direction;
-import com.tinkerpop.blueprints.impls.tg.TinkerGraph;
 import org.apache.flink.api.common.state.*;
 import org.apache.flink.configuration.Configuration;
 import provenancegraph.*;
@@ -14,13 +12,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.UUID;
 import java.util.Map;
-import java.util.regex.Pattern;
 
 import com.tinkerpop.blueprints.Edge;
 import com.tinkerpop.blueprints.Vertex;
 
-import static libtagpropagation.TechniqueKnowledgeGraph.isEdgeAligned;
-import static libtagpropagation.TechniqueKnowledgeGraph.isVertexAligned;
+import static libtagpropagation.graphalignment.TechniqueKnowledgeGraph.isEdgeAligned;
+import static libtagpropagation.graphalignment.TechniqueKnowledgeGraph.isVertexAligned;
 
 
 public class GraphAlignmentLocalProcessFunction

@@ -1,4 +1,4 @@
-package libtagpropagation;
+package libtagpropagation.graphalignment;
 
 import com.tinkerpop.blueprints.Direction;
 import com.tinkerpop.blueprints.Edge;

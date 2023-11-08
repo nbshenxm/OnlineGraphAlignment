@@ -1,4 +1,4 @@
-package libtagpropagation;
+package libtagpropagation.graphalignment;
 
 import java.util.ArrayList;
 

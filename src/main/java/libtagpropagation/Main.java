@@ -23,9 +23,7 @@ import utils.KafkaPDMDeserializer;
 import java.util.Objects;
 
 
-import static libtagpropagation.nodoze.EventFrequencyDBConstructionWithFlink.EventFrequencyDBConstructionHandler;
-import static libtagpropagation.nodoze.TagBasedAnomalyPathMiningOnFlink.AnomalyPathMiningHandler;
-import static org.apache.flink.util.IterableUtils.flatMap;
+import static libtagpropagation.anomalypath.EventFrequencyDBConstructionWithFlink.EventFrequencyDBConstructionHandler;
 
 public class Main {
 

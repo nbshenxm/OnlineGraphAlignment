@@ -1,4 +1,4 @@
-package libtagpropagation;
+package libtagpropagation.graphalignment;
 
 import provenancegraph.BasicNode;
 
