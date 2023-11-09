@@ -21,8 +21,6 @@ import java.util.*;
 
 import static provenancegraph.parser.PDMParser.*;
 
-
-
 public class TagBasedAnomalyPathMiningOnFlink extends KeyedProcessFunction<PDM.HostUUID, PDM.Log, String> implements TagBasedAnomalyPathMining {
 
     public static Double initTagRegularScoreThreshold = 0.1;
@@ -142,7 +140,7 @@ public class TagBasedAnomalyPathMiningOnFlink extends KeyedProcessFunction<PDM.H
                 processedEventCountValue.update(processedEventCount);
                 eventCount += 1;
                 System.out.println(eventCount);
-                if (eventCount % 100L == 0) {
+                if (eventCount % 100000L == 0) {
                     System.out.println(lostEventCount + "/" + processedEventCount + " of Events lost!");
                     updateStatisticInfo(log.getEventData().getEHeader().getTs());
                     printRegularInformation();
@@ -323,7 +321,7 @@ public class TagBasedAnomalyPathMiningOnFlink extends KeyedProcessFunction<PDM.H
             double score = fre_e / fre_src_rel;
             map.put(key, score);
         }
-        System.out.println(map.size());
+
         setEventRelativeFrequencyMap(map);
     }
 

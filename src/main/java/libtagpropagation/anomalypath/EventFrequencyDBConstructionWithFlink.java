@@ -28,7 +28,7 @@ import static provenancegraph.parser.PDMParser.*;
 
 
 public class EventFrequencyDBConstructionWithFlink extends KeyedProcessFunction<PDM.HostUUID, PDM.Log, Row> {
-    public static Long dbDumpEventCount = 100L;
+    public static Long dbDumpEventCount = 300000L;
     private transient MapState<UUID, BasicNode> nodeInfoMap;
 
     private transient MapState<AssociatedEvent, HashSet<String>> exactlyMatchEventFrequencyMap;
@@ -109,7 +109,6 @@ public class EventFrequencyDBConstructionWithFlink extends KeyedProcessFunction<
         }
 
         processedEventCountValue.update(processedEventCount);
-        System.out.println(processedEventCountValue.value());
 
         // process events.
         if (log.getUHeader().getType() == PDM.LogType.EVENT)
@@ -125,7 +124,6 @@ public class EventFrequencyDBConstructionWithFlink extends KeyedProcessFunction<
                     exactlyMatchEventFrequencyMap.put(eEvent, new HashSet<>());
                 }
                 exactlyMatchEventFrequencyMap.get(eEvent).add(item);
-//                System.out.println(exactlyMatchEventFrequencyMap.get(eEvent));
                 AssociatedEvent srEvent = eEvent.ignoreSink();
                 if (!sourceRelationshipMatchEventFrequencyMap.contains(srEvent)) {
                     sourceRelationshipMatchEventFrequencyMap.put(srEvent, new HashSet<>());
@@ -135,7 +133,6 @@ public class EventFrequencyDBConstructionWithFlink extends KeyedProcessFunction<
         }
 
     }
-
 
     public Map covertMapStateToMap(MapState<AssociatedEvent, HashSet<String>> mapState) throws Exception {
         HashMap map = new HashMap<>();
