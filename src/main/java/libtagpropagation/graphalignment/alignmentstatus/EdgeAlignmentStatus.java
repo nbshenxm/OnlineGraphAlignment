@@ -1,4 +1,4 @@
-package libtagpropagation.graphalignment;
+package libtagpropagation.graphalignment.alignmentstatus;
 
 import provenancegraph.AssociatedEvent;
 
