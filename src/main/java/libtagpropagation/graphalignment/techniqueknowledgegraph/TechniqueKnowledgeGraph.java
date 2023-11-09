@@ -1,4 +1,4 @@
-package libtagpropagation.graphalignment;
+package libtagpropagation.graphalignment.techniqueknowledgegraph;
 
 import com.tinkerpop.blueprints.Direction;
 import com.tinkerpop.blueprints.Edge;
@@ -44,6 +44,9 @@ class TKGNode {
 public class TechniqueKnowledgeGraph {
     // https://github.com/tinkerpop/blueprints/wiki/GraphML-Reader-and-Writer-Library
     public TinkerGraph tinkerGraph;
+
+    public AlignmentSearchTree searchTree;
+
     public String techniqueName;
 
     private static final HashMap<String, String> KEY_PROPERTIES_MAP = new HashMap <String, String> (){{

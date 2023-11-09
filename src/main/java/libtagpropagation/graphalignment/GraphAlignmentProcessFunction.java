@@ -1,5 +1,6 @@
 package libtagpropagation.graphalignment;
 
+import libtagpropagation.graphalignment.techniqueknowledgegraph.TechniqueKnowledgeGraph;
 import org.apache.flink.api.common.state.*;
 import org.apache.flink.configuration.Configuration;
 import provenancegraph.*;
@@ -16,8 +17,8 @@ import java.util.Map;
 import com.tinkerpop.blueprints.Edge;
 import com.tinkerpop.blueprints.Vertex;
 
-import static libtagpropagation.graphalignment.TechniqueKnowledgeGraph.isEdgeAligned;
-import static libtagpropagation.graphalignment.TechniqueKnowledgeGraph.isVertexAligned;
+import static libtagpropagation.graphalignment.techniqueknowledgegraph.TechniqueKnowledgeGraph.isEdgeAligned;
+import static libtagpropagation.graphalignment.techniqueknowledgegraph.TechniqueKnowledgeGraph.isVertexAligned;
 
 
 public class GraphAlignmentProcessFunction

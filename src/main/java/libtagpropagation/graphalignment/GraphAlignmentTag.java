@@ -4,6 +4,10 @@ import com.tinkerpop.blueprints.Direction;
 import com.tinkerpop.blueprints.Edge;
 import com.tinkerpop.blueprints.Vertex;
 import javafx.util.Pair;
+import libtagpropagation.graphalignment.alignmentstatus.EdgeAlignmentStatus;
+import libtagpropagation.graphalignment.alignmentstatus.GraphAlignmentStatus;
+import libtagpropagation.graphalignment.alignmentstatus.NodeAlignmentStatus;
+import libtagpropagation.graphalignment.techniqueknowledgegraph.TechniqueKnowledgeGraph;
 import provenancegraph.*;
 
 import java.util.ArrayList;
@@ -15,10 +19,12 @@ public class GraphAlignmentTag {
     // TODO: discuss what information we need: 1) rules to search for candidate nodes/edges for further propagation;
     //                                          2) matched nodes/edge to calculate alignment score;
 
-    private TechniqueKnowledgeGraph tkg;
+    private TechniqueKnowledgeGraph tkg; // 用于匹配
+    private BasicNode lastAlignedNode; // 用于记录最近匹配到的节点，便于减少匹配数量，最好是一个树中节点的id
+    private GraphAlignmentStatus alignStatus; // 用于记录匹配状态，二次索引
+
     private static final float TECHNIQUE_ACCEPT_THRESHOLD = 0.66F;
     private float matchScore = 0F;
-    private float decayDegree = 1F;
 
     // ToDo: When to free the memory
     private int occupancyCount = 1;
