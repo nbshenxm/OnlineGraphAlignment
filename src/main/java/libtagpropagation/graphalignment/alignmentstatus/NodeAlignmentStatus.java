@@ -5,40 +5,28 @@ import provenancegraph.BasicNode;
 import java.util.regex.Pattern;
 
 public class NodeAlignmentStatus {
-    private final String type;
-    private final String kpKGNodeRegex;
-    private String kpPGNodeString;
-    private boolean matched;
-    private float matchedScore;
+    private String knowledgeGraphNodeRegex;
 
-    public NodeAlignmentStatus(String type, String kpKGNodeRegex) {
+    private String type;
+    private String alignedString;
+    private float alignmentScore;
+
+    public NodeAlignmentStatus(String knowledgeGraphNodeRegex, String type, String alignedString) {
         this.type = type;
-        this.kpKGNodeRegex = kpKGNodeRegex;
-        this.kpPGNodeString = "";
-        this.matched = false;
-        this.matchedScore = 0.0F;
+        this.alignedString = alignedString;
+        this.knowledgeGraphNodeRegex = knowledgeGraphNodeRegex;
     }
 
-    public void align(BasicNode node) {
-        if (isAligned(node)) {
-            matched = true;
-            matchedScore = 1F;
-            kpPGNodeString = node.getNodeName();
-        }
+    public float getAlignmentScore() {
+        return alignmentScore;
     }
 
-    public boolean isAligned(BasicNode node) {
-        if (this.type.equals(node.getNodeType())) { // ToDo: check these two kind of node type
-            return Pattern.matches(this.kpKGNodeRegex, node.getNodeName());
-        }
-        return false;
+    public boolean isABetterAlign(NodeAlignmentStatus anotherStatus) {
+        return this.getAlignmentScore() > anotherStatus.getAlignmentScore();
     }
 
-    public float getMatchedScore() {
-        return matchedScore;
-    }
-
-    public boolean isMatched() {
-        return matched;
+    @Override
+    public String toString() {
+        return String.format("[{}, {}]", this.alignedString, this.alignmentScore);
     }
 }

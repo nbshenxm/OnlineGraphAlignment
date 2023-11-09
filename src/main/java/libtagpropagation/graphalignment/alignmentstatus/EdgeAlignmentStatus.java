@@ -2,30 +2,25 @@ package libtagpropagation.graphalignment.alignmentstatus;
 
 import provenancegraph.AssociatedEvent;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 public class EdgeAlignmentStatus {
     private final String type;
-    private UUID sourceNodeId;
-    private UUID sinkNodeId;
 
-    // private string edgeType;
-
-    private boolean matched;
-    private float matchedScore;
+    private float alignmentScore;
     private int distance;
+    private ArrayList<AssociatedEvent> alignedPath;
 
     public EdgeAlignmentStatus(String type) {
         this.type = type;
-        this.matched = false;
-        this.matchedScore = 0.0F;
+        this.alignmentScore = 0.0F;
         this.distance = 0;
     }
 
     public void align(AssociatedEvent event) {
         if (isAligned(event)) {
-            matched = true;
-            matchedScore = 1F;
+            alignmentScore = 1F;
         }
     }
 
@@ -33,13 +28,14 @@ public class EdgeAlignmentStatus {
         return this.type.equals(event.getRelationship());
     }
 
-    public float getMatchedScore() {
-        return matchedScore;
+    public float getAlignmentScore() {
+        return alignmentScore;
     }
 
-    public boolean isMatched() {
-        return matched;
+    public boolean isABetterAlign(EdgeAlignmentStatus anotherStatus) {
+        return this.getAlignmentScore() > anotherStatus.getAlignmentScore();
     }
+
 
     public void incDist() {
         distance++;
