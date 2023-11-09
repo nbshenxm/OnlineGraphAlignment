@@ -20,7 +20,7 @@ import static libtagpropagation.graphalignment.TechniqueKnowledgeGraph.isEdgeAli
 import static libtagpropagation.graphalignment.TechniqueKnowledgeGraph.isVertexAligned;
 
 
-public class GraphAlignmentLocalProcessFunction
+public class GraphAlignmentProcessFunction
         extends KeyedProcessFunction<UUID, AssociatedEvent, String>{
 
     private static String knowledgeGraphPath = "TechniqueKnowledgeGraph/ManualCrafted";
