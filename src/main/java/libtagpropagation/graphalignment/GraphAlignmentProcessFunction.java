@@ -26,7 +26,7 @@ public class GraphAlignmentProcessFunction
 
     private static String knowledgeGraphPath = "TechniqueKnowledgeGraph/ManualCrafted";
     private transient ValueState<Boolean> isInitialized;
-    private transient MapState<UUID, GraphAlignmentTagList> tagsCacheMap;
+    private transient MapState<UUID, GraphAlignmentMultiTag> tagsCacheMap;
     private transient MapState<UUID, BasicNode> nodeInfoMap;
     private transient ListState<TechniqueKnowledgeGraph> tkgList;
     private transient ListState<Vertex> seedNodeList;
@@ -41,8 +41,8 @@ public class GraphAlignmentProcessFunction
                 new ValueStateDescriptor<>("isInitialized", Boolean.class, false);
         this.isInitialized = getRuntimeContext().getState(isInitializedDescriptor);
 
-        MapStateDescriptor<UUID, GraphAlignmentTagList> tagCacheStateDescriptor =
-                new MapStateDescriptor<>("tagsCacheMap", UUID.class, GraphAlignmentTagList.class);
+        MapStateDescriptor<UUID, GraphAlignmentMultiTag> tagCacheStateDescriptor =
+                new MapStateDescriptor<>("tagsCacheMap", UUID.class, GraphAlignmentMultiTag.class);
         tagsCacheMap = getRuntimeContext().getMapState(tagCacheStateDescriptor);
 
         MapStateDescriptor<UUID, BasicNode> nodeInfoStateDescriptor =
@@ -157,13 +157,13 @@ public class GraphAlignmentProcessFunction
     }
 
     private void propGraphAlignmentTag(AssociatedEvent associatedEvent) throws Exception {
-        GraphAlignmentTagList srcTagList = tagsCacheMap.get(associatedEvent.sourceNodeId);
-        GraphAlignmentTagList destTagList = tagsCacheMap.get(associatedEvent.sinkNodeId);
+        GraphAlignmentMultiTag srcTagList = tagsCacheMap.get(associatedEvent.sourceNodeId);
+        GraphAlignmentMultiTag destTagList = tagsCacheMap.get(associatedEvent.sinkNodeId);
         // iterate through tagsCacheMap to check if any existing tags can be propagated
-        Iterable<Map.Entry<UUID, GraphAlignmentTagList>> entries = tagsCacheMap.entries();
-        for (Map.Entry<UUID, GraphAlignmentTagList> entry : entries) {
+        Iterable<Map.Entry<UUID, GraphAlignmentMultiTag>> entries = tagsCacheMap.entries();
+        for (Map.Entry<UUID, GraphAlignmentMultiTag> entry : entries) {
             UUID nodeUUID = entry.getKey();
-            GraphAlignmentTagList graphAlignmentTagList = entry.getValue();
+            GraphAlignmentMultiTag graphAlignmentTagList = entry.getValue();
             // if there is a match in GraphAlignmentTag with current associatedEvent, prop the tag
             ArrayList<GraphAlignmentTag> tagList = graphAlignmentTagList.getTagList();
             for (GraphAlignmentTag tag: tagList) {
@@ -191,7 +191,7 @@ public class GraphAlignmentProcessFunction
 
     private void addTagToCache(GraphAlignmentTag tag, UUID nodeId) throws Exception {
         if (!this.tagsCacheMap.contains(nodeId)){
-            GraphAlignmentTagList tagList = new GraphAlignmentTagList();
+            GraphAlignmentMultiTag tagList = new GraphAlignmentMultiTag();
             this.tagsCacheMap.put(nodeId, tagList);
         }
         this.tagsCacheMap.get(nodeId).addTag(tag);

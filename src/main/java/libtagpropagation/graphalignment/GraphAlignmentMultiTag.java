@@ -2,9 +2,9 @@ package libtagpropagation.graphalignment;
 
 import java.util.ArrayList;
 
-public class GraphAlignmentTagList {
+public class GraphAlignmentMultiTag {
     private ArrayList<GraphAlignmentTag> tagList;
-    public GraphAlignmentTagList() {
+    public GraphAlignmentMultiTag() {
         tagList = new ArrayList<>();
     }
 
