@@ -1,6 +1,8 @@
 package libtagpropagation.graphalignment.techniqueknowledgegraph;
 
+import libtagpropagation.graphalignment.alignmentstatus.NodeAlignmentStatus;
 import org.apache.flink.api.java.tuple.Tuple2;
+import provenancegraph.BasicNode;
 
 public class AlignmentSearchTree {
     // 用于加速 TechniqueKnowledgeGraph 的搜索速度
@@ -11,5 +13,7 @@ public class AlignmentSearchTree {
 
     }
 
+    public Tuple2<Integer, NodeAlignmentStatus> nodeAlignmentSearch(int lastAlignedNodeIndex, BasicNode currentNode) {
 
+    }
 }

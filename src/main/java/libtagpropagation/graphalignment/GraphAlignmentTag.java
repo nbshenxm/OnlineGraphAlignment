@@ -13,17 +13,25 @@ import provenancegraph.*;
 
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.UUID;
 
 public class GraphAlignmentTag {
 
     // TODO: discuss what information we need: 1) rules to search for candidate nodes/edges for further propagation;
     //                                          2) matched nodes/edge to calculate alignment score;
 
+    public UUID tagUuid;
+
     private TechniqueKnowledgeGraph tkg; // 用于匹配
     private AlignmentSearchTree searchTree;
+    private int lastAlignedNodeIndex;
     private BasicNode lastAlignedNode; // 用于记录最近匹配到的节点，便于减少匹配数量，最好是一个树中节点的id
+
+    private int cachedPathLength;
     private ArrayList<AssociatedEvent> cachedPath; // 记录最新匹配到的节点后的传播路径
+    
     private GraphAlignmentStatus alignStatus; // 用于记录匹配状态，二次索引
+
     private static final float TECHNIQUE_ACCEPT_THRESHOLD = 0.66F;
     private float matchScore = 0F;
 
@@ -32,6 +40,8 @@ public class GraphAlignmentTag {
 
 
     public GraphAlignmentTag(TechniqueKnowledgeGraph tkg) {
+        this.tagUuid = UUID.randomUUID();
+
         this.tkg = tkg;
         this.searchTree = new AlignmentSearchTree(tkg);
         this.alignStatus = new GraphAlignmentStatus(tkg);
@@ -71,11 +81,6 @@ public class GraphAlignmentTag {
         float newMatchScore = 0.0F;
         return newMatchScore;
     }
-
-    // Expending the search
-//    public void expandSearch(BasicNode node) {
-//
-//    }
 
     public String getNodeId(BasicNode node) {
         for (Map.Entry<String, NodeAlignmentStatus> entryIter : nodeMatchMap.entrySet()) {
