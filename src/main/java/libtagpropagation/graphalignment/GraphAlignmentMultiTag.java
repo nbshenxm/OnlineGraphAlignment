@@ -1,19 +1,17 @@
 package libtagpropagation.graphalignment;
 
+import libtagpropagation.graphalignment.techniqueknowledgegraph.TechniqueKnowledgeGraph;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class GraphAlignmentMultiTag {
     private ArrayList<GraphAlignmentTag> tagList;
-    public GraphAlignmentMultiTag() {
-        tagList = new ArrayList<>();
+    public GraphAlignmentMultiTag(List<TechniqueKnowledgeGraph> tkgList) {
+        // ToDo
     }
 
-    public void addTag(GraphAlignmentTag tag) {
-        tagList.add(tag);
-    }
+    public GraphAlignmentMultiTag mergeMultiTag(GraphAlignmentMultiTag newMultiTag) {
 
-    public ArrayList<GraphAlignmentTag> getTagList() {
-        return tagList;
     }
-
 }
