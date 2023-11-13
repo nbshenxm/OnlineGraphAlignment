@@ -66,6 +66,7 @@ public class GraphAlignmentTag {
 
     public void propagate(AssociatedEvent event) {
         // alignNode()
+
     }
 
     public boolean sameAs(GraphAlignmentTag anotherAlignmentTag) {

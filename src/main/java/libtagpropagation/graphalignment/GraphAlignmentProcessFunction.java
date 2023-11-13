@@ -55,8 +55,8 @@ public class GraphAlignmentProcessFunction
             this.isInitialized.update(true);
         }
         try {
+            tryInitGraphAlignmentTag(associatedEvent); // 先将标签初始化到SourceNode上，再考虑是不是需要传播
             propGraphAlignmentTag(associatedEvent);
-            tryInitGraphAlignmentTag(associatedEvent);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -84,14 +84,14 @@ public class GraphAlignmentProcessFunction
 
     private GraphAlignmentMultiTag tryInitGraphAlignmentTag(AssociatedEvent associatedEvent) throws Exception {
         List<TechniqueKnowledgeGraph> initTkgList = new ArrayList<>();
-        initTkgList.addAll(this.seedSearching.value().search(associatedEvent.sinkNode)); // ToDo：初始话的标签应该放在sourcceNode还是SinkNode还是都放
+        initTkgList.addAll(this.seedSearching.value().search(associatedEvent.sourceNode));
         initTkgList.addAll(this.seedSearching.value().search(associatedEvent));
 
         if (initTkgList.isEmpty()) return null;
         else {
             GraphAlignmentMultiTag multiTag = new GraphAlignmentMultiTag(initTkgList);
-            if (this.tagsCacheMap.contains(associatedEvent.sinkNodeId)) {
-                this.tagsCacheMap.get(associatedEvent.sinkNodeId).mergeMultiTag(multiTag);
+            if (this.tagsCacheMap.contains(associatedEvent.sourceNodeId)) {
+                this.tagsCacheMap.get(associatedEvent.sourceNodeId).mergeMultiTag(multiTag);
             }
             else{
                 CacheMultiTag(associatedEvent.sourceNodeId, multiTag);
@@ -100,7 +100,9 @@ public class GraphAlignmentProcessFunction
         }
     }
 
-    private void propGraphAlignmentTag(AssociatedEvent associatedEvent) throws Exception {
+    private GraphAlignmentMultiTag propGraphAlignmentTag(AssociatedEvent associatedEvent) throws Exception {
+        if ()
+
         GraphAlignmentMultiTag srcTagList = tagsCacheMap.get(associatedEvent.sourceNodeId);
         GraphAlignmentMultiTag destTagList = tagsCacheMap.get(associatedEvent.sinkNodeId);
         // iterate through tagsCacheMap to check if any existing tags can be propagated
