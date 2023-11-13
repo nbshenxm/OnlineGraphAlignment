@@ -32,29 +32,32 @@ public class GraphAlignmentStatus {
         Arrays.fill(edgeAlignmentStatusList, null);
     }
 
-    public String tryUpdateNode(int index, NodeAlignmentStatus newStatus) {
+    public NodeAlignmentStatus tryUpdateNode(int index, NodeAlignmentStatus newStatus) {
         if (index >= nodeCount) throw new RuntimeException("This node seems not in the TKG.");
 
+        // 考虑节点匹配状态
         if (nodeAlignmentStatusList[index] == null || newStatus.isABetterAlign(nodeAlignmentStatusList[index])) {
             nodeAlignmentStatusList[index] = newStatus;
             // ToDo: Update alignment score
-            return "Updated.";
+            return newStatus;
         }
 
-        return "Not accepted.";
+        // ToDo：考虑边的匹配状态
+
+        return null;
     }
 
-    public String tryUpdateEdge(int index, EdgeAlignmentStatus newStatus) {
-        if (index >= edgeCount) throw new RuntimeException("This edge seems not in the TKG.");
-
-        if (edgeAlignmentStatusList[index] == null || newStatus.isABetterAlign(edgeAlignmentStatusList[index])) {
-            edgeAlignmentStatusList[index] = newStatus;
-            // ToDo: Update alignment score
-            return "Updated.";
-        }
-
-        return "Not accepted.";
-    }
+//    public String tryUpdateEdge(int index, EdgeAlignmentStatus newStatus) {
+//        if (index >= edgeCount) throw new RuntimeException("This edge seems not in the TKG.");
+//
+//        if (edgeAlignmentStatusList[index] == null || newStatus.isABetterAlign(edgeAlignmentStatusList[index])) {
+//            edgeAlignmentStatusList[index] = newStatus;
+//            // ToDo: Update alignment score
+//            return "Updated.";
+//        }
+//
+//        return "Not accepted.";
+//    }
 
     public Float getAlignmentScore() {
         // ToDo: 设计对齐分数的计算过程，目标是能够及时的更新
