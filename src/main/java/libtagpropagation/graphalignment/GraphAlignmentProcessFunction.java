@@ -84,13 +84,18 @@ public class GraphAlignmentProcessFunction
 
     private GraphAlignmentMultiTag tryInitGraphAlignmentTag(AssociatedEvent associatedEvent) throws Exception {
         List<TechniqueKnowledgeGraph> initTkgList = new ArrayList<>();
-        initTkgList.addAll(this.seedSearching.value().search(associatedEvent.sourceNode));
+        initTkgList.addAll(this.seedSearching.value().search(associatedEvent.sinkNode)); // ToDo：初始话的标签应该放在sourcceNode还是SinkNode还是都放
         initTkgList.addAll(this.seedSearching.value().search(associatedEvent));
 
         if (initTkgList.isEmpty()) return null;
         else {
             GraphAlignmentMultiTag multiTag = new GraphAlignmentMultiTag(initTkgList);
-            CacheMultiTag(associatedEvent.sourceNodeId, multiTag);
+            if (this.tagsCacheMap.contains(associatedEvent.sinkNodeId)) {
+                this.tagsCacheMap.get(associatedEvent.sinkNodeId).mergeMultiTag(multiTag);
+            }
+            else{
+                CacheMultiTag(associatedEvent.sourceNodeId, multiTag);
+            }
             return multiTag;
         }
     }

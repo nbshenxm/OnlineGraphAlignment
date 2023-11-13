@@ -4,11 +4,21 @@ import libtagpropagation.graphalignment.techniqueknowledgegraph.TechniqueKnowled
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class GraphAlignmentMultiTag {
-    private ArrayList<GraphAlignmentTag> tagList;
+    private Map<String, GraphAlignmentTag> tagMap;
+
     public GraphAlignmentMultiTag(List<TechniqueKnowledgeGraph> tkgList) {
         // ToDo
+    }
+
+    public GraphAlignmentMultiTag mergeMultiTag(List<TechniqueKnowledgeGraph> tkgList) {
+        for (TechniqueKnowledgeGraph tkg : tkgList) {
+            if (tagMap.containsKey(tkg.techniqueName)) {
+
+            }
+        }
     }
 
     public GraphAlignmentMultiTag mergeMultiTag(GraphAlignmentMultiTag newMultiTag) {

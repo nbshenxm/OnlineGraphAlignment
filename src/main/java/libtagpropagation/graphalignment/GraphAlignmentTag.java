@@ -9,8 +9,10 @@ import libtagpropagation.graphalignment.alignmentstatus.GraphAlignmentStatus;
 import libtagpropagation.graphalignment.alignmentstatus.NodeAlignmentStatus;
 import libtagpropagation.graphalignment.techniqueknowledgegraph.AlignmentSearchTree;
 import libtagpropagation.graphalignment.techniqueknowledgegraph.TechniqueKnowledgeGraph;
+import org.apache.flink.api.java.tuple.Tuple2;
 import provenancegraph.*;
 
+import javax.xml.soap.Node;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.UUID;
@@ -47,13 +49,23 @@ public class GraphAlignmentTag {
         this.alignStatus = new GraphAlignmentStatus(tkg);
     }
 
-    private void alignNode(Vertex v, BasicNode node) {
+    private NodeAlignmentStatus alignNode(BasicNode node) {
         // 需要取调用 AlignmentSearchTree
-        // 返回值存入 GraphAlignmentStatus
+        Tuple2<Integer, NodeAlignmentStatus> alignStatusTuple = this.searchTree.nodeAlignmentSearch(this.lastAlignedNodeIndex, node);
+        if (alignStatusTuple == null) return null;
+        else {
+            if (this.alignStatus.tryUpdateNode(alignStatusTuple.f0, alignStatusTuple.f1) == null) return null; // 和当前已有的匹配情况比较
+            else {
+                this.lastAlignedNode = node;
+                this.lastAlignedNodeIndex = alignStatusTuple.f0;
+                // 返回值存入 GraphAlignmentStatus
+                return alignStatusTuple.f1;
+            }
+        }
     }
 
     public void propagate(AssociatedEvent event) {
-
+        // alignNode()
     }
 
     public boolean sameAs(GraphAlignmentTag anotherAlignmentTag) {
