@@ -41,22 +41,26 @@ public class TechniqueKnowledgeGraphSeedSearching {
 
     public List<TechniqueKnowledgeGraph> search(BasicNode candidateNode) {
         // 缓存查询过的节点
-        if (searchedNodeCache.containsKey(candidateNode.getNodeId())) {
-            return searchedNodeCache.get(candidateNode.getNodeId());
+        if (this.searchedNodeCache.containsKey(candidateNode.getNodeId())) {
+            return this.searchedNodeCache.get(candidateNode.getNodeId());
         }
 
         else {
             ArrayList<TechniqueKnowledgeGraph> techniqueKnowledgeGraphs = new ArrayList<>();
             for (Map.Entry entry : seedNodeSearchMap.entrySet()) {
-                if (isVertexAligned((Vertex) entry.getKey(), candidateNode, candidateNode.getProperties())) {
+                if (isVertexAligned((Vertex) entry.getKey(), candidateNode, candidateNode.getProperties())) { // ToDo：不要用全局的函数，改到SeedNode和SeedEdge类里
                     techniqueKnowledgeGraphs.add((TechniqueKnowledgeGraph) entry.getValue());
                 }
             }
+
+            this.searchedNodeCache.put(candidateNode.getNodeId(), techniqueKnowledgeGraphs);
             return techniqueKnowledgeGraphs;
         }
     }
 
     public List<TechniqueKnowledgeGraph> search(AssociatedEvent candidateEdge) {
+        // ToDo：加上缓存
+
         ArrayList<TechniqueKnowledgeGraph> techniqueKnowledgeGraphs = new ArrayList<>();
         for (Map.Entry entry : seedEdgeSearchMap.entrySet()){
             if(isEdgeAligned((Edge) entry.getKey(), candidateEdge)){

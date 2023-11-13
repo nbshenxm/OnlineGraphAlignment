@@ -32,7 +32,7 @@ public class Main {
         DataStream<AssociatedEvent> event_stream;
 
         if (Objects.equals(args[0], "online")){
-            String kafkaBroker = "192.168.10.102:9092";
+            String kafkaBroker = "10.214.242.214:9092";
             String kafkaTopic = "topic-HipsToMrd";
             String kafkaGroupId = "mergeAlert";
 
