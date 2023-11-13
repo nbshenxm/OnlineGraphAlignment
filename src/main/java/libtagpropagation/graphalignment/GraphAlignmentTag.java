@@ -102,4 +102,8 @@ public class GraphAlignmentTag {
         }
         return null;
     }
+
+    public int getLastAlignedNodeIndex() {
+        return lastAlignedNodeIndex;
+    }
 }
