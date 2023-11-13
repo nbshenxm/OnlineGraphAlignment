@@ -1,6 +1,5 @@
 package libtagpropagation.graphalignment;
 
-import com.google.protobuf.DoubleArrayList;
 import libtagpropagation.graphalignment.techniqueknowledgegraph.TechniqueKnowledgeGraph;
 import libtagpropagation.graphalignment.techniqueknowledgegraph.TechniqueKnowledgeGraphSeedSearching;
 import org.apache.flink.api.common.state.*;
@@ -12,10 +11,7 @@ import org.apache.flink.util.Collector;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-import java.util.Map;
+import java.util.*;
 
 
 public class GraphAlignmentProcessFunction
@@ -23,7 +19,7 @@ public class GraphAlignmentProcessFunction
 
     private static final String knowledgeGraphPath = "TechniqueKnowledgeGraph/ManualCrafted";
     private transient ListState<TechniqueKnowledgeGraph> tkgList;
-    private transient ValueState<TechniqueKnowledgeGraphSeedSearching> seedSearching;
+    private transient ValueState<TechniqueKnowledgeGraphSeedSearching> seedSearching; // ToDo：和直接存变量有什么区别？
 
     private transient ValueState<Boolean> isInitialized;
     private transient MapState<UUID, GraphAlignmentMultiTag> tagsCacheMap;
@@ -57,7 +53,7 @@ public class GraphAlignmentProcessFunction
         }
         try {
             tryInitGraphAlignmentTag(associatedEvent); // 先将标签初始化到SourceNode上，再考虑是不是需要传播
-            propGraphAlignmentTag(associatedEvent);
+            propagateGraphAlignmentTag(associatedEvent);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -84,61 +80,29 @@ public class GraphAlignmentProcessFunction
     }
 
     private GraphAlignmentMultiTag tryInitGraphAlignmentTag(AssociatedEvent associatedEvent) throws Exception {
-        List<TechniqueKnowledgeGraph> initTkgList = new ArrayList<>();
+        Set<TechniqueKnowledgeGraph> initTkgList = new HashSet<>();
+
         initTkgList.addAll(this.seedSearching.value().search(associatedEvent.sourceNode));
-        initTkgList.addAll(this.seedSearching.value().search(associatedEvent));
+        initTkgList.addAll(this.seedSearching.value().search(associatedEvent)); // 即匹配事件又匹配节点是为了减少标签初始化的量 ToDo：事件匹配时，标签是否应该放到两个节点上
 
         if (initTkgList.isEmpty()) return null;
         else {
             GraphAlignmentMultiTag multiTag = new GraphAlignmentMultiTag(initTkgList);
             if (this.tagsCacheMap.contains(associatedEvent.sourceNodeId)) {
-                this.tagsCacheMap.get(associatedEvent.sourceNodeId).mergeMultiTag(multiTag);
+                this.tagsCacheMap.get(associatedEvent.sourceNodeId).mergeMultiTag(multiTag); // ToDo：直接用tkgList合并是否会更快
             }
             else{
-                CacheMultiTag(associatedEvent.sourceNodeId, multiTag);
+                this.tagsCacheMap.put(associatedEvent.sourceNodeId, multiTag);
             }
+
             return multiTag;
         }
     }
 
-    private GraphAlignmentMultiTag propGraphAlignmentTag(AssociatedEvent associatedEvent) throws Exception {
+    private GraphAlignmentMultiTag propagateGraphAlignmentTag(AssociatedEvent associatedEvent) throws Exception {
         if ()
 
-        GraphAlignmentMultiTag srcTagList = tagsCacheMap.get(associatedEvent.sourceNodeId);
-        GraphAlignmentMultiTag destTagList = tagsCacheMap.get(associatedEvent.sinkNodeId);
-        // iterate through tagsCacheMap to check if any existing tags can be propagated
-        Iterable<Map.Entry<UUID, GraphAlignmentMultiTag>> entries = tagsCacheMap.entries();
-        for (Map.Entry<UUID, GraphAlignmentMultiTag> entry : entries) {
-            UUID nodeUUID = entry.getKey();
-            GraphAlignmentMultiTag graphAlignmentTagList = entry.getValue();
-            // if there is a match in GraphAlignmentTag with current associatedEvent, prop the tag
-            ArrayList<GraphAlignmentTag> tagList = graphAlignmentTagList.getTagList();
-            for (GraphAlignmentTag tag: tagList) {
-                // tag align
-                tag.propagate(associatedEvent);
 
-                // tag merge
-                for (GraphAlignmentTag anotherTag : srcTagList.getTagList()) {
-                    if (tag.sameAs(anotherTag)) {
-                        tag.mergeStatus(tag);
-                        anotherTag.mergeStatus(tag);
-                    }
-                }
-
-                // score update
-                tag.updateMatchScore();
-                if (tag.isMatched()) {
-                    System.out.println("Technique detected.");
-                }
-            }
-        }
-    }
-
-
-
-    private void CacheMultiTag(UUID nodeId, GraphAlignmentMultiTag multiTag) throws Exception {
-        if (!this.tagsCacheMap.contains(nodeId)) this.tagsCacheMap.put(nodeId, multiTag);
-        else this.tagsCacheMap.get(nodeId).mergeMultiTag(multiTag);
     }
 
 }

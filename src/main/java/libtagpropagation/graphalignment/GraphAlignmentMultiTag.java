@@ -1,8 +1,9 @@
 package libtagpropagation.graphalignment;
 
 import libtagpropagation.graphalignment.techniqueknowledgegraph.TechniqueKnowledgeGraph;
+import provenancegraph.AssociatedEvent;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,27 +11,38 @@ public class GraphAlignmentMultiTag {
     private Map<String, GraphAlignmentTag> tagMap;
 
     public GraphAlignmentMultiTag(List<TechniqueKnowledgeGraph> tkgList) {
-        // ToDo
+        tagMap = new HashMap<>();
+
         for (TechniqueKnowledgeGraph tkg : tkgList){
             GraphAlignmentTag tag = new GraphAlignmentTag(tkg);
             this.tagMap.put(tkg.techniqueName, tag);
         }
     }
 
-    public GraphAlignmentMultiTag mergeMultiTag(List<TechniqueKnowledgeGraph> tkgList) {
-        for (TechniqueKnowledgeGraph tkg : tkgList) {
-            if (tagMap.containsKey(tkg.techniqueName)) {
-
-            }
-        }
-        return;
+    public GraphAlignmentMultiTag(GraphAlignmentMultiTag originalTag) {
+        this.tagMap = new HashMap<>(originalTag.tagMap);
     }
 
-    public void mergeMultiTag(GraphAlignmentMultiTag newMultiTag) {
+    public GraphAlignmentMultiTag mergeMultiTag(GraphAlignmentMultiTag newMultiTag) {
         Map<String, GraphAlignmentTag> newMultiTagMap = newMultiTag.getTagMap();
         for (Map.Entry entry : newMultiTagMap.entrySet()){
-            this.tagMap.put((String) entry.getKey(), (GraphAlignmentTag) entry.getValue());
+            if (this.tagMap.containsKey(entry.getKey())) {
+                GraphAlignmentTag mergedTag = this.tagMap.get(entry.getKey()).mergeTag((GraphAlignmentTag) entry.getValue());
+                this.tagMap.put((String) entry.getKey(), mergedTag);
+            }
+            else
+                this.tagMap.put((String) entry.getKey(), (GraphAlignmentTag) entry.getValue());
         }
+        return this;
+    }
+
+    public GraphAlignmentMultiTag propagate(AssociatedEvent associatedEvent) {
+        GraphAlignmentMultiTag newMultiTag = new GraphAlignmentMultiTag(this);
+        for (GraphAlignmentTag tag : newMultiTag.tagMap.values()) {
+            tag.propagate(associatedEvent);
+        }
+
+        return newMultiTag;
     }
 
     public Map<String, GraphAlignmentTag> getTagMap() {

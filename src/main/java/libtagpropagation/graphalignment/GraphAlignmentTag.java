@@ -1,10 +1,5 @@
 package libtagpropagation.graphalignment;
 
-import com.tinkerpop.blueprints.Direction;
-import com.tinkerpop.blueprints.Edge;
-import com.tinkerpop.blueprints.Vertex;
-import javafx.util.Pair;
-import libtagpropagation.graphalignment.alignmentstatus.EdgeAlignmentStatus;
 import libtagpropagation.graphalignment.alignmentstatus.GraphAlignmentStatus;
 import libtagpropagation.graphalignment.alignmentstatus.NodeAlignmentStatus;
 import libtagpropagation.graphalignment.techniqueknowledgegraph.AlignmentSearchTree;
@@ -12,7 +7,6 @@ import libtagpropagation.graphalignment.techniqueknowledgegraph.TechniqueKnowled
 import org.apache.flink.api.java.tuple.Tuple2;
 import provenancegraph.*;
 
-import javax.xml.soap.Node;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.UUID;
@@ -64,16 +58,12 @@ public class GraphAlignmentTag {
         }
     }
 
-    public void propagate(AssociatedEvent event) {
-        // alignNode()
-
-    }
 
     public boolean sameAs(GraphAlignmentTag anotherAlignmentTag) {
         return this.tkg.techniqueName.equals(anotherAlignmentTag.tkg.techniqueName);
     }
 
-    public GraphAlignmentTag mergeStatus(GraphAlignmentTag anotherAlignmentTag) {
+    public GraphAlignmentTag mergeTag(GraphAlignmentTag anotherAlignmentTag) {
         // ToDo: merge alignment status and 
         this.occupancyCount += anotherAlignmentTag.occupancyCount;
 
@@ -102,6 +92,24 @@ public class GraphAlignmentTag {
             }
         }
         return null;
+    }
+
+    public GraphAlignmentTag(GraphAlignmentTag orignal){
+        this.tagUuid = orignal.tagUuid;
+        this.tkg = orignal.tkg;
+        this.searchTree = orignal.searchTree;
+        this.alignStatus = orignal.alignStatus;
+    }
+
+    public GraphAlignmentTag propagate(AssociatedEvent event){
+        GraphAlignmentTag graphAlignmentTag = new GraphAlignmentTag(this);
+//        graphAlignmentTag.lastAlignedNodeIndex =
+//        graphAlignmentTag.lastAlignedNode =
+        graphAlignmentTag.cachedPathLength = this.cachedPathLength + 1;
+        graphAlignmentTag.cachedPath.add(event);
+        graphAlignmentTag.alignStatus.tryUpdateNode(,new GraphAlignmentStatus(this.tkg));
+        graphAlignmentTag.matchScore = 
+        return graphAlignmentTag;
     }
 
     public int getLastAlignedNodeIndex() {
