@@ -11,6 +11,10 @@ public class GraphAlignmentMultiTag {
 
     public GraphAlignmentMultiTag(List<TechniqueKnowledgeGraph> tkgList) {
         // ToDo
+        for (TechniqueKnowledgeGraph tkg : tkgList){
+            GraphAlignmentTag tag = new GraphAlignmentTag(tkg);
+            this.tagMap.put(tkg.techniqueName, tag);
+        }
     }
 
     public GraphAlignmentMultiTag mergeMultiTag(List<TechniqueKnowledgeGraph> tkgList) {
@@ -19,9 +23,17 @@ public class GraphAlignmentMultiTag {
 
             }
         }
+        return;
     }
 
-    public GraphAlignmentMultiTag mergeMultiTag(GraphAlignmentMultiTag newMultiTag) {
+    public void mergeMultiTag(GraphAlignmentMultiTag newMultiTag) {
+        Map<String, GraphAlignmentTag> newMultiTagMap = newMultiTag.getTagMap();
+        for (Map.Entry entry : newMultiTagMap.entrySet()){
+            this.tagMap.put((String) entry.getKey(), (GraphAlignmentTag) entry.getValue());
+        }
+    }
 
+    public Map<String, GraphAlignmentTag> getTagMap() {
+        return tagMap;
     }
 }

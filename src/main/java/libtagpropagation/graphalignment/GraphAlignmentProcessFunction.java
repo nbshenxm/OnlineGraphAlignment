@@ -1,5 +1,6 @@
 package libtagpropagation.graphalignment;
 
+import com.google.protobuf.DoubleArrayList;
 import libtagpropagation.graphalignment.techniqueknowledgegraph.TechniqueKnowledgeGraph;
 import libtagpropagation.graphalignment.techniqueknowledgegraph.TechniqueKnowledgeGraphSeedSearching;
 import org.apache.flink.api.common.state.*;
@@ -65,7 +66,7 @@ public class GraphAlignmentProcessFunction
     private void init(String knowledgeGraphPath) {
         try {
             loadTechniqueKnowledgeGraphList(knowledgeGraphPath);
-            this.seedSearching.update(new TechniqueKnowledgeGraphSeedSearching(this.tkgList));
+            this.seedSearching.update(new TechniqueKnowledgeGraphSeedSearching((List<TechniqueKnowledgeGraph>) this.tkgList));
         } catch (Exception e) {
             e.printStackTrace();
         }
