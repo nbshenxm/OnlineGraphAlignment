@@ -85,20 +85,20 @@ public class GraphAlignmentTag {
         return newMatchScore;
     }
 
-    public String getNodeId(BasicNode node) {
-        for (Map.Entry<String, NodeAlignmentStatus> entryIter : nodeMatchMap.entrySet()) {
-            if (entryIter.getValue().isAligned(node)) {
-                return entryIter.getKey();
-            }
-        }
-        return null;
-    }
+//    public String getNodeId(BasicNode node) {
+//        for (Map.Entry<String, NodeAlignmentStatus> entryIter : nodeMatchMap.entrySet()) {
+//            if (entryIter.getValue().isAligned(node)) {
+//                return entryIter.getKey();
+//            }
+//        }
+//        return null;
+//    }
 
-    public GraphAlignmentTag(GraphAlignmentTag orignal){
-        this.tagUuid = orignal.tagUuid;
-        this.tkg = orignal.tkg;
-        this.searchTree = orignal.searchTree;
-        this.alignStatus = orignal.alignStatus;
+    public GraphAlignmentTag(GraphAlignmentTag orignalTag){
+        this.tagUuid = orignalTag.tagUuid;
+        this.tkg = orignalTag.tkg;
+        this.searchTree = orignalTag.searchTree;
+        this.alignStatus = orignalTag.alignStatus;
     }
 
     public GraphAlignmentTag propagate(AssociatedEvent event){
@@ -108,7 +108,6 @@ public class GraphAlignmentTag {
         graphAlignmentTag.cachedPathLength = this.cachedPathLength + 1;
         graphAlignmentTag.cachedPath.add(event);
         graphAlignmentTag.alignStatus.tryUpdateNode(,new GraphAlignmentStatus(this.tkg));
-        graphAlignmentTag.matchScore = 
         return graphAlignmentTag;
     }
 
