@@ -6,11 +6,12 @@ import provenancegraph.AssociatedEvent;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class GraphAlignmentMultiTag {
     private Map<String, GraphAlignmentTag> tagMap;
 
-    public GraphAlignmentMultiTag(List<TechniqueKnowledgeGraph> tkgList) {
+    public GraphAlignmentMultiTag(Set<TechniqueKnowledgeGraph> tkgList) {
         tagMap = new HashMap<>();
 
         for (TechniqueKnowledgeGraph tkg : tkgList){

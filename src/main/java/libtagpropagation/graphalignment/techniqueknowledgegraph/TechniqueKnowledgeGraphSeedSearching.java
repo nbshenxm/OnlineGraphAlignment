@@ -1,17 +1,10 @@
 package libtagpropagation.graphalignment.techniqueknowledgegraph;
 
 import com.tinkerpop.blueprints.Edge;
-import com.tinkerpop.blueprints.Vertex;
 import provenancegraph.AssociatedEvent;
 import provenancegraph.BasicNode;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
-import static libtagpropagation.graphalignment.techniqueknowledgegraph.TechniqueKnowledgeGraph.isEdgeAligned;
-import static libtagpropagation.graphalignment.techniqueknowledgegraph.TechniqueKnowledgeGraph.isVertexAligned;
+import java.util.*;
 
 public class TechniqueKnowledgeGraphSeedSearching {
 
@@ -19,8 +12,13 @@ public class TechniqueKnowledgeGraphSeedSearching {
     private Map<SeedEdge, TechniqueKnowledgeGraph> seedEdgeSearchMap;
 
     private Map<UUID, List<TechniqueKnowledgeGraph>> searchedNodeCache;
+    private Map<UUID, List<TechniqueKnowledgeGraph>> searchedEdgeCache;
 
     public TechniqueKnowledgeGraphSeedSearching(List<TechniqueKnowledgeGraph> tkgList) {
+        this.seedEdgeSearchMap = new HashMap<>();
+        this.seedNodeSearchMap = new HashMap<>();
+        this.searchedEdgeCache = new HashMap<>();
+        this.searchedNodeCache = new HashMap<>();
         for (TechniqueKnowledgeGraph tkg : tkgList){
             addTechniqueKnowledgeGraph(tkg);
         }
@@ -47,8 +45,9 @@ public class TechniqueKnowledgeGraphSeedSearching {
 
         else {
             ArrayList<TechniqueKnowledgeGraph> techniqueKnowledgeGraphs = new ArrayList<>();
-            for (Map.Entry entry : seedNodeSearchMap.entrySet()) {
-                if (isVertexAligned((Vertex) entry.getKey(), candidateNode, candidateNode.getProperties())) { // ToDo：不要用全局的函数，改到SeedNode和SeedEdge类里
+            for (Map.Entry entry : this.seedNodeSearchMap.entrySet()) {
+                SeedNode seedNode = (SeedNode) entry.getKey();
+                if (seedNode.isVertexAligned(candidateNode, candidateNode.getProperties())) { // ToDo：不要用全局的函数，改到SeedNode和SeedEdge类里
                     techniqueKnowledgeGraphs.add((TechniqueKnowledgeGraph) entry.getValue());
                 }
             }
@@ -60,13 +59,19 @@ public class TechniqueKnowledgeGraphSeedSearching {
 
     public List<TechniqueKnowledgeGraph> search(AssociatedEvent candidateEdge) {
         // ToDo：加上缓存
-
-        ArrayList<TechniqueKnowledgeGraph> techniqueKnowledgeGraphs = new ArrayList<>();
-        for (Map.Entry entry : seedEdgeSearchMap.entrySet()){
-            if(isEdgeAligned((Edge) entry.getKey(), candidateEdge)){
-                techniqueKnowledgeGraphs.add((TechniqueKnowledgeGraph) entry.getValue());
-            }
+        if (this.searchedEdgeCache.containsKey(candidateEdge.edgeId)) {
+            return this.searchedEdgeCache.get(candidateEdge.edgeId);
         }
-        return techniqueKnowledgeGraphs;
+        else {
+            ArrayList<TechniqueKnowledgeGraph> techniqueKnowledgeGraphs = new ArrayList<>();
+            for (Map.Entry entry : seedEdgeSearchMap.entrySet()) {
+                SeedEdge seedEdge = (SeedEdge) entry.getKey();
+                if (seedEdge.isEdgeAligned(candidateEdge)) {
+                    techniqueKnowledgeGraphs.add((TechniqueKnowledgeGraph) entry.getValue());
+                }
+            }
+            this.searchedEdgeCache.put(candidateEdge.edgeId, techniqueKnowledgeGraphs);
+            return techniqueKnowledgeGraphs;
+        }
     }
 }
