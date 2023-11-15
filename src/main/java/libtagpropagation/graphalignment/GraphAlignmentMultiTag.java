@@ -1,6 +1,7 @@
 package libtagpropagation.graphalignment;
 
 import libtagpropagation.graphalignment.techniqueknowledgegraph.TechniqueKnowledgeGraph;
+import org.apache.kafka.common.protocol.types.Field;
 import provenancegraph.AssociatedEvent;
 
 import java.util.HashMap;
@@ -39,8 +40,15 @@ public class GraphAlignmentMultiTag {
 
     public GraphAlignmentMultiTag propagate(AssociatedEvent associatedEvent) {
         GraphAlignmentMultiTag newMultiTag = new GraphAlignmentMultiTag(this);
-        for (GraphAlignmentTag tag : newMultiTag.tagMap.values()) {
-            tag.propagate(associatedEvent);
+        for (Map.Entry entry : newMultiTag.tagMap.entrySet()) {
+            GraphAlignmentTag tag = (GraphAlignmentTag) entry.getValue();
+            String techniqueName = (String) entry.getKey();
+
+            GraphAlignmentTag newTag = tag.propagate(associatedEvent);
+            if (newTag != null) {
+                newMultiTag.tagMap.put(techniqueName, newTag);
+            }
+
         }
 
         return newMultiTag;

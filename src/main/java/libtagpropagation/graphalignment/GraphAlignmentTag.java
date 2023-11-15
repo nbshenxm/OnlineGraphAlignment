@@ -101,7 +101,7 @@ public class GraphAlignmentTag {
         Tuple2<Integer, NodeAlignmentStatus> searchResult = this.searchTree.nodeAlignmentSearch(lastAlignedNodeIndex, event.sinkNode);
         if (searchResult == null) {
 
-
+            return null;
         }
         else {
             newTag.lastAlignedNodeIndex = searchResult.f0;
