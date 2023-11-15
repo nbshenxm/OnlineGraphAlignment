@@ -5,6 +5,7 @@ import libtagpropagation.graphalignment.alignmentstatus.NodeAlignmentStatus;
 import libtagpropagation.graphalignment.techniqueknowledgegraph.AlignmentSearchTree;
 import libtagpropagation.graphalignment.techniqueknowledgegraph.TechniqueKnowledgeGraph;
 import org.apache.flink.api.java.tuple.Tuple2;
+import org.checkerframework.checker.units.qual.A;
 import provenancegraph.*;
 
 import java.util.ArrayList;
@@ -58,7 +59,6 @@ public class GraphAlignmentTag {
         }
     }
 
-
     public boolean sameAs(GraphAlignmentTag anotherAlignmentTag) {
         return this.tkg.techniqueName.equals(anotherAlignmentTag.tkg.techniqueName);
     }
@@ -102,13 +102,26 @@ public class GraphAlignmentTag {
     }
 
     public GraphAlignmentTag propagate(AssociatedEvent event){
-        GraphAlignmentTag graphAlignmentTag = new GraphAlignmentTag(this);
-//        graphAlignmentTag.lastAlignedNodeIndex =
-//        graphAlignmentTag.lastAlignedNode =
-        graphAlignmentTag.cachedPathLength = this.cachedPathLength + 1;
-        graphAlignmentTag.cachedPath.add(event);
-        graphAlignmentTag.alignStatus.tryUpdateNode(,new GraphAlignmentStatus(this.tkg));
-        return graphAlignmentTag;
+        GraphAlignmentTag newTag = new GraphAlignmentTag(this);
+
+        newTag.cachedPathLength = this.cachedPathLength + 1;
+        newTag.cachedPath.add(event);
+
+        Tuple2<Integer, NodeAlignmentStatus> searchResult = this.searchTree.nodeAlignmentSearch(lastAlignedNodeIndex, event.sinkNode);
+        if (searchResult == null) {
+
+        }
+        else {
+            newTag.lastAlignedNodeIndex = searchResult.f0;
+            newTag.lastAlignedNode = event.sinkNode;
+            newTag.alignStatus.tryUpdateNode(newTag.lastAlignedNodeIndex, searchResult.f1);
+            // ToDo：cached path也需要更新到alignStatus
+            newTag.cachedPath = new ArrayList<>();
+            newTag.cachedPathLength = 0;
+        }
+
+
+        return newTag;
     }
 
     public int getLastAlignedNodeIndex() {
