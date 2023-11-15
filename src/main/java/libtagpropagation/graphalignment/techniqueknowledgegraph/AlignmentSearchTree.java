@@ -18,14 +18,13 @@ public class AlignmentSearchTree {
     // 输出：匹配的分数（0表示没有匹配上），匹配到节点的新位置
     TechniqueKnowledgeGraph tkg;
     public AlignmentSearchTree(TechniqueKnowledgeGraph tkg) {
-
+        ArrayList<Vertex> vertexList = tkg.getVertexList();
+        Vertex vertex = vertexList.get(lastAlignedNodeIndex);
     }
 
     public Tuple2<Integer, NodeAlignmentStatus> nodeAlignmentSearch(int lastAlignedNodeIndex, BasicNode currentNode) {
-        GraphAlignmentTag tag;
+
         do{
-            ArrayList<Vertex> vertexList = tkg.getVertexList();
-            Vertex vertex = vertexList.get(lastAlignedNodeIndex);
             if (isVertexAligned(vertex, currentNode, currentNode.getProperties())){
                 NodeAlignmentStatus nodeAlignmentStatus = new NodeAlignmentStatus(tkg.getKeyPropertiesFromType(vertex.getProperty("type")),
                         vertex.getProperty("type"),
@@ -33,8 +32,7 @@ public class AlignmentSearchTree {
                 return Tuple2.of(lastAlignedNodeIndex, nodeAlignmentStatus);
             }
             GraphAlignmentMultiTag tags = GraphAlignmentProcessFunction.tagsCacheMap.get(currentNode.getNodeId());
-            tag = tags.getTagMap().get(tkg.techniqueName);
-           lastAlignedNodeIndex = tag.getLastAlignedNodeIndex();
+
         }while(tag != null);
     }
 }
