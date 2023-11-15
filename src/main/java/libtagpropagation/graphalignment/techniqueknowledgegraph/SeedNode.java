@@ -8,7 +8,8 @@ import java.util.HashMap;
 import java.util.regex.Pattern;
 
 public class SeedNode{
-    private Vertex kgNode;
+    private Vertex tkgNode;
+    private String knowledgeGraphNodeRegex;
 
     private final HashMap<String, String> KEY_PROPERTIES_MAP = new HashMap <String, String> (){{
         put("Network", "url_ip");
@@ -16,8 +17,9 @@ public class SeedNode{
         put("Process", "process_name");
     }};
 
-    public SeedNode(Vertex kgNode) {
-        this.kgNode = kgNode;
+    public SeedNode(Vertex tkgNode) {
+        this.tkgNode = tkgNode;
+        this.knowledgeGraphNodeRegex = getKeyPropertiesFromType(tkgNode.getProperty("type"));
     }
 
     public String getKeyPropertiesFromType(String type) {
@@ -25,12 +27,12 @@ public class SeedNode{
     }
 
     public boolean nodeMatch(Vertex pgNode) {
-        String kgNodeType = this.kgNode.getProperty("type");
+        String kgNodeType = this.tkgNode.getProperty("type");
         String pgNodeType = pgNode.getProperty("type");
         if (!kgNodeType.equals(pgNodeType)) {
             return false;
         }
-        String kpKGNode = kgNode.getProperty(getKeyPropertiesFromType(kgNode.getProperty("type")));
+        String kpKGNode = tkgNode.getProperty(getKeyPropertiesFromType(tkgNode.getProperty("type")));
         String kpPGNode = pgNode.getProperty(getKeyPropertiesFromType(pgNode.getProperty("type")));
         return Pattern.matches(kpKGNode, kpPGNode);
     }
@@ -55,5 +57,13 @@ public class SeedNode{
                 break;
         }
         return nodeMatch(temp_node);
+    }
+
+    public Vertex getTkgNode() {
+        return tkgNode;
+    }
+
+    public String getKnowledgeGraphNodeRegex() {
+        return knowledgeGraphNodeRegex;
     }
 }

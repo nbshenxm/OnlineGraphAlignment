@@ -85,15 +85,6 @@ public class GraphAlignmentTag {
         return newMatchScore;
     }
 
-//    public String getNodeId(BasicNode node) {
-//        for (Map.Entry<String, NodeAlignmentStatus> entryIter : nodeMatchMap.entrySet()) {
-//            if (entryIter.getValue().isAligned(node)) {
-//                return entryIter.getKey();
-//            }
-//        }
-//        return null;
-//    }
-
     public GraphAlignmentTag(GraphAlignmentTag orignalTag){
         this.tagUuid = orignalTag.tagUuid;
         this.tkg = orignalTag.tkg;
@@ -110,6 +101,7 @@ public class GraphAlignmentTag {
         Tuple2<Integer, NodeAlignmentStatus> searchResult = this.searchTree.nodeAlignmentSearch(lastAlignedNodeIndex, event.sinkNode);
         if (searchResult == null) {
 
+
         }
         else {
             newTag.lastAlignedNodeIndex = searchResult.f0;
@@ -119,7 +111,6 @@ public class GraphAlignmentTag {
             newTag.cachedPath = new ArrayList<>();
             newTag.cachedPathLength = 0;
         }
-
 
         return newTag;
     }
