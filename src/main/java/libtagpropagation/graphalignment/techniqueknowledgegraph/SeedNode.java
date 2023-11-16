@@ -37,7 +37,7 @@ public class SeedNode{
         return Pattern.matches(kpKGNode, kpPGNode);
     }
 
-    public boolean isVertexAligned(BasicNode n, NodeProperties np) {
+    public boolean isNodeAligned(BasicNode n, NodeProperties np) {
         TinkerGraph graph = new TinkerGraph();
         Vertex temp_node = graph.addVertex("1");
         switch (n.getNodeType()) {
