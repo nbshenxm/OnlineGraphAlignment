@@ -1,9 +1,12 @@
 package libtagpropagation.graphalignment;
 
+import com.tinkerpop.blueprints.Edge;
+import com.tinkerpop.blueprints.Vertex;
 import libtagpropagation.graphalignment.techniqueknowledgegraph.TechniqueKnowledgeGraph;
 import libtagpropagation.graphalignment.techniqueknowledgegraph.TechniqueKnowledgeGraphSeedSearching;
 import org.apache.flink.api.common.state.*;
 import org.apache.flink.configuration.Configuration;
+import org.apache.kafka.common.protocol.types.Field;
 import provenancegraph.*;
 
 import org.apache.flink.streaming.api.functions.KeyedProcessFunction;
@@ -35,7 +38,7 @@ public class GraphAlignmentProcessFunction
         this.tkgList = getRuntimeContext().getListState(tkgListDescriptor);
 
         ValueStateDescriptor<TechniqueKnowledgeGraphSeedSearching> seedSearchingDescriptor =
-                new ValueStateDescriptor<>("seedSearching", TechniqueKnowledgeGraphSeedSearching.class, false);
+                new ValueStateDescriptor<>("seedSearching", TechniqueKnowledgeGraphSeedSearching.class, null);
         this.seedSearching = getRuntimeContext().getState(seedSearchingDescriptor);
 
         MapStateDescriptor<UUID, GraphAlignmentMultiTag> tagCacheStateDescriptor =
@@ -62,6 +65,8 @@ public class GraphAlignmentProcessFunction
     private void init(String knowledgeGraphPath) {
         try {
             loadTechniqueKnowledgeGraphList(knowledgeGraphPath);
+
+
             this.seedSearching.update(new TechniqueKnowledgeGraphSeedSearching((List<TechniqueKnowledgeGraph>) this.tkgList));
         } catch (Exception e) {
             e.printStackTrace();
@@ -100,9 +105,40 @@ public class GraphAlignmentProcessFunction
     }
 
     private GraphAlignmentMultiTag propagateGraphAlignmentTag(AssociatedEvent associatedEvent) throws Exception {
-        if ()
 
+        GraphAlignmentMultiTag srcMultiTag = tagsCacheMap.get(associatedEvent.sourceNodeId);
+        // iterate through tagsCacheMap to check if any existing tags can be propagated
+        Iterable<Map.Entry<UUID, GraphAlignmentMultiTag>> entries = tagsCacheMap.entries();
+        for (Map.Entry<UUID, GraphAlignmentMultiTag> entry : entries) {
+            GraphAlignmentMultiTag graphAlignmentMultiTag = entry.getValue();
 
+            // if there is a match in GraphAlignmentTag with current associatedEvent, prop the tag
+            GraphAlignmentMultiTag newTags = graphAlignmentMultiTag.propagate(associatedEvent);
+
+            // tag merge
+            for (Map.Entry entryNewTag : newTags.getTagMap().entrySet()) {
+                String newTagTechniqueName = (String) entryNewTag.getKey();
+                GraphAlignmentTag newTag = (GraphAlignmentTag) entryNewTag.getValue();
+                for (Map.Entry entrySrcTag : srcMultiTag.getTagMap().entrySet()) {
+                    String srcTagTechniqueName = (String) entrySrcTag.getKey();
+                    GraphAlignmentTag srcTag = (GraphAlignmentTag) entrySrcTag.getValue();
+                    if (newTagTechniqueName.equals(srcTagTechniqueName))
+                    {
+                        newTag.mergeTag(srcTag);
+                        srcTag.mergeTag(newTag);
+                    }
+                    // score update
+                    newTag.updateMatchScore();
+                    if(newTag.isMatched()){
+                        System.out.println("Technique detected.");
+                    }
+                }
+            }
+
+            tagsCacheMap.put(associatedEvent.sinkNodeId, newTags);
+        }
+
+        return tagsCacheMap.get(associatedEvent.sinkNodeId);
     }
 
 }
