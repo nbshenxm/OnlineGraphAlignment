@@ -21,10 +21,14 @@ public class SeedEdge {
             Vertex dest = this.seedEdge.getVertex(Direction.IN);
             SeedNode sourceNode = new SeedNode(src);
             SeedNode sinkNode = new SeedNode(dest);
-            if (sourceNode.isVertexAligned(e.sourceNode, e.sourceNodeProperties)){
-                return sinkNode.isVertexAligned(e.sinkNode, e.sinkNodeProperties);
+            if (sourceNode.isNodeAligned(e.sourceNode, e.sourceNodeProperties)){
+                return sinkNode.isNodeAligned(e.sinkNode, e.sinkNodeProperties);
             }
         }
         return false;
+    }
+
+    public Edge getSeedEdge() {
+        return seedEdge;
     }
 }
