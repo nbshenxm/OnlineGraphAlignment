@@ -47,7 +47,7 @@ public class TechniqueKnowledgeGraphSeedSearching {
             ArrayList<TechniqueKnowledgeGraph> techniqueKnowledgeGraphs = new ArrayList<>();
             for (Map.Entry entry : this.seedNodeSearchMap.entrySet()) {
                 SeedNode seedNode = (SeedNode) entry.getKey();
-                if (seedNode.isVertexAligned(candidateNode, candidateNode.getProperties())) { // ToDo：不要用全局的函数，改到SeedNode和SeedEdge类里
+                if (seedNode.isNodeAligned(candidateNode, candidateNode.getProperties())) { // ToDo：不要用全局的函数，改到SeedNode和SeedEdge类里
                     techniqueKnowledgeGraphs.add((TechniqueKnowledgeGraph) entry.getValue());
                 }
             }

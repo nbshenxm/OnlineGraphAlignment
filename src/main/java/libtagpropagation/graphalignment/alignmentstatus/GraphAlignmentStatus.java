@@ -47,17 +47,17 @@ public class GraphAlignmentStatus {
         return null;
     }
 
-//    public String tryUpdateEdge(int index, EdgeAlignmentStatus newStatus) {
-//        if (index >= edgeCount) throw new RuntimeException("This edge seems not in the TKG.");
-//
-//        if (edgeAlignmentStatusList[index] == null || newStatus.isABetterAlign(edgeAlignmentStatusList[index])) {
-//            edgeAlignmentStatusList[index] = newStatus;
-//            // ToDo: Update alignment score
-//            return "Updated.";
-//        }
-//
-//        return "Not accepted.";
-//    }
+    public String tryUpdateEdge(int index, EdgeAlignmentStatus newStatus) {
+        if (index >= edgeCount) throw new RuntimeException("This edge seems not in the TKG.");
+
+        if (edgeAlignmentStatusList[index] == null || newStatus.isABetterAlign(edgeAlignmentStatusList[index])) {
+            edgeAlignmentStatusList[index] = newStatus;
+            // ToDo: Update alignment score
+            return "Updated.";
+        }
+
+        return "Not accepted.";
+    }
 
     public Float getAlignmentScore() {
         // ToDo: 设计对齐分数的计算过程，目标是能够及时的更新

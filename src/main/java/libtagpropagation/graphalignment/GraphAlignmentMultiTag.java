@@ -45,10 +45,7 @@ public class GraphAlignmentMultiTag {
             String techniqueName = (String) entry.getKey();
 
             GraphAlignmentTag newTag = tag.propagate(associatedEvent);
-            if (newTag != null) {
                 newMultiTag.tagMap.put(techniqueName, newTag);
-            }
-
         }
 
         return newMultiTag;
