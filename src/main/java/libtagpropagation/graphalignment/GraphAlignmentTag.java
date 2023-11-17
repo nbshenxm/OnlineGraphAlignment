@@ -1,5 +1,6 @@
 package libtagpropagation.graphalignment;
 
+import libtagpropagation.graphalignment.alignmentstatus.EdgeAlignmentStatus;
 import libtagpropagation.graphalignment.alignmentstatus.GraphAlignmentStatus;
 import libtagpropagation.graphalignment.alignmentstatus.NodeAlignmentStatus;
 import libtagpropagation.graphalignment.techniqueknowledgegraph.AlignmentSearchTree;
@@ -42,6 +43,8 @@ public class GraphAlignmentTag {
         this.tkg = tkg;
         this.searchTree = new AlignmentSearchTree(tkg);
         this.alignStatus = new GraphAlignmentStatus(tkg);
+        this.lastAlignedNodeIndex = -1;
+        this.lastAlignedNode = null;
     }
 
     private NodeAlignmentStatus alignNode(BasicNode node) {
@@ -81,12 +84,12 @@ public class GraphAlignmentTag {
 
     public float updateMatchScore() {
         // ToDo:
-        float newMatchScore = 0.0F;
+        float newMatchScore = 1 / cachedPathLength;
         return newMatchScore;
     }
 
     public GraphAlignmentTag(GraphAlignmentTag orignalTag){
-        this.tagUuid = orignalTag.tagUuid;
+        this.tagUuid = UUID.randomUUID();
         this.tkg = orignalTag.tkg;
         this.searchTree = orignalTag.searchTree;
         this.alignStatus = orignalTag.alignStatus;
@@ -97,16 +100,21 @@ public class GraphAlignmentTag {
 
         newTag.cachedPathLength = this.cachedPathLength + 1;
         newTag.cachedPath.add(event);
-
+        //node align
         Tuple2<Integer, NodeAlignmentStatus> searchResult = this.searchTree.nodeAlignmentSearch(lastAlignedNodeIndex, event.sinkNode);
+        // edge align
+        Tuple2<Integer, EdgeAlignmentStatus> edgeResult = this.searchTree.edgeAlignmentSerach(searchResult.f0, event);
         if (searchResult == null) {
-
-            return null;
+            newTag.lastAlignedNodeIndex = this.lastAlignedNodeIndex;
+            newTag.lastAlignedNode = this.lastAlignedNode;
+            newTag.cachedPath = new ArrayList<>();
+            newTag.cachedPathLength = 0;
         }
         else {
             newTag.lastAlignedNodeIndex = searchResult.f0;
             newTag.lastAlignedNode = event.sinkNode;
-            newTag.alignStatus.tryUpdateNode(newTag.lastAlignedNodeIndex, searchResult.f1);
+            newTag.alignStatus.tryUpdateNode(searchResult.f0, searchResult.f1);
+            newTag.alignStatus.tryUpdateEdge(edgeResult.f0, edgeResult.f1);
             // ToDo：cached path也需要更新到alignStatus
             newTag.cachedPath = new ArrayList<>();
             newTag.cachedPathLength = 0;
@@ -115,7 +123,4 @@ public class GraphAlignmentTag {
         return newTag;
     }
 
-    public int getLastAlignedNodeIndex() {
-        return lastAlignedNodeIndex;
-    }
 }
