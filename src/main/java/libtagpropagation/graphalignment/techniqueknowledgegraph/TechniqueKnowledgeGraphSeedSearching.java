@@ -1,6 +1,7 @@
 package libtagpropagation.graphalignment.techniqueknowledgegraph;
 
 import com.tinkerpop.blueprints.Edge;
+import com.tinkerpop.blueprints.Vertex;
 import provenancegraph.AssociatedEvent;
 import provenancegraph.BasicNode;
 
@@ -14,7 +15,7 @@ public class TechniqueKnowledgeGraphSeedSearching {
     private Map<UUID, List<TechniqueKnowledgeGraph>> searchedNodeCache;
     private Map<UUID, List<TechniqueKnowledgeGraph>> searchedEdgeCache;
 
-    public TechniqueKnowledgeGraphSeedSearching(List<TechniqueKnowledgeGraph> tkgList) {
+    public TechniqueKnowledgeGraphSeedSearching(Iterable<TechniqueKnowledgeGraph> tkgList) {
         this.seedEdgeSearchMap = new HashMap<>();
         this.seedNodeSearchMap = new HashMap<>();
         this.searchedEdgeCache = new HashMap<>();
@@ -28,12 +29,14 @@ public class TechniqueKnowledgeGraphSeedSearching {
         // 加载
         ArrayList<Object> seedObjects = tkg.getSeedObjects();
         for (Object vertex : seedObjects){
-            this.seedNodeSearchMap.put((SeedNode) vertex, tkg);
+            SeedNode seedNode = new SeedNode((Vertex) vertex);
+            this.seedNodeSearchMap.put(seedNode, tkg);
         }
 
         ArrayList<Edge> edgeList = tkg.getEdgeList();
         for (Edge edge : edgeList){
-            this.seedEdgeSearchMap.put((SeedEdge) edge, tkg);
+            SeedEdge seedEdge = new SeedEdge(edge);
+            this.seedEdgeSearchMap.put(seedEdge, tkg);
         }
     }
 

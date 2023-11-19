@@ -70,6 +70,10 @@ public class GraphAlignmentTag {
         // ToDo: merge alignment status and 
         this.occupancyCount += anotherAlignmentTag.occupancyCount;
 
+        this.cachedPathLength += anotherAlignmentTag.cachedPathLength;
+        this.lastAlignedNodeIndex = anotherAlignmentTag.lastAlignedNodeIndex;
+        this.lastAlignedNode = anotherAlignmentTag.lastAlignedNode;
+
         return null;
     }
 
@@ -103,7 +107,7 @@ public class GraphAlignmentTag {
         //node align
         Tuple2<Integer, NodeAlignmentStatus> searchResult = this.searchTree.nodeAlignmentSearch(lastAlignedNodeIndex, event.sinkNode);
         // edge align
-        Tuple2<Integer, EdgeAlignmentStatus> edgeResult = this.searchTree.edgeAlignmentSerach(searchResult.f0, event);
+//        Tuple2<Integer, EdgeAlignmentStatus> edgeResult = this.searchTree.edgeAlignmentSerach(searchResult.f0, event);
         if (searchResult == null) {
             newTag.lastAlignedNodeIndex = this.lastAlignedNodeIndex;
             newTag.lastAlignedNode = this.lastAlignedNode;
@@ -114,7 +118,7 @@ public class GraphAlignmentTag {
             newTag.lastAlignedNodeIndex = searchResult.f0;
             newTag.lastAlignedNode = event.sinkNode;
             newTag.alignStatus.tryUpdateNode(searchResult.f0, searchResult.f1);
-            newTag.alignStatus.tryUpdateEdge(edgeResult.f0, edgeResult.f1);
+//            newTag.alignStatus.tryUpdateEdge(edgeResult.f0, edgeResult.f1);
             // ToDo：cached path也需要更新到alignStatus
             newTag.cachedPath = new ArrayList<>();
             newTag.cachedPathLength = 0;

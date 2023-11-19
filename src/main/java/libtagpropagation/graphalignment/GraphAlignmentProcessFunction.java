@@ -4,9 +4,11 @@ import com.tinkerpop.blueprints.Edge;
 import com.tinkerpop.blueprints.Vertex;
 import libtagpropagation.graphalignment.techniqueknowledgegraph.TechniqueKnowledgeGraph;
 import libtagpropagation.graphalignment.techniqueknowledgegraph.TechniqueKnowledgeGraphSeedSearching;
+import org.apache.commons.math3.fitting.leastsquares.EvaluationRmsChecker;
 import org.apache.flink.api.common.state.*;
 import org.apache.flink.configuration.Configuration;
 import org.apache.kafka.common.protocol.types.Field;
+import org.checkerframework.checker.units.qual.A;
 import provenancegraph.*;
 
 import org.apache.flink.streaming.api.functions.KeyedProcessFunction;
@@ -65,7 +67,10 @@ public class GraphAlignmentProcessFunction
     private void init(String knowledgeGraphPath) {
         try {
             loadTechniqueKnowledgeGraphList(knowledgeGraphPath);
-            this.seedSearching.update(new TechniqueKnowledgeGraphSeedSearching((List<TechniqueKnowledgeGraph>) this.tkgList));
+//            ArrayList<TechniqueKnowledgeGraph> techniqueKnowledgeGraphs = new ArrayList<>();
+//            this.tkgList.get().forEach(techniqueKnowledgeGraphs::add);
+            TechniqueKnowledgeGraphSeedSearching techniqueKnowledgeGraphSeedSearching = new TechniqueKnowledgeGraphSeedSearching(this.tkgList.get());
+            this.seedSearching.update(techniqueKnowledgeGraphSeedSearching);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -114,28 +119,10 @@ public class GraphAlignmentProcessFunction
             if (uuid.equals(associatedEvent.sourceNodeId)) {
                 GraphAlignmentMultiTag newTags = graphAlignmentMultiTag.propagate(associatedEvent);
 
-                // tag merge
-                for (Map.Entry entryNewTag : newTags.getTagMap().entrySet()) {
-                    String newTagTechniqueName = (String) entryNewTag.getKey();
-                    GraphAlignmentTag newTag = (GraphAlignmentTag) entryNewTag.getValue();
-                    for (Map.Entry entrySrcTag : destMultiTag.getTagMap().entrySet()) {
-                        String srcTagTechniqueName = (String) entrySrcTag.getKey();
-                        GraphAlignmentTag srcTag = (GraphAlignmentTag) entrySrcTag.getValue();
-                        if (newTagTechniqueName.equals(srcTagTechniqueName)) {
-                            // how to merge ?
-                            newTag.mergeTag(srcTag);
-                            srcTag.mergeTag(newTag);
-                        }
-
-                        // score update
-                        newTag.updateMatchScore();
-                        if (newTag.isMatched()) {
-                            System.out.println("Technique detected.");
-                        }
-                    }
-                }
-
-                tagsCacheMap.put(associatedEvent.sinkNodeId, newTags);
+                //multiTag merge
+                if(destMultiTag == null)
+                    this.tagsCacheMap.put(associatedEvent.sinkNodeId, newTags);
+                else destMultiTag.mergeMultiTag(newTags);
             }
         }
 
