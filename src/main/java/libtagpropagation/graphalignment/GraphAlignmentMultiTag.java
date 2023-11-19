@@ -28,6 +28,7 @@ public class GraphAlignmentMultiTag {
     public GraphAlignmentMultiTag mergeMultiTag(GraphAlignmentMultiTag newMultiTag) {
         Map<String, GraphAlignmentTag> newMultiTagMap = newMultiTag.getTagMap();
         for (Map.Entry entry : newMultiTagMap.entrySet()){
+            // 把相同tkgName的Tag合并
             if (this.tagMap.containsKey(entry.getKey())) {
                 GraphAlignmentTag mergedTag = this.tagMap.get(entry.getKey()).mergeTag((GraphAlignmentTag) entry.getValue());
                 this.tagMap.put((String) entry.getKey(), mergedTag);
