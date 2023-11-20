@@ -9,9 +9,12 @@ import java.util.regex.Pattern;
 
 public class SeedEdge {
     private Edge seedEdge;
-
+    private int id;
+    private String type;
     public SeedEdge(Edge seedEdge) {
         this.seedEdge = seedEdge;
+        this.id = seedEdge.getProperty("sequence_num");
+        this.type = (String)seedEdge.getProperty("event_type");
     }
 
     public boolean isEdgeAligned(AssociatedEvent e) {
@@ -28,7 +31,15 @@ public class SeedEdge {
         return false;
     }
 
-    public Edge getSeedEdge() {
-        return seedEdge;
+    public int getId(){
+        return this.id;
+    }
+
+    @Override
+    public String toString() {
+        return "SeedEdge{" +
+                "id=" + id +
+                ", type='" + type + '\'' +
+                '}';
     }
 }

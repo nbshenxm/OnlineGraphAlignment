@@ -2,6 +2,7 @@ package libtagpropagation.graphalignment.techniqueknowledgegraph;
 
 import com.tinkerpop.blueprints.Vertex;
 import com.tinkerpop.blueprints.impls.tg.TinkerGraph;
+import org.apache.kafka.common.protocol.types.Field;
 import provenancegraph.*;
 
 import java.util.HashMap;
@@ -9,7 +10,9 @@ import java.util.regex.Pattern;
 
 public class SeedNode{
     private Vertex tkgNode;
-    private String knowledgeGraphNodeRegex;
+    private String alignedString;
+    private String type;
+    private int id;
 
     private final HashMap<String, String> KEY_PROPERTIES_MAP = new HashMap <String, String> (){{
         put("Network", "url_ip");
@@ -19,7 +22,9 @@ public class SeedNode{
 
     public SeedNode(Vertex tkgNode) {
         this.tkgNode = tkgNode;
-        this.knowledgeGraphNodeRegex = getKeyPropertiesFromType(tkgNode.getProperty("type"));
+        this.alignedString = getKeyPropertiesFromType(tkgNode.getProperty("type"));
+        this.type = (String) tkgNode.getProperty("type");
+        this.id = Integer.parseInt(((String) tkgNode.getId()).substring(1));
     }
 
     public String getKeyPropertiesFromType(String type) {
@@ -59,11 +64,24 @@ public class SeedNode{
         return nodeMatch(temp_node);
     }
 
-    public Vertex getTkgNode() {
-        return tkgNode;
+    public String getAlignedString() {
+        return alignedString;
     }
 
-    public String getKnowledgeGraphNodeRegex() {
-        return knowledgeGraphNodeRegex;
+    public String getType() {
+        return type;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public String toString() {
+        return "SeedNode{" +
+                "id=" + id +
+                ", type='" + type + '\'' +
+                ", " + (String) this.tkgNode.getProperty(alignedString) +
+                '}';
     }
 }

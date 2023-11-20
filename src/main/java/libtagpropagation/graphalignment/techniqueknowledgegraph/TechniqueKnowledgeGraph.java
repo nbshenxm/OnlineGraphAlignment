@@ -45,7 +45,7 @@ public class TechniqueKnowledgeGraph {
     // https://github.com/tinkerpop/blueprints/wiki/GraphML-Reader-and-Writer-Library
     public TinkerGraph tinkerGraph;
 
-    public AlignmentSearchTree searchTree;
+    public AlignmentSearchGraph searchTree;
 
     public String techniqueName;
 
