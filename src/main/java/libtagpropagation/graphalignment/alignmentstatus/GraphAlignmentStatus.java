@@ -4,6 +4,7 @@ import com.google.common.collect.Iterators;
 import libtagpropagation.graphalignment.techniqueknowledgegraph.TechniqueKnowledgeGraph;
 import provenancegraph.AssociatedEvent;
 
+import javax.xml.soap.Node;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -15,7 +16,7 @@ public class GraphAlignmentStatus {
     // 输出匹配的最新情况
 
     public Float alignmentScore = 0.0F;
-    public static final Float ALIGNMENT_THRESHOLDS = 0.6F;
+    public final Float alignmentThresholds = 0.7F;
 
     private int nodeCount;
     private int edgeCount;
@@ -34,18 +35,18 @@ public class GraphAlignmentStatus {
     }
 
     public GraphAlignmentStatus tryUpdateStatus(int nodeIndex, int edgeIndex, NodeAlignmentStatus newNodeAlignmentStatus, ArrayList<AssociatedEvent> cachedPath) {
-        if (nodeIndex >= nodeCount || edgeIndex >= edgeCount) throw new RuntimeException("This node seems not in the TKG.");
+        if (nodeIndex >= nodeCount || edgeIndex >= edgeCount) throw new RuntimeException("This node or edge seems not in the TKG.");
 
-        // 考虑边的匹配状态
-        if (this.edgeAlignmentStatusList[edgeIndex] == null) {
-            this.nodeAlignmentStatusList[nodeIndex] = newNodeAlignmentStatus; // FixMe：此时节点未必为空
+        // ToDo：考虑边的匹配状态
+        if (edgeAlignmentStatusList[edgeIndex] == null){
+            this.nodeAlignmentStatusList[nodeIndex] = newNodeAlignmentStatus;//Fixme: 节点未必为空
             this.edgeAlignmentStatusList[edgeIndex] = new EdgeAlignmentStatus(cachedPath);
             this.alignmentScore += newNodeAlignmentStatus.getAlignmentScore() * (1 / cachedPath.size() + 1) / this.edgeCount;
         }
-        else {
+        else{
             Float newEdgeAlignmentScore = newNodeAlignmentStatus.getAlignmentScore() / cachedPath.size();
-            Float originalEdgeAlignmentScore = this.nodeAlignmentStatusList[nodeIndex].getAlignmentScore() / this.edgeAlignmentStatusList[edgeIndex].getPathLength();
-            if (newEdgeAlignmentScore > originalEdgeAlignmentScore) {
+            Float originalAlignmentScore = this.nodeAlignmentStatusList[nodeIndex].getAlignmentScore() / this.edgeAlignmentStatusList[edgeIndex].getPathLength();
+            if (newEdgeAlignmentScore > originalAlignmentScore){
                 this.edgeAlignmentStatusList[edgeIndex] = new EdgeAlignmentStatus(cachedPath);
                 this.nodeAlignmentStatusList[nodeIndex] = newNodeAlignmentStatus;
             }
@@ -55,8 +56,8 @@ public class GraphAlignmentStatus {
         return this;
     }
 
-    public boolean shouldTriggerAlert() {
-        return this.alignmentScore >= this.ALIGNMENT_THRESHOLDS;
+    public boolean shouldTriggerAlert(){
+        return alignmentScore >= alignmentThresholds;
     }
 
     public String getAlignmentResult() {
@@ -75,6 +76,4 @@ public class GraphAlignmentStatus {
 
         return alignmentResult.toString();
     }
-
-    public EdgeAlignmentStatus[] getEdgeAlignmentStatusList
 }
