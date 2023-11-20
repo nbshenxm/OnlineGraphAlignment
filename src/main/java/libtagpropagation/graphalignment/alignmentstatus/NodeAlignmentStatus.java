@@ -9,7 +9,7 @@ public class NodeAlignmentStatus {
 
     private String type;
     private String alignedString;
-    private float alignmentScore;
+    private float alignmentScore; // 0/1
 
     public NodeAlignmentStatus(String knowledgeGraphNodeRegex, String type, String alignedString) {
         this.type = type;

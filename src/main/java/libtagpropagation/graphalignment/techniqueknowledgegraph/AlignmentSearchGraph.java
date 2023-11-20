@@ -7,21 +7,20 @@ import libtagpropagation.graphalignment.alignmentstatus.EdgeAlignmentStatus;
 import libtagpropagation.graphalignment.alignmentstatus.NodeAlignmentStatus;
 import org.apache.flink.api.java.tuple.Tuple2;
 import provenancegraph.AssociatedEvent;
-import provenancegraph.BasicEdge;
 import provenancegraph.BasicNode;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
 
-public class AlignmentSearchTree {
+public class AlignmentSearchGraph {
     // 用于加速 TechniqueKnowledgeGraph 的搜索速度
     // 输入：查询的起点，即 Tag 中缓存的 lastAlignedNode，以及新到的节点
     // 输出：匹配的分数（0表示没有匹配上），匹配到节点的新位置
     private  ArrayList<Tuple2<Vertex, ArrayList<Integer>>> nodeSearch;
     private ArrayList<ArrayList<Edge>> edgeSearch;
 
-    public AlignmentSearchTree(TechniqueKnowledgeGraph tkg) {
+    public AlignmentSearchGraph(TechniqueKnowledgeGraph tkg) {
         // set size of dynamic graphSearch
         this.nodeSearch = new ArrayList<>(tkg.getVertexList().size());
         this.nodeSearch.addAll(null);
@@ -65,7 +64,7 @@ public class AlignmentSearchTree {
         }
     }
 
-    public Tuple2<Integer, NodeAlignmentStatus> nodeAlignmentSearch(int lastAlignedNodeIndex, BasicNode currentNode) {
+    public Tuple2<Integer, Integer, NodeAlignmentStatus> alignmentSearch(int lastAlignedNodeIndex, BasicNode currentNode) {
 
         // traverse all nodes if tkg doesn't align any node
         if (lastAlignedNodeIndex == -1){

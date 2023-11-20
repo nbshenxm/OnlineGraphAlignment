@@ -1,17 +1,15 @@
 package libtagpropagation.graphalignment;
 
-import libtagpropagation.graphalignment.alignmentstatus.EdgeAlignmentStatus;
 import libtagpropagation.graphalignment.alignmentstatus.GraphAlignmentStatus;
 import libtagpropagation.graphalignment.alignmentstatus.NodeAlignmentStatus;
-import libtagpropagation.graphalignment.techniqueknowledgegraph.AlignmentSearchTree;
+import libtagpropagation.graphalignment.techniqueknowledgegraph.AlignmentSearchGraph;
 import libtagpropagation.graphalignment.techniqueknowledgegraph.TechniqueKnowledgeGraph;
-import org.apache.flink.api.java.tuple.Tuple2;
-import org.checkerframework.checker.units.qual.A;
+import org.apache.flink.api.java.tuple.Tuple3;
 import provenancegraph.*;
 
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.UUID;
+
 
 public class GraphAlignmentTag {
 
@@ -21,45 +19,25 @@ public class GraphAlignmentTag {
     public UUID tagUuid;
 
     private TechniqueKnowledgeGraph tkg; // 用于匹配
-    private AlignmentSearchTree searchTree;
+    private AlignmentSearchGraph searchGraph;
     private int lastAlignedNodeIndex;
     private BasicNode lastAlignedNode; // 用于记录最近匹配到的节点，便于减少匹配数量，最好是一个树中节点的id
 
-    private int cachedPathLength;
+    private int cachedPathLength; // 在性能要求比较高的时候可以用来取代cachedPath
     private ArrayList<AssociatedEvent> cachedPath; // 记录最新匹配到的节点后的传播路径
     
     private GraphAlignmentStatus alignStatus; // 用于记录匹配状态，二次索引
 
-    private static final float TECHNIQUE_ACCEPT_THRESHOLD = 0.66F;
-    private float matchScore = 0F;
-
-    // ToDo: When to free the memory
-    private int occupancyCount = 1;
-
+    private static final int ATTENUATION_THRESHOLD = 6;
 
     public GraphAlignmentTag(TechniqueKnowledgeGraph tkg) {
         this.tagUuid = UUID.randomUUID();
 
         this.tkg = tkg;
-        this.searchTree = new AlignmentSearchTree(tkg);
+        this.searchGraph = new AlignmentSearchGraph(tkg);
         this.alignStatus = new GraphAlignmentStatus(tkg);
         this.lastAlignedNodeIndex = -1;
         this.lastAlignedNode = null;
-    }
-
-    private NodeAlignmentStatus alignNode(BasicNode node) {
-        // 需要取调用 AlignmentSearchTree
-        Tuple2<Integer, NodeAlignmentStatus> alignStatusTuple = this.searchTree.nodeAlignmentSearch(this.lastAlignedNodeIndex, node);
-        if (alignStatusTuple == null) return null;
-        else {
-            if (this.alignStatus.tryUpdateNode(alignStatusTuple.f0, alignStatusTuple.f1) == null) return null; // 和当前已有的匹配情况比较
-            else {
-                this.lastAlignedNode = node;
-                this.lastAlignedNodeIndex = alignStatusTuple.f0;
-                // 返回值存入 GraphAlignmentStatus
-                return alignStatusTuple.f1;
-            }
-        }
     }
 
     public boolean sameAs(GraphAlignmentTag anotherAlignmentTag) {
@@ -67,9 +45,9 @@ public class GraphAlignmentTag {
     }
 
     public GraphAlignmentTag mergeTag(GraphAlignmentTag anotherAlignmentTag) {
-        // ToDo: merge alignment status and 
-        this.occupancyCount += anotherAlignmentTag.occupancyCount;
+        // ToDo: merge alignment status
 
+        for ()
         this.cachedPathLength += anotherAlignmentTag.cachedPathLength;
         this.lastAlignedNodeIndex = anotherAlignmentTag.lastAlignedNodeIndex;
         this.lastAlignedNode = anotherAlignmentTag.lastAlignedNode;
@@ -77,51 +55,51 @@ public class GraphAlignmentTag {
         return null;
     }
 
-    // Calculate the alignment score
-    public float getMatchScore() {
-        return this.matchScore;
-    }
-
-    public boolean isMatched() {
-        return (getMatchScore() >= TECHNIQUE_ACCEPT_THRESHOLD);
-    }
-
-    public float updateMatchScore() {
-        // ToDo:
-        float newMatchScore = 1 / cachedPathLength;
-        return newMatchScore;
-    }
-
     public GraphAlignmentTag(GraphAlignmentTag orignalTag){
         this.tagUuid = UUID.randomUUID();
         this.tkg = orignalTag.tkg;
-        this.searchTree = orignalTag.searchTree;
+        this.searchGraph = orignalTag.searchGraph;
         this.alignStatus = orignalTag.alignStatus;
     }
 
     public GraphAlignmentTag propagate(AssociatedEvent event){
+
         GraphAlignmentTag newTag = new GraphAlignmentTag(this);
 
-        newTag.cachedPathLength = this.cachedPathLength + 1;
+        newTag.cachedPath = new ArrayList<>(this.cachedPath); // ToDo：有优化空间，可以复用同一个List，记录起点和终点
         newTag.cachedPath.add(event);
+        newTag.cachedPathLength = this.cachedPathLength + 1;
+
         //node align
-        Tuple2<Integer, NodeAlignmentStatus> searchResult = this.searchTree.nodeAlignmentSearch(lastAlignedNodeIndex, event.sinkNode);
-        // edge align
-//        Tuple2<Integer, EdgeAlignmentStatus> edgeResult = this.searchTree.edgeAlignmentSerach(searchResult.f0, event);
+        Tuple3<Integer, Integer, NodeAlignmentStatus> searchResult = this.searchGraph.nodeAlignmentSearch(lastAlignedNodeIndex, event.sinkNode);
         if (searchResult == null) {
-            newTag.lastAlignedNodeIndex = this.lastAlignedNodeIndex;
-            newTag.lastAlignedNode = this.lastAlignedNode;
-            newTag.cachedPath = new ArrayList<>();
-            newTag.cachedPathLength = 0;
+            if (this.cachedPath.size() > ATTENUATION_THRESHOLD) return null;
+            else {
+                newTag.lastAlignedNodeIndex = this.lastAlignedNodeIndex;
+                newTag.lastAlignedNode = this.lastAlignedNode;
+            }
         }
         else {
-            newTag.lastAlignedNodeIndex = searchResult.f0;
-            newTag.lastAlignedNode = event.sinkNode;
-            newTag.alignStatus.tryUpdateNode(searchResult.f0, searchResult.f1);
-//            newTag.alignStatus.tryUpdateEdge(edgeResult.f0, edgeResult.f1);
-            // ToDo：cached path也需要更新到alignStatus
-            newTag.cachedPath = new ArrayList<>();
-            newTag.cachedPathLength = 0;
+            GraphAlignmentStatus graphAlignmentStatus = newTag.alignStatus.tryUpdateStatus(searchResult.f0, searchResult.f1, searchResult.f2, cachedPath);
+            if (graphAlignmentStatus == null) {
+                if (this.cachedPath.size() > ATTENUATION_THRESHOLD) return null;
+                else {
+                    newTag.lastAlignedNodeIndex = this.lastAlignedNodeIndex;
+                    newTag.lastAlignedNode = this.lastAlignedNode;
+                }
+            }
+            else {
+                newTag.lastAlignedNodeIndex = searchResult.f0;
+                newTag.lastAlignedNode = event.sinkNode;
+
+                if (this.alignStatus.shouldTriggerAlert()) {
+                    System.out.println(this.alignStatus.getAlignmentResult());
+                    return null;
+                }
+
+                newTag.cachedPath = new ArrayList<>();
+                newTag.cachedPathLength = 0;
+            }
         }
 
         return newTag;
