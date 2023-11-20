@@ -1,23 +1,22 @@
 package libtagpropagation.graphalignment;
 
 import libtagpropagation.graphalignment.techniqueknowledgegraph.TechniqueKnowledgeGraph;
-import org.apache.kafka.common.protocol.types.Field;
+import org.apache.flink.api.java.tuple.Tuple2;
 import provenancegraph.AssociatedEvent;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 public class GraphAlignmentMultiTag {
     private Map<String, GraphAlignmentTag> tagMap;
 
-    public GraphAlignmentMultiTag(Set<TechniqueKnowledgeGraph> tkgList) {
+    public GraphAlignmentMultiTag(Set<Tuple2<Integer, TechniqueKnowledgeGraph>> tkgList) {
         tagMap = new HashMap<>();
 
-        for (TechniqueKnowledgeGraph tkg : tkgList){
-            GraphAlignmentTag tag = new GraphAlignmentTag(tkg);
-            this.tagMap.put(tkg.techniqueName, tag);
+        for (Tuple2<Integer, TechniqueKnowledgeGraph> entry : tkgList){
+            GraphAlignmentTag tag = new GraphAlignmentTag(entry);
+            this.tagMap.put(entry.f1.techniqueName, tag);
         }
     }
 
@@ -26,9 +25,10 @@ public class GraphAlignmentMultiTag {
     }
 
     public GraphAlignmentMultiTag mergeMultiTag(GraphAlignmentMultiTag newMultiTag) {
+        //
         Map<String, GraphAlignmentTag> newMultiTagMap = newMultiTag.getTagMap();
         for (Map.Entry entry : newMultiTagMap.entrySet()){
-            // 把相同tkgName的Tag合并
+            // 把相同tkg的Tag合并
             if (this.tagMap.containsKey(entry.getKey())) {
                 GraphAlignmentTag mergedTag = this.tagMap.get(entry.getKey()).mergeTag((GraphAlignmentTag) entry.getValue());
                 this.tagMap.put((String) entry.getKey(), mergedTag);
