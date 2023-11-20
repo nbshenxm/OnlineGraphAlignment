@@ -2,8 +2,9 @@ package libtagpropagation.graphalignment.alignmentstatus;
 
 import com.google.common.collect.Iterators;
 import libtagpropagation.graphalignment.techniqueknowledgegraph.TechniqueKnowledgeGraph;
+import provenancegraph.AssociatedEvent;
 
-import javax.xml.soap.Node;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class GraphAlignmentStatus {
@@ -14,7 +15,7 @@ public class GraphAlignmentStatus {
     // 输出匹配的最新情况
 
     public Float alignmentScore = 0.0F;
-    public final Float alignmentThresholds = 0.7F;
+    public static final Float ALIGNMENT_THRESHOLDS = 0.6F;
 
     private int nodeCount;
     private int edgeCount;
@@ -32,36 +33,30 @@ public class GraphAlignmentStatus {
         Arrays.fill(edgeAlignmentStatusList, null);
     }
 
-    public NodeAlignmentStatus tryUpdateNode(int index, NodeAlignmentStatus newStatus) {
-        if (index >= nodeCount) throw new RuntimeException("This node seems not in the TKG.");
+    public GraphAlignmentStatus tryUpdateStatus(int nodeIndex, int edgeIndex, NodeAlignmentStatus newNodeAlignmentStatus, ArrayList<AssociatedEvent> cachedPath) {
+        if (nodeIndex >= nodeCount || edgeIndex >= edgeCount) throw new RuntimeException("This node seems not in the TKG.");
 
-        // 考虑节点匹配状态
-        if (nodeAlignmentStatusList[index] == null || newStatus.isABetterAlign(nodeAlignmentStatusList[index])) {
-            nodeAlignmentStatusList[index] = newStatus;
-            // ToDo: Update alignment score
-            return newStatus;
+        // 考虑边的匹配状态
+        if (this.edgeAlignmentStatusList[edgeIndex] == null) {
+            this.nodeAlignmentStatusList[nodeIndex] = newNodeAlignmentStatus; // FixMe：此时节点未必为空
+            this.edgeAlignmentStatusList[edgeIndex] = new EdgeAlignmentStatus(cachedPath);
+            this.alignmentScore += newNodeAlignmentStatus.getAlignmentScore() * (1 / cachedPath.size() + 1) / this.edgeCount;
+        }
+        else {
+            Float newEdgeAlignmentScore = newNodeAlignmentStatus.getAlignmentScore() / cachedPath.size();
+            Float originalEdgeAlignmentScore = this.nodeAlignmentStatusList[nodeIndex].getAlignmentScore() / this.edgeAlignmentStatusList[edgeIndex].getPathLength();
+            if (newEdgeAlignmentScore > originalEdgeAlignmentScore) {
+                this.edgeAlignmentStatusList[edgeIndex] = new EdgeAlignmentStatus(cachedPath);
+                this.nodeAlignmentStatusList[nodeIndex] = newNodeAlignmentStatus;
+            }
+            else return null;
         }
 
-        // ToDo：考虑边的匹配状态
-
-        return null;
+        return this;
     }
 
-    public String tryUpdateEdge(int index, EdgeAlignmentStatus newStatus) {
-        if (index >= edgeCount) throw new RuntimeException("This edge seems not in the TKG.");
-
-        if (edgeAlignmentStatusList[index] == null || newStatus.isABetterAlign(edgeAlignmentStatusList[index])) {
-            edgeAlignmentStatusList[index] = newStatus;
-            // ToDo: Update alignment score
-            return "Updated.";
-        }
-
-        return "Not accepted.";
-    }
-
-    public Float getAlignmentScore() {
-        // ToDo: 设计对齐分数的计算过程，目标是能够及时的更新
-        return alignmentScore;
+    public boolean shouldTriggerAlert() {
+        return this.alignmentScore >= this.ALIGNMENT_THRESHOLDS;
     }
 
     public String getAlignmentResult() {
@@ -80,4 +75,6 @@ public class GraphAlignmentStatus {
 
         return alignmentResult.toString();
     }
+
+    public EdgeAlignmentStatus[] getEdgeAlignmentStatusList
 }
