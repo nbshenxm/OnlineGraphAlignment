@@ -1,14 +1,10 @@
 package libtagpropagation.graphalignment;
 
-import com.tinkerpop.blueprints.Edge;
-import com.tinkerpop.blueprints.Vertex;
 import libtagpropagation.graphalignment.techniqueknowledgegraph.TechniqueKnowledgeGraph;
 import libtagpropagation.graphalignment.techniqueknowledgegraph.TechniqueKnowledgeGraphSeedSearching;
-import org.apache.commons.math3.fitting.leastsquares.EvaluationRmsChecker;
 import org.apache.flink.api.common.state.*;
+import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.configuration.Configuration;
-import org.apache.kafka.common.protocol.types.Field;
-import org.checkerframework.checker.units.qual.A;
 import provenancegraph.*;
 
 import org.apache.flink.streaming.api.functions.KeyedProcessFunction;
@@ -67,10 +63,8 @@ public class GraphAlignmentProcessFunction
     private void init(String knowledgeGraphPath) {
         try {
             loadTechniqueKnowledgeGraphList(knowledgeGraphPath);
-//            ArrayList<TechniqueKnowledgeGraph> techniqueKnowledgeGraphs = new ArrayList<>();
-//            this.tkgList.get().forEach(techniqueKnowledgeGraphs::add);
-            TechniqueKnowledgeGraphSeedSearching techniqueKnowledgeGraphSeedSearching = new TechniqueKnowledgeGraphSeedSearching(this.tkgList.get());
-            this.seedSearching.update(techniqueKnowledgeGraphSeedSearching);
+            this.seedSearching.update(new TechniqueKnowledgeGraphSeedSearching(this.tkgList.get()));
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -88,7 +82,7 @@ public class GraphAlignmentProcessFunction
     }
 
     private GraphAlignmentMultiTag tryInitGraphAlignmentTag(AssociatedEvent associatedEvent) throws Exception {
-        Set<TechniqueKnowledgeGraph> initTkgList = new HashSet<>();
+        Set<Tuple2<Integer, TechniqueKnowledgeGraph>> initTkgList = new HashSet<>();
 
         initTkgList.addAll(this.seedSearching.value().search(associatedEvent.sourceNode));
         initTkgList.addAll(this.seedSearching.value().search(associatedEvent)); // 即匹配事件又匹配节点是为了减少标签初始化的量 ToDo：事件匹配时，标签是否应该放到两个节点上
@@ -96,11 +90,11 @@ public class GraphAlignmentProcessFunction
         if (initTkgList.isEmpty()) return null;
         else {
             GraphAlignmentMultiTag multiTag = new GraphAlignmentMultiTag(initTkgList);
-            if (this.tagsCacheMap.contains(associatedEvent.sourceNodeId)) {
-                this.tagsCacheMap.get(associatedEvent.sourceNodeId).mergeMultiTag(multiTag); // ToDo：直接用tkgList合并是否会更快
+            if (this.tagsCacheMap.contains(associatedEvent.sourceNode.getNodeId())) {
+                this.tagsCacheMap.get(associatedEvent.sourceNode.getNodeId()).mergeMultiTag(multiTag); // ToDo：直接用tkgList合并是否会更快
             }
             else{
-                this.tagsCacheMap.put(associatedEvent.sourceNodeId, multiTag);
+                this.tagsCacheMap.put(associatedEvent.sourceNode.getNodeId(), multiTag);
             }
 
             return multiTag;
@@ -109,24 +103,16 @@ public class GraphAlignmentProcessFunction
 
     private GraphAlignmentMultiTag propagateGraphAlignmentTag(AssociatedEvent associatedEvent) throws Exception {
 
-        GraphAlignmentMultiTag destMultiTag = tagsCacheMap.get(associatedEvent.sinkNodeId);
-        // iterate through tagsCacheMap to check if any existing tags can be propagated
-        Iterable<Map.Entry<UUID, GraphAlignmentMultiTag>> entries = tagsCacheMap.entries();
-        for (Map.Entry<UUID, GraphAlignmentMultiTag> entry : entries) {
-            GraphAlignmentMultiTag graphAlignmentMultiTag = entry.getValue();
-            UUID uuid = entry.getKey();
-            // if there is a match in GraphAlignmentTag with current associatedEvent, prop the tag
-            if (uuid.equals(associatedEvent.sourceNodeId)) {
-                GraphAlignmentMultiTag newTags = graphAlignmentMultiTag.propagate(associatedEvent);
+        GraphAlignmentMultiTag sinkMultiTag = tagsCacheMap.get(associatedEvent.sinkNode.getNodeId());
+        GraphAlignmentMultiTag srcMultiTag = tagsCacheMap.get(associatedEvent.sourceNode.getNodeId());
 
-                //multiTag merge
-                if(destMultiTag == null)
-                    this.tagsCacheMap.put(associatedEvent.sinkNodeId, newTags);
-                else destMultiTag.mergeMultiTag(newTags);
-            }
+        GraphAlignmentMultiTag newTags = srcMultiTag.propagate(associatedEvent);
+
+        if(sinkMultiTag == null){
+            this.tagsCacheMap.put(associatedEvent.sinkNode.getNodeId(), newTags);
         }
+        else sinkMultiTag.mergeMultiTag(newTags);
 
-        return tagsCacheMap.get(associatedEvent.sinkNodeId);
+        return tagsCacheMap.get(associatedEvent.sinkNode.getNodeId());
     }
-
 }
