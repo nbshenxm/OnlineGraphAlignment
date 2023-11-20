@@ -5,16 +5,15 @@ import provenancegraph.BasicNode;
 import java.util.regex.Pattern;
 
 public class NodeAlignmentStatus {
-    private String knowledgeGraphNodeRegex;
 
     private String type;
     private String alignedString;
-    private float alignmentScore; // 0/1
+    private float alignmentScore;
 
-    public NodeAlignmentStatus(String knowledgeGraphNodeRegex, String type, String alignedString) {
+    public NodeAlignmentStatus(String type, String alignedString) {
         this.type = type;
         this.alignedString = alignedString;
-        this.knowledgeGraphNodeRegex = knowledgeGraphNodeRegex;
+        this.alignmentScore = 1.0f;
     }
 
     public float getAlignmentScore() {
@@ -29,4 +28,5 @@ public class NodeAlignmentStatus {
     public String toString() {
         return String.format("[{}, {}]", this.alignedString, this.alignmentScore);
     }
+
 }
