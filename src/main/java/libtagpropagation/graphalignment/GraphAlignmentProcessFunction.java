@@ -104,19 +104,21 @@ public class GraphAlignmentProcessFunction
 
     private GraphAlignmentMultiTag propagateGraphAlignmentTag(AssociatedEvent associatedEvent) throws Exception {
 
-        GraphAlignmentMultiTag sinkMultiTag = tagsCacheMap.get(associatedEvent.sinkNode.getNodeId());
-        GraphAlignmentMultiTag srcMultiTag = tagsCacheMap.get(associatedEvent.sourceNode.getNodeId());
-
-        GraphAlignmentMultiTag newTags = srcMultiTag.propagate(associatedEvent);
-
-        if(sinkMultiTag == null){
-            this.tagsCacheMap.put(associatedEvent.sinkNode.getNodeId(), newTags);
-        }
-        else {
-            sinkMultiTag.mergeMultiTag(newTags);
-            newTags.mergeMultiTag(sinkMultiTag);
-        }
+//            System.out.println(associatedEvent.toJsonString());
+            GraphAlignmentMultiTag srcMultiTag = tagsCacheMap.get(associatedEvent.sourceNode.getNodeId());
+            if (srcMultiTag != null) {
+                GraphAlignmentMultiTag sinkMultiTag = tagsCacheMap.get(associatedEvent.sinkNode.getNodeId());
+                GraphAlignmentMultiTag newTags = srcMultiTag.propagate(associatedEvent);
+                // merge tag
+                if (sinkMultiTag == null) {
+                    this.tagsCacheMap.put(associatedEvent.sinkNode.getNodeId(), newTags);
+                } else {
+                    sinkMultiTag.mergeMultiTag(newTags);
+                    newTags.mergeMultiTag(sinkMultiTag);
+                }
+            }
 
         return tagsCacheMap.get(associatedEvent.sinkNode.getNodeId());
     }
 }
+
