@@ -85,6 +85,7 @@ public class GraphAlignmentProcessFunction
         Set<Tuple2<Integer, TechniqueKnowledgeGraph>> initTkgList = new HashSet<>();
 
         initTkgList.addAll(this.seedSearching.value().search(associatedEvent.sourceNode));
+        // tag 放在哪里
         initTkgList.addAll(this.seedSearching.value().search(associatedEvent)); // 即匹配事件又匹配节点是为了减少标签初始化的量 ToDo：事件匹配时，标签是否应该放到两个节点上
 
         if (initTkgList.isEmpty()) return null;
@@ -111,7 +112,10 @@ public class GraphAlignmentProcessFunction
         if(sinkMultiTag == null){
             this.tagsCacheMap.put(associatedEvent.sinkNode.getNodeId(), newTags);
         }
-        else sinkMultiTag.mergeMultiTag(newTags);
+        else {
+            sinkMultiTag.mergeMultiTag(newTags);
+            newTags.mergeMultiTag(sinkMultiTag);
+        }
 
         return tagsCacheMap.get(associatedEvent.sinkNode.getNodeId());
     }

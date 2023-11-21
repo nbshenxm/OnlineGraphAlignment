@@ -1,5 +1,6 @@
 package libtagpropagation.graphalignment;
 
+import libtagpropagation.graphalignment.alignmentstatus.EdgeAlignmentStatus;
 import libtagpropagation.graphalignment.alignmentstatus.GraphAlignmentStatus;
 import libtagpropagation.graphalignment.alignmentstatus.NodeAlignmentStatus;
 import libtagpropagation.graphalignment.techniqueknowledgegraph.AlignmentSearchGraph;
@@ -45,8 +46,23 @@ public class GraphAlignmentTag {
 
     public GraphAlignmentTag mergeTag(GraphAlignmentTag anotherAlignmentTag) {
         // ToDo: merge alignment status
+        // update nodeAlignmentStatus
+        NodeAlignmentStatus[] anotherNodeAlignmentStatusList = anotherAlignmentTag.alignStatus.getNodeAlignmentStatusList();
+        NodeAlignmentStatus[] nodeAlignmentStatusList = this.alignStatus.getNodeAlignmentStatusList();
+        for (int i = 0; i < anotherNodeAlignmentStatusList.length; i ++){
+            if (anotherNodeAlignmentStatusList[i] != null && nodeAlignmentStatusList[i] == null)
+                nodeAlignmentStatusList[i] = anotherNodeAlignmentStatusList[i];
+        }
 
-        return null;
+        // update edgeAlignmentStatus
+        EdgeAlignmentStatus[] anotherEdgeAlignmentStatusList = anotherAlignmentTag.alignStatus.getEdgeAlignmentStatusList();
+        EdgeAlignmentStatus[] edgeAlignmentStatusList = this.alignStatus.getEdgeAlignmentStatusList();
+        for (int i = 0; i < anotherEdgeAlignmentStatusList.length; i ++){
+            if(anotherEdgeAlignmentStatusList[i] != null && edgeAlignmentStatusList[i] == null){
+                edgeAlignmentStatusList[i] = anotherEdgeAlignmentStatusList[i];
+            }
+        }
+        return this;
     }
 
     public GraphAlignmentTag(GraphAlignmentTag orignalTag){
