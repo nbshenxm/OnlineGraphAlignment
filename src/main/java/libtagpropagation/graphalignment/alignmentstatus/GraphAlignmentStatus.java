@@ -56,6 +56,14 @@ public class GraphAlignmentStatus {
         return this;
     }
 
+    public NodeAlignmentStatus[] getNodeAlignmentStatusList() {
+        return nodeAlignmentStatusList;
+    }
+
+    public EdgeAlignmentStatus[] getEdgeAlignmentStatusList() {
+        return edgeAlignmentStatusList;
+    }
+
     public boolean shouldTriggerAlert(){
         return alignmentScore >= alignmentThresholds;
     }
