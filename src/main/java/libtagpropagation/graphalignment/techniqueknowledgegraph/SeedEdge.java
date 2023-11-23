@@ -11,19 +11,22 @@ public class SeedEdge {
     private Edge seedEdge;
     private int id;
     private String type;
+    private SeedNode sourceNode;
+    private SeedNode sinkNode;
+
     public SeedEdge(Edge seedEdge) {
         this.seedEdge = seedEdge;
         this.id = seedEdge.getProperty("sequence_num");
         this.type = (String)seedEdge.getProperty("event_type");
+        Vertex src = seedEdge.getVertex(Direction.OUT);
+        Vertex sink = seedEdge.getVertex(Direction.IN);
+        this.sourceNode = new SeedNode(src);
+        this.sinkNode = new SeedNode(sink);
     }
 
     public boolean isEdgeAligned(AssociatedEvent e) {
         String event = e.getRelationship();
         if (Pattern.matches(this.seedEdge.getProperty("event_type"), event)) {
-            Vertex src = this.seedEdge.getVertex(Direction.OUT);
-            Vertex dest = this.seedEdge.getVertex(Direction.IN);
-            SeedNode sourceNode = new SeedNode(src);
-            SeedNode sinkNode = new SeedNode(dest);
             if (sourceNode.isNodeAligned(e.sourceNode, e.sourceNodeProperties)){
                 return sinkNode.isNodeAligned(e.sinkNode, e.sinkNodeProperties);
             }
@@ -41,5 +44,13 @@ public class SeedEdge {
                 "id=" + id +
                 ", type='" + type + '\'' +
                 '}';
+    }
+
+    public SeedNode getSourceNode() {
+        return sourceNode;
+    }
+
+    public SeedNode getSinkNode() {
+        return sinkNode;
     }
 }

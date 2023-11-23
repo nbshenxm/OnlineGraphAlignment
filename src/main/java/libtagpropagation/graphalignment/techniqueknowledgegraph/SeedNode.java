@@ -2,9 +2,11 @@ package libtagpropagation.graphalignment.techniqueknowledgegraph;
 
 import com.tinkerpop.blueprints.Vertex;
 import com.tinkerpop.blueprints.impls.tg.TinkerGraph;
+import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.kafka.common.protocol.types.Field;
 import provenancegraph.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.Pattern;
 
@@ -39,6 +41,8 @@ public class SeedNode{
         }
         String kpKGNode = tkgNode.getProperty(getKeyPropertiesFromType(tkgNode.getProperty("type")));
         String kpPGNode = pgNode.getProperty(getKeyPropertiesFromType(pgNode.getProperty("type")));
+
+        this.alignedString = kpPGNode;
         return Pattern.matches(kpKGNode, kpPGNode);
     }
 
@@ -52,6 +56,7 @@ public class SeedNode{
                 break;
             case "Process":
                 temp_node.setProperty("type", "Process");
+
                 temp_node.setProperty("process_name", ((ProcessNodeProperties) np).getProcessName());
                 break;
             case "Network":

@@ -1,10 +1,11 @@
 package libtagpropagation.graphalignment.alignmentstatus;
 
 import com.google.common.collect.Iterators;
+import libtagpropagation.graphalignment.techniqueknowledgegraph.SeedNode;
 import libtagpropagation.graphalignment.techniqueknowledgegraph.TechniqueKnowledgeGraph;
+import org.apache.flink.api.java.tuple.Tuple2;
 import provenancegraph.AssociatedEvent;
 
-import javax.xml.soap.Node;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -24,12 +25,13 @@ public class GraphAlignmentStatus {
     private NodeAlignmentStatus[] nodeAlignmentStatusList;
     private EdgeAlignmentStatus[] edgeAlignmentStatusList;
 
-    public GraphAlignmentStatus(TechniqueKnowledgeGraph tkg) {
-        nodeCount = Iterators.size(tkg.tinkerGraph.getVertices().iterator());
+    public GraphAlignmentStatus(Tuple2<SeedNode, TechniqueKnowledgeGraph> entry) {
+        nodeCount = Iterators.size(entry.f1.tinkerGraph.getVertices().iterator());
         nodeAlignmentStatusList = new NodeAlignmentStatus[nodeCount];
         Arrays.fill(nodeAlignmentStatusList, null);
+        nodeAlignmentStatusList[entry.f0.getId()] = new NodeAlignmentStatus(entry.f0.getType(), entry.f0.getAlignedString());
 
-        edgeCount = Iterators.size(tkg.tinkerGraph.getEdges().iterator());
+        edgeCount = Iterators.size(entry.f1.tinkerGraph.getEdges().iterator());
         edgeAlignmentStatusList = new EdgeAlignmentStatus[edgeCount];
         Arrays.fill(edgeAlignmentStatusList, null);
     }
@@ -49,6 +51,7 @@ public class GraphAlignmentStatus {
             if (newEdgeAlignmentScore > originalAlignmentScore){
                 this.edgeAlignmentStatusList[edgeIndex] = new EdgeAlignmentStatus(cachedPath);
                 this.nodeAlignmentStatusList[nodeIndex] = newNodeAlignmentStatus;
+                this.alignmentScore = this.alignmentScore - originalAlignmentScore + newEdgeAlignmentScore;
             }
             else return null;
         }
@@ -71,17 +74,36 @@ public class GraphAlignmentStatus {
     public String getAlignmentResult() {
         // 格式化的输出对齐的结果，作为告警信息
         StringBuilder alignmentResult = new StringBuilder();
-
+        int count = 0;
         for (NodeAlignmentStatus nodeAligned : nodeAlignmentStatusList) {
             if (nodeAligned == null) continue;
-            else alignmentResult.append(nodeAligned.toString()).append("\n");
+            else alignmentResult.append(count).append(" node: ").append(nodeAligned.toString()).append("\n");
+            count ++;
         }
-
+        count = 0;
         for (EdgeAlignmentStatus edgeAligned : edgeAlignmentStatusList) {
             if (edgeAligned == null) continue;
-            else alignmentResult.append(edgeAligned.toString()).append("\n");
+            else alignmentResult.append(count).append(" edge: ").append(edgeAligned.toString()).append("\n");
+            count++;
         }
 
         return alignmentResult.toString();
     }
+
+    public void print(){
+        String str = "null";
+        for (int i = 0; i < nodeCount; i ++){
+            if (nodeAlignmentStatusList[i] != null) str =  nodeAlignmentStatusList[i].toString();
+            System.out.println("node " + i + ": " + str);
+            str = "null";
+        }
+
+        for (int i = 0; i < edgeCount; i ++){
+            if (edgeAlignmentStatusList[i] != null) str = edgeAlignmentStatusList[i].toString();
+            System.out.println("edge " + i + ": " + str);
+            str = "null";
+        }
+        System.out.println();
+    }
+
 }
