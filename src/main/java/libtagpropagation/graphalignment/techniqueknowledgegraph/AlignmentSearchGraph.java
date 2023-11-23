@@ -34,14 +34,12 @@ public class AlignmentSearchGraph {
 
         ArrayList<Edge> edges = this.edgeSearch.get(lastAlignedNodeIndex);
         for (Edge edge : edges){
-            Vertex vertex = edge.getVertex(Direction.IN);
             SeedEdge seedEdge = new SeedEdge(edge);
-            SeedNode seedNode = new SeedNode(vertex);
             if (seedEdge.isEdgeAligned(currentEdege)){
                 NodeAlignmentStatus nodeAlignmentStatus = new NodeAlignmentStatus(
-                        seedNode.getType(),
-                        seedNode.getAlignedString());
-                return Tuple3.of(seedNode.getId(), seedEdge.getId(), nodeAlignmentStatus);
+                        seedEdge.getSinkNode().getType(),
+                        seedEdge.getSinkNode().getAlignedString());
+                return Tuple3.of(seedEdge.getSinkNode().getId(), seedEdge.getId(), nodeAlignmentStatus);
             }
         }
         return null;

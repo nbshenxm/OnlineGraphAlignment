@@ -4,6 +4,7 @@ import libtagpropagation.graphalignment.alignmentstatus.EdgeAlignmentStatus;
 import libtagpropagation.graphalignment.alignmentstatus.GraphAlignmentStatus;
 import libtagpropagation.graphalignment.alignmentstatus.NodeAlignmentStatus;
 import libtagpropagation.graphalignment.techniqueknowledgegraph.AlignmentSearchGraph;
+import libtagpropagation.graphalignment.techniqueknowledgegraph.SeedNode;
 import libtagpropagation.graphalignment.techniqueknowledgegraph.TechniqueKnowledgeGraph;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.api.java.tuple.Tuple3;
@@ -35,17 +36,20 @@ public class GraphAlignmentTag {
     private int occupancyCount = 1;
 
 
-    public GraphAlignmentTag(Tuple2<Integer, TechniqueKnowledgeGraph> entry) {
+    public GraphAlignmentTag(Tuple2<SeedNode, TechniqueKnowledgeGraph> entry) {
         this.tagUuid = UUID.randomUUID();
         this.tkg = entry.f1;
         this.cachedPath = new ArrayList<>();
         this.searchTree = new AlignmentSearchGraph(entry.f1);
-        this.alignStatus = new GraphAlignmentStatus(entry.f1);
-        this.lastAlignedNodeIndex = entry.f0;
+        //增加匹配上的信息
+        this.alignStatus = new GraphAlignmentStatus(entry);
+        this.lastAlignedNodeIndex = entry.f0.getId();
     }
 
     public GraphAlignmentTag mergeTag(GraphAlignmentTag anotherAlignmentTag) {
         // ToDo: merge alignment status
+        System.out.println(tkg.techniqueName + " alignStatus :\n" );
+        this.alignStatus.print();
         // update nodeAlignmentStatus
         NodeAlignmentStatus[] anotherNodeAlignmentStatusList = anotherAlignmentTag.alignStatus.getNodeAlignmentStatusList();
         NodeAlignmentStatus[] nodeAlignmentStatusList = this.alignStatus.getNodeAlignmentStatusList();
@@ -62,6 +66,9 @@ public class GraphAlignmentTag {
                 edgeAlignmentStatusList[i] = anotherEdgeAlignmentStatusList[i];
             }
         }
+
+        System.out.println(tkg.techniqueName + " alignStatus after merge:\n" );
+        this.alignStatus.print();
         return this;
     }
 
@@ -81,7 +88,8 @@ public class GraphAlignmentTag {
 
         Tuple3<Integer, Integer, NodeAlignmentStatus> searchResult = this.searchTree.alignmentSearch(lastAlignedNodeIndex, event);
         if (searchResult == null) {
-            if (this.cachedPath.size() > ATTENUATION_THRESHOLD)return null;
+            System.out.println("searchResult is null\n");
+            if (this.cachedPath.size() > ATTENUATION_THRESHOLD) return null;
             else{
                 newTag.lastAlignedNodeIndex = this.lastAlignedNodeIndex;
                 newTag.lastAlignedNode = this.lastAlignedNode;
@@ -92,16 +100,19 @@ public class GraphAlignmentTag {
             newTag.lastAlignedNodeIndex = searchResult.f0;
             newTag.lastAlignedNode = event.sinkNode;
 
-            GraphAlignmentStatus graphAlignmentStatus = newTag.alignStatus.tryUpdateStatus(searchResult.f0, searchResult.f1, searchResult.f2, cachedPath);
-            if(graphAlignmentStatus == null){
+            GraphAlignmentStatus graphAlignmentStatus = newTag.alignStatus.tryUpdateStatus(searchResult.f0, searchResult.f1, searchResult.f2, newTag.cachedPath);
+            if(graphAlignmentStatus == null) {
                 if (this.cachedPath.size() > ATTENUATION_THRESHOLD)return null;
                 else{
                     newTag.lastAlignedNodeIndex = this.lastAlignedNodeIndex;
                     newTag.lastAlignedNode = this.lastAlignedNode;
                 }
             }
-            if (this.alignStatus.shouldTriggerAlert()){
-                System.out.println(this.alignStatus.getAlignmentResult());
+            System.out.println("alignmentScore: " + newTag.alignStatus.alignmentScore + "\n");
+            if (newTag.alignStatus.shouldTriggerAlert()){
+                System.out.println("*************Alert*************");
+                System.out.println(newTag.alignStatus.getAlignmentResult());
+                System.out.println("*************Alert*************");
                 return null;
             }
             // ToDo：cached path也需要更新到alignStatus

@@ -1,5 +1,6 @@
 package libtagpropagation.graphalignment.alignmentstatus;
 
+import org.apache.kafka.common.protocol.types.Field;
 import provenancegraph.AssociatedEvent;
 
 import java.util.ArrayList;
@@ -17,4 +18,11 @@ public class EdgeAlignmentStatus {
     public int getPathLength() {
         return pathLength;
     }
+
+    @Override
+    public String toString() {
+        String path = alignedPath.get(alignedPath.size() - 1).toString();
+        return String.format("[{%s}]", path);
+    }
+
 }

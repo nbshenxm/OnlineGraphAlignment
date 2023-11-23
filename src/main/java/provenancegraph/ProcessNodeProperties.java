@@ -14,8 +14,8 @@ public class ProcessNodeProperties extends NodeProperties {
     public ProcessNodeProperties(int processId, String exePath, String cmdLineArguments, String processName) {
         this.type = NodeType.Process;
         this.processId = processId;
-        this.exePath = exePath;
         this.processName = processName;
+        this.exePath = exePath;
         this.cmdLineArguments = cmdLineArguments;
     }
 
@@ -24,7 +24,7 @@ public class ProcessNodeProperties extends NodeProperties {
     }
 
     public String getProcessName() {
-        return this.exePath;
+        return this.processName;
     }
 
     @Override

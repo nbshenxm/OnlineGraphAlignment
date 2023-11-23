@@ -13,8 +13,8 @@ public class TechniqueKnowledgeGraphSeedSearching {
     private Map<SeedNode, TechniqueKnowledgeGraph> seedNodeSearchMap;
     private Map<SeedEdge, TechniqueKnowledgeGraph> seedEdgeSearchMap;
 
-    private Map<UUID, List<Tuple2<Integer, TechniqueKnowledgeGraph>>> searchedNodeCache;
-    private Map<UUID, List<Tuple2<Integer, TechniqueKnowledgeGraph>>> searchedEdgeCache;
+    private Map<UUID, List<Tuple2<SeedNode, TechniqueKnowledgeGraph>>> searchedNodeCache;
+    private Map<UUID, List<Tuple2<SeedNode, TechniqueKnowledgeGraph>>> searchedEdgeCache;
 
     public TechniqueKnowledgeGraphSeedSearching(Iterable<TechniqueKnowledgeGraph> tkgList) {
         this.seedEdgeSearchMap = new HashMap<>();
@@ -38,6 +38,7 @@ public class TechniqueKnowledgeGraphSeedSearching {
             TechniqueKnowledgeGraph tkg = (TechniqueKnowledgeGraph) entry.getValue();
             System.out.println(seedNode.toString() + " " + tkg.techniqueName);
         }
+        System.out.println();
     }
 
     public void addTechniqueKnowledgeGraph(TechniqueKnowledgeGraph tkg) {
@@ -54,18 +55,18 @@ public class TechniqueKnowledgeGraphSeedSearching {
         }
     }
 
-    public List<Tuple2<Integer, TechniqueKnowledgeGraph>> search(BasicNode candidateNode) {
+    public List<Tuple2<SeedNode, TechniqueKnowledgeGraph>> search(BasicNode candidateNode) {
         // 缓存查询过的节点
         if (this.searchedNodeCache.containsKey(candidateNode.getNodeId())) {
             return this.searchedNodeCache.get(candidateNode.getNodeId());
         }
 
         else {
-            ArrayList<Tuple2<Integer, TechniqueKnowledgeGraph>> techniqueKnowledgeGraphs = new ArrayList<>();
+            ArrayList<Tuple2<SeedNode, TechniqueKnowledgeGraph>> techniqueKnowledgeGraphs = new ArrayList<>();
             for (Map.Entry entry : this.seedNodeSearchMap.entrySet()) {
                 SeedNode seedNode = (SeedNode) entry.getKey();
-                if (seedNode.isNodeAligned(candidateNode, candidateNode.getProperties())) { // ToDo：不要用全局的函数，改到SeedNode和SeedEdge类里
-                    techniqueKnowledgeGraphs.add(Tuple2.of(seedNode.getId(), (TechniqueKnowledgeGraph) entry.getValue()));
+                if (seedNode.isNodeAligned(candidateNode, candidateNode.getProperties())) {
+                    techniqueKnowledgeGraphs.add(Tuple2.of(seedNode, (TechniqueKnowledgeGraph) entry.getValue()));
                 }
             }
 
@@ -74,21 +75,32 @@ public class TechniqueKnowledgeGraphSeedSearching {
         }
     }
 
-    public List<Tuple2<Integer, TechniqueKnowledgeGraph>> search(AssociatedEvent candidateEdge) {
+    public List<Tuple2<SeedNode, TechniqueKnowledgeGraph>> search(AssociatedEvent candidateEdge) {
         // ToDo：加上缓存
         if (this.searchedEdgeCache.containsKey(candidateEdge.edgeId)) {
             return this.searchedEdgeCache.get(candidateEdge.edgeId);
         }
         else {
-            ArrayList<Tuple2<Integer, TechniqueKnowledgeGraph>> techniqueKnowledgeGraphs = new ArrayList<>();
+            ArrayList<Tuple2<SeedNode, TechniqueKnowledgeGraph>> techniqueKnowledgeGraphs = new ArrayList<>();
             for (Map.Entry entry : seedEdgeSearchMap.entrySet()) {
                 SeedEdge seedEdge = (SeedEdge) entry.getKey();
+
                 if (seedEdge.isEdgeAligned(candidateEdge)) {
-                    techniqueKnowledgeGraphs.add(Tuple2.of(seedEdge.getId(), (TechniqueKnowledgeGraph) entry.getValue()));
+                    techniqueKnowledgeGraphs.add(Tuple2.of(seedEdge.getSourceNode(), (TechniqueKnowledgeGraph) entry.getValue()));
                 }
             }
             this.searchedEdgeCache.put(candidateEdge.edgeId, techniqueKnowledgeGraphs);
             return techniqueKnowledgeGraphs;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "TechniqueKnowledgeGraphSeedSearching{" +
+                "seedNodeSearchMap=" + seedNodeSearchMap +
+                ", seedEdgeSearchMap=" + seedEdgeSearchMap +
+                ", searchedNodeCache=" + searchedNodeCache +
+                ", searchedEdgeCache=" + searchedEdgeCache +
+                '}';
     }
 }
