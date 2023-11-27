@@ -26,7 +26,7 @@ public class TechniqueKnowledgeGraphSeedSearching {
         }
 
         // Print seedNodes and seedEdges
-        System.out.println("Print seedNodes and seedEdges in TKGs");
+        System.out.println("TKG中的seedNode和seedEdge");
         for(Map.Entry entry : seedNodeSearchMap.entrySet()){
             SeedNode seedNode = (SeedNode) entry.getKey();
             TechniqueKnowledgeGraph tkg = (TechniqueKnowledgeGraph) entry.getValue();
@@ -77,8 +77,8 @@ public class TechniqueKnowledgeGraphSeedSearching {
 
     public List<Tuple2<SeedNode, TechniqueKnowledgeGraph>> search(AssociatedEvent candidateEdge) {
         // ToDo：加上缓存
-        if (this.searchedEdgeCache.containsKey(candidateEdge.edgeId)) {
-            return this.searchedEdgeCache.get(candidateEdge.edgeId);
+        if (this.searchedEdgeCache.containsKey(candidateEdge.hostUUID)) {
+            return this.searchedEdgeCache.get(candidateEdge.hostUUID);
         }
         else {
             ArrayList<Tuple2<SeedNode, TechniqueKnowledgeGraph>> techniqueKnowledgeGraphs = new ArrayList<>();
