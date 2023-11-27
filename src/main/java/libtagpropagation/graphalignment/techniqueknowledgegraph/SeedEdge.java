@@ -26,7 +26,8 @@ public class SeedEdge {
 
     public boolean isEdgeAligned(AssociatedEvent e) {
         String event = e.getRelationship();
-        if (Pattern.matches(this.seedEdge.getProperty("event_type"), event)) {
+        String event_type = (String) this.seedEdge.getProperty("event_type");
+        if (Pattern.matches(event_type , event)) {
             if (sourceNode.isNodeAligned(e.sourceNode, e.sourceNodeProperties)){
                 return sinkNode.isNodeAligned(e.sinkNode, e.sinkNodeProperties);
             }
