@@ -15,9 +15,9 @@ public class GraphAlignmentStatus {
     // 用 TechniqueKnowledgeGraph 初始化
     // 输入匹配上的结果，该结果来自于 TechniqueKnowledge 和 ALignmentSearchTree 的输出
     // 输出匹配的最新情况
-
+    public String techniqueName;
     public Float alignmentScore = 0.0F;
-    public final Float alignmentThresholds = 0.7F;
+    public static final Float ALIGNMENT_THRESHOLDS = 1.4F;
 
     private int nodeCount;
     private int edgeCount;
@@ -34,6 +34,8 @@ public class GraphAlignmentStatus {
         edgeCount = Iterators.size(entry.f1.tinkerGraph.getEdges().iterator());
         edgeAlignmentStatusList = new EdgeAlignmentStatus[edgeCount];
         Arrays.fill(edgeAlignmentStatusList, null);
+
+        this.techniqueName = entry.f1.techniqueName;
     }
 
     public GraphAlignmentStatus tryUpdateStatus(int nodeIndex, int edgeIndex, NodeAlignmentStatus newNodeAlignmentStatus, ArrayList<AssociatedEvent> cachedPath) {
@@ -55,7 +57,6 @@ public class GraphAlignmentStatus {
             }
             else return null;
         }
-
         return this;
     }
 
@@ -68,12 +69,14 @@ public class GraphAlignmentStatus {
     }
 
     public boolean shouldTriggerAlert(){
-        return alignmentScore >= alignmentThresholds;
+        return alignmentScore >= ALIGNMENT_THRESHOLDS;
     }
 
     public String getAlignmentResult() {
         // 格式化的输出对齐的结果，作为告警信息
         StringBuilder alignmentResult = new StringBuilder();
+        alignmentResult.append("Alert\nTKG: ").append(this.techniqueName).append("\n");
+        alignmentResult.append("alignmentScore: ").append(this.alignmentScore).append("\n");
         int count = 0;
         for (NodeAlignmentStatus nodeAligned : nodeAlignmentStatusList) {
             if (nodeAligned == null) continue;
@@ -91,6 +94,8 @@ public class GraphAlignmentStatus {
     }
 
     public void print(){
+        System.out.println("TKG: " + this.techniqueName);
+        System.out.println("score: " + this.alignmentScore);
         String str = "null";
         for (int i = 0; i < nodeCount; i ++){
             if (nodeAlignmentStatusList[i] != null) str =  nodeAlignmentStatusList[i].toString();
@@ -104,6 +109,36 @@ public class GraphAlignmentStatus {
             str = "null";
         }
         System.out.println();
+    }
+
+    public GraphAlignmentStatus updateNodeAlignmentStatus(NodeAlignmentStatus[] anotherNodeAlignmentStatusList){
+
+        for (int i = 0; i < anotherNodeAlignmentStatusList.length; i ++){
+            if (anotherNodeAlignmentStatusList[i] != null && nodeAlignmentStatusList[i] == null)
+                nodeAlignmentStatusList[i] = anotherNodeAlignmentStatusList[i];
+        }
+
+        return this;
+    }
+
+    public GraphAlignmentStatus updateEdgeAlignmentStatus(EdgeAlignmentStatus[] anotherEdgeAlignmentStatusList){
+
+        for (int i = 0; i < anotherEdgeAlignmentStatusList.length; i ++){
+            if(anotherEdgeAlignmentStatusList[i] != null && edgeAlignmentStatusList[i] == null){
+                edgeAlignmentStatusList[i] = anotherEdgeAlignmentStatusList[i];
+                this.alignmentScore += 1.0f /  anotherEdgeAlignmentStatusList[i].getPathLength();
+            }
+            else if (anotherEdgeAlignmentStatusList[i] != null && edgeAlignmentStatusList[i] != null){
+                Float newEdgeAlignmentScore = 1.0f /  anotherEdgeAlignmentStatusList[i].getPathLength();
+                Float originalAlignmentScore = 1.0f / this.edgeAlignmentStatusList[i].getPathLength();
+                if (newEdgeAlignmentScore > originalAlignmentScore){
+                    this.edgeAlignmentStatusList[i] = anotherEdgeAlignmentStatusList[i];
+//                    this.nodeAlignmentStatusList[nodeIndex] = newNodeAlignmentStatus;
+                    this.alignmentScore = this.alignmentScore - originalAlignmentScore + newEdgeAlignmentScore;
+                }
+            }
+        }
+        return this;
     }
 
 }
