@@ -47,28 +47,19 @@ public class GraphAlignmentTag {
     }
 
     public GraphAlignmentTag mergeTag(GraphAlignmentTag anotherAlignmentTag) {
-        // ToDo: merge alignment status
-        System.out.println(tkg.techniqueName + " alignStatus :\n" );
-        this.alignStatus.print();
+
         // update nodeAlignmentStatus
-        NodeAlignmentStatus[] anotherNodeAlignmentStatusList = anotherAlignmentTag.alignStatus.getNodeAlignmentStatusList();
-        NodeAlignmentStatus[] nodeAlignmentStatusList = this.alignStatus.getNodeAlignmentStatusList();
-        for (int i = 0; i < anotherNodeAlignmentStatusList.length; i ++){
-            if (anotherNodeAlignmentStatusList[i] != null && nodeAlignmentStatusList[i] == null)
-                nodeAlignmentStatusList[i] = anotherNodeAlignmentStatusList[i];
-        }
+        this.alignStatus.updateNodeAlignmentStatus(anotherAlignmentTag.alignStatus.getNodeAlignmentStatusList());
 
         // update edgeAlignmentStatus
-        EdgeAlignmentStatus[] anotherEdgeAlignmentStatusList = anotherAlignmentTag.alignStatus.getEdgeAlignmentStatusList();
-        EdgeAlignmentStatus[] edgeAlignmentStatusList = this.alignStatus.getEdgeAlignmentStatusList();
-        for (int i = 0; i < anotherEdgeAlignmentStatusList.length; i ++){
-            if(anotherEdgeAlignmentStatusList[i] != null && edgeAlignmentStatusList[i] == null){
-                edgeAlignmentStatusList[i] = anotherEdgeAlignmentStatusList[i];
-            }
+        this.alignStatus.updateEdgeAlignmentStatus(anotherAlignmentTag.alignStatus.getEdgeAlignmentStatusList());
+        if (anotherAlignmentTag.cachedPath.size() < this.cachedPath.size()){
+            this.cachedPath = new ArrayList<>(anotherAlignmentTag.cachedPath);
+            this.lastAlignedNodeIndex = anotherAlignmentTag.lastAlignedNodeIndex;
         }
 
-        System.out.println(tkg.techniqueName + " alignStatus after merge:\n" );
-        this.alignStatus.print();
+//        System.out.println("merge:" + this.tagUuid + " " + anotherAlignmentTag.tagUuid );
+//        this.alignStatus.print();
         return this;
     }
 
@@ -88,7 +79,6 @@ public class GraphAlignmentTag {
 
         Tuple3<Integer, Integer, NodeAlignmentStatus> searchResult = this.searchTree.alignmentSearch(lastAlignedNodeIndex, event);
         if (searchResult == null) {
-            System.out.println("searchResult is null\n");
             if (this.cachedPath.size() > ATTENUATION_THRESHOLD) return null;
             else{
                 newTag.lastAlignedNodeIndex = this.lastAlignedNodeIndex;
@@ -99,7 +89,6 @@ public class GraphAlignmentTag {
         else {
             newTag.lastAlignedNodeIndex = searchResult.f0;
             newTag.lastAlignedNode = event.sinkNode;
-
             GraphAlignmentStatus graphAlignmentStatus = newTag.alignStatus.tryUpdateStatus(searchResult.f0, searchResult.f1, searchResult.f2, newTag.cachedPath);
             if(graphAlignmentStatus == null) {
                 if (this.cachedPath.size() > ATTENUATION_THRESHOLD)return null;
@@ -108,13 +97,12 @@ public class GraphAlignmentTag {
                     newTag.lastAlignedNode = this.lastAlignedNode;
                 }
             }
-            System.out.println("alignmentScore: " + newTag.alignStatus.alignmentScore + "\n");
             if (newTag.alignStatus.shouldTriggerAlert()){
-                System.out.println("*************Alert*************");
                 System.out.println(newTag.alignStatus.getAlignmentResult());
-                System.out.println("*************Alert*************");
                 return null;
             }
+//            System.out.println("updateStatus:");
+//            this.alignStatus.print();
             // ToDo：cached path也需要更新到alignStatus
             newTag.cachedPath = new ArrayList<>();
             newTag.cachedPathLength = 0;
@@ -122,4 +110,5 @@ public class GraphAlignmentTag {
 
         return newTag;
     }
+
 }
