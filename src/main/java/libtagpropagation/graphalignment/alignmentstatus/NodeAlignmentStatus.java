@@ -18,7 +18,7 @@ public class NodeAlignmentStatus {
 
     @Override
     public String toString() {
-        return String.format("[{%s}, {%.2f}]", this.alignedString, this.alignmentScore);
+        return String.format("[{%s}, {%s}]", this.alignedString, this.type);
     }
 
 }
