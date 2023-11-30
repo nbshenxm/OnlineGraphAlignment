@@ -16,10 +16,11 @@
 
     <graph id="T1053.003_Cron" edgedefault="directed">
         <!-- Description: Leverage Cron for persistance or privilege escalation by add new tasks to crontab or modify existing cron tasks. -->
+        <!-- <data key="file_path">.*/crontab\..*/crontab|/var/spool/cron|/etc/cron(\..*|tab)|/etc/init/anacron.conf|/etc/anacrontab|/etc/cron.d/anacron|/etc/apm/event.d/anacron</data> -->
         <node id="n0">
             <data key="type">File</data>
-            <data key="file_path">.*/crontab\..*/crontab|/var/spool/cron|/etc/cron(\..*|tab)|/etc/init/anacron.conf|/etc/anacrontab|/etc/cron.d/anacron|/etc/apm/event.d/anacron</data>
-            <data key="is_seed_node">true</data>
+            <data key="file_path">/etc/cron.d/.*</data>
+            <data key="is_seed_node">false</data>
         </node>
         <node id="n1">
             <data key="type">Process</data>
@@ -29,17 +30,29 @@
         <node id="n2">
             <!-- Limit the spread of higher-level technique tags. -->
             <data key="type">Process</data>
+
             <data key="process_name">cron</data>
+            <data key="is_seed_node">true</data>
+        </node>
+        <node id="n3">
+            <!-- Limit the spread of higher-level technique tags. -->
+            <data key="type">Process</data>
+            <data key="process_name">.*?</data>
             <data key="is_seed_node">false</data>
         </node>
 
-        <edge source="n0" target="n1">
+        <edge source="n1" target="n0">
             <data key="event_type">FILE_WRITE</data>
+            <data key="sequence_num">0</data>
+            <data key="is_seed_edge">true</data>
+        </edge>
+        <edge source="n2" target="n0">
+            <data key="event_type">PROCESS_LOAD</data>
             <data key="sequence_num">1</data>
             <data key="is_seed_edge">true</data>
         </edge>
-        <edge source="n2" target="n1">
-            <data key="event_type">FILE_READ</data>
+        <edge source="n2" target="n3">
+            <data key="event_type">PROCESS_EXEC</data>
             <data key="sequence_num">2</data>
             <data key="is_seed_edge">false</data>
         </edge>
