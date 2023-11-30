@@ -1,6 +1,5 @@
 package libtagpropagation.graphalignment;
 
-import libtagpropagation.graphalignment.alignmentstatus.EdgeAlignmentStatus;
 import libtagpropagation.graphalignment.alignmentstatus.GraphAlignmentStatus;
 import libtagpropagation.graphalignment.alignmentstatus.NodeAlignmentStatus;
 import libtagpropagation.graphalignment.techniqueknowledgegraph.AlignmentSearchGraph;
@@ -48,18 +47,23 @@ public class GraphAlignmentTag {
 
     public GraphAlignmentTag mergeTag(GraphAlignmentTag anotherAlignmentTag) {
 
-        // update nodeAlignmentStatus
-        this.alignStatus.updateNodeAlignmentStatus(anotherAlignmentTag.alignStatus.getNodeAlignmentStatusList());
+        // update mergeAlignmentStatus
+        this.alignStatus.mergeAlignmentStatus(anotherAlignmentTag.alignStatus.getEdgeAlignmentStatusList(),anotherAlignmentTag.alignStatus.getNodeAlignmentStatusList());
 
-        // update edgeAlignmentStatus
-        this.alignStatus.updateEdgeAlignmentStatus(anotherAlignmentTag.alignStatus.getEdgeAlignmentStatusList());
-        if (anotherAlignmentTag.cachedPath.size() < this.cachedPath.size()){
-            this.cachedPath = new ArrayList<>(anotherAlignmentTag.cachedPath);
-            this.lastAlignedNodeIndex = anotherAlignmentTag.lastAlignedNodeIndex;
+//        System.out.println("merge:" + this.lastAlignedNodeIndex + " " + anotherAlignmentTag.lastAlignedNodeIndex );
+//        this.alignStatus.print();
+
+        if (this.alignStatus.recurringAlert()){
+            return null;
         }
 
-//        System.out.println("merge:" + this.tagUuid + " " + anotherAlignmentTag.tagUuid );
-//        this.alignStatus.print();
+        if (this.alignStatus.shouldTriggerAlert()){
+            System.out.println(this.alignStatus.getAlignmentResult());
+            return null;
+        }
+
+        this.lastAlignedNodeIndex = anotherAlignmentTag.lastAlignedNodeIndex;
+
         return this;
     }
 
@@ -71,6 +75,9 @@ public class GraphAlignmentTag {
     }
 
     public GraphAlignmentTag propagate(AssociatedEvent event){
+        if (this.alignStatus.recurringAlert()){
+            return null;
+        }
         GraphAlignmentTag newTag = new GraphAlignmentTag(this);
         newTag.cachedPath = new ArrayList<>(this.cachedPath);
 
@@ -97,8 +104,8 @@ public class GraphAlignmentTag {
                     newTag.lastAlignedNode = this.lastAlignedNode;
                 }
             }
-            if (newTag.alignStatus.shouldTriggerAlert()){
-                System.out.println(newTag.alignStatus.getAlignmentResult());
+            if (this.alignStatus.shouldTriggerAlert()){
+                System.out.println(this.alignStatus.getAlignmentResult());
                 return null;
             }
 //            System.out.println("updateStatus:");
