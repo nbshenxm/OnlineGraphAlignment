@@ -26,7 +26,10 @@ public class GraphAlignmentProcessFunction
     private transient ValueState<Boolean> isInitialized;
     private transient MapState<UUID, GraphAlignmentMultiTag> tagsCacheMap;
     private static int processEventCount = 0;
+    private static int initTagCount = 0;
+    private static int propagateCount = 0;
     private static int multiTagCount = 0;
+    private static int tagCount = 0;
 
     @Override
     public void open(Configuration parameter) {
@@ -58,6 +61,14 @@ public class GraphAlignmentProcessFunction
             this.isInitialized.update(true);
         }
         try {
+            processEventCount++;
+            tagCount = propagateCount + initTagCount;
+            if (processEventCount % 1000 == 0){
+                System.out.println("处理的事件数量：" + processEventCount + "\n多标签数量： " + multiTagCount + "\n标签数量： " + tagCount
+                                    + "\n初始化标签数量：" + initTagCount + "  传播标签数量： " + propagateCount
+                                    + "\n...\n"
+                        );
+            }
             tryInitGraphAlignmentTag(associatedEvent); // 先将标签初始化到SourceNode上，再考虑是不是需要传播
             propagateGraphAlignmentTag(associatedEvent);
         } catch (Exception e) {
@@ -68,6 +79,13 @@ public class GraphAlignmentProcessFunction
     private void init(String knowledgeGraphPath) {
         try {
             loadTechniqueKnowledgeGraphList(knowledgeGraphPath);
+            int count = 0;
+            String out = "";
+            for (TechniqueKnowledgeGraph tkg : this.tkgList.get()){
+                count ++;
+                out += tkg.techniqueName + "\n";
+            }
+            System.out.println("TKG 总数是 ：" + count + "\n" + out);
             this.seedSearching.update(new TechniqueKnowledgeGraphSeedSearching(this.tkgList.get()));
 
         } catch (Exception e) {
@@ -87,24 +105,11 @@ public class GraphAlignmentProcessFunction
     }
 
     private GraphAlignmentMultiTag tryInitGraphAlignmentTag(AssociatedEvent associatedEvent) throws Exception {
-        processEventCount++;
-        System.out.println(String.format("\n########################################第%d事件正在处理############################################################", processEventCount));
-        System.out.println("---------------------tryInitGraphAlignmentTag---------------------");
         Set<Tuple2<SeedNode, TechniqueKnowledgeGraph>> initTkgList = new HashSet<>();
 
         initTkgList.addAll(this.seedSearching.value().search(associatedEvent.sourceNode));
         // 记录到source上传播到sink上面
         initTkgList.addAll(this.seedSearching.value().search(associatedEvent)); // 即匹配事件又匹配节点是为了减少标签初始化的量
-
-        if (initTkgList.isEmpty()) {
-            System.out.println("该事件没有匹配到seedNode and seedEdge\n");
-        }else{
-            System.out.println("搜索到的seed节点:");
-            for (Tuple2<SeedNode, TechniqueKnowledgeGraph> item : initTkgList){
-                System.out.println("node " + item.f0.getId() + "  tkg: " + item.f1.techniqueName);
-            }
-            System.out.println();
-        }
 
         if (initTkgList.isEmpty()) return null;
         else {
@@ -116,7 +121,7 @@ public class GraphAlignmentProcessFunction
                 this.tagsCacheMap.put(associatedEvent.sourceNode.getNodeId(), multiTag);
                 multiTagCount ++;
             }
-
+            initTagCount += multiTag.getTagMap().size();
             return multiTag;
         }
     }
@@ -124,42 +129,33 @@ public class GraphAlignmentProcessFunction
     // TODo 标签统计，处理的事件量  关键的状态变化，初始化的标签
     private GraphAlignmentMultiTag propagateGraphAlignmentTag(AssociatedEvent associatedEvent) throws Exception {
 
-        System.out.println("---------------------propagateGraphAlignmentTag------------------------");
-        if (processEventCount != 0){
-            System.out.println("multiTagCount: " + multiTagCount +
-                    "\tprocessEventCount: " + processEventCount +
-                    "\ncontinue..."
-            );
-        }
-
         GraphAlignmentMultiTag srcMultiTag = tagsCacheMap.get(associatedEvent.sourceNode.getNodeId());
         if (srcMultiTag != null) {
+            if (srcMultiTag.getTagMap().size() == 0) {
+                this.tagsCacheMap.remove(associatedEvent.sourceNode.getNodeId());
+                multiTagCount --;
+            }
             GraphAlignmentMultiTag sinkMultiTag = tagsCacheMap.get(associatedEvent.sinkNode.getNodeId());
             GraphAlignmentMultiTag newTags = srcMultiTag.propagate(associatedEvent);
 
             // merge tag
             if (sinkMultiTag == null) {
-                System.out.println("\nsinkMultiTag为null无需Merge");
-                this.tagsCacheMap.put(associatedEvent.sinkNode.getNodeId(), newTags);
+                if (newTags != null){
+                    multiTagCount ++;
+                    propagateCount += newTags.getTagMap().size();
+                    this.tagsCacheMap.put(associatedEvent.sinkNode.getNodeId(), newTags);
+                }
             } else {
-                System.out.println("\n--------------------merge Tag-------------------------");
+                propagateCount -= sinkMultiTag.getTagMap().size();
                 sinkMultiTag.mergeMultiTag(newTags);
+                propagateCount += sinkMultiTag.getTagMap().size();
+
                 newTags.mergeMultiTag(sinkMultiTag);
             }
         }
-        System.out.println("##########################################end##########################################################");
         return tagsCacheMap.get(associatedEvent.sinkNode.getNodeId());
     }
 
-    @Override
-    public String toString() {
-        return "GraphAlignmentProcessFunction{" +
-                "tkgList=" + tkgList +
-                ", seedSearching=" + seedSearching +
-                ", isInitialized=" + isInitialized +
-                ", tagsCacheMap=" + tagsCacheMap +
-                '}';
-    }
 }
 
 

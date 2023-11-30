@@ -94,13 +94,4 @@ public class TechniqueKnowledgeGraphSeedSearching {
         }
     }
 
-    @Override
-    public String toString() {
-        return "TechniqueKnowledgeGraphSeedSearching{" +
-                "seedNodeSearchMap=" + seedNodeSearchMap +
-                ", seedEdgeSearchMap=" + seedEdgeSearchMap +
-                ", searchedNodeCache=" + searchedNodeCache +
-                ", searchedEdgeCache=" + searchedEdgeCache +
-                '}';
-    }
 }
