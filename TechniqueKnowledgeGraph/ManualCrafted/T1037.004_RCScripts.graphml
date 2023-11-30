@@ -22,7 +22,7 @@
         </node>
         <node id="n1">
             <data key="type">File</data>
-            <data key="file_path">/etc/(rc.local|rc.d|init.d)</data>
+            <data key="file_path">/etc/(rc.common|rc.local|rc.d|init.d)</data>
             <data key="is_seed_node">true</data>
         </node>
         <node id="n2">
@@ -33,13 +33,13 @@
 
         <edge source="n0" target="n1">
             <data key="event_type">FILE_WRITE</data>
-            <data key="sequence_num">1</data>
+            <data key="sequence_num">0</data>
             <data key="is_seed_edge">true</data>
         </edge>
         <edge source="n2" target="n1">
-            <data key="event_type">PROCESS_EXEC</data>
-            <data key="sequence_num">2</data>
-            <data key="is_seed_edge">false</data>
+            <data key="event_type">PROCESS_LOAD</data>
+            <data key="sequence_num">1</data>
+            <data key="is_seed_edge">true</data>
         </edge>
     </graph>
 </graphml>
