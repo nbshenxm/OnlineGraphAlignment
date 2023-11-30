@@ -2,11 +2,8 @@ package libtagpropagation.graphalignment.techniqueknowledgegraph;
 
 import com.tinkerpop.blueprints.Vertex;
 import com.tinkerpop.blueprints.impls.tg.TinkerGraph;
-import org.apache.flink.api.java.tuple.Tuple2;
-import org.apache.kafka.common.protocol.types.Field;
 import provenancegraph.*;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.Pattern;
 
