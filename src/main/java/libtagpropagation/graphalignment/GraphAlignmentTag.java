@@ -29,6 +29,7 @@ public class GraphAlignmentTag {
     
     private GraphAlignmentStatus alignStatus; // 用于记录匹配状态，二次索引
 
+    private boolean IsOnTKG;
     private static final int ATTENUATION_THRESHOLD = 6;
 
     // ToDo: When to free the memory
@@ -43,9 +44,13 @@ public class GraphAlignmentTag {
         //增加匹配上的信息
         this.alignStatus = new GraphAlignmentStatus(entry);
         this.lastAlignedNodeIndex = entry.f0.getId();
+        this.IsOnTKG = true;
     }
 
     public GraphAlignmentTag mergeTag(GraphAlignmentTag anotherAlignmentTag) {
+        if (this.alignStatus.recurringAlert()){
+            return null;
+        }
 
         // update mergeAlignmentStatus
         this.alignStatus.mergeAlignmentStatus(anotherAlignmentTag.alignStatus.getEdgeAlignmentStatusList(),anotherAlignmentTag.alignStatus.getNodeAlignmentStatusList());
@@ -53,16 +58,16 @@ public class GraphAlignmentTag {
 //        System.out.println("merge:" + this.lastAlignedNodeIndex + " " + anotherAlignmentTag.lastAlignedNodeIndex );
 //        this.alignStatus.print();
 
-        if (this.alignStatus.recurringAlert()){
-            return null;
-        }
-
         if (this.alignStatus.shouldTriggerAlert()){
             System.out.println(this.alignStatus.getAlignmentResult());
             return null;
         }
-
-        this.lastAlignedNodeIndex = anotherAlignmentTag.lastAlignedNodeIndex;
+        if(anotherAlignmentTag.IsOnTKG){
+            this.lastAlignedNodeIndex = anotherAlignmentTag.lastAlignedNodeIndex;
+        }
+        else{
+            this.lastAlignedNodeIndex = -1;
+        }
 
         return this;
     }
@@ -86,16 +91,18 @@ public class GraphAlignmentTag {
 
         Tuple3<Integer, Integer, NodeAlignmentStatus> searchResult = this.searchTree.alignmentSearch(lastAlignedNodeIndex, event);
         if (searchResult == null) {
-            if (this.cachedPath.size() > ATTENUATION_THRESHOLD) return null;
+            if (newTag.cachedPath.size() > ATTENUATION_THRESHOLD) return null;
             else{
                 newTag.lastAlignedNodeIndex = this.lastAlignedNodeIndex;
                 newTag.lastAlignedNode = this.lastAlignedNode;
+                newTag.IsOnTKG = false;
             }
 
         }
         else {
             newTag.lastAlignedNodeIndex = searchResult.f0;
             newTag.lastAlignedNode = event.sinkNode;
+            newTag.IsOnTKG = true;
             GraphAlignmentStatus graphAlignmentStatus = newTag.alignStatus.tryUpdateStatus(searchResult.f0, searchResult.f1, searchResult.f2, newTag.cachedPath);
             if(graphAlignmentStatus == null) {
                 if (this.cachedPath.size() > ATTENUATION_THRESHOLD)return null;
