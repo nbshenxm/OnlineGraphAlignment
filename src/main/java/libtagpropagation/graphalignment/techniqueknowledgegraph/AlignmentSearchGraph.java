@@ -14,6 +14,7 @@ public class AlignmentSearchGraph {
     // 输入：查询的起点，即 Tag 中缓存的 lastAlignedNode，以及新到的节点
     // 输出：匹配的分数（0表示没有匹配上），匹配到节点的新位置
     private ArrayList<ArrayList<Edge>> edgeSearch;
+    private ArrayList<Edge> edgeList;
 
     public AlignmentSearchGraph(TechniqueKnowledgeGraph tkg) {
         // set size of dynamic graphSearch
@@ -22,7 +23,7 @@ public class AlignmentSearchGraph {
             edgeSearch.add(new ArrayList<Edge>());
         }
         // init nodeSearch via edgeList
-        ArrayList<Edge> edgeList = tkg.getEdgeList();
+        this.edgeList = tkg.getEdgeList();
         for (Edge edge : edgeList){
             Vertex src = edge.getVertex(Direction.OUT);
             Integer src_index = Integer.parseInt(((String) src.getId()).substring(1));
@@ -31,10 +32,11 @@ public class AlignmentSearchGraph {
     }
 
     public Tuple3<Integer, Integer, NodeAlignmentStatus> alignmentSearch(int lastAlignedNodeIndex, AssociatedEvent currentEdege) {
-
         ArrayList<Edge> edges = this.edgeSearch.get(lastAlignedNodeIndex);
-        for (Edge edge : edges){
+        if (lastAlignedNodeIndex < 0) edges = edgeList;
+            for (Edge edge : edges){
             SeedEdge seedEdge = new SeedEdge(edge);
+            // TODO:对齐应该不包括sourceNode
             if (seedEdge.isEdgeAligned(currentEdege)){
                 NodeAlignmentStatus nodeAlignmentStatus = new NodeAlignmentStatus(
                         seedEdge.getSinkNode().getType(),
@@ -44,4 +46,5 @@ public class AlignmentSearchGraph {
         }
         return null;
     }
+
 }
