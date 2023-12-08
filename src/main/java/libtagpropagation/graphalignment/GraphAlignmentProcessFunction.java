@@ -15,7 +15,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-
 public class GraphAlignmentProcessFunction
         extends KeyedProcessFunction<UUID, AssociatedEvent, String>{
 
@@ -56,20 +55,21 @@ public class GraphAlignmentProcessFunction
     public void processElement(AssociatedEvent associatedEvent,
                                KeyedProcessFunction<UUID, AssociatedEvent, String>.Context context,
                                Collector<String> collector) throws IOException {
+        processEventCount++;
+        tagCount = propagateCount + initTagCount;
+        if (processEventCount % 100000 == 0){
+            System.out.println("处理的事件数量：" + processEventCount + "\n多标签数量： " + multiTagCount + "\n标签数量： " + tagCount
+                    + "\n初始化标签数量：" + initTagCount + "  传播标签数量： " + propagateCount
+                    + "\n...\n"
+            );
+        }
+
         if (!this.isInitialized.value()){
             init(knowledgeGraphPath);
             this.isInitialized.update(true);
         }
         try {
-            processEventCount++;
-            tagCount = propagateCount + initTagCount;
-            if (processEventCount % 1000 == 0){
-                System.out.println("处理的事件数量：" + processEventCount + "\n多标签数量： " + multiTagCount + "\n标签数量： " + tagCount
-                                    + "\n初始化标签数量：" + initTagCount + "  传播标签数量： " + propagateCount
-                                    + "\n...\n"
-                        );
-            }
-            tryInitGraphAlignmentTag(associatedEvent); // 先将标签初始化到SourceNode上，再考虑是不是需要传播
+            tryInitGraphAlignmentTag(associatedEvent);
             propagateGraphAlignmentTag(associatedEvent);
         } catch (Exception e) {
             e.printStackTrace();
@@ -128,7 +128,6 @@ public class GraphAlignmentProcessFunction
 
     // TODo 标签统计，处理的事件量  关键的状态变化，初始化的标签
     private GraphAlignmentMultiTag propagateGraphAlignmentTag(AssociatedEvent associatedEvent) throws Exception {
-
         GraphAlignmentMultiTag srcMultiTag = tagsCacheMap.get(associatedEvent.sourceNode.getNodeId());
         if (srcMultiTag != null) {
             if (srcMultiTag.getTagMap().size() == 0) {
@@ -156,6 +155,19 @@ public class GraphAlignmentProcessFunction
         return tagsCacheMap.get(associatedEvent.sinkNode.getNodeId());
     }
 
+    public ValueState<Boolean> getIsInitialized() {
+        return isInitialized;
+    }
+
+    @Override
+    public String toString() {
+        return "GraphAlignmentProcessFunction{" +
+                "tkgList=" + tkgList +
+                ", seedSearching=" + seedSearching +
+                ", isInitialized=" + isInitialized +
+                ", tagsCacheMap=" + tagsCacheMap +
+                '}';
+    }
 }
 
 

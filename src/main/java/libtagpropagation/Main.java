@@ -1,6 +1,7 @@
 package libtagpropagation;
 
 import com.twitter.chill.protobuf.ProtobufSerializer;
+import libtagpropagation.graphalignment.GraphAlignmentProcessFunction;
 import org.apache.flink.connector.file.src.FileSource;
 import org.apache.flink.connector.file.src.reader.TextLineInputFormat;
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
@@ -19,11 +20,7 @@ import provenancegraph.parser.LocalParser;
 import provenancegraph.parser.PDMParser;
 import utils.KafkaPDMDeserializer;
 
-
 import java.util.Objects;
-
-
-import static libtagpropagation.anomalypath.EventFrequencyDBConstructionWithFlink.EventFrequencyDBConstructionHandler;
 
 public class Main {
 
@@ -32,6 +29,7 @@ public class Main {
         DataStream<AssociatedEvent> event_stream;
 
         if (Objects.equals(args[0], "online")){
+//            String kafkaBroker = "192.168.10.102:9092";
             String kafkaBroker = "10.214.242.214:9092";
             String kafkaTopic = "topic-HipsToMrd";
             String kafkaGroupId = "mergeAlert";
@@ -47,10 +45,9 @@ public class Main {
                     .build();
 
             DataStream<PDM.LogPack> logPack_stream = env.fromSource(source, WatermarkStrategy.noWatermarks(), "Kafka Source");
-//            AnomalyPathMiningHandler(logPack_stream);
-            EventFrequencyDBConstructionHandler(logPack_stream);
             DataStream<PDM.Log> log_stream = logPack_stream.flatMap(new PDMParser());
-//            event_stream = log_stream.map(PDMParser::initAssociatedEvent);
+            event_stream = log_stream.map(PDMParser::initAssociatedEvent);
+//            event_stream.print();
 
         }
         else {
@@ -63,11 +60,11 @@ public class Main {
             event_stream = json_stream.map(LocalParser::initAssociatedEvent);
         }
 
-//        event_stream.keyBy(associatedEvent -> associatedEvent.hostUUID)
-//                .process(new GraphAlignmentLocalProcessFunction());
+        event_stream.keyBy(associatedEvent -> associatedEvent.hostUUID)
+                .process(new GraphAlignmentProcessFunction());
 
         // Execute the Flink job
-        env.execute("Read Local JSON Files with Flink");
+        env.execute("Online Flink");
     }
 
     private static JsonElement convertToJson(String inputLine) {
