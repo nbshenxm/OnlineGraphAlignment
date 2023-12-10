@@ -132,7 +132,7 @@ public class LocalParser {
 
                 break;
             default:
-                n = new FileNodeProperties("");
+                n = new FileNodeProperties("", "");
         }
         return n;
     }
@@ -143,7 +143,7 @@ public class LocalParser {
         switch(nodeType){
 
             case "File":
-                n = new FileNodeProperties(getJsonArgField("filepath", jsonElement));
+                n = new FileNodeProperties(getJsonArgField("filepath", jsonElement), "");
                 break;
             case "Network":
                 n = new NetworkNodeProperties(getJsonArgField("destination_ip", jsonElement), getJsonArgField("destination_port", jsonElement), Integer.parseInt(getJsonArgField("direction", jsonElement)));
@@ -152,7 +152,7 @@ public class LocalParser {
                 n = new ProcessNodeProperties(Integer.parseInt(getJsonArgField("process_id", jsonElement)), getJsonArgField("process_path", jsonElement), getJsonArgField("process_commandline", jsonElement), getJsonArgField("process_name", jsonElement));
                 break;
             default:
-                n = new FileNodeProperties("");
+                n = new FileNodeProperties("", "");
         }
 
         return n;

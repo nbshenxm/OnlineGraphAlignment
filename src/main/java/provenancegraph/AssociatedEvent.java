@@ -29,8 +29,8 @@ public class AssociatedEvent extends BasicEdge implements Serializable {
     public AssociatedEvent(){
         this.sourceNode = new BasicNode();
         this.sinkNode = new BasicNode();
-        this.sourceNodeProperties = new FileNodeProperties("");
-        this.sinkNodeProperties = new FileNodeProperties("");
+        this.sourceNodeProperties = new FileNodeProperties("", "");
+        this.sinkNodeProperties = new FileNodeProperties("", "");
         this.relationship = "";
         this.timeStamp = Long.valueOf(0);
         this.hostUUID = new UUID(0, 0);

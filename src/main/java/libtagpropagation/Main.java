@@ -34,8 +34,8 @@ public class Main {
         DataStream<AssociatedEvent> event_stream;
 
         if (Objects.equals(args[0], "online")){
-            String kafkaBroker = "192.168.10.102:9092";
-            String kafkaTopic = "topic-HipsToMrd";
+            String kafkaBroker = "192.168.139.130:9092";
+            String kafkaTopic = "prov_data_logs";
             String kafkaGroupId = "mergeAlert";
 
             // TODO: replace deserializer with protobuf PDM deserializer
@@ -50,9 +50,9 @@ public class Main {
 
             DataStream<PDM.LogPack> logPack_stream = env.fromSource(source, WatermarkStrategy.noWatermarks(), "Kafka Source");
 //            AnomalyPathMiningHandler(logPack_stream);
-            EventFrequencyDBConstructionHandler(logPack_stream);
+//            EventFrequencyDBConstructionHandler(logPack_stream);
             DataStream<PDM.Log> log_stream = logPack_stream.flatMap(new PDMParser());
-//            event_stream = log_stream.map(PDMParser::initAssociatedEvent);
+            event_stream = log_stream.map(PDMParser::initAssociatedEvent);
 
         }
         else {
@@ -65,8 +65,8 @@ public class Main {
             event_stream = json_stream.map(LocalParser::initAssociatedEvent);
         }
 
-//        event_stream.keyBy(associatedEvent -> associatedEvent.hostUUID)
-//                .process(new GraphAlignmentLocalProcessFunction());
+        event_stream.keyBy(associatedEvent -> associatedEvent.hostUUID)
+                .process(new GraphAlignmentLocalProcessFunction());
 
         // Execute the Flink job
         env.execute("Read Local JSON Files with Flink");

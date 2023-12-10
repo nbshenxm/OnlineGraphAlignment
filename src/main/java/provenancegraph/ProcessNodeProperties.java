@@ -10,6 +10,7 @@ public class ProcessNodeProperties extends NodeProperties {
     private String exePath;
     private String processName;
     private String cmdLineArguments;
+    private String filePathHash = "";
 
     public ProcessNodeProperties(int processId, String exePath, String cmdLineArguments, String processName) {
         this.type = NodeType.Process;
@@ -19,12 +20,20 @@ public class ProcessNodeProperties extends NodeProperties {
         this.cmdLineArguments = cmdLineArguments;
     }
 
+    public void setFilePathHash(String h){
+        this.filePathHash = h;
+    }
+
+    public String getFilePathHash(){
+        return this.filePathHash;
+    }
+
     public String getExePath() {
         return this.exePath;
     }
 
     public String getProcessName() {
-        return this.exePath;
+        return this.processName;
     }
 
     @Override

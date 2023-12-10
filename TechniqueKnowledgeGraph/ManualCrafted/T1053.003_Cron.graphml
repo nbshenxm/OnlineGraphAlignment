@@ -16,29 +16,29 @@
 
     <graph id="T1053.003_Cron" edgedefault="directed">
         <!-- Description: Leverage Cron for persistance or privilege escalation by add new tasks to crontab or modify existing cron tasks. -->
-        <node id="n0">
+        <node id="n0-1053">
             <data key="type">File</data>
             <data key="file_path">.*/crontab\..*/crontab|/var/spool/cron|/etc/cron(\..*|tab)|/etc/init/anacron.conf|/etc/anacrontab|/etc/cron.d/anacron|/etc/apm/event.d/anacron</data>
             <data key="is_seed_node">true</data>
         </node>
-        <node id="n1">
+        <node id="n1-1053">
             <data key="type">Process</data>
             <data key="process_name">.*?</data>
             <data key="is_seed_node">false</data>
         </node>
-        <node id="n2">
+        <node id="n2-1053">
             <!-- Limit the spread of higher-level technique tags. -->
             <data key="type">Process</data>
             <data key="process_name">cron</data>
             <data key="is_seed_node">false</data>
         </node>
 
-        <edge source="n1" target="n0">
+        <edge source="n1-1053" target="n0-1053">
             <data key="event_type">FILE_WRITE</data>
             <data key="sequence_num">1</data>
             <data key="is_seed_edge">true</data>
         </edge>
-        <edge source="n0" target="n1">
+        <edge source="n0-1053" target="n1-1053">
             <data key="event_type">FILE_READ</data>
             <data key="sequence_num">2</data>
             <data key="is_seed_edge">false</data>

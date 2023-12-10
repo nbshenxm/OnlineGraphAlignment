@@ -15,34 +15,23 @@
     <key id="is_seed_edge" for="edge" attr.name="is_seed_edge" attr.type="boolean"/>
 
     <!-- Make sure pattern matching is working -->
-    <graph id="T1105_IngressToolTransfer" edgedefault="directed">
-        <node id="n0-1105">
-            <data key="type">Network</data>
-            <!-- The value of url_ip can be %unknown_address%. -->
-            <data key="url_ip">.*?</data>
-            <data key="is_seed_node">true</data>
-        </node>
-        <node id="n1-1105">
+    <graph id="T1222_change_file_mode" edgedefault="directed">
+        <node id="n0-1222">
             <data key="type">Process</data>
+            <!-- The value of url_ip can be %unknown_address%. -->
             <data key="process_name">.*?</data>
             <data key="is_seed_node">false</data>
         </node>
-        <node id="n2-1105">
-            <data key="type">File</data>
-            <!-- Also the value of file_path can be %executable_file%. -->
-            <data key="file_path">.*\.(ps1|sh|jar|xlm|elf|bin|js|)</data>
+        <node id="n1-1222">
+            <data key="type">Process</data>
+            <data key="process_name">chmod</data>
             <data key="is_seed_node">true</data>
         </node>
-        
-        <edge source="n1-1105" target="n0-1105">
-            <data key="event_type">FILE_READ</data>
+
+        <edge source="n0-1222" target="n1-1222">
+            <data key="event_type">PROCESS_EXEC</data>
             <data key="sequence_num">1</data>
             <data key="is_seed_edge">true</data>
-        </edge>
-        <edge source="n1-1105" target="n2-1105">
-            <data key="event_type">FILE_READ</data>
-            <data key="sequence_num">2</data>
-            <data key="is_seed_edge">false</data>
         </edge>
     </graph>
 </graphml>

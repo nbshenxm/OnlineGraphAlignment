@@ -7,14 +7,20 @@ import static utils.EntityGeneralizer.filePathGeneralizer;
 
 public class FileNodeProperties extends NodeProperties {
     private String filePath;
+    private String filePathHash;
 
-    public FileNodeProperties(String filePath) {
+    public FileNodeProperties(String filePath, String h) {
         this.type = NodeType.File;
         this.filePath = filePath;
+        this.filePathHash = h;
     }
 
     public String getFilePath(){
         return this.filePath;
+    }
+
+    public String getFilePathHash(){
+        return this.filePathHash;
     }
 
     @Override
@@ -39,7 +45,8 @@ public class FileNodeProperties extends NodeProperties {
     @Override
     public FileNodeProperties copyGeneralize() {
         FileNodeProperties generalizedProperties = new FileNodeProperties(
-                filePathGeneralizer(filePath)
+                filePathGeneralizer(filePath),
+                this.filePathHash
         );
         return generalizedProperties;
     }

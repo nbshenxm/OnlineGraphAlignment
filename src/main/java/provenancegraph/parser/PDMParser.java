@@ -7,6 +7,9 @@ import provenancegraph.BasicNode;
 import provenancegraph.datamodel.PDM;
 import provenancegraph.*;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.List;
@@ -117,10 +120,29 @@ public class PDMParser implements FlatMapFunction<PDM.LogPack, PDM.Log> {
 
         source.setProperties(initSourceNodeProperties(log));
         sink.setProperties(initSinkNodeProperties(log));
-
+        event.setRelationship(log.getUHeader().getContent().toString());
         event.setSourceNode(source);
         event.setSinkNode(sink);
-
+        System.out.println(log);
+//        if (log.hasEventData() && log.getEventData().hasFileEvent() && log.getEventData().getFileEvent().hasFile()){
+//            System.out.println(log.getEventData().getFileEvent().getFile().getFilePath());
+//        }
+//        if (log.hasEventData() && log.getEventData().hasFileEvent() && log.getEventData().getFileEvent().getFile().getFilePath().equals("/etc/rc.d/rc.local")){
+//            System.out.println("brhh");
+//        }
+        try{
+            File logger = new File("../tester.log");
+            FileWriter fileReader = new FileWriter(logger, true);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileReader);
+            bufferedWriter.append(log.toString());
+            bufferedWriter.append("\n");
+            bufferedWriter.append(event.toJsonString());
+            bufferedWriter.append("\n");
+            bufferedWriter.close();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
 //        System.out.println(event.toJsonString());
 
         return event;
@@ -130,8 +152,7 @@ public class PDMParser implements FlatMapFunction<PDM.LogPack, PDM.Log> {
     public static BasicNode initBasicSourceNode(PDM.Log log){
         String ts = Long.toString(log.getEventData().getEHeader().getTs());
         String pid = Integer.toString(log.getEventData().getEHeader().getProc().getProcUUID().getPid());
-        UUID uuid = new UUID(new BigInteger(pid, 16).longValue(),
-                new BigInteger(ts, 16).longValue());
+        UUID uuid = UUID.nameUUIDFromBytes((ts + pid).getBytes());
 
         String content = log.getUHeader().getContent().toString();
         String log_category;
@@ -175,16 +196,19 @@ public class PDMParser implements FlatMapFunction<PDM.LogPack, PDM.Log> {
         String nodeName;
         String log_category;
         String content = log.getUHeader().getContent().toString();
+        long fileHash;
         switch (content){
-            case "PROCESS_FORK":
-            case "PROCESS_EXEC":
-            case "PROCESS_LOAD":
-                log_category = "Process";break;
-            case "FILE_OPEN":
-            case "FILE_READ":
-            case "FILE_WRITE":
+            case "PROCESS_LOAD": // sink to source
                 log_category = "File";break;
-            case "NET_CONNECT":
+            case "PROCESS_FORK": // source to sink
+            case "PROCESS_EXEC": // source to sink
+                log_category = "Process";
+                break;
+            case "FILE_OPEN": // sink to source
+            case "FILE_READ": // sink to source
+            case "FILE_WRITE": // source to sink
+                log_category = "File";break;
+            case "NET_CONNECT": // source to sink
                 log_category = "Network";break;
             default:
                 return null;
@@ -194,23 +218,22 @@ public class PDMParser implements FlatMapFunction<PDM.LogPack, PDM.Log> {
             case "Process":
                 String ts = Long.toString(log.getEventData().getProcessEvent().getChildProc().getProcUUID().getTs());
                 String pid = Integer.toString(log.getEventData().getProcessEvent().getChildProc().getProcUUID().getPid());
-                uuid = new UUID(new BigInteger(ts, 16).longValue(),
-                        new BigInteger(pid, 16).longValue());
+                uuid = UUID.nameUUIDFromBytes((ts + pid).getBytes());
                 nodeType = "Process";
                 nodeName = "Process";
                 break;
             case "File":
                 String filePathHash = Long.toString(log.getEventData().getFileEvent().getFile().getFileUUID().getFilePathHash());
-                uuid = new UUID(new BigInteger(filePathHash, 16).longValue(),
-                        new BigInteger(filePathHash, 16).longValue());
+                uuid = UUID.nameUUIDFromBytes(filePathHash.getBytes());
                 nodeType = "File";
                 nodeName = "FileMonitor";
                 break;
-            case "Network":
+            case "Network": // this isn't the right address???????????
                 String sip = Long.toString(log.getEventData().getNetEvent().getSip().getAddress());
+                String sport = Integer.toString(log.getEventData().getNetEvent().getSport());
                 String dip = Integer.toString(log.getEventData().getNetEvent().getDip().getAddress());
-                uuid = new UUID(new BigInteger(sip, 16).longValue(),
-                        new BigInteger(dip, 16).longValue());
+                String dport = Integer.toString(log.getEventData().getNetEvent().getDport());
+                uuid = UUID.nameUUIDFromBytes((sip + dip + sport + dport).getBytes());
                 nodeType = "Network";
                 nodeName = "Network";
                 break;
@@ -235,10 +258,17 @@ public class PDMParser implements FlatMapFunction<PDM.LogPack, PDM.Log> {
         NodeProperties nodeProperties;
         String log_category;
         String content = log.getUHeader().getContent().toString();
+        String filePathHash = "";
+        if(content.equals("PROCESS_LOAD")){
+            System.out.println("yo");
+        }
         switch (content){
+            case "PROCESS_LOAD":
+                filePathHash = Long.toString(log.getEventData().getFileEvent().getFile().getFileUUID().getFilePathHash());
+                log_category = "File";
+                break;
             case "PROCESS_FORK":
             case "PROCESS_EXEC":
-            case "PROCESS_LOAD":
                 log_category = "Process";break;
             case "FILE_OPEN":
             case "FILE_READ":
@@ -252,12 +282,13 @@ public class PDMParser implements FlatMapFunction<PDM.LogPack, PDM.Log> {
         }
         switch (log_category) {
             case "Process":
+
                 nodeProperties = new ProcessNodeProperties(log.getEventData().getProcessEvent().getChildProc().getProcUUID().getPid(),
                         log.getEventData().getProcessEvent().getChildProc().getExePath(),
                         log.getEventData().getProcessEvent().getChildProc().getCmdline(), log.getEventData().getProcessEvent().getChildProc().getProcessName());
                 break;
             case "File":
-                nodeProperties = new FileNodeProperties(log.getEventData().getFileEvent().getFile().getFilePath());
+                nodeProperties = new FileNodeProperties(log.getEventData().getFileEvent().getFile().getFilePath(), Long.toString(log.getEventData().getFileEvent().getFile().getFileUUID().getFilePathHash()));
                 break;
             case "Network":
                 PDM.NetEvent.Direction direct = log.getEventData().getNetEvent().getDirect();
@@ -269,7 +300,7 @@ public class PDMParser implements FlatMapFunction<PDM.LogPack, PDM.Log> {
                         dir);
                 break;
             default:
-            nodeProperties = new FileNodeProperties("");
+            nodeProperties = new FileNodeProperties("", "");
         }
         return nodeProperties;
     }

@@ -9,7 +9,9 @@ import provenancegraph.*;
 import org.apache.flink.streaming.api.functions.KeyedProcessFunction;
 import org.apache.flink.util.Collector;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.UUID;
@@ -22,7 +24,9 @@ import com.tinkerpop.blueprints.Vertex;
 import static libtagpropagation.TechniqueKnowledgeGraph.isEdgeAligned;
 import static libtagpropagation.TechniqueKnowledgeGraph.isVertexAligned;
 
-
+//TODO: get started on final report, start testing benign scenarios and make sure they're visible in the logs
+// make sure malicious attacks propagate through the graph
+// Start documenting what the different servers should do (setup, use case, etc.)
 public class GraphAlignmentLocalProcessFunction
         extends KeyedProcessFunction<UUID, AssociatedEvent, String>{
 
@@ -35,7 +39,7 @@ public class GraphAlignmentLocalProcessFunction
     private transient ListState<Edge> seedEdgeList;
     private transient MapState<Object, TechniqueKnowledgeGraph> seedEventMap;
     private transient MapState<Object, TechniqueKnowledgeGraph> seedNodeMap; // TODO: further divide nodes by types
-
+    private int iterCount = 0;
 
     @Override
     public void open(Configuration parameter) {
@@ -83,6 +87,30 @@ public class GraphAlignmentLocalProcessFunction
         try {
             propGraphAlignmentTag(associatedEvent);
             initGraphAlignmentTag(associatedEvent);
+            iterCount ++;
+            System.out.println(iterCount);
+            if(iterCount % 500 == 0){
+                try{
+                    int taggedNodeCount= 0;
+                    int totalTags = 0;
+                    for(Map.Entry<UUID, GraphAlignmentTagList> entry : tagsCacheMap.entries()){
+                        taggedNodeCount++;
+                        totalTags += entry.getValue().getTagList().size();
+                    }
+                    File logger = new File("../systemStatusChmod.log");
+                    FileWriter fileReader = new FileWriter(logger, true);
+                    BufferedWriter bufferedWriter = new BufferedWriter(fileReader);
+                    bufferedWriter.append("Iteration #: " + iterCount + "\n");
+                    bufferedWriter.append("Total Nodes Tagged: " + taggedNodeCount + "\n");
+                    bufferedWriter.append("Total tags: " + totalTags + "\n");
+                    bufferedWriter.append("\n");
+                    bufferedWriter.close();
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -114,7 +142,7 @@ public class GraphAlignmentLocalProcessFunction
                 ArrayList<Object> seedObjects = tkg.getSeedObjects();
                 for (Object seedObject: seedObjects) {
                     if (seedObject instanceof Vertex) {
-                        this.seedNodeMap.put(((Vertex) seedObject).getId(), tkg);
+                        this.seedNodeMap.put((((Vertex) seedObject).getId()).toString(), tkg);
                         this.seedNodeList.add((Vertex) seedObject);
                     } else if (seedObject instanceof Edge) {
                         this.seedEventMap.put(((Edge) seedObject).getId(), tkg);
@@ -131,6 +159,19 @@ public class GraphAlignmentLocalProcessFunction
 
     private void initGraphAlignmentTag(AssociatedEvent associatedEvent) throws Exception {
 //        Iterable<Map.Entry<Vertex, TechniqueKnowledgeGraph>> node_entries = seedNodeMap.entries();
+        if (associatedEvent.sinkNode.getProperties().toShapeAttribution().equals("rect")){
+            if(((FileNodeProperties) associatedEvent.sinkNodeProperties).getFilePath().equals("/home/dave/Downloads/database_server.sh")){
+                System.out.println("getting alignment for problem");
+            }
+        }
+        if (associatedEvent.sinkNode.getProperties().toShapeAttribution().equals("rect")){
+            if(((FileNodeProperties) associatedEvent.sinkNodeProperties).getFilePath().equals("/home/dave/Downloads/database_server.sh")){
+                if(associatedEvent.getRelationship().equals("PROCESS_LOAD")){
+                    System.out.println("bruh");
+                }
+                System.out.println("getting alignment for problem");
+            }
+        }
         for (Vertex seedNode : this.seedNodeList.get()) {
             TechniqueKnowledgeGraph tkg = this.seedNodeMap.get(seedNode.getId());
             BasicNode srcNode = associatedEvent.sourceNode;
@@ -159,13 +200,18 @@ public class GraphAlignmentLocalProcessFunction
     }
 
     private void propGraphAlignmentTag(AssociatedEvent associatedEvent) throws Exception {
-        GraphAlignmentTagList srcTagList = tagsCacheMap.get(associatedEvent.sourceNodeId);
-        GraphAlignmentTagList destTagList = tagsCacheMap.get(associatedEvent.sinkNodeId);
-        // iterate through tagsCacheMap to check if any existing tags can be propagated
+        GraphAlignmentTagList srcTagList = tagsCacheMap.get(associatedEvent.sourceNode.getNodeId());
+        GraphAlignmentTagList destTagList;
+        destTagList = tagsCacheMap.get(associatedEvent.sinkNode.getNodeId());
+
+        // iterate through tagsCacheMap to check if any existing tags can be
         Iterable<Map.Entry<UUID, GraphAlignmentTagList>> entries = tagsCacheMap.entries();
+        // list of tags AND nodeids, each tag corresponds to the nodeid that immediately follows
+        ArrayList<Object> addTags = new ArrayList<Object>();
         for (Map.Entry<UUID, GraphAlignmentTagList> entry : entries) {
             UUID nodeUUID = entry.getKey();
-            GraphAlignmentTagList graphAlignmentTagList = entry.getValue();
+
+            GraphAlignmentTagList graphAlignmentTagList = entry.getValue(); 
             // if there is a match in GraphAlignmentTag with current associatedEvent, prop the tag
             ArrayList<GraphAlignmentTag> tagList = graphAlignmentTagList.getTagList();
             for (GraphAlignmentTag tag: tagList) {
@@ -173,25 +219,78 @@ public class GraphAlignmentLocalProcessFunction
                 tag.propagate(associatedEvent);
 
                 // tag merge
-                for (GraphAlignmentTag anotherTag : srcTagList.getTagList()) {
-                    if (tag.sameAs(anotherTag)) {
-                        tag.mergeStatus(tag);
-                        anotherTag.mergeStatus(tag);
-                    }
-                }
 
+                if(srcTagList != null){
+                    for (GraphAlignmentTag anotherTag : srcTagList.getTagList()) {
+//                        System.out.println(anotherTag.getMatchScore());
+                        if (tag.sameAs(anotherTag)) {
+                            tag.mergeStatus(tag);
+                            anotherTag.mergeStatus(tag);
+                        }
+                        if(anotherTag.getTTL() > 0 && (associatedEvent.getRelationship().equals("PROCESS_FORK") || associatedEvent.getRelationship().equals("PROCESS_EXEC")
+                        || associatedEvent.getRelationship().equals("FILE_WRITE") || associatedEvent.getRelationship().equals("NET_CONNECT"))){
+                            addTags.add(anotherTag);
+                            addTags.add(associatedEvent.sinkNode.getNodeId());
+                            anotherTag.decay();
+                        }
+                        //make copy of tag, then reduce score
+                    }
+                    //propagate from tagList
+                    //see what database_server.sh spawns
+                    //for (entries)
+
+                }
+                if(destTagList != null){
+                    for (GraphAlignmentTag anotherTag : destTagList.getTagList()) {
+//                        System.out.println(anotherTag.getMatchScore());
+                        if (tag.sameAs(anotherTag)) {
+                            tag.mergeStatus(tag);
+                            anotherTag.mergeStatus(tag);
+                        }
+                        //make copy of tag, then reduce timer
+                        if(anotherTag.getTTL() > 0 && !(associatedEvent.getRelationship().equals("PROCESS_FORK") || associatedEvent.getRelationship().equals("PROCESS_EXEC")
+                                || associatedEvent.getRelationship().equals("FILE_WRITE") || associatedEvent.getRelationship().equals("NET_CONNECT"))){
+                            addTags.add(anotherTag);
+                            addTags.add(associatedEvent.sourceNode.getNodeId());
+                            anotherTag.decay();
+                        }
+                    }
+                    //propagate from tagList
+                    //see what database_server.sh spawns
+                    //for (entries)
+                }
                 // score update
-                tag.updateMatchScore();
                 if (tag.isMatched()) {
                     System.out.println("Technique detected.");
+                    try{
+                        File logger = new File("../techniquesDetectedChmod.log");
+                        FileWriter fileReader = new FileWriter(logger, true);
+                        BufferedWriter bufferedWriter = new BufferedWriter(fileReader);
+                        if(tag.getNode() != null){
+                            bufferedWriter.append(tag.getNode().toString() + " technique detected\n");
+                        }
+
+                        bufferedWriter.append(associatedEvent.toJsonString());
+                        bufferedWriter.append("\n");
+                        bufferedWriter.close();
+                    }
+                    catch (Exception e){
+                        e.printStackTrace();
+                    }
                 }
             }
+        }
+        for(int i = 0; i < addTags.size(); i += 2){
+            addTagToCache((GraphAlignmentTag) addTags.get(i), (UUID) addTags.get(i + 1));
         }
     }
 
 
 
     private void addTagToCache(GraphAlignmentTag tag, UUID nodeId) throws Exception {
+        if(nodeId == null){
+            System.out.println("hey");
+        }
         if (!this.tagsCacheMap.contains(nodeId)){
             GraphAlignmentTagList tagList = new GraphAlignmentTagList();
             this.tagsCacheMap.put(nodeId, tagList);
