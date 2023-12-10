@@ -97,7 +97,7 @@ public class GraphAlignmentLocalProcessFunction
                         taggedNodeCount++;
                         totalTags += entry.getValue().getTagList().size();
                     }
-                    File logger = new File("../systemStatusChmod.log");
+                    File logger = new File("../systemStatusWebserver.log");
                     FileWriter fileReader = new FileWriter(logger, true);
                     BufferedWriter bufferedWriter = new BufferedWriter(fileReader);
                     bufferedWriter.append("Iteration #: " + iterCount + "\n");
@@ -179,12 +179,37 @@ public class GraphAlignmentLocalProcessFunction
             if (isVertexAligned(seedNode, srcNode, srcNodeProperties)){
                 GraphAlignmentTag tag = new GraphAlignmentTag(seedNode, srcNode, tkg);
                 addTagToCache(tag, srcNode.getNodeId());
+                try{
+                    File logger = new File("../causedAlignment.log");
+                    FileWriter fileReader = new FileWriter(logger, true);
+                    BufferedWriter bufferedWriter = new BufferedWriter(fileReader);
+
+                    bufferedWriter.append(associatedEvent.toJsonString());
+                    bufferedWriter.append("\n");
+                    bufferedWriter.close();
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
+
             }
             BasicNode destNode = associatedEvent.sinkNode;
             NodeProperties destNodeProperties = associatedEvent.sinkNodeProperties;
             if (isVertexAligned(seedNode, destNode, destNodeProperties)){
                 GraphAlignmentTag tag = new GraphAlignmentTag(seedNode, destNode, tkg);
                 addTagToCache(tag, destNode.getNodeId());
+                try{
+                    File logger = new File("../causedAlignment.log");
+                    FileWriter fileReader = new FileWriter(logger, true);
+                    BufferedWriter bufferedWriter = new BufferedWriter(fileReader);
+
+                    bufferedWriter.append(associatedEvent.toJsonString());
+                    bufferedWriter.append("\n");
+                    bufferedWriter.close();
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
             }
         }
 
@@ -195,6 +220,18 @@ public class GraphAlignmentLocalProcessFunction
                 GraphAlignmentTag tag = new GraphAlignmentTag(seedEdge, associatedEvent, tkg);
                 addTagToCache(tag, associatedEvent.sourceNodeId);
                 addTagToCache(tag, associatedEvent.sinkNodeId);
+                try{
+                    File logger = new File("../causedAlignment.log");
+                    FileWriter fileReader = new FileWriter(logger, true);
+                    BufferedWriter bufferedWriter = new BufferedWriter(fileReader);
+
+                    bufferedWriter.append(associatedEvent.toJsonString());
+                    bufferedWriter.append("\n");
+                    bufferedWriter.close();
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
             }
         }
     }
@@ -263,7 +300,7 @@ public class GraphAlignmentLocalProcessFunction
                 if (tag.isMatched()) {
                     System.out.println("Technique detected.");
                     try{
-                        File logger = new File("../techniquesDetectedChmod.log");
+                        File logger = new File("../techniquesDetectedWebserver.log");
                         FileWriter fileReader = new FileWriter(logger, true);
                         BufferedWriter bufferedWriter = new BufferedWriter(fileReader);
                         if(tag.getNode() != null){
