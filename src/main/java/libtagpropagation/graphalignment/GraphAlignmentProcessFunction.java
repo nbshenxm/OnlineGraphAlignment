@@ -24,11 +24,12 @@ public class GraphAlignmentProcessFunction
 
     private transient ValueState<Boolean> isInitialized;
     private transient MapState<UUID, GraphAlignmentMultiTag> tagsCacheMap;
-    private static int processEventCount = 0;
-    private static int initTagCount = 0;
-    private static int propagateCount = 0;
-    private static int multiTagCount = 0;
-    private static int tagCount = 0;
+    public static int processEventCount = 0;
+    public static int initTagCount = 0;
+    public static int propagateTagCount = 0;
+    public static int multiTagCount = 0;
+    public static int tagCount = 0;
+    public static int removeTagCount = 0;
 
     @Override
     public void open(Configuration parameter) {
@@ -56,10 +57,11 @@ public class GraphAlignmentProcessFunction
                                KeyedProcessFunction<UUID, AssociatedEvent, String>.Context context,
                                Collector<String> collector) throws IOException {
         processEventCount++;
-        tagCount = propagateCount + initTagCount;
+        tagCount = propagateTagCount + initTagCount;
         if (processEventCount % 100000 == 0){
             System.out.println("处理的事件数量：" + processEventCount + "\n多标签数量： " + multiTagCount + "\n标签数量： " + tagCount
-                    + "\n初始化标签数量：" + initTagCount + "  传播标签数量： " + propagateCount
+                    + "\n初始化标签数量： " + initTagCount + "  传播标签数量： " + propagateTagCount + "  移除标签的数量:  " + removeTagCount
+                    + "\n当前时间： " + associatedEvent.timeStamp
                     + "\n...\n"
             );
         }
@@ -67,6 +69,7 @@ public class GraphAlignmentProcessFunction
         if (!this.isInitialized.value()){
             init(knowledgeGraphPath);
             this.isInitialized.update(true);
+            System.out.println("\nOnline Alignment start ......\n");
         }
         try {
             tryInitGraphAlignmentTag(associatedEvent);
@@ -115,24 +118,21 @@ public class GraphAlignmentProcessFunction
         else {
             GraphAlignmentMultiTag multiTag = new GraphAlignmentMultiTag(initTkgList);
             if (this.tagsCacheMap.contains(associatedEvent.sourceNode.getNodeId())) {
-                this.tagsCacheMap.get(associatedEvent.sourceNode.getNodeId()).mergeMultiTag(multiTag); // ToDo：直接用tkgList合并是否会更快
+                this.tagsCacheMap.get(associatedEvent.sourceNode.getNodeId()).mergeMultiTag(multiTag);
             }
             else{
                 this.tagsCacheMap.put(associatedEvent.sourceNode.getNodeId(), multiTag);
                 multiTagCount ++;
             }
-            initTagCount += multiTag.getTagMap().size();
             return multiTag;
         }
     }
 
-    // TODo 标签统计，处理的事件量  关键的状态变化，初始化的标签
     private GraphAlignmentMultiTag propagateGraphAlignmentTag(AssociatedEvent associatedEvent) throws Exception {
         GraphAlignmentMultiTag srcMultiTag = tagsCacheMap.get(associatedEvent.sourceNode.getNodeId());
         if (srcMultiTag != null) {
             if (srcMultiTag.getTagMap().size() == 0) {
                 this.tagsCacheMap.remove(associatedEvent.sourceNode.getNodeId());
-                multiTagCount --;
             }
             GraphAlignmentMultiTag sinkMultiTag = tagsCacheMap.get(associatedEvent.sinkNode.getNodeId());
             GraphAlignmentMultiTag newTags = srcMultiTag.propagate(associatedEvent);
@@ -140,15 +140,11 @@ public class GraphAlignmentProcessFunction
             // merge tag
             if (sinkMultiTag == null) {
                 if (newTags != null){
-                    multiTagCount ++;
-                    propagateCount += newTags.getTagMap().size();
                     this.tagsCacheMap.put(associatedEvent.sinkNode.getNodeId(), newTags);
+                    multiTagCount ++;
                 }
             } else {
-                propagateCount -= sinkMultiTag.getTagMap().size();
                 sinkMultiTag.mergeMultiTag(newTags);
-                propagateCount += sinkMultiTag.getTagMap().size();
-
                 newTags.mergeMultiTag(sinkMultiTag);
             }
         }
