@@ -12,6 +12,8 @@ import provenancegraph.*;
 import java.util.ArrayList;
 import java.util.UUID;
 
+import static libtagpropagation.graphalignment.GraphAlignmentProcessFunction.*;
+
 public class GraphAlignmentTag {
 
     // TODO: discuss what information we need: 1) rules to search for candidate nodes/edges for further propagation;
@@ -29,12 +31,8 @@ public class GraphAlignmentTag {
     
     private GraphAlignmentStatus alignStatus; // 用于记录匹配状态，二次索引
 
-    private boolean IsOnTKG;
+    private boolean IsOnTKG;// identify if the tag is on tkg
     private static final int ATTENUATION_THRESHOLD = 6;
-
-    // ToDo: When to free the memory
-    private int occupancyCount = 1;
-
 
     public GraphAlignmentTag(Tuple2<SeedNode, TechniqueKnowledgeGraph> entry) {
         this.tagUuid = UUID.randomUUID();
@@ -45,6 +43,7 @@ public class GraphAlignmentTag {
         this.alignStatus = new GraphAlignmentStatus(entry);
         this.lastAlignedNodeIndex = entry.f0.getId();
         this.IsOnTKG = true;
+        initTagCount ++;
     }
 
     public GraphAlignmentTag mergeTag(GraphAlignmentTag anotherAlignmentTag) {
@@ -66,7 +65,9 @@ public class GraphAlignmentTag {
             this.lastAlignedNodeIndex = anotherAlignmentTag.lastAlignedNodeIndex;
         }
         else{
-            this.lastAlignedNodeIndex = -1;
+            if (!this.IsOnTKG) {
+                this.lastAlignedNodeIndex = -1;
+            }
         }
 
         return this;
@@ -77,21 +78,22 @@ public class GraphAlignmentTag {
         this.tkg = orignalTag.tkg;
         this.searchTree = orignalTag.searchTree;
         this.alignStatus = orignalTag.alignStatus;
+        propagateTagCount ++;
     }
 
     public GraphAlignmentTag propagate(AssociatedEvent event){
+        GraphAlignmentTag newTag = new GraphAlignmentTag(this);
+
         if (this.alignStatus.recurringAlert()){
             return null;
         }
-        GraphAlignmentTag newTag = new GraphAlignmentTag(this);
         newTag.cachedPath = new ArrayList<>(this.cachedPath);
-
         newTag.cachedPath.add(event);
         newTag.cachedPathLength = this.cachedPathLength + 1;
 
         Tuple3<Integer, Integer, NodeAlignmentStatus> searchResult = this.searchTree.alignmentSearch(lastAlignedNodeIndex, event);
         if (searchResult == null) {
-            if (newTag.cachedPath.size() > ATTENUATION_THRESHOLD) return null;
+            if (this.cachedPath.size() > ATTENUATION_THRESHOLD) return null;
             else{
                 newTag.lastAlignedNodeIndex = this.lastAlignedNodeIndex;
                 newTag.lastAlignedNode = this.lastAlignedNode;
@@ -105,7 +107,7 @@ public class GraphAlignmentTag {
             newTag.IsOnTKG = true;
             GraphAlignmentStatus graphAlignmentStatus = newTag.alignStatus.tryUpdateStatus(searchResult.f0, searchResult.f1, searchResult.f2, newTag.cachedPath);
             if(graphAlignmentStatus == null) {
-                if (this.cachedPath.size() > ATTENUATION_THRESHOLD)return null;
+                if (this.cachedPath.size() > ATTENUATION_THRESHOLD) return null;
                 else{
                     newTag.lastAlignedNodeIndex = this.lastAlignedNodeIndex;
                     newTag.lastAlignedNode = this.lastAlignedNode;

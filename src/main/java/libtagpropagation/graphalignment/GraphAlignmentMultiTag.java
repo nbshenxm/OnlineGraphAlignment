@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import static libtagpropagation.graphalignment.GraphAlignmentProcessFunction.removeTagCount;
+
 public class GraphAlignmentMultiTag {
     private Map<String, GraphAlignmentTag> tagMap;
 
@@ -31,8 +33,14 @@ public class GraphAlignmentMultiTag {
             String key = (String) entry.getKey();
             if (this.tagMap.containsKey(key)) {
                 GraphAlignmentTag mergedTag = this.tagMap.get(key).mergeTag((GraphAlignmentTag) entry.getValue());
-                if (mergedTag == null) this.tagMap.remove(key);
-                else this.tagMap.put(key, mergedTag);
+                if (mergedTag == null) {
+                    this.tagMap.remove(key);
+                    removeTagCount += 2;
+                }
+                else {
+                    this.tagMap.put(key, mergedTag);
+//                    removeTagCount++;
+                }
             }
             else
                 this.tagMap.put((String) entry.getKey(), (GraphAlignmentTag) entry.getValue());
@@ -51,6 +59,7 @@ public class GraphAlignmentMultiTag {
             }
             else {
                 this.tagMap.remove(techniqueName);
+                removeTagCount += 2;
             }
         }
 
