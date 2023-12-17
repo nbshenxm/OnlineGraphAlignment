@@ -32,12 +32,17 @@ public class AlignmentSearchGraph {
     }
 
     public Tuple3<Integer, Integer, NodeAlignmentStatus> alignmentSearch(int lastAlignedNodeIndex, AssociatedEvent currentEdege) {
-        ArrayList<Edge> edges = this.edgeSearch.get(lastAlignedNodeIndex);
+        ArrayList<Edge> edges;
+        if (lastAlignedNodeIndex < 0){
+            edges = edgeList;
+        }else{
+            edges = this.edgeSearch.get(lastAlignedNodeIndex);
+        }
+
         if (lastAlignedNodeIndex < 0) edges = edgeList;
             for (Edge edge : edges){
             SeedEdge seedEdge = new SeedEdge(edge);
-            // TODO:对齐应该不包括sourceNode
-            if (seedEdge.isEdgeAligned(currentEdege)){
+            if (seedEdge.isNextEdgeAligned(currentEdege)){
                 NodeAlignmentStatus nodeAlignmentStatus = new NodeAlignmentStatus(
                         seedEdge.getSinkNode().getType(),
                         seedEdge.getSinkNode().getAlignedString());

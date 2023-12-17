@@ -4,6 +4,7 @@ import com.tinkerpop.blueprints.Direction;
 import com.tinkerpop.blueprints.Edge;
 import com.tinkerpop.blueprints.Vertex;
 import provenancegraph.AssociatedEvent;
+import provenancegraph.BasicNode;
 
 import java.util.regex.Pattern;
 
@@ -31,6 +32,15 @@ public class SeedEdge {
             if (sourceNode.isNodeAligned(e.sourceNode, e.sourceNodeProperties)){
                 return sinkNode.isNodeAligned(e.sinkNode, e.sinkNodeProperties);
             }
+        }
+        return false;
+    }
+
+    public boolean isNextEdgeAligned(AssociatedEvent e) {
+        String event = e.getRelationship();
+        String event_type = (String) this.seedEdge.getProperty("event_type");
+        if (Pattern.matches(event_type , event)) {
+            return sinkNode.isNodeAligned(e.sinkNode, e.sinkNodeProperties);
         }
         return false;
     }
