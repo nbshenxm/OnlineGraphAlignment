@@ -44,7 +44,7 @@
         <edge source="n1" target="n2">
             <data key="event_type">PROCESS_EXEC</data>
             <data key="sequence_num">1</data>
-            <data key="is_seed_edge">true</data>
+            <data key="is_seed_edge">false</data>
         </edge>
         <edge source="n1" target="n3">
             <data key="event_type">PROCESS_EXEC</data>
