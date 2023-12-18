@@ -96,8 +96,6 @@ public class EventFrequencyDBConstructionWithFlink extends KeyedProcessFunction<
     public void processElement(PDM.Log log, KeyedProcessFunction<PDM.HostUUID, PDM.Log, Row>.Context context, Collector<Row> collector) throws Exception {
         //count the number of process events
         Long processedEventCount = processedEventCountValue.value() + 1;
-        Long lostEventCount = lostEventCountValue.value();
-
         if (processedEventCount % dbDumpEventCount == 0) {
             System.out.println(String.format("[ProcessedEventCount: %d, LostEventCount: %d, EventTime: %s]",
                     processedEventCount,
