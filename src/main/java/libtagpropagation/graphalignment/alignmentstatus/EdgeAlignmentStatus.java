@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 public class EdgeAlignmentStatus {
 
-    private int pathLength;
 //    private NodeAlignmentStatus sinkNodeAlignmentStatus;
     private int nodeAlignmentStatusIndex;
     private float anomlyScore;
@@ -14,12 +13,7 @@ public class EdgeAlignmentStatus {
 
     public EdgeAlignmentStatus(ArrayList<AssociatedEvent> cachedPath, int nodeAlignmentStatusIndex) {
         this.alignedPath = cachedPath;
-        this.pathLength = cachedPath.size();
         this.nodeAlignmentStatusIndex = nodeAlignmentStatusIndex;
-    }
-
-    public int getPathLength() {
-        return pathLength;
     }
 
     public float getAnomlyScore() {
@@ -37,7 +31,7 @@ public class EdgeAlignmentStatus {
     @Override
     public String toString() {
         String path = alignedPath.get(alignedPath.size() - 1).toString();
-        return String.format("[{%s}]", path);
+        return String.format("[{%s}, {%d}, {%d}]", path, nodeAlignmentStatusIndex, alignedPath.size());
     }
 
 

@@ -308,7 +308,7 @@ public class TagBasedAnomalyPathMiningOnFlink extends KeyedProcessFunction<PDM.H
         hostEventLatestTime.update(eventTime);
     }
 
-    static void calculateRegularScore() throws IOException, ClassNotFoundException {
+    public static void calculateRegularScore() throws IOException, ClassNotFoundException {
         ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("SystemLog\\EventFrequencyDB.out"));
         Tuple2<Map, Map> dbstring = (Tuple2<Map, Map>) objectInputStream.readObject();
         Map<AssociatedEvent, HashSet<String>> exactlyMatchEventFrequencyMap = dbstring.f0;

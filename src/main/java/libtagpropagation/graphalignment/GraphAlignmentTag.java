@@ -22,7 +22,7 @@ public class GraphAlignmentTag {
     public UUID tagUuid;
 
     private TechniqueKnowledgeGraph tkg; // 用于匹配
-    private AlignmentSearchGraph searchTree;
+    private AlignmentSearchGraph searchGraph;
     private int lastAlignedNodeIndex;
     private BasicNode lastAlignedNode; // 用于记录最近匹配到的节点，便于减少匹配数量，最好是一个树中节点的id
 
@@ -38,7 +38,7 @@ public class GraphAlignmentTag {
         this.tagUuid = UUID.randomUUID();
         this.tkg = entry.f1;
         this.cachedPath = new ArrayList<>();
-        this.searchTree = new AlignmentSearchGraph(entry.f1);
+        this.searchGraph = new AlignmentSearchGraph(entry.f0.getAlignedString(), entry.f1);
         //增加匹配上的信息
         this.alignStatus = new GraphAlignmentStatus(entry);
         this.lastAlignedNodeIndex = entry.f0.getId();
@@ -76,7 +76,7 @@ public class GraphAlignmentTag {
     public GraphAlignmentTag(GraphAlignmentTag orignalTag){
         this.tagUuid = UUID.randomUUID();
         this.tkg = orignalTag.tkg;
-        this.searchTree = orignalTag.searchTree;
+        this.searchGraph = orignalTag.searchGraph;
         this.alignStatus = orignalTag.alignStatus;
         propagateTagCount ++;
     }
@@ -91,7 +91,7 @@ public class GraphAlignmentTag {
         newTag.cachedPath.add(event);
         newTag.cachedPathLength = this.cachedPathLength + 1;
 
-        Tuple3<Integer, Integer, NodeAlignmentStatus> searchResult = this.searchTree.alignmentSearch(lastAlignedNodeIndex, event);
+        Tuple3<Integer, Integer, NodeAlignmentStatus> searchResult = this.searchGraph.alignmentSearch(lastAlignedNodeIndex, event);
         if (searchResult == null) {
             if (this.cachedPath.size() > ATTENUATION_THRESHOLD) return null;
             else{

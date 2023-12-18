@@ -33,7 +33,7 @@
             <data key="is_seed_node">true</data>
         </node>
         
-        <edge source="n1" target="n2">
+        <edge source="n2" target="n1">
             <data key="event_type">FILE_READ</data>
             <data key="sequence_num">0</data>
             <data key="is_seed_edge">true</data>
