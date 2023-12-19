@@ -316,9 +316,9 @@ public class TagBasedAnomalyPathMiningOnFlink extends KeyedProcessFunction<PDM.H
         Map<AssociatedEvent, Double> map = new HashMap<>();
         for (AssociatedEvent key : exactlyMatchEventFrequencyMap.keySet())
         {
-            double fre_e = exactlyMatchEventFrequencyMap.get(key).size();
-            double fre_src_rel = sourceRelationshipMatchEventFrequencyMap.get(key.ignoreSink()).size();
-            double score = fre_e / fre_src_rel;
+            double freq_event = exactlyMatchEventFrequencyMap.get(key).size();
+            double freq_src_rel = sourceRelationshipMatchEventFrequencyMap.get(key.ignoreSink()).size();
+            double score = freq_event / freq_src_rel;
             map.put(key, score);
         }
 

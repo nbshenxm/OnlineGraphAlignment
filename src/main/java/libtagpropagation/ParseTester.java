@@ -1,49 +1,34 @@
 package libtagpropagation;
-import com.google.gson.Gson;
-import org.apache.flink.api.common.eventtime.WatermarkStrategy;
-import org.apache.flink.connector.file.src.FileSource;
-import org.apache.flink.connector.file.src.reader.TextLineInputFormat;
-import org.apache.flink.core.fs.Path;
-import org.apache.flink.streaming.api.datastream.DataStream;
-import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
+import java.math.BigInteger;
 
-import com.google.gson.JsonElement;
-import provenancegraph.AssociatedEvent;
-import provenancegraph.BasicNode;
-import provenancegraph.NodeProperties;
-import com.google.gson.JsonParser;
-import provenancegraph.parser.LocalParser;
-
+import static libtagpropagation.anomalypath.TagBasedAnomalyPathMiningOnFlink.calculateRegularScore;
 
 public class ParseTester {
     public static void main(String[] args) throws Exception{
-        StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
-        DataStream<AssociatedEvent> event_stream;
-        final String inputDirectory = "SystemLog/apt.log";
-        final FileSource<String> source =
-                FileSource.forRecordStreamFormat(new TextLineInputFormat(), new Path(inputDirectory) ).build();
-        final DataStream<String> stream =
-                env.fromSource(source, WatermarkStrategy.noWatermarks(), "file-source");
-        final DataStream<JsonElement> json_stream = stream.map(ParseTester::convertToJson).name("json-source");
-        event_stream = json_stream.map(LocalParser::initAssociatedEvent);
-        event_stream.print();
-//        event_stream.keyBy(associatedEvent -> associatedEvent.hostUUID)
-//                .process(new GraphAlignmentLocalProcessFunction());
-        env.execute("Test reading in Local JSON Files with Flink");
+
+//        1648196412041127565    1648405875429715088    ubantu benign
+//        durationTime("1648196412041127565", "1648405875429715088");
+//        1648196053351249642 (后)  1648471346229724669 （前）     ubantu anomly
+//        durationTime("1648196053351249642", "1648471346229724669");
+        System.out.println(12200000 / 220);
+
     }
-    private static JsonElement convertToJson(String inputLine) {
-        Gson gson = new Gson();
 
-        try {
-//            System.out.println(inputLine);
-            JsonElement jsonElement = gson.fromJson(inputLine, JsonElement.class);
-//            System.out.println(gson.toJson(jsonElement));
-            return jsonElement;
+    public static void durationTime(String startTime, String endTime){
+//         将字符串转换为 BigInteger 对象
+        BigInteger num1 = new BigInteger(startTime);
+        BigInteger num2 = new BigInteger(endTime);
+        String strNum3 = "3600000000000";
+        BigInteger num3 = new BigInteger(strNum3);
+        String strNum4 = "60000000000";
+        BigInteger num4 = new BigInteger(strNum4);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("oopsies");
-        }
-        return null;
+        // 执行大数相减
+//        BigInteger result = num1.divide(num2);
+        BigInteger result = num2.subtract(num1);
+        BigInteger[] results = result.divideAndRemainder(num3);
+
+        // 输出结果
+        System.out.println("Result of subtraction: " + results[0] + " 余： " + results[1].divide(num4));
     }
 }
