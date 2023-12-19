@@ -9,16 +9,16 @@ import provenancegraph.BasicNode;
 import java.util.regex.Pattern;
 
 public class SeedEdge {
-    private Edge seedEdge;
+//    private Edge seedEdge;
     private int id;
-    private String type;
+    private String event_type;
     private SeedNode sourceNode;
     private SeedNode sinkNode;
 
     public SeedEdge(Edge seedEdge) {
-        this.seedEdge = seedEdge;
+//        this.seedEdge = seedEdge;
         this.id = seedEdge.getProperty("sequence_num");
-        this.type = (String)seedEdge.getProperty("event_type");
+        this.event_type = seedEdge.getProperty("event_type");
         Vertex src = seedEdge.getVertex(Direction.OUT);
         Vertex sink = seedEdge.getVertex(Direction.IN);
         this.sourceNode = new SeedNode(src);
@@ -27,8 +27,8 @@ public class SeedEdge {
 
     public boolean isEdgeAligned(AssociatedEvent e) {
         String event = e.getRelationship();
-        String event_type = (String) this.seedEdge.getProperty("event_type");
-        if (Pattern.matches(event_type , event)) {
+//        String event_type = this.seedEdge.getProperty("event_type");
+        if (Pattern.matches(this.event_type , event)) {
             if (sourceNode.isNodeAligned(e.sourceNode, e.sourceNodeProperties)){
                 return sinkNode.isNodeAligned(e.sinkNode, e.sinkNodeProperties);
             }
@@ -38,8 +38,8 @@ public class SeedEdge {
 
     public boolean isNextEdgeAligned(AssociatedEvent e) {
         String event = e.getRelationship();
-        String event_type = (String) this.seedEdge.getProperty("event_type");
-        if (Pattern.matches(event_type , event)) {
+//        String event_type = (String) this.seedEdge.getProperty("event_type");
+        if (Pattern.matches(this.event_type , event)) {
             return sinkNode.isNodeAligned(e.sinkNode, e.sinkNodeProperties);
         }
         return false;
@@ -53,7 +53,7 @@ public class SeedEdge {
     public String toString() {
         return "SeedEdge{" +
                 "id=" + id +
-                ", type='" + type + '\'' +
+                ", type='" + this.event_type + '\'' +
                 '}';
     }
 
