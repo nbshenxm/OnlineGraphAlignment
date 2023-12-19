@@ -21,8 +21,8 @@ public class SeedNode{
 
     public SeedNode(Vertex tkgNode) {
         this.tkgNode = tkgNode;
-        this.alignedString = getKeyPropertiesFromType(tkgNode.getProperty("type"));
-        this.type = (String) tkgNode.getProperty("type");
+        this.type = tkgNode.getProperty("type");
+        this.alignedString = tkgNode.getProperty(getKeyPropertiesFromType(this.type));
         this.id = Integer.parseInt(((String) tkgNode.getId()).substring(1));
     }
 
