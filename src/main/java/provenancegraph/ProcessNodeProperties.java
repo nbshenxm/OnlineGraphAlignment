@@ -29,7 +29,7 @@ public class ProcessNodeProperties extends NodeProperties {
 
     @Override
     public String toString() {
-        return String.format("[%s: PID-%s, PATH-%s, ARGUMENTS-%s]", this.type.toString(), this.processId, this.exePath, this.cmdLineArguments);
+        return String.format("[%s: PID-%s, PName-%s, ARGUMENTS-%s]", this.type.toString(), this.processId, this.processName, this.cmdLineArguments);
     }
 
 //    @Override
