@@ -23,11 +23,11 @@ public class NetworkNodeProperties extends NodeProperties {
     @Override
     public String toString() {
         if (direction == 1)
-            return String.format("[Network Connect: %s:%s->Local Process]", this.remoteIp, this.remotePort);
+            return String.format("[Network Connect: %s:%s->Localhost]", this.remoteIp, this.remotePort);
         else if (direction == 2)
-            return String.format("[Network Connect: Local Process->%s:%s]", this.remoteIp, this.remotePort);
+            return String.format("[Network Connect: Localhost->%s:%s]", this.remoteIp, this.remotePort);
         else
-            return String.format("[Network Connect: Local Process--%s:%s]", this.remoteIp, this.remotePort);
+            return String.format("[Network Connect: Localhost--%s:%s]", this.remoteIp, this.remotePort);
     }
 
     @Override

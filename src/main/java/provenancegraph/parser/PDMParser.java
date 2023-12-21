@@ -8,6 +8,7 @@ import provenancegraph.datamodel.PDM;
 import provenancegraph.*;
 
 import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.UUID;
 import com.google.common.primitives.Bytes;
@@ -87,9 +88,7 @@ public class PDMParser implements FlatMapFunction<PDM.LogPack, PDM.Log> {
     }
 
     public static BasicNode initBasicNode(PDM.File file){
-        String filePathHash = Long.toString(file.getFileUUID().getFilePathHash());
-        UUID uuid = new UUID(new BigInteger(filePathHash, 16).longValue(),
-                new BigInteger(filePathHash, 16).longValue());
+        UUID uuid = new UUID(file.getFileUUID().getFilePathHash(), file.getFileUUID().getFilePathHash());
 
         BasicNode basicNode = new BasicNode(uuid, "File", "FileMonitor");
 
@@ -100,21 +99,29 @@ public class PDMParser implements FlatMapFunction<PDM.LogPack, PDM.Log> {
 
     public static BasicNode initBasicNode(PDM.NetEvent netEvent){
 
-        String sip = Long.toString(netEvent.getSip().getAddress());
-        String dip = Integer.toString(netEvent.getDip().getAddress());
-        UUID uuid = new UUID(new BigInteger(sip, 16).longValue(),
-                new BigInteger(dip, 16).longValue());
+        String sip = parseIPAddress(netEvent.getSip());
+        String dip = parseIPAddress(netEvent.getDip());
+        UUID uuid = UUID.nameUUIDFromBytes((sip+dip).getBytes(StandardCharsets.UTF_8));
 
         BasicNode basicNode = new BasicNode(uuid, "Network", "Network");
         PDM.NetEvent.Direction direct = netEvent.getDirect();
         int dir = 2;
         if (direct == IN) dir = 0;
         if (direct == OUT) dir = 1;
-        NodeProperties nodeProperties = new NetworkNodeProperties(sip,
+        NodeProperties nodeProperties = new NetworkNodeProperties(dip,
                 String.valueOf(netEvent.getDport()),
                 dir);
         basicNode.setProperties(nodeProperties);
         return basicNode;
+    }
+
+    public static String parseIPAddress(PDM.IPAddress ipAddress){
+        StringBuilder ipv4 = new StringBuilder();
+        ipv4.append(ipAddress.getAddress() + ".");
+        ipv4.append(ipAddress.getAddress1() + ".");
+        ipv4.append(ipAddress.getAddress2() + ".");
+        ipv4.append(ipAddress.getAddress3());
+        return ipv4.toString();
     }
 
 //
