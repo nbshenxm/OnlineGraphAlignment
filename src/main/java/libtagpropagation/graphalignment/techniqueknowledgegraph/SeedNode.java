@@ -39,7 +39,6 @@ public class SeedNode{
         String kpKGNode = tkgNode.getProperty(getKeyPropertiesFromType(tkgNode.getProperty("type")));
         String kpPGNode = pgNode.getProperty(getKeyPropertiesFromType(pgNode.getProperty("type")));
 
-        this.alignedString = kpPGNode;
         return Pattern.matches(kpKGNode, kpPGNode);
     }
 
@@ -80,10 +79,6 @@ public class SeedNode{
 
     @Override
     public String toString() {
-        return "SeedNode{" +
-                "id=" + id +
-                ", type='" + type + '\'' +
-                ", " + (String) this.tkgNode.getProperty(alignedString) +
-                '}';
+        return this.type + ": "+ this.alignedString;
     }
 }

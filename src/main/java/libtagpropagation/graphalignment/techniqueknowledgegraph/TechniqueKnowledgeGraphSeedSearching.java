@@ -34,9 +34,9 @@ public class TechniqueKnowledgeGraphSeedSearching {
         }
 
         for(Map.Entry entry : seedEdgeSearchMap.entrySet()){
-            SeedEdge seedNode = (SeedEdge) entry.getKey();
+            SeedEdge seedEdge = (SeedEdge) entry.getKey();
             TechniqueKnowledgeGraph tkg = (TechniqueKnowledgeGraph) entry.getValue();
-            System.out.println(seedNode.toString() + " " + tkg.techniqueName);
+            System.out.println(seedEdge.toString() + " " + tkg.techniqueName);
         }
         System.out.println();
     }
@@ -77,8 +77,8 @@ public class TechniqueKnowledgeGraphSeedSearching {
 
     public List<Tuple2<SeedNode, TechniqueKnowledgeGraph>> search(AssociatedEvent candidateEdge) {
         // ToDo：加上缓存
-        if (this.searchedEdgeCache.containsKey(candidateEdge.hostUUID)) {
-            return this.searchedEdgeCache.get(candidateEdge.hostUUID);
+        if (this.searchedEdgeCache.containsKey(candidateEdge.getEventUUID())) {
+            return this.searchedEdgeCache.get(candidateEdge.getEventUUID());
         }
         else {
             ArrayList<Tuple2<SeedNode, TechniqueKnowledgeGraph>> techniqueKnowledgeGraphs = new ArrayList<>();
@@ -89,7 +89,7 @@ public class TechniqueKnowledgeGraphSeedSearching {
                     techniqueKnowledgeGraphs.add(Tuple2.of(seedEdge.getSourceNode(), (TechniqueKnowledgeGraph) entry.getValue()));
                 }
             }
-            this.searchedEdgeCache.put(candidateEdge.edgeId, techniqueKnowledgeGraphs);
+            this.searchedEdgeCache.put(candidateEdge.getEventUUID(), techniqueKnowledgeGraphs);
             return techniqueKnowledgeGraphs;
         }
     }

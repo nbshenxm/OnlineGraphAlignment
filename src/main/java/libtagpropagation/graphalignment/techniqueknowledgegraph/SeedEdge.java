@@ -4,7 +4,6 @@ import com.tinkerpop.blueprints.Direction;
 import com.tinkerpop.blueprints.Edge;
 import com.tinkerpop.blueprints.Vertex;
 import provenancegraph.AssociatedEvent;
-import provenancegraph.BasicNode;
 
 import java.util.regex.Pattern;
 
@@ -16,7 +15,6 @@ public class SeedEdge {
     private SeedNode sinkNode;
 
     public SeedEdge(Edge seedEdge) {
-//        this.seedEdge = seedEdge;
         this.id = seedEdge.getProperty("sequence_num");
         this.event_type = seedEdge.getProperty("event_type");
         Vertex src = seedEdge.getVertex(Direction.OUT);
@@ -26,9 +24,7 @@ public class SeedEdge {
     }
 
     public boolean isEdgeAligned(AssociatedEvent e) {
-        String event = e.getRelationship();
-//        String event_type = this.seedEdge.getProperty("event_type");
-        if (Pattern.matches(this.event_type , event)) {
+        if (Pattern.matches(this.event_type , e.getRelationship())) {
             if (sourceNode.isNodeAligned(e.sourceNode, e.sourceNodeProperties)){
                 return sinkNode.isNodeAligned(e.sinkNode, e.sinkNodeProperties);
             }
@@ -37,9 +33,7 @@ public class SeedEdge {
     }
 
     public boolean isNextEdgeAligned(AssociatedEvent e) {
-        String event = e.getRelationship();
-//        String event_type = (String) this.seedEdge.getProperty("event_type");
-        if (Pattern.matches(this.event_type , event)) {
+        if (Pattern.matches(this.event_type , e.getRelationship())) {
             return sinkNode.isNodeAligned(e.sinkNode, e.sinkNodeProperties);
         }
         return false;
@@ -51,10 +45,7 @@ public class SeedEdge {
 
     @Override
     public String toString() {
-        return "SeedEdge{" +
-                "id=" + id +
-                ", type='" + this.event_type + '\'' +
-                '}';
+        return "[" + sourceNode.toString() + "]->"+ event_type +"->[" + sinkNode.toString() + "]";
     }
 
     public SeedNode getSourceNode() {
