@@ -121,14 +121,16 @@ public class GraphAlignmentStatus {
     }
 
     public GraphAlignmentStatus mergeAlignmentStatus(EdgeAlignmentStatus[] anotherEdgeAlignmentStatusList, NodeAlignmentStatus[] anotherNodeAlignmentStatusList){
-        for (int i = 0; i < anotherNodeAlignmentStatusList.length; i ++){
-            if (anotherNodeAlignmentStatusList[i] != null && nodeAlignmentStatusList[i] == null)
-                nodeAlignmentStatusList[i] = anotherNodeAlignmentStatusList[i];
-        }
+//        for (int i = 0; i < anotherNodeAlignmentStatusList.length; i ++){
+//            if (anotherNodeAlignmentStatusList[i] != null && nodeAlignmentStatusList[i] == null)
+//                nodeAlignmentStatusList[i] = anotherNodeAlignmentStatusList[i];
+//        }
 
         for (int i = 0; i < anotherEdgeAlignmentStatusList.length; i ++){
             if(anotherEdgeAlignmentStatusList[i] != null && edgeAlignmentStatusList[i] == null){
                 edgeAlignmentStatusList[i] = anotherEdgeAlignmentStatusList[i];
+                int nodeAlignmentStatusIndex = anotherEdgeAlignmentStatusList[i].getNodeAlignmentStatusIndex();
+                this.nodeAlignmentStatusList[nodeAlignmentStatusIndex] = anotherNodeAlignmentStatusList[nodeAlignmentStatusIndex];
                 this.alignmentScore += anotherEdgeAlignmentStatusList[i].getAnomlyScore();
             }
             else if (anotherEdgeAlignmentStatusList[i] != null && edgeAlignmentStatusList[i] != null){
