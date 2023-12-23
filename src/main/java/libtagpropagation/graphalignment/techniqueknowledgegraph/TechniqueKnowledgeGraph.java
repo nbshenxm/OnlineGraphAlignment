@@ -45,8 +45,6 @@ public class TechniqueKnowledgeGraph {
     // https://github.com/tinkerpop/blueprints/wiki/GraphML-Reader-and-Writer-Library
     public TinkerGraph tinkerGraph;
 
-    public AlignmentSearchGraph searchTree;
-
     public String techniqueName;
 
     private static final HashMap<String, String> KEY_PROPERTIES_MAP = new HashMap <String, String> (){{
