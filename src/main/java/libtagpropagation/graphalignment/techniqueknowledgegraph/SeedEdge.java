@@ -8,7 +8,6 @@ import provenancegraph.AssociatedEvent;
 import java.util.regex.Pattern;
 
 public class SeedEdge {
-//    private Edge seedEdge;
     private int id;
     private String event_type;
     private SeedNode sourceNode;

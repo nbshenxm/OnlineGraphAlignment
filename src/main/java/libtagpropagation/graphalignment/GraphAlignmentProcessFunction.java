@@ -112,7 +112,8 @@ public class GraphAlignmentProcessFunction
 
         initTkgList.addAll(this.seedSearching.value().search(associatedEvent.sourceNode));
         // 记录到source上传播到sink上面
-        initTkgList.addAll(this.seedSearching.value().search(associatedEvent)); // 即匹配事件又匹配节点是为了减少标签初始化的量
+        initTkgList.addAll(this.seedSearching.value().search(associatedEvent));
+
 
         if (initTkgList.isEmpty()) return null;
         else {
@@ -146,13 +147,10 @@ public class GraphAlignmentProcessFunction
             } else {
                 sinkMultiTag.mergeMultiTag(newTags);
                 newTags.mergeMultiTag(sinkMultiTag);
+//                System.out.println("merging end...\n");
             }
         }
         return tagsCacheMap.get(associatedEvent.sinkNode.getNodeId());
-    }
-
-    public ValueState<Boolean> getIsInitialized() {
-        return isInitialized;
     }
 
     @Override
