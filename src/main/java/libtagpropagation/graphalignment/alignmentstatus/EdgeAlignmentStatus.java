@@ -31,7 +31,7 @@ public class EdgeAlignmentStatus {
     @Override
     public String toString() {
         String path = alignedPath.get(alignedPath.size() - 1).toString();
-        return String.format("[{%s}, {%d}, {%d}]", path, nodeAlignmentStatusIndex, alignedPath.size());
+        return String.format("[{%s}, {%d}, {cachedPath:%d}]", path, nodeAlignmentStatusIndex, alignedPath.size());
     }
 
 

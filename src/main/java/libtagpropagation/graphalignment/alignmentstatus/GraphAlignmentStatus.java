@@ -18,7 +18,7 @@ public class GraphAlignmentStatus {
     public String techniqueName;
     public Float alignmentScore = 0.0F;
     public boolean ALERT_FLAG;
-    public static final Float ALIGNMENT_THRESHOLDS = 1.4F;
+    public static final Float ALIGNMENT_THRESHOLDS = 1.0F;
 
     private int nodeCount;
     private int edgeCount;
@@ -121,10 +121,6 @@ public class GraphAlignmentStatus {
     }
 
     public GraphAlignmentStatus mergeAlignmentStatus(EdgeAlignmentStatus[] anotherEdgeAlignmentStatusList, NodeAlignmentStatus[] anotherNodeAlignmentStatusList){
-//        for (int i = 0; i < anotherNodeAlignmentStatusList.length; i ++){
-//            if (anotherNodeAlignmentStatusList[i] != null && nodeAlignmentStatusList[i] == null)
-//                nodeAlignmentStatusList[i] = anotherNodeAlignmentStatusList[i];
-//        }
 
         for (int i = 0; i < anotherEdgeAlignmentStatusList.length; i ++){
             if(anotherEdgeAlignmentStatusList[i] != null && edgeAlignmentStatusList[i] == null){

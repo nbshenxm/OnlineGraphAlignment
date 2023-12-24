@@ -10,7 +10,6 @@ public class BasicEdge {
     public String edgeType;
     public long timeStamp;
 
-    public boolean directed; // FixMe: Handle events without direction
     public UUID sourceNodeId;
     public UUID sinkNodeId;
 
