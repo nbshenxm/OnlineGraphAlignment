@@ -18,6 +18,7 @@ public class AssociatedEvent extends BasicEdge implements Serializable {
     public NodeProperties sinkNodeProperties;
 
     private String relationship;
+    private UUID eventUUID;
     public  Long timeStamp;
 
     public UUID hostUUID;
@@ -33,10 +34,11 @@ public class AssociatedEvent extends BasicEdge implements Serializable {
         this.hostUUID = new UUID(0, 0);
 
     }
-    public AssociatedEvent(UUID hostUUID, String relationship, Long timeStamp){
+    public AssociatedEvent(UUID hostUUID, String relationship, Long timeStamp, UUID eventUUID){
         this.hostUUID = hostUUID;
         this.relationship = relationship;
         this.timeStamp = timeStamp;
+        this.eventUUID = eventUUID;
     }
 
     public AssociatedEvent(BasicNode sourceNode, BasicNode sinkNode, String relationship, Long timeStamp) {
@@ -115,6 +117,8 @@ public class AssociatedEvent extends BasicEdge implements Serializable {
         return relationship;
     }
 
+    public UUID getEventUUID(){return this.eventUUID;}
+
     public void setRelationship(String relationship) {
         this.relationship = relationship;
     }
@@ -133,4 +137,5 @@ public class AssociatedEvent extends BasicEdge implements Serializable {
 
     public void setHostUUID(UUID hostUUID){ this.hostUUID = hostUUID; };
 
+    public void setEventUUID(UUID eventUUID){this.eventUUID = eventUUID; }
 }

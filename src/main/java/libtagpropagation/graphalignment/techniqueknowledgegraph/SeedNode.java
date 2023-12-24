@@ -1,14 +1,13 @@
 package libtagpropagation.graphalignment.techniqueknowledgegraph;
 
 import com.tinkerpop.blueprints.Vertex;
-import com.tinkerpop.blueprints.impls.tg.TinkerGraph;
 import provenancegraph.*;
 
 import java.util.HashMap;
 import java.util.regex.Pattern;
 
 public class SeedNode{
-    private Vertex tkgNode;
+    private String matchedString;
     private String alignedString;
     private String type;
     private int id;
@@ -20,9 +19,8 @@ public class SeedNode{
     }};
 
     public SeedNode(Vertex tkgNode) {
-        this.tkgNode = tkgNode;
         this.type = tkgNode.getProperty("type");
-        this.alignedString = tkgNode.getProperty(getKeyPropertiesFromType(this.type));
+        this.matchedString = tkgNode.getProperty(getKeyPropertiesFromType(this.type));
         this.id = Integer.parseInt(((String) tkgNode.getId()).substring(1));
     }
 
@@ -30,43 +28,37 @@ public class SeedNode{
         return this.KEY_PROPERTIES_MAP.getOrDefault(type, null);
     }
 
-    public boolean nodeMatch(Vertex pgNode) {
-        String kgNodeType = this.tkgNode.getProperty("type");
-        String pgNodeType = pgNode.getProperty("type");
-        if (!kgNodeType.equals(pgNodeType)) {
-            return false;
-        }
-        String kpKGNode = tkgNode.getProperty(getKeyPropertiesFromType(tkgNode.getProperty("type")));
-        String kpPGNode = pgNode.getProperty(getKeyPropertiesFromType(pgNode.getProperty("type")));
-
-        return Pattern.matches(kpKGNode, kpPGNode);
-    }
-
     public boolean isNodeAligned(BasicNode n, NodeProperties np) {
-        TinkerGraph graph = new TinkerGraph();
-        Vertex temp_node = graph.addVertex("1");
+        String alignedString = null;
+        String type = null;
         switch (n.getNodeType()) {
             case "File":
-                temp_node.setProperty("type", "File");
-                temp_node.setProperty("file_path", ((FileNodeProperties) np).getFilePath());
+                type = "File";
+                alignedString = ((FileNodeProperties) np).getFilePath();
                 break;
             case "Process":
-                temp_node.setProperty("type", "Process");
-
-                temp_node.setProperty("process_name", ((ProcessNodeProperties) np).getProcessName());
+                type = "Process";
+                alignedString = ((ProcessNodeProperties) np).getProcessName();
                 break;
             case "Network":
-                temp_node.setProperty("type", "Network");
-                temp_node.setProperty("url_ip", ((NetworkNodeProperties) np).getRemoteIp());
+                type = "Network";
+                alignedString = ((NetworkNodeProperties) np).getRemoteIp();
                 break;
             default:
                 break;
         }
-        return nodeMatch(temp_node);
+
+        if (this.type.equals(type)){
+            if(Pattern.matches(this.matchedString, alignedString)){
+                this.alignedString = alignedString;
+                return true;
+            }
+        }
+        return false;
     }
 
     public String getAlignedString() {
-        return alignedString;
+        return this.alignedString;
     }
 
     public String getType() {
@@ -79,6 +71,6 @@ public class SeedNode{
 
     @Override
     public String toString() {
-        return this.type + ": "+ this.alignedString;
+        return this.type + ": "+ this.matchedString;
     }
 }
