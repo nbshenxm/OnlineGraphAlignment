@@ -31,7 +31,7 @@ public class GraphAlignmentMultiTag {
         Map<String, GraphAlignmentTag> newMultiTagMap = newMultiTag.getTagMap();
         for (Map.Entry entry : newMultiTagMap.entrySet()){
             String key = (String) entry.getKey();
-            if (this.tagMap.containsKey(key)) {
+            if (this.tagMap.containsKey(key) && !this.tagMap.get(key).recurringAlert()) {
                 GraphAlignmentTag mergedTag = this.tagMap.get(key).mergeTag((GraphAlignmentTag) entry.getValue());
                 if (mergedTag == null) {
                     this.tagMap.remove(key);
@@ -51,16 +51,17 @@ public class GraphAlignmentMultiTag {
     public GraphAlignmentMultiTag propagate(AssociatedEvent associatedEvent) {
         GraphAlignmentMultiTag newMultiTag = new GraphAlignmentMultiTag(this);
         for (Map.Entry entry : newMultiTag.tagMap.entrySet()) {
-            GraphAlignmentTag tag = (GraphAlignmentTag) entry.getValue();
-            String techniqueName = (String) entry.getKey();
-            GraphAlignmentTag newTag = tag.propagate(associatedEvent);
-            if(newTag != null) {
-                newMultiTag.tagMap.put(techniqueName, newTag);
+            if (!((GraphAlignmentTag) entry.getValue()).recurringAlert()) {
+                String techniqueName = (String) entry.getKey();
+                GraphAlignmentTag newTag = ((GraphAlignmentTag) entry.getValue()).propagate(associatedEvent);
+                if (newTag != null) {
+                    newMultiTag.tagMap.put(techniqueName, newTag);
+                } else {
+                    this.tagMap.remove(techniqueName);
+                    removeTagCount += 2;
+                }
             }
-            else {
-                this.tagMap.remove(techniqueName);
-                removeTagCount += 2;
-            }
+            else this.tagMap.remove((String)entry.getKey());
         }
 
         return newMultiTag;
