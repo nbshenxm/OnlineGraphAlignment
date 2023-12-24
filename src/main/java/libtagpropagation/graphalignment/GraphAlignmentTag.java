@@ -31,7 +31,7 @@ public class GraphAlignmentTag {
     
     private GraphAlignmentStatus alignStatus; // 用于记录匹配状态，二次索引
 
-    private boolean IsOnTKG;// identify if the tag is on tkg
+    private boolean isOnTKG;// identify if the tag is on tkg
     private static final int ATTENUATION_THRESHOLD = 6;
 
     public GraphAlignmentTag(Tuple2<SeedNode, TechniqueKnowledgeGraph> entry) {
@@ -42,16 +42,12 @@ public class GraphAlignmentTag {
         //增加匹配上的信息
         this.alignStatus = new GraphAlignmentStatus(entry);
         this.lastAlignedNodeIndex = entry.f0.getId();
-        this.IsOnTKG = true;
+        this.isOnTKG = true;
         initTagCount ++;
     }
 
     public GraphAlignmentTag mergeTag(GraphAlignmentTag anotherAlignmentTag) {
-        if (this.alignStatus.recurringAlert()){
-            return null;
-        }
 
-        // update mergeAlignmentStatus
         this.alignStatus.mergeAlignmentStatus(anotherAlignmentTag.alignStatus.getEdgeAlignmentStatusList(),anotherAlignmentTag.alignStatus.getNodeAlignmentStatusList());
 
 //        System.out.println("merge:" + this.lastAlignedNodeIndex + " " + anotherAlignmentTag.lastAlignedNodeIndex );
@@ -61,13 +57,22 @@ public class GraphAlignmentTag {
             System.out.println(this.alignStatus.getAlignmentResult());
             return null;
         }
-        if(anotherAlignmentTag.IsOnTKG){
-            this.lastAlignedNodeIndex = anotherAlignmentTag.lastAlignedNodeIndex;
+
+        if(this.isOnTKG){
+            if (this.cachedPath.size() == 0 || anotherAlignmentTag.cachedPath.size() == 0){
+                if (anotherAlignmentTag.cachedPath.size() == 0)
+                    this.lastAlignedNodeIndex = anotherAlignmentTag.lastAlignedNodeIndex;
+                this.cachedPath = new ArrayList<>();
+            }
+          else return null;
         }
         else{
-            if (!this.IsOnTKG) {
-                this.lastAlignedNodeIndex = -1;
+            if (this.lastAlignedNodeIndex != anotherAlignmentTag.lastAlignedNodeIndex) {
+                this.lastAlignedNodeIndex = -1;   //TODO:bug of assigned cachedPath
             }
+            //TODO: time attribution
+            if (this.cachedPath.size() > anotherAlignmentTag.cachedPath.size())
+                this.cachedPath = anotherAlignmentTag.cachedPath;
         }
 
         return this;
@@ -83,10 +88,6 @@ public class GraphAlignmentTag {
 
     public GraphAlignmentTag propagate(AssociatedEvent event){
         GraphAlignmentTag newTag = new GraphAlignmentTag(this);
-
-        if (this.alignStatus.recurringAlert()){
-            return null;
-        }
         newTag.cachedPath = new ArrayList<>(this.cachedPath);
         newTag.cachedPath.add(event);
         newTag.cachedPathLength = this.cachedPathLength + 1;
@@ -97,34 +98,36 @@ public class GraphAlignmentTag {
             else{
                 newTag.lastAlignedNodeIndex = this.lastAlignedNodeIndex;
                 newTag.lastAlignedNode = this.lastAlignedNode;
-                newTag.IsOnTKG = false;
+                newTag.isOnTKG = false;
             }
 
         }
         else {
             newTag.lastAlignedNodeIndex = searchResult.f0;
             newTag.lastAlignedNode = event.sinkNode;
-            newTag.IsOnTKG = true;
+            newTag.isOnTKG = true;
             GraphAlignmentStatus graphAlignmentStatus = newTag.alignStatus.tryUpdateStatus(searchResult.f0, searchResult.f1, searchResult.f2, newTag.cachedPath);
             if(graphAlignmentStatus == null) {
                 if (this.cachedPath.size() > ATTENUATION_THRESHOLD) return null;
-                else{
-                    newTag.lastAlignedNodeIndex = this.lastAlignedNodeIndex;
-                    newTag.lastAlignedNode = this.lastAlignedNode;
-                }
             }
             if (this.alignStatus.shouldTriggerAlert()){
                 System.out.println(this.alignStatus.getAlignmentResult());
                 return null;
             }
-//            System.out.println("updateStatus:");
-//            this.alignStatus.print();
+//            if(graphAlignmentStatus != null) {
+//                System.out.println("updateStatus:");
+//                this.alignStatus.print();
+//            }
             // ToDo：cached path也需要更新到alignStatus
             newTag.cachedPath = new ArrayList<>();
             newTag.cachedPathLength = 0;
         }
 
         return newTag;
+    }
+
+    public boolean recurringAlert(){
+        return this.alignStatus.recurringAlert();
     }
 
 }
