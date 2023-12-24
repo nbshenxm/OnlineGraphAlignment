@@ -27,12 +27,12 @@
         </node>
         <node id="n2">
             <data key="type">File</data>
-            <data key="file_path">.*\.(sh|py|bat|hta)</data>
+            <data key="file_path">.*\.(sh|py|bat|hta|yaml|vbs)</data>
             <data key="is_seed_node">true</data>
         </node>
         <node id="n3">
             <data key="type">Process</data>
-            <data key="process_name">bash|sh|python|powershell</data>
+            <data key="process_name">bash|sh|python|powershell|cmd|cscript</data>
             <data key="is_seed_node">false</data>
         </node>
         <node id="n4">
