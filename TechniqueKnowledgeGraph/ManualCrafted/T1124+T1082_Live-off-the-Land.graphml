@@ -9,6 +9,7 @@
     <key id="process_name" for="node" attr.name="process_name" attr.type="string"/>
     <key id="url_ip" for="node" attr.name="url_ip" attr.type="string"/>
     <key id="is_seed_node" for="node" attr.name="is_seed_node" attr.type="boolean"/>
+    <key id="Alert_threshold" for="node" attr.name="Alert_threshold" attr.type="float"/>
 
     <key id="event_type" for="edge" attr.name="event_type" attr.type="string"/>
     <key id="sequence_num" for="edge" attr.name="sequence_num" attr.type="int"/>
@@ -19,6 +20,7 @@
             <data key="type">Process</data>
             <data key="process_name">bash|sh|powershell|cmd</data>
             <data key="is_seed_node">true</data>
+            <data key="Alert_threshold">1.0</data>
         </node>
         <node id="n1">
             <data key="type">Process</data>
