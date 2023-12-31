@@ -7,7 +7,6 @@ import provenancegraph.BasicNode;
 import provenancegraph.datamodel.PDM;
 import provenancegraph.*;
 
-import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.UUID;
@@ -67,6 +66,9 @@ public class PDMParser implements FlatMapFunction<PDM.LogPack, PDM.Log> {
                 return null;
         }
 
+        String eventUUID = source.getNodeUUID().toString() + sink.getNodeUUID().toString() + event.getRelationship();
+        event.setEventUUID(UUID.nameUUIDFromBytes(eventUUID.getBytes(StandardCharsets.UTF_8)));
+
         event.setSourceNode(source);
         event.setSinkNode(sink);
 //        System.out.println(event.toJsonString());
@@ -88,7 +90,7 @@ public class PDMParser implements FlatMapFunction<PDM.LogPack, PDM.Log> {
     }
 
     public static BasicNode initBasicNode(PDM.File file){
-        UUID uuid = new UUID(file.getFileUUID().getFilePathHash(), file.getFileUUID().getFilePathHash());
+        UUID uuid = new UUID(file.getFileUUID().getFilePathHash(), (int)file.getFileUUID().getFilePathHash());
 
         BasicNode basicNode = new BasicNode(uuid, "File", "FileMonitor");
 
@@ -123,122 +125,6 @@ public class PDMParser implements FlatMapFunction<PDM.LogPack, PDM.Log> {
         ipv4.append(ipAddress.getAddress3());
         return ipv4.toString();
     }
-
-//
-//    //subject
-//    public static BasicNode initBasicSourceNode(PDM.Log log){
-//        Long ts = log.getEventData().getEHeader().getProc().getProcUUID().getTs();
-//        int pid = log.getEventData().getEHeader().getProc().getProcUUID().getPid();
-//        UUID uuid = new UUID(ts, pid);
-//        String nodeName = "Process";
-//        return new BasicNode(uuid, "Process", nodeName);
-//    }
-//
-//    //object
-//    public static BasicNode initBasicSinkNode(PDM.Log log) {
-//        UUID uuid;
-//        String nodeType;
-//        String nodeName;
-//        String log_category;
-//        String content = log.getUHeader().getContent().toString();
-//        switch (content){
-//            case "PROCESS_FORK":
-//            case "PROCESS_EXEC":
-//                log_category = "Process";break;
-//            case "FILE_WRITE":
-//            case "FILE_OPEN":
-//            case "FILE_READ":
-//            case "PROCESS_LOAD":
-//                log_category = "File";break;
-//            case "NET_CONNECT":
-//                log_category = "Network";break;
-//            default:
-//                return null;
-//
-//        }
-//        switch (log_category) {
-//            case "Process":
-//                Long ts = log.getEventData().getProcessEvent().getChildProc().getProcUUID().getTs();
-//                int pid = log.getEventData().getProcessEvent().getChildProc().getProcUUID().getPid();
-//                uuid = new UUID(ts, pid);
-//                nodeType = "Process";
-//                nodeName = "Process";
-//                break;
-//            case "File":
-//                String filePathHash = Long.toString(log.getEventData().getFileEvent().getFile().getFileUUID().getFilePathHash());
-//                uuid = new UUID(new BigInteger(filePathHash, 16).longValue(),
-//                        new BigInteger(filePathHash, 16).longValue());
-//                nodeType = "File";
-//                nodeName = "FileMonitor";
-//                break;
-//            case "Network":
-//                String sip = Long.toString(log.getEventData().getNetEvent().getSip().getAddress());
-//                String dip = Integer.toString(log.getEventData().getNetEvent().getDip().getAddress());
-//                uuid = new UUID(new BigInteger(sip, 16).longValue(),
-//                        new BigInteger(dip, 16).longValue());
-//                nodeType = "Network";
-//                nodeName = "Network";
-//                break;
-//            default:
-//                uuid = new UUID(0,0);
-//                nodeType = "";
-//                nodeName = "";
-//
-//        }
-//        return new BasicNode(uuid, nodeType, nodeName);
-//    }
-//
-//    //add properties of subject (pid, path, cmd)
-//    public static NodeProperties initSourceNodeProperties(PDM.Log log){
-//        NodeProperties nodeProperties = new ProcessNodeProperties(log.getEventData().getEHeader().getProc().getProcUUID().getPid(),
-//                        log.getEventData().getEHeader().getProc().getExePath(),
-//                        log.getEventData().getEHeader().getProc().getCmdline(), log.getEventData().getEHeader().getProc().getProcessName());
-//       return nodeProperties;
-//    }
-//
-//    public static NodeProperties initSinkNodeProperties(PDM.Log log){
-//        NodeProperties nodeProperties;
-//        String log_category;
-//        String content = log.getUHeader().getContent().toString();
-//        switch (content){
-//            case "PROCESS_FORK":
-//            case "PROCESS_EXEC":
-//                log_category = "Process";break;
-//            case "PROCESS_LOAD":
-//            case "FILE_OPEN":
-//            case "FILE_READ":
-//            case "FILE_WRITE":
-//                log_category = "File";break;
-//            case "NET_CONNECT":
-//                log_category = "Network";break;
-//            default:
-//                return null;
-//
-//        }
-//        switch (log_category) {
-//            case "Process":
-//                nodeProperties = new ProcessNodeProperties(log.getEventData().getProcessEvent().getChildProc().getProcUUID().getPid(),
-//                        log.getEventData().getProcessEvent().getChildProc().getExePath(),
-//                        log.getEventData().getProcessEvent().getChildProc().getCmdline(), log.getEventData().getProcessEvent().getChildProc().getProcessName());
-//                break;
-//            case "File":
-//                nodeProperties = new FileNodeProperties(log.getEventData().getFileEvent().getFile().getFilePath());
-//                break;
-//            case "Network":
-//                PDM.NetEvent.Direction direct = log.getEventData().getNetEvent().getDirect();
-//                int dir = 2;
-//                if (direct == IN) dir = 0;
-//                if (direct == OUT) dir = 1;
-//                nodeProperties = new NetworkNodeProperties(String.valueOf(log.getEventData().getNetEvent().getDip().getAddress()),
-//                        String.valueOf(log.getEventData().getNetEvent().getDport()),
-//                        dir);
-//                break;
-//            default:
-//            nodeProperties = new FileNodeProperties("");
-//        }
-//        return nodeProperties;
-//    }
-//
     
     @Override
     public void flatMap(PDM.LogPack logPack, Collector<PDM.Log> logCollector) throws Exception{
