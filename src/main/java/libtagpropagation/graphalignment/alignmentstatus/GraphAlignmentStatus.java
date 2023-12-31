@@ -26,19 +26,19 @@ public class GraphAlignmentStatus {
     private NodeAlignmentStatus[] nodeAlignmentStatusList;
     private EdgeAlignmentStatus[] edgeAlignmentStatusList;
 
-    public GraphAlignmentStatus(Tuple2<SeedNode, TechniqueKnowledgeGraph> entry) {
-        nodeCount = Iterators.size(entry.f1.tinkerGraph.getVertices().iterator());
+    public GraphAlignmentStatus(SeedNode seedNode, TechniqueKnowledgeGraph tkg) {
+        nodeCount = Iterators.size(tkg.tinkerGraph.getVertices().iterator());
         nodeAlignmentStatusList = new NodeAlignmentStatus[nodeCount];
         Arrays.fill(nodeAlignmentStatusList, null);
-        nodeAlignmentStatusList[entry.f0.getId()] = new NodeAlignmentStatus(entry.f0.getType(), entry.f0.getAlignedString(), entry.f0.getId());
+        nodeAlignmentStatusList[seedNode.getId()] = new NodeAlignmentStatus(seedNode.getType(), seedNode.getAlignedString(), seedNode.getId());
 
-        edgeCount = Iterators.size(entry.f1.tinkerGraph.getEdges().iterator());
+        edgeCount = Iterators.size(tkg.tinkerGraph.getEdges().iterator());
         edgeAlignmentStatusList = new EdgeAlignmentStatus[edgeCount];
         Arrays.fill(edgeAlignmentStatusList, null);
 
-        this.techniqueName = entry.f1.techniqueName;
+        this.techniqueName = tkg.techniqueName;
         this.ALERT_FLAG = false;
-        this.ALIGNMENT_THRESHOLDS = entry.f1.Alert_Threshold;
+        this.ALIGNMENT_THRESHOLDS = tkg.Alert_Threshold;
     }
 
     public GraphAlignmentStatus tryUpdateStatus(NodeAlignmentStatus sourceNodeAlignmentStatus, NodeAlignmentStatus sinkNodeAlignmentStatus, Integer edgeIndex, ArrayList<AssociatedEvent> cachedPath) {
@@ -52,7 +52,7 @@ public class GraphAlignmentStatus {
             this.alignmentScore += sinkNodeAlignmentStatus.getAlignmentScore() * (1.0f / cachedPath.size() + 1) / this.edgeCount;
             this.edgeAlignmentStatusList[edgeIndex].setAnomlyScore((1.0f / cachedPath.size() + 1) / this.edgeCount);
 //            if(this.alignmentScore == 0){
-                this.nodeAlignmentStatusList[sourceNodeAlignmentStatus.getIndex()] = sourceNodeAlignmentStatus;
+//            this.nodeAlignmentStatusList[sourceNodeAlignmentStatus.getIndex()] = sourceNodeAlignmentStatus;
 //            }
         }
         else{
@@ -64,6 +64,7 @@ public class GraphAlignmentStatus {
                 this.edgeAlignmentStatusList[edgeIndex] = new EdgeAlignmentStatus(cachedPath, nodeIndex);
                 this.nodeAlignmentStatusList[nodeIndex] = sinkNodeAlignmentStatus;
                 this.alignmentScore = this.alignmentScore - originalAlignmentScore + newEdgeAlignmentScore;
+//                this.nodeAlignmentStatusList[sourceNodeAlignmentStatus.getIndex()] = sourceNodeAlignmentStatus;
             }
             else return null;
         }

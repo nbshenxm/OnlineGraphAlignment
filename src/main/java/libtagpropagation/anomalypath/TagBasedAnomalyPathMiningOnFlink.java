@@ -219,17 +219,17 @@ public class TagBasedAnomalyPathMiningOnFlink extends KeyedProcessFunction<PDM.H
 
     @Override
     public void setTagCache(BasicNode node, AnomalyScoreTagCache tagCache) throws Exception {
-        tagsCacheMap.put(node.getNodeId(), tagCache);
+        tagsCacheMap.put(node.getNodeUUID(), tagCache);
     }
 
     @Override
     public boolean isNodeTagCached(BasicNode node) throws Exception {
-        return tagsCacheMap.contains(node.getNodeId());
+        return tagsCacheMap.contains(node.getNodeUUID());
     }
 
     @Override
     public AnomalyScoreTagCache getTagCache(BasicNode node) throws Exception {
-        return tagsCacheMap.get(node.getNodeId());
+        return tagsCacheMap.get(node.getNodeUUID());
     }
 
     @Override
@@ -239,7 +239,7 @@ public class TagBasedAnomalyPathMiningOnFlink extends KeyedProcessFunction<PDM.H
 
     @Override
     public void removeTagCache(BasicNode node) throws Exception {
-        tagsCacheMap.remove(node.getNodeId());
+        tagsCacheMap.remove(node.getNodeUUID());
     }
 
     @Override
