@@ -117,12 +117,12 @@ public class GraphAlignmentProcessFunction
 
         if (initTkgList.isEmpty()) return null;
         else {
-            GraphAlignmentMultiTag multiTag = new GraphAlignmentMultiTag(initTkgList);
-            if (this.tagsCacheMap.contains(associatedEvent.sourceNode.getNodeId())) {
-                this.tagsCacheMap.get(associatedEvent.sourceNode.getNodeId()).mergeMultiTag(multiTag);
+            GraphAlignmentMultiTag multiTag = new GraphAlignmentMultiTag(initTkgList, associatedEvent.sourceNode.getNodeUUID());
+            if (this.tagsCacheMap.contains(associatedEvent.sourceNode.getNodeUUID())) {
+                this.tagsCacheMap.get(associatedEvent.sourceNode.getNodeUUID()).mergeMultiTag(multiTag);
             }
             else{
-                this.tagsCacheMap.put(associatedEvent.sourceNode.getNodeId(), multiTag);
+                this.tagsCacheMap.put(associatedEvent.sourceNode.getNodeUUID(), multiTag);
                 multiTagCount ++;
             }
             return multiTag;
@@ -130,27 +130,26 @@ public class GraphAlignmentProcessFunction
     }
 
     private GraphAlignmentMultiTag propagateGraphAlignmentTag(AssociatedEvent associatedEvent) throws Exception {
-        GraphAlignmentMultiTag srcMultiTag = tagsCacheMap.get(associatedEvent.sourceNode.getNodeId());
+        GraphAlignmentMultiTag srcMultiTag = tagsCacheMap.get(associatedEvent.sourceNode.getNodeUUID());
         if (srcMultiTag != null) {
             if (srcMultiTag.getTagMap().size() == 0) {
-                this.tagsCacheMap.remove(associatedEvent.sourceNode.getNodeId());
+                this.tagsCacheMap.remove(associatedEvent.sourceNode.getNodeUUID());
             }
-            GraphAlignmentMultiTag sinkMultiTag = tagsCacheMap.get(associatedEvent.sinkNode.getNodeId());
+            GraphAlignmentMultiTag sinkMultiTag = tagsCacheMap.get(associatedEvent.sinkNode.getNodeUUID());
             GraphAlignmentMultiTag newTags = srcMultiTag.propagate(associatedEvent);
 
             // merge tag
             if (sinkMultiTag == null) {
-                if (newTags != null){
-                    this.tagsCacheMap.put(associatedEvent.sinkNode.getNodeId(), newTags);
+                if (newTags.getTagMap().size() > 0){
+                    this.tagsCacheMap.put(associatedEvent.sinkNode.getNodeUUID(), newTags);
                     multiTagCount ++;
                 }
             } else {
                 sinkMultiTag.mergeMultiTag(newTags);
                 newTags.mergeMultiTag(sinkMultiTag);
-//                System.out.println("merging end...\n");
             }
         }
-        return tagsCacheMap.get(associatedEvent.sinkNode.getNodeId());
+        return tagsCacheMap.get(associatedEvent.sinkNode.getNodeUUID());
     }
 
     @Override

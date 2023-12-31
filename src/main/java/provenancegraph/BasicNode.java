@@ -7,19 +7,19 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class BasicNode implements Serializable {
-    private UUID nodeId;
+    private UUID nodeUUID;
     private NodeType nodeType;
     private String nodeName;
     private NodeProperties properties;
 
 
     public BasicNode(UUID nodeId, String nodeType, String nodeName) {
-        this.setNodeId(nodeId);
+        this.setNodeUUID(nodeId);
         this.setNodeType(nodeType);
         this.setNodeName(nodeName);
     }
     public BasicNode(){
-        this.setNodeId(new UUID(0, 0));
+        this.setNodeUUID(new UUID(0, 0));
         this.setNodeType("");
         this.setNodeName("");
     }
@@ -29,17 +29,17 @@ public class BasicNode implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BasicNode basicNode = (BasicNode) o;
-        return Objects.equals(nodeId, basicNode.nodeId);
+        return Objects.equals(nodeUUID, basicNode.nodeUUID);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), nodeId);
+        return Objects.hash(super.hashCode(), nodeUUID);
     }
 
     public Row getNodeRow() {
         Row nodeRecord = new Row(3);
-        nodeRecord.setField(0, nodeId);
+        nodeRecord.setField(0, nodeUUID);
         nodeRecord.setField(1, nodeType);
         nodeRecord.setField(2, nodeName);
 
@@ -54,12 +54,12 @@ public class BasicNode implements Serializable {
         this.nodeName = nodeName;
     }
 
-    public UUID getNodeId() {
-        return nodeId;
+    public UUID getNodeUUID() {
+        return nodeUUID;
     }
 
-    public void setNodeId(UUID nodeId) {
-        this.nodeId = nodeId;
+    public void setNodeUUID(UUID nodeUUID) {
+        this.nodeUUID = nodeUUID;
     }
 
     public String getNodeType() {
@@ -91,6 +91,6 @@ public class BasicNode implements Serializable {
     }
 
     public String toString(){
-        return "UUID: " + this.nodeId.toString() + ", Node Type: " + this.nodeType.toString() + ", Node Name: " + this.nodeName;
+        return "UUID: " + this.nodeUUID.toString() + ", Node Type: " + this.nodeType.toString() + ", Node Name: " + this.nodeName;
     }
 }

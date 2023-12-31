@@ -57,8 +57,8 @@ public class TechniqueKnowledgeGraphSeedSearching {
 
     public List<Tuple2<SeedNode, TechniqueKnowledgeGraph>> search(BasicNode candidateNode) {
         // 缓存查询过的节点
-        if (this.searchedNodeCache.containsKey(candidateNode.getNodeId())) {
-            return this.searchedNodeCache.get(candidateNode.getNodeId());
+        if (this.searchedNodeCache.containsKey(candidateNode.getNodeUUID())) {
+            return this.searchedNodeCache.get(candidateNode.getNodeUUID());
         }
 
         else {
@@ -70,7 +70,7 @@ public class TechniqueKnowledgeGraphSeedSearching {
                 }
             }
 
-            this.searchedNodeCache.put(candidateNode.getNodeId(), techniqueKnowledgeGraphs);
+            this.searchedNodeCache.put(candidateNode.getNodeUUID(), techniqueKnowledgeGraphs);
             return techniqueKnowledgeGraphs;
         }
     }
