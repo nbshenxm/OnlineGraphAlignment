@@ -30,8 +30,12 @@ public class EdgeAlignmentStatus {
 
     @Override
     public String toString() {
-        String path = alignedPath.get(alignedPath.size() - 1).toString();
-        return String.format("[{%s}, {%d}, {cachedPath:%d}]", path, nodeAlignmentStatusIndex, alignedPath.size());
+//        String path = alignedPath.get(alignedPath.size() - 1).toString();
+        StringBuilder path = new StringBuilder();
+        for (AssociatedEvent associatedEvent : alignedPath){
+            path.append(associatedEvent.toString()).append("(ts:" + associatedEvent.timeStamp+") ");
+        }
+        return String.format("[{%s}, {cachedPath:%d}]", path, alignedPath.size());
     }
 
 
