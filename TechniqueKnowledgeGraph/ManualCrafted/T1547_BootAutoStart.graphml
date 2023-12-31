@@ -15,12 +15,12 @@
     <key id="sequence_num" for="edge" attr.name="sequence_num" attr.type="int"/>
     <key id="is_seed_edge" for="edge" attr.name="is_seed_edge" attr.type="boolean"/>
 
-    <graph id="T1105_BootAutoStart" edgedefault="directed">
+    <graph id="T1547_BootAutoStart" edgedefault="directed">
         <node id="n0">
             <data key="type">File</data>
             <data key="file_path">.*\.(sh|py|bat|hta|yaml|vbs)</data>
             <data key="is_seed_node">true</data>
-            <data key="Alert_threshold">1.0</data>
+            <data key="Alert_threshold">1.1</data>
         </node>
         <node id="n1">
             <data key="type">Process</data>
@@ -33,44 +33,25 @@
             <data key="is_seed_node">false</data>
         </node>
         <node id="n3">
-            <data key="type">Process</data>
-            <data key="process_name">unknown</data>
-            <data key="is_seed_node">false</data>
-        </node>
-        <node id="n4">
             <data key="type">File</data>
-            <data key="file_path">.*\.(dat|url)</data>
+            <data key="file_path">.*\.(url)</data>
             <data key="is_seed_node">false</data>
         </node>
-        <node id="n5">
-            <data key="type">Process</data>
-            <data key="process_name">.*</data>
-            <data key="is_seed_node">false</data>
-        </node>
+
 
         <edge source="n0" target="n1">
             <data key="event_type">FILE_READ</data>
             <data key="sequence_num">0</data>
-            <data key="is_seed_edge">true</data>
+            <data key="is_seed_edge">false</data>
         </edge>
         <edge source="n1" target="n2">
             <data key="event_type">PROCESS_EXEC</data>
             <data key="sequence_num">1</data>
             <data key="is_seed_edge">false</data>
         </edge>
-        <edge source="n2" target="n3">
-            <data key="event_type">PROCESS_EXEC</data>
-            <data key="sequence_num">2</data>
-            <data key="is_seed_edge">false</data>
-        </edge>
-        <edge source="n1" target="n4">
+        <edge source="n1" target="n3">
             <data key="event_type">FILE_WRITE</data>
-            <data key="sequence_num">3</data>
-            <data key="is_seed_edge">false</data>
-        </edge>
-        <edge source="n4" target="n1">
-            <data key="event_type">FILE_READ</data>
-            <data key="sequence_num">4</data>
+            <data key="sequence_num">2</data>
             <data key="is_seed_edge">false</data>
         </edge>
     </graph>
