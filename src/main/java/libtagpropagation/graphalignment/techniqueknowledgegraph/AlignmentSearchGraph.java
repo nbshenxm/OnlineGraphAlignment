@@ -4,6 +4,7 @@ import com.tinkerpop.blueprints.Direction;
 import com.tinkerpop.blueprints.Edge;
 import com.tinkerpop.blueprints.Vertex;
 import libtagpropagation.graphalignment.alignmentstatus.NodeAlignmentStatus;
+import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.api.java.tuple.Tuple3;
 import provenancegraph.AssociatedEvent;
 import java.util.ArrayList;
@@ -38,18 +39,17 @@ public class AlignmentSearchGraph {
         this.nodeStatus.put(alignedString, true);
     }
 
-    public Tuple3<Integer, Integer, NodeAlignmentStatus> alignmentSearch(int lastAlignedNodeIndex, AssociatedEvent currentEdege) {
+    public Tuple3<NodeAlignmentStatus, NodeAlignmentStatus, Integer> alignmentSearch(int lastAlignedNodeIndex, AssociatedEvent currentEdege) {
 
         // 处理合并时缺少lastAlignedNode的情况
         if (lastAlignedNodeIndex < 0){
             for (SeedEdge seedEdge : this.edgeList){
                 if (seedEdge.isNextEdgeAligned(currentEdege)){
                     if (this.nodeStatus.get(seedEdge.getSourceNode().getAlignedString())){
-                        NodeAlignmentStatus nodeAlignmentStatus = new NodeAlignmentStatus(
-                                seedEdge.getSinkNode().getType(),
-                                seedEdge.getSinkNode().getAlignedString());
+                        NodeAlignmentStatus nodeSinkAlignmentStatus = new NodeAlignmentStatus(seedEdge.getSinkNode().getType(), seedEdge.getSinkNode().getAlignedString(), seedEdge.getSinkNode().getId());
+                        NodeAlignmentStatus nodeSourceAlignmentStatus = new NodeAlignmentStatus(seedEdge.getSourceNode().getType(), seedEdge.getSourceNode().getAlignedString(), seedEdge.getSourceNode().getId());
                         this.nodeStatus.put(seedEdge.getSinkNode().getAlignedString(), true);
-                        return Tuple3.of(seedEdge.getSinkNode().getId(), seedEdge.getId(), nodeAlignmentStatus);
+                        return Tuple3.of(nodeSourceAlignmentStatus, nodeSinkAlignmentStatus, seedEdge.getId());
                     }
                 }
             }
@@ -57,11 +57,10 @@ public class AlignmentSearchGraph {
             ArrayList<SeedEdge> edges = this.edgeSearch.get(lastAlignedNodeIndex);
             for (SeedEdge seedEdge : edges){
                 if (seedEdge.isNextEdgeAligned(currentEdege)){
-                    NodeAlignmentStatus nodeAlignmentStatus = new NodeAlignmentStatus(
-                            seedEdge.getSinkNode().getType(),
-                            seedEdge.getSinkNode().getAlignedString());
+                    NodeAlignmentStatus nodeSinkAlignmentStatus = new NodeAlignmentStatus(seedEdge.getSinkNode().getType(), seedEdge.getSinkNode().getAlignedString(), seedEdge.getSinkNode().getId());
+                    NodeAlignmentStatus nodeSourceAlignmentStatus = new NodeAlignmentStatus(seedEdge.getSourceNode().getType(), seedEdge.getSourceNode().getAlignedString(), seedEdge.getSourceNode().getId());
                     this.nodeStatus.put(seedEdge.getSinkNode().getAlignedString(), true);
-                    return Tuple3.of(seedEdge.getSinkNode().getId(), seedEdge.getId(), nodeAlignmentStatus);
+                    return Tuple3.of(nodeSourceAlignmentStatus, nodeSinkAlignmentStatus, seedEdge.getId());
                 }
             }
         }

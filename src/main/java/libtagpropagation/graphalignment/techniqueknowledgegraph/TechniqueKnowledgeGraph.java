@@ -1,10 +1,12 @@
 package libtagpropagation.graphalignment.techniqueknowledgegraph;
 
+import com.sun.javaws.IconUtil;
 import com.tinkerpop.blueprints.Direction;
 import com.tinkerpop.blueprints.Edge;
 import com.tinkerpop.blueprints.Vertex;
 import com.tinkerpop.blueprints.impls.tg.TinkerGraph;
 import com.tinkerpop.blueprints.util.io.graphml.GraphMLReader;
+import org.checkerframework.checker.units.qual.A;
 import provenancegraph.*;
 
 import java.io.*;
@@ -46,6 +48,7 @@ public class TechniqueKnowledgeGraph {
     public TinkerGraph tinkerGraph;
 
     public String techniqueName;
+    public Float Alert_Threshold;
 
     private static final HashMap<String, String> KEY_PROPERTIES_MAP = new HashMap <String, String> (){{
         put("Network", "url_ip");
@@ -57,6 +60,7 @@ public class TechniqueKnowledgeGraph {
         this.loadFromGraphMLFile(gmlFilePath);
         String fileNameWithExtension = new File(gmlFilePath.trim()).getName();
         this.techniqueName = fileNameWithExtension.substring(0, fileNameWithExtension.lastIndexOf("."));
+        this.Alert_Threshold = this.tinkerGraph.getVertex("n0").getProperty("Alert_threshold");
     }
 
     private void loadFromGraphMLFile(String gmlFilePath) throws IOException {

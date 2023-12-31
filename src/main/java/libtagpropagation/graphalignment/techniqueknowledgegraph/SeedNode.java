@@ -49,10 +49,10 @@ public class SeedNode{
         }
 
         if (this.type.equals(type)){
-            if(Pattern.matches(this.matchedString, alignedString)){
-                this.alignedString = alignedString;
-                return true;
-            }
+                if (Pattern.matches(this.matchedString, alignedString)) {
+                    this.alignedString = alignedString;
+                    return true;
+                }
         }
         return false;
     }
