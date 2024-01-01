@@ -5,26 +5,24 @@ import libtagpropagation.graphalignment.techniqueknowledgegraph.TechniqueKnowled
 import org.apache.flink.api.java.tuple.Tuple2;
 import provenancegraph.AssociatedEvent;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import static libtagpropagation.graphalignment.GraphAlignmentProcessFunction.removeTagCount;
 
 public class GraphAlignmentMultiTag {
     private Map<String, GraphAlignmentTag> tagMap;
 
-    public GraphAlignmentMultiTag(Set<Tuple2<SeedNode, TechniqueKnowledgeGraph>> tkgList) {
+    public GraphAlignmentMultiTag(Set<Tuple2<SeedNode, TechniqueKnowledgeGraph>> tkgList, UUID sourceUUID) {
         tagMap = new HashMap<>();
 
         for (Tuple2<SeedNode, TechniqueKnowledgeGraph> entry : tkgList){
-            GraphAlignmentTag tag = new GraphAlignmentTag(entry);
+            GraphAlignmentTag tag = new GraphAlignmentTag(entry.f0, entry.f1, sourceUUID);
             this.tagMap.put(entry.f1.techniqueName, tag);
         }
     }
 
     public GraphAlignmentMultiTag(GraphAlignmentMultiTag originalTag) {
-        this.tagMap = new HashMap<>(originalTag.tagMap);
+        this.tagMap = new HashMap<>();
     }
 
     public GraphAlignmentMultiTag mergeMultiTag(GraphAlignmentMultiTag newMultiTag) {
@@ -39,7 +37,6 @@ public class GraphAlignmentMultiTag {
                 }
                 else {
                     this.tagMap.put(key, mergedTag);
-//                    removeTagCount++;
                 }
             }
             else
@@ -50,18 +47,23 @@ public class GraphAlignmentMultiTag {
 
     public GraphAlignmentMultiTag propagate(AssociatedEvent associatedEvent) {
         GraphAlignmentMultiTag newMultiTag = new GraphAlignmentMultiTag(this);
-        for (Map.Entry entry : newMultiTag.tagMap.entrySet()) {
-            if (!((GraphAlignmentTag) entry.getValue()).recurringAlert()) {
-                String techniqueName = (String) entry.getKey();
-                GraphAlignmentTag newTag = ((GraphAlignmentTag) entry.getValue()).propagate(associatedEvent);
+        Iterator<Map.Entry<String, GraphAlignmentTag>> iterator = this.tagMap.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<String, GraphAlignmentTag> entry = iterator.next();
+            if (!(entry.getValue()).recurringAlert()) {
+                String techniqueName = entry.getKey();
+                GraphAlignmentTag newTag = entry.getValue().propagate(associatedEvent);
                 if (newTag != null) {
                     newMultiTag.tagMap.put(techniqueName, newTag);
                 } else {
-                    this.tagMap.remove(techniqueName);
+                    iterator.remove();
                     removeTagCount += 2;
                 }
             }
-            else this.tagMap.remove((String)entry.getKey());
+            else {
+                iterator.remove();
+                removeTagCount ++;
+            }
         }
 
         return newMultiTag;
