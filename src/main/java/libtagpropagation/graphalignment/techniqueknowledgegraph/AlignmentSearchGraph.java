@@ -31,7 +31,7 @@ public class AlignmentSearchGraph {
 
         for (Edge edge : tkg.getEdgeList()){
             SeedEdge seedEdge = new SeedEdge(edge);
-            this.nodeStatus.put(seedEdge.getSourceNode().getAlignedString(), false);
+            this.nodeStatus.put(seedEdge.getSourceNode().getMatchedString(), false);
             this.edgeList.add(seedEdge);
             this.edgeSearch.get(seedEdge.getSourceNode().getId()).add(seedEdge);
         }
@@ -45,7 +45,7 @@ public class AlignmentSearchGraph {
         if (lastAlignedNodeIndex < 0){
             for (SeedEdge seedEdge : this.edgeList){
                 if (seedEdge.isNextEdgeAligned(currentEdege)){
-                    if (this.nodeStatus.get(seedEdge.getSourceNode().getAlignedString())){
+                    if (this.nodeStatus.get(seedEdge.getSourceNode().getMatchedString())){
                         NodeAlignmentStatus nodeSinkAlignmentStatus = new NodeAlignmentStatus(seedEdge.getSinkNode().getType(), seedEdge.getSinkNode().getAlignedString(), seedEdge.getSinkNode().getId());
                         NodeAlignmentStatus nodeSourceAlignmentStatus = new NodeAlignmentStatus(seedEdge.getSourceNode().getType(), seedEdge.getSourceNode().getAlignedString(), seedEdge.getSourceNode().getId());
                         this.nodeStatus.put(seedEdge.getSinkNode().getAlignedString(), true);

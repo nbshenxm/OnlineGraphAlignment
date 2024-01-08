@@ -114,7 +114,6 @@ public class GraphAlignmentProcessFunction
         // 记录到source上传播到sink上面
         initTkgList.addAll(this.seedSearching.value().search(associatedEvent));
 
-
         if (initTkgList.isEmpty()) return null;
         else {
             GraphAlignmentMultiTag multiTag = new GraphAlignmentMultiTag(initTkgList, associatedEvent.sourceNode.getNodeUUID());
