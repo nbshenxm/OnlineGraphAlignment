@@ -61,6 +61,9 @@ public class SeedNode{
         return this.alignedString;
     }
 
+    public String getMatchedString(){
+        return this.matchedString;
+    }
     public String getType() {
         return type;
     }

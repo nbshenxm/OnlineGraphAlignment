@@ -5,7 +5,6 @@ import libtagpropagation.graphalignment.alignmentstatus.NodeAlignmentStatus;
 import libtagpropagation.graphalignment.techniqueknowledgegraph.AlignmentSearchGraph;
 import libtagpropagation.graphalignment.techniqueknowledgegraph.SeedNode;
 import libtagpropagation.graphalignment.techniqueknowledgegraph.TechniqueKnowledgeGraph;
-import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.api.java.tuple.Tuple3;
 import provenancegraph.*;
 
@@ -65,7 +64,7 @@ public class GraphAlignmentTag {
             return null;
         }
 
-        if(this.isOnTKG){
+        if(this.isOnTKG || anotherAlignmentTag.isOnTKG){
             if (this.cachedPath.size() == 0 || anotherAlignmentTag.cachedPath.size() == 0){
                 if (anotherAlignmentTag.cachedPath.size() == 0)
                     this.lastAlignedNodeIndex = anotherAlignmentTag.lastAlignedNodeIndex;

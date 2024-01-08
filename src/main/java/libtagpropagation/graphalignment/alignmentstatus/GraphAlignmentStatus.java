@@ -51,9 +51,9 @@ public class GraphAlignmentStatus {
             this.edgeAlignmentStatusList[edgeIndex] = new EdgeAlignmentStatus(cachedPath, nodeIndex);
             this.alignmentScore += sinkNodeAlignmentStatus.getAlignmentScore() * (1.0f / cachedPath.size() + 1) / this.edgeCount;
             this.edgeAlignmentStatusList[edgeIndex].setAnomlyScore((1.0f / cachedPath.size() + 1) / this.edgeCount);
-//            if(this.alignmentScore == 0){
-//            this.nodeAlignmentStatusList[sourceNodeAlignmentStatus.getIndex()] = sourceNodeAlignmentStatus;
-//            }
+            if(this.alignmentScore == 0){
+                this.nodeAlignmentStatusList[sourceNodeAlignmentStatus.getIndex()] = sourceNodeAlignmentStatus;
+            }
         }
         else{
 //            Float newEdgeAlignmentScore = newNodeAlignmentStatus.getAlignmentScore() / cachedPath.size();
@@ -130,7 +130,7 @@ public class GraphAlignmentStatus {
 
         for (int i = 0; i < anotherEdgeAlignmentStatusList.length; i ++){
             if(anotherEdgeAlignmentStatusList[i] != null && edgeAlignmentStatusList[i] == null){
-                edgeAlignmentStatusList[i] = anotherEdgeAlignmentStatusList[i];
+                this.edgeAlignmentStatusList[i] = anotherEdgeAlignmentStatusList[i];
                 int nodeAlignmentStatusIndex = anotherEdgeAlignmentStatusList[i].getNodeAlignmentStatusIndex();
                 this.nodeAlignmentStatusList[nodeAlignmentStatusIndex] = anotherNodeAlignmentStatusList[nodeAlignmentStatusIndex];
                 this.alignmentScore += anotherEdgeAlignmentStatusList[i].getAnomlyScore();
