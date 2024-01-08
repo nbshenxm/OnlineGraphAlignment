@@ -15,7 +15,7 @@
     <key id="sequence_num" for="edge" attr.name="sequence_num" attr.type="int"/>
     <key id="is_seed_edge" for="edge" attr.name="is_seed_edge" attr.type="boolean"/>
 
-    <graph id="CADETS–NginxBackdoorw" edgedefault="directed">
+    <graph id="CADETS–NginxBackdoorw-3.1" edgedefault="directed">
         <node id="n0">
             <data key="type">Network</data>
             <data key="url_ip">81.49.200.166</data>

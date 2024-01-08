@@ -15,7 +15,7 @@
     <key id="sequence_num" for="edge" attr.name="sequence_num" attr.type="int"/>
     <key id="is_seed_edge" for="edge" attr.name="is_seed_edge" attr.type="boolean"/>
 
-    <graph id="FiveDirections-PhishingE-mail-w" edgedefault="directed">
+    <graph id="FiveDirections-PhishingE-mail-w-4.4" edgedefault="directed">
         <node id="n0">
             <data key="type">Network</data>
             <data key="url_ip">208.75.117.5</data>
