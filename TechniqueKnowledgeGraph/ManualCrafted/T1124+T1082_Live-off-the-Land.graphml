@@ -20,11 +20,11 @@
             <data key="type">Process</data>
             <data key="process_name">bash|sh|powershell|cmd</data>
             <data key="is_seed_node">true</data>
-            <data key="Alert_threshold">1.0</data>
+            <data key="Alert_threshold">1.2</data>
         </node>
         <node id="n1">
             <data key="type">Process</data>
-            <data key="process_name">systeminfo</data>
+            <data key="process_name">systeminfo|ping</data>
             <data key="is_seed_node">false</data>
         </node>
         <node id="n2">
@@ -45,11 +45,6 @@
         <node id="n5">
             <data key="type">Process</data>
             <data key="process_name">arp|ARP</data>
-            <data key="is_seed_node">false</data>
-        </node>
-        <node id="n6">
-            <data key="type">Process</data>
-            <data key="process_name">ping</data>
             <data key="is_seed_node">false</data>
         </node>
 
@@ -79,11 +74,5 @@
             <data key="sequence_num">4</data>
             <data key="is_seed_edge">false</data>
         </edge>
-        <edge source="n0" target="n6">
-            <data key="event_type">PROCESS_EXEC</data>
-            <data key="sequence_num">5</data>
-            <data key="is_seed_edge">false</data>
-        </edge>
-
     </graph>
 </graphml>
