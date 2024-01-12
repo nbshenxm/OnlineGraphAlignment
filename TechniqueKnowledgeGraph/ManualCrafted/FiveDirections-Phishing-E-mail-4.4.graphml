@@ -15,37 +15,36 @@
     <key id="sequence_num" for="edge" attr.name="sequence_num" attr.type="int"/>
     <key id="is_seed_edge" for="edge" attr.name="is_seed_edge" attr.type="boolean"/>
 
-    <graph id="T1547_BootAutoStart" edgedefault="directed">
+    <graph id="FiveDirections-PhishingE-mail-4.4" edgedefault="directed">
         <node id="n0">
-            <data key="type">File</data>
-            <data key="file_path">.*\.(sh|py|bat|hta|yaml|vbs)</data>
-            <data key="is_seed_node">true</data>
-            <data key="Alert_threshold">1.16</data>
+            <data key="type">Network</data>
+            <data key="url_ip">208.75.117.5</data>
+            <data key="is_seed_node">false</data>
+            <data key="Alert_threshold">1.5</data>
         </node>
         <node id="n1">
             <data key="type">Process</data>
-            <data key="process_name">bash|sh|python|powershell|cmd|cscript</data>
+            <data key="process_name">.*powershell.*</data>
             <data key="is_seed_node">false</data>
         </node>
         <node id="n2">
-            <data key="type">Process</data>
-            <data key="process_name">reg</data>
-            <data key="is_seed_node">false</data>
+            <data key="type">File</data>
+            <data key="file_path">.*\.config</data>
+            <data key="is_seed_node">true</data>
         </node>
         <node id="n3">
             <data key="type">File</data>
-            <data key="file_path">.*\.(url)</data>
+            <data key="file_path">.*update.ps1.*</data>
             <data key="is_seed_node">false</data>
         </node>
 
-
         <edge source="n0" target="n1">
-            <data key="event_type">FILE_READ</data>
+            <data key="event_type">NET_CONNECT</data>
             <data key="sequence_num">0</data>
-            <data key="is_seed_edge">false</data>
+            <data key="is_seed_edge">true</data>
         </edge>
-        <edge source="n1" target="n2">
-            <data key="event_type">PROCESS_EXEC</data>
+        <edge source="n2" target="n1">
+            <data key="event_type">FILE_READ</data>
             <data key="sequence_num">1</data>
             <data key="is_seed_edge">false</data>
         </edge>
