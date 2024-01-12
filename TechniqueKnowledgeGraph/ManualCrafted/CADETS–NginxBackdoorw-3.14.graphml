@@ -25,12 +25,12 @@
         <node id="n1">
             <data key="type">Process</data>
             <data key="process_name">.*nginx.*</data>
-            <data key="is_seed_node">false</data>
+            <data key="is_seed_node">true</data>
         </node>
         <node id="n2">
             <data key="type">File</data>
-            <data key="file_path">/tmp/eWq10bVcs</data>
-            <data key="is_seed_node">true</data>
+            <data key="file_path">.*eWq10bVcx.*</data>
+            <data key="is_seed_node">false</data>
         </node>
         <node id="n3">
             <data key="type">File</data>
@@ -54,7 +54,7 @@
         </node>
         <node id="n7">
             <data key="type">File</data>
-            <data key="file_path">/tmp/pEja72mA</data>
+            <data key="file_path">.*pEja72mA.*</data>
             <data key="is_seed_node">false</data>
         </node>
         <node id="n8">
@@ -69,22 +69,22 @@
         </node>
         <node id="n10">
             <data key="type">File</data>
-            <data key="file_path">/tmp/memhelp.so</data>
+            <data key="file_path">.*memhelp.so.*</data>
             <data key="is_seed_node">false</data>
         </node>
         <node id="n11">
             <data key="type">File</data>
-            <data key="file_path">/tmp/eraseme</data>
+            <data key="file_path">.*eraseme.*</data>
             <data key="is_seed_node">false</data>
         </node>
         <node id="n12">
             <data key="type">File</data>
-            <data key="file_path">/tmp/done.so</data>
+            <data key="file_path">.*done.so.*</data>
             <data key="is_seed_node">false</data>
         </node>
         <node id="n13">
             <data key="type">Process</data>
-            <data key="process_name">sshd</data>
+            <data key="process_name">.*sshd.*</data>
             <data key="is_seed_node">false</data>
         </node>
         <node id="n14">
@@ -98,8 +98,8 @@
             <data key="sequence_num">0</data>
             <data key="is_seed_edge">true</data>
         </edge>
-        <edge source="n2" target="n1">
-            <data key="event_type">FILE_READ</data>
+        <edge source="n1" target="n2">
+            <data key="event_type">FILE_WRITE</data>
             <data key="sequence_num">1</data>
             <data key="is_seed_edge">false</data>
         </edge>
@@ -118,44 +118,49 @@
             <data key="sequence_num">4</data>
             <data key="is_seed_edge">false</data>
         </edge>
-        <edge source="n1" target="n6">
-            <data key="event_type">FILE_WRITE</data>
+        <edge source="n6" target="n1">
+            <data key="event_type">FILE_READ</data>
             <data key="sequence_num">5</data>
+            <data key="is_seed_edge">false</data>
+        </edge>
+        <edge source="n1" target="n7">
+            <data key="event_type">FILE_WRITE</data>
+            <data key="sequence_num">6</data>
             <data key="is_seed_edge">false</data>
         </edge>
         <edge source="n7" target="n8">
             <data key="event_type">PROCESS_LOAD</data>
-            <data key="sequence_num">6</data>
+            <data key="sequence_num">7</data>
             <data key="is_seed_edge">false</data>
         </edge>
         <edge source="n2" target="n8">
             <data key="event_type">FILE_READ</data>
-            <data key="sequence_num">7</data>
+            <data key="sequence_num">8</data>
             <data key="is_seed_edge">false</data>
         </edge>
         <edge source="n3" target="n8">
             <data key="event_type">FILE_READ</data>
-            <data key="sequence_num">8</data>
+            <data key="sequence_num">9</data>
             <data key="is_seed_edge">false</data>
         </edge>
         <edge source="n8" target="n9">
             <data key="event_type">NET_CONNECT</data>
-            <data key="sequence_num">9</data>
+            <data key="sequence_num">10</data>
             <data key="is_seed_edge">false</data>
         </edge>
         <edge source="n8" target="n10">
             <data key="event_type">FILE_WRITE</data>
-            <data key="sequence_num">10</data>
+            <data key="sequence_num">11</data>
             <data key="is_seed_edge">false</data>
         </edge>
         <edge source="n8" target="n11">
             <data key="event_type">FILE_WRITE</data>
-            <data key="sequence_num">11</data>
+            <data key="sequence_num">12</data>
             <data key="is_seed_edge">false</data>
         </edge>
         <edge source="n8" target="n12">
             <data key="event_type">FILE_WRITE</data>
-            <data key="sequence_num">12</data>
+            <data key="sequence_num">13</data>
             <data key="is_seed_edge">false</data>
         </edge>
     </graph>
