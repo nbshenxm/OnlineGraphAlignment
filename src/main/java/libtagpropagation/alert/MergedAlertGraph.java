@@ -12,4 +12,8 @@ public class MergedAlertGraph {
     {
         this.anomalyPath = anomalyPath;
     }
+
+    public ArrayList<Tuple3<AssociatedEvent, Double, Long>> getAnomalyPath() {
+        return anomalyPath;
+    }
 }

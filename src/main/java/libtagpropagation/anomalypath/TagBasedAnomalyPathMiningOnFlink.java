@@ -139,7 +139,7 @@ public class TagBasedAnomalyPathMiningOnFlink extends KeyedProcessFunction<PDM.H
                 Long processedEventCount = processedEventCountValue.value() + 1;
                 processedEventCountValue.update(processedEventCount);
                 eventCount += 1;
-                System.out.println(eventCount);
+//                System.out.println(eventCount);
                 if (eventCount % 100000L == 0) {
                     System.out.println(lostEventCount + "/" + processedEventCount + " of Events lost!");
                     updateStatisticInfo(log.getEventData().getEHeader().getTs());
@@ -189,7 +189,7 @@ public class TagBasedAnomalyPathMiningOnFlink extends KeyedProcessFunction<PDM.H
         updateStatisticInfo(eventTime);
 
         printRegularInformation();
-        System.out.println(tag.toString());
+//        System.out.println(tag.toString());
 
         MergedAlertGraph singleAlertPath = new MergedAlertGraph();
         singleAlertPath.insertPath(tag.anomalyPath);
