@@ -1,6 +1,7 @@
 package libtagpropagation.alert;
 
-import com.google.gson.Gson;
+import org.apache.flink.api.java.tuple.Tuple3;
+import provenancegraph.AssociatedEvent;
 
 import java.util.UUID;
 
@@ -27,7 +28,13 @@ public class AlertFormatter {
     }
 
     public String toJsonString() {
-        Gson fullAlertJson = new Gson();
-        return fullAlertJson.toJson(this);
+        StringBuilder fullAlertJson = new StringBuilder();
+        fullAlertJson.append("###############Alert###############\ncurrentTime:" + currentTime + "\n");
+        fullAlertJson.append("AnomalyScore: " + AnomalyScore + "\n");
+        fullAlertJson.append("AlertPath:");
+        for (Tuple3<AssociatedEvent, Double, Long> path : AlertPath.getAnomalyPath()){
+            fullAlertJson.append(path.f0.toString()+": " +path.f1 + ": " +path.f2 + "\n");
+        }
+        return fullAlertJson.toString();
     }
 }
