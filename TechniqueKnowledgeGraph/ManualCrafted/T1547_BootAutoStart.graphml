@@ -20,7 +20,7 @@
             <data key="type">File</data>
             <data key="file_path">.*\.(sh|py|bat|hta|yaml|vbs)</data>
             <data key="is_seed_node">true</data>
-            <data key="Alert_threshold">1.16</data>
+            <data key="Alert_threshold">1.2</data>
         </node>
         <node id="n1">
             <data key="type">Process</data>
