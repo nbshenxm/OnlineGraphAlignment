@@ -20,7 +20,7 @@
             <data key="type">Network</data>
             <data key="url_ip">132.85.63.248</data>
             <data key="is_seed_node">false</data>
-            <data key="Alert_threshold">1.5</data>
+            <data key="Alert_threshold">1.6</data>
         </node>
         <node id="n1">
             <data key="type">Process</data>
@@ -30,11 +30,11 @@
         <node id="n2">
             <data key="type">Process</data>
             <data key="process_name">.*pass_mgr.*</data>
-            <data key="is_seed_node">true</data>
+            <data key="is_seed_node">false</data>
         </node>
         <node id="n3">
             <data key="type">File</data>
-            <data key="file_path">.*hjauW101.*</data>
+            <data key="file_path">.*HJAUWL01.*</data>
             <data key="is_seed_node">false</data>
         </node>
         <node id="n4">
@@ -49,7 +49,7 @@
             <data key="is_seed_edge">true</data>
         </edge>
         <edge source="n1" target="n2">
-            <data key="event_type">PROCESS_EXEC</data>
+            <data key="event_type">PROCESS_FORK</data>
             <data key="sequence_num">1</data>
             <data key="is_seed_edge">false</data>
         </edge>

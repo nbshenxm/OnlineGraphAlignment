@@ -15,47 +15,43 @@
     <key id="sequence_num" for="edge" attr.name="sequence_num" attr.type="int"/>
     <key id="is_seed_edge" for="edge" attr.name="is_seed_edge" attr.type="boolean"/>
 
-    <graph id="T1053_ScheduleTaskOnWindows" edgedefault="directed">
+    <graph id="T1053_ScheduleTask" edgedefault="directed">
         <node id="n0">
             <data key="type">Process</data>
-            <data key="process_name">powershell|cmd</data>
+            <data key="process_name">.*</data>
             <data key="is_seed_node">false</data>
             <data key="Alert_threshold">1.4</data>
         </node>
         <node id="n1">
-            <data key="type">Process</data>
-            <data key="process_name">schtask</data>
+            <data key="type">File</data>
+            <data key="file_path">.*</data>
             <data key="is_seed_node">false</data>
         </node>
         <node id="n2">
-            <data key="type">File</data>
-            <data key="file_path">.*\.(bat)</data>
+            <data key="type">Process</data>
+            <data key="process_name">schtask|.*cron.*</data>
             <data key="is_seed_node">false</data>
         </node>
-        <node id="n4">
+        <node id="n3">
             <data key="type">Process</data>
             <data key="process_name">.*</data>
             <data key="is_seed_node">false</data>
         </node>
 
+
         <edge source="n0" target="n1">
-            <data key="event_type">PROCESS_EXEC</data>
+            <data key="event_type">FILE_WRITE</data>
             <data key="sequence_num">0</data>
             <data key="is_seed_edge">true</data>
         </edge>
         <edge source="n1" target="n2">
-            <data key="event_type">FILE_WRITE</data>
-            <data key="sequence_num">1</data>
-            <data key="is_seed_edge">true</data>
-        </edge>
-        <edge source="n2" target="n1">
             <data key="event_type">FILE_READ</data>
-            <data key="sequence_num">2</data>
+            <data key="sequence_num">1</data>
             <data key="is_seed_edge">false</data>
         </edge>
-        <edge source="n1" target="n4">
-            <data key="event_type">PROCESS_EXEC</data>
-            <data key="sequence_num">4</data>
+        <edge source="n2" target="n3">
+            <data key="event_type">PROCESS_FORK</data>
+            <data key="sequence_num">2</data>
             <data key="is_seed_edge">false</data>
         </edge>
     </graph>

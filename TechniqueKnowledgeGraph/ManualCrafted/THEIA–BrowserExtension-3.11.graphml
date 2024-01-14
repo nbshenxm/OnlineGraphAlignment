@@ -18,9 +18,9 @@
     <graph id="THEIA–BrowserExtension-3.11" edgedefault="directed">
         <node id="n0">
             <data key="type">Network</data>
-            <data key="url_ip">61.130.69.232</data>
+            <data key="url_ip">128.55.12.10</data>
             <data key="is_seed_node">false</data>
-            <data key="Alert_threshold">0.7</data>
+            <data key="Alert_threshold">1.5</data>
         </node>
         <node id="n1">
             <data key="type">Process</data>
@@ -30,7 +30,7 @@
         <node id="n2">
             <data key="type">Process</data>
             <data key="process_name">.*hosts/pass_mgr.*</data>
-            <data key="is_seed_node">true</data>
+            <data key="is_seed_node">false</data>
         </node>
         <node id="n3">
             <data key="type">Network</data>
@@ -70,7 +70,7 @@
         <node id="n10">
             <data key="type">Process</data>
             <data key="process_name">.*profile.*</data>
-            <data key="is_seed_node">true</data>
+            <data key="is_seed_node">false</data>
         </node>
         <node id="n11">
             <data key="type">File</data>
@@ -101,71 +101,61 @@
         <edge source="n3" target="n2">
             <data key="event_type">NET_CONNECT</data>
             <data key="sequence_num">2</data>
-            <data key="is_seed_edge">false</data>
-        </edge>
-        <edge source="n2" target="n5">
-            <data key="event_type">PROCESS_FORK</data>
-            <data key="sequence_num">3</data>
-            <data key="is_seed_edge">false</data>
+            <data key="is_seed_edge">true</data>
         </edge>
         <edge source="n2" target="n4">
             <data key="event_type">FILE_WRITE</data>
-            <data key="sequence_num">4</data>
+            <data key="sequence_num">3</data>
             <data key="is_seed_edge">false</data>
         </edge>
         <edge source="n4" target="n5">
             <data key="event_type">PROCESS_LOAD</data>
-            <data key="sequence_num">5</data>
+            <data key="sequence_num">4</data>
             <data key="is_seed_edge">false</data>
         </edge>
         <edge source="n6" target="n5">
             <data key="event_type">FILE_READ</data>
-            <data key="sequence_num">6</data>
+            <data key="sequence_num">5</data>
             <data key="is_seed_edge">false</data>
         </edge>
         <edge source="n7" target="n5">
             <data key="event_type">FILE_READ</data>
-            <data key="sequence_num">7</data>
+            <data key="sequence_num">6</data>
             <data key="is_seed_edge">false</data>
         </edge>
         <edge source="n8" target="n5">
             <data key="event_type">FILE_READ</data>
-            <data key="sequence_num">8</data>
+            <data key="sequence_num">7</data>
             <data key="is_seed_edge">false</data>
         </edge>
         <edge source="n5" target="n9">
             <data key="event_type">FILE_WRITE</data>
-            <data key="sequence_num">9</data>
+            <data key="sequence_num">8</data>
             <data key="is_seed_edge">false</data>
         </edge>
         <edge source="n5" target="n10">
             <data key="event_type">PROCESS_FORK</data>
-            <data key="sequence_num">10</data>
+            <data key="sequence_num">9</data>
             <data key="is_seed_edge">false</data>
         </edge>
         <edge source="n7" target="n10">
             <data key="event_type">FILE_READ</data>
-            <data key="sequence_num">11</data>
-            <data key="is_seed_edge">false</data>
-        </edge>
-        <edge source="n10" target="n12">
-            <data key="event_type">PROCESS_FORK</data>
-            <data key="sequence_num">12</data>
+            <data key="sequence_num">10</data>
             <data key="is_seed_edge">false</data>
         </edge>
         <edge source="n10" target="n11">
             <data key="event_type">FILE_WRITE</data>
-            <data key="sequence_num">13</data>
+            <data key="sequence_num">11</data>
             <data key="is_seed_edge">false</data>
         </edge>
         <edge source="n11" target="n12">
             <data key="event_type">PROCESS_LOAD</data>
-            <data key="sequence_num">14</data>
+            <data key="sequence_num">12</data>
             <data key="is_seed_edge">false</data>
         </edge>
         <edge source="n12" target="n13">
             <data key="event_type">NET_CONNECT</data>
-            <data key="sequence_num">15</data>
+            <data key="sequence_num">13</data>
             <data key="is_seed_edge">false</data>
         </edge>
     </graph>
