@@ -43,6 +43,7 @@ public class SeedNode{
             case "Network":
                 type = "Network";
                 alignedString = ((NetworkNodeProperties) np).getRemoteIp();
+//                alignedString += ": " + ((NetworkNodeProperties) np).getRemotePort();
                 break;
             default:
                 break;

@@ -19,7 +19,7 @@ public class NetworkNodeProperties extends NodeProperties {
     public String getRemoteIp() {
         return this.remoteIp;
     }
-
+    public String getRemotePort() {return this.remotePort;}
     @Override
     public String toString() {
         if (direction == 1)

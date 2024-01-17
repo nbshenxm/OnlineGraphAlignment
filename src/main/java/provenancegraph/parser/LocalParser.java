@@ -1,8 +1,6 @@
 package provenancegraph.parser;
 
 import com.google.gson.JsonElement;
-import org.apache.commons.lang.ObjectUtils;
-import org.apache.commons.math3.ml.neuralnet.Network;
 import provenancegraph.*;
 
 import java.math.BigInteger;

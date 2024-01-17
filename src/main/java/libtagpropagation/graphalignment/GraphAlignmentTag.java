@@ -55,8 +55,10 @@ public class GraphAlignmentTag {
 
         this.alignStatus.mergeAlignmentStatus(anotherAlignmentTag.alignStatus.getEdgeAlignmentStatusList(),anotherAlignmentTag.alignStatus.getNodeAlignmentStatusList());
 
-//        System.out.println("merge:" + this.lastAlignedNodeIndex + " " + anotherAlignmentTag.lastAlignedNodeIndex );
-//        this.alignStatus.print();
+//        if (this.tkg.techniqueName.equals("T1105+T1059_Download+Execution")) {
+//            System.out.println("merge:" + this.lastAlignedNodeIndex + " " + anotherAlignmentTag.lastAlignedNodeIndex);
+//            this.alignStatus.print();
+//        }
 
         if (this.alignStatus.shouldTriggerAlert()){
             if(!this.alignStatus.recurringAlert())
@@ -74,10 +76,9 @@ public class GraphAlignmentTag {
         }
         else{
             if (this.lastAlignedNodeIndex != anotherAlignmentTag.lastAlignedNodeIndex) {
-                this.lastAlignedNodeIndex = -1;   //TODO:bug of assigned cachedPath
+                this.lastAlignedNodeIndex = -1;
             }
-            //TODO: time attribution
-            if (this.cachedPath.size() > anotherAlignmentTag.cachedPath.size())
+            if (this.cachedPath.size() < anotherAlignmentTag.cachedPath.size())
                 this.cachedPath = anotherAlignmentTag.cachedPath;
         }
         return this;
@@ -122,9 +123,11 @@ public class GraphAlignmentTag {
                     System.out.println(this.alignStatus.getAlignmentResult());
                 return null;
             }
-//            if(graphAlignmentStatus != null) {
-//                System.out.println("updateStatus:");
-//                this.alignStatus.print();
+//            if (this.tkg.techniqueName.equals("THEIA–BrowserExtension-3.11")) {
+//                if (graphAlignmentStatus != null) {
+//                    System.out.println("updateStatus:");
+//                    this.alignStatus.print();
+//                }
 //            }
             // ToDo：cached path也需要更新到alignStatus
             newTag.cachedPath = new ArrayList<>();
