@@ -4,6 +4,7 @@ import libtagpropagation.graphalignment.techniqueknowledgegraph.SeedNode;
 import libtagpropagation.graphalignment.techniqueknowledgegraph.TechniqueKnowledgeGraph;
 import libtagpropagation.graphalignment.techniqueknowledgegraph.TechniqueKnowledgeGraphSeedSearching;
 import org.apache.flink.api.common.state.*;
+import org.apache.flink.api.common.time.Time;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.configuration.Configuration;
 import provenancegraph.*;
@@ -33,6 +34,13 @@ public class GraphAlignmentProcessFunction
 
     @Override
     public void open(Configuration parameter) {
+        StateTtlConfig ttlConfig = StateTtlConfig
+                .newBuilder(Time.seconds(1))
+                .setUpdateType(StateTtlConfig.UpdateType.OnCreateAndWrite)
+                .setStateVisibility(StateTtlConfig.StateVisibility.NeverReturnExpired)
+                .cleanupIncrementally(10, false)
+                .build();
+
         ValueStateDescriptor<Boolean> isInitializedDescriptor =
                 new ValueStateDescriptor<>("isInitialized", Boolean.class, false);
         this.isInitialized = getRuntimeContext().getState(isInitializedDescriptor);
@@ -48,6 +56,7 @@ public class GraphAlignmentProcessFunction
         MapStateDescriptor<UUID, GraphAlignmentMultiTag> tagCacheStateDescriptor =
                 new MapStateDescriptor<>("tagsCacheMap", UUID.class, GraphAlignmentMultiTag.class);
         tagsCacheMap = getRuntimeContext().getMapState(tagCacheStateDescriptor);
+        tagCacheStateDescriptor.enableTimeToLive(ttlConfig);
     }
 
     // ToDo：考虑边的匹配状态
