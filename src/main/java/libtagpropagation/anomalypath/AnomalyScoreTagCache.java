@@ -9,6 +9,7 @@ import java.util.Properties;
 
 public class AnomalyScoreTagCache  extends GenericTagCache{
 
+
     private static double ATTENUATION_THRESHOLD = 0.4;
     private static final double ATTENUATION_THRESHOLD_REGULAR_SCORE = 0.2;
 

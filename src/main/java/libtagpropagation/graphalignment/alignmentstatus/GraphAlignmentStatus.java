@@ -3,7 +3,6 @@ package libtagpropagation.graphalignment.alignmentstatus;
 import com.google.common.collect.Iterators;
 import libtagpropagation.graphalignment.techniqueknowledgegraph.SeedNode;
 import libtagpropagation.graphalignment.techniqueknowledgegraph.TechniqueKnowledgeGraph;
-import org.apache.flink.api.java.tuple.Tuple2;
 import provenancegraph.AssociatedEvent;
 
 import java.util.ArrayList;
@@ -42,29 +41,25 @@ public class GraphAlignmentStatus {
     }
 
     public GraphAlignmentStatus tryUpdateStatus(NodeAlignmentStatus sourceNodeAlignmentStatus, NodeAlignmentStatus sinkNodeAlignmentStatus, Integer edgeIndex, ArrayList<AssociatedEvent> cachedPath) {
-        Integer nodeIndex = sinkNodeAlignmentStatus.getIndex();
-        if (nodeIndex >= nodeCount || edgeIndex >= edgeCount) throw new RuntimeException("This node or edge seems not in the TKG.");
+        Integer sinkNodeIndex = sinkNodeAlignmentStatus.getIndex();
+        Integer sourceNodeIndex = sourceNodeAlignmentStatus.getIndex();
+        if (sinkNodeIndex >= nodeCount || edgeIndex >= edgeCount) throw new RuntimeException("This node or edge seems not in the TKG.");
 
         // ToDo：考虑边的匹配状态
         if (edgeAlignmentStatusList[edgeIndex] == null){
-            this.nodeAlignmentStatusList[nodeIndex] = sinkNodeAlignmentStatus;//Fixme: 节点未必为空
-            this.edgeAlignmentStatusList[edgeIndex] = new EdgeAlignmentStatus(cachedPath, nodeIndex);
+            this.nodeAlignmentStatusList[sinkNodeIndex] = sinkNodeAlignmentStatus;//Fixme: 节点未必为空
+            this.edgeAlignmentStatusList[edgeIndex] = new EdgeAlignmentStatus(cachedPath, sinkNodeIndex, sourceNodeIndex);
             this.alignmentScore += sinkNodeAlignmentStatus.getAlignmentScore() * (1.0f / cachedPath.size() + 1) / this.edgeCount;
             this.edgeAlignmentStatusList[edgeIndex].setAnomlyScore((1.0f / cachedPath.size() + 1) / this.edgeCount);
-            if(this.alignmentScore == 0){
-                this.nodeAlignmentStatusList[sourceNodeAlignmentStatus.getIndex()] = sourceNodeAlignmentStatus;
-            }
         }
         else{
-//            Float newEdgeAlignmentScore = newNodeAlignmentStatus.getAlignmentScore() / cachedPath.size();
-//            Float originalAlignmentScore = this.nodeAlignmentStatusList[nodeIndex].getAlignmentScore() / this.edgeAlignmentStatusList[edgeIndex].getPathLength();
             Float newEdgeAlignmentScore = sinkNodeAlignmentStatus.getAlignmentScore() * (1.0f / cachedPath.size() + 1) / this.edgeCount;
-            Float originalAlignmentScore = this.nodeAlignmentStatusList[nodeIndex].getAlignmentScore() * this.edgeAlignmentStatusList[edgeIndex].getAnomlyScore();
-            if (newEdgeAlignmentScore > originalAlignmentScore){
-                this.edgeAlignmentStatusList[edgeIndex] = new EdgeAlignmentStatus(cachedPath, nodeIndex);
-                this.nodeAlignmentStatusList[nodeIndex] = sinkNodeAlignmentStatus;
+            Float originalAlignmentScore = this.nodeAlignmentStatusList[sinkNodeIndex].getAlignmentScore() * this.edgeAlignmentStatusList[edgeIndex].getAnomlyScore();
+            if (newEdgeAlignmentScore >= originalAlignmentScore){
+                this.edgeAlignmentStatusList[edgeIndex] = new EdgeAlignmentStatus(cachedPath, sinkNodeIndex, sourceNodeIndex);
+                this.nodeAlignmentStatusList[sinkNodeIndex] = sinkNodeAlignmentStatus;
                 this.alignmentScore = this.alignmentScore - originalAlignmentScore + newEdgeAlignmentScore;
-//                this.nodeAlignmentStatusList[sourceNodeAlignmentStatus.getIndex()] = sourceNodeAlignmentStatus;
+                this.edgeAlignmentStatusList[edgeIndex].setAnomlyScore(newEdgeAlignmentScore);
             }
             else return null;
         }
@@ -127,26 +122,24 @@ public class GraphAlignmentStatus {
     }
 
     public GraphAlignmentStatus mergeAlignmentStatus(EdgeAlignmentStatus[] anotherEdgeAlignmentStatusList, NodeAlignmentStatus[] anotherNodeAlignmentStatusList){
-
         for (int i = 0; i < anotherEdgeAlignmentStatusList.length; i ++){
             if(anotherEdgeAlignmentStatusList[i] != null && edgeAlignmentStatusList[i] == null){
                 this.edgeAlignmentStatusList[i] = anotherEdgeAlignmentStatusList[i];
-                int nodeAlignmentStatusIndex = anotherEdgeAlignmentStatusList[i].getNodeAlignmentStatusIndex();
-                this.nodeAlignmentStatusList[nodeAlignmentStatusIndex] = anotherNodeAlignmentStatusList[nodeAlignmentStatusIndex];
+                int sinkNodeStatusIndex = anotherEdgeAlignmentStatusList[i].getSinkNodeStatusIndex();
+                int sourceNodeStatusIndex = anotherEdgeAlignmentStatusList[i].getSourceNodeStatusIndex();
+                this.nodeAlignmentStatusList[sinkNodeStatusIndex] = anotherNodeAlignmentStatusList[sinkNodeStatusIndex];
+                this.nodeAlignmentStatusList[sourceNodeStatusIndex] = anotherNodeAlignmentStatusList[sourceNodeStatusIndex];
                 this.alignmentScore += anotherEdgeAlignmentStatusList[i].getAnomlyScore();
             }
             else if (anotherEdgeAlignmentStatusList[i] != null && edgeAlignmentStatusList[i] != null){
                 Float newEdgeAlignmentScore = anotherEdgeAlignmentStatusList[i].getAnomlyScore();
                 Float originalAlignmentScore = this.edgeAlignmentStatusList[i].getAnomlyScore();
-                if (newEdgeAlignmentScore > originalAlignmentScore){
+                if (newEdgeAlignmentScore >= originalAlignmentScore){
                     this.edgeAlignmentStatusList[i] = anotherEdgeAlignmentStatusList[i];
-                    int nodeAlignmentStatusIndex = anotherEdgeAlignmentStatusList[i].getNodeAlignmentStatusIndex();
-                    this.nodeAlignmentStatusList[nodeAlignmentStatusIndex] = anotherNodeAlignmentStatusList[nodeAlignmentStatusIndex];
                     this.alignmentScore = this.alignmentScore - originalAlignmentScore + newEdgeAlignmentScore;
                 }
             }
         }
         return this;
     }
-
 }
