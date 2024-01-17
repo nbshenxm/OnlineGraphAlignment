@@ -90,7 +90,7 @@ public class PDMParser implements FlatMapFunction<PDM.LogPack, PDM.Log> {
     }
 
     public static BasicNode initBasicNode(PDM.File file){
-        UUID uuid = new UUID(file.getFileUUID().getFilePathHash(), (int)file.getFileUUID().getFilePathHash());
+        UUID uuid = new UUID(file.getFileUUID().getFilePathHash(), file.getFileUUID().getFilePathHash());
 
         BasicNode basicNode = new BasicNode(uuid, "File", "FileMonitor");
 
@@ -101,9 +101,9 @@ public class PDMParser implements FlatMapFunction<PDM.LogPack, PDM.Log> {
 
     public static BasicNode initBasicNode(PDM.NetEvent netEvent){
 
-        String sip = parseIPAddress(netEvent.getSip());
+        String dport = String.valueOf(netEvent.getDport());
         String dip = parseIPAddress(netEvent.getDip());
-        UUID uuid = UUID.nameUUIDFromBytes((sip+dip).getBytes(StandardCharsets.UTF_8));
+        UUID uuid = UUID.nameUUIDFromBytes((dip+dport).getBytes(StandardCharsets.UTF_8));
 
         BasicNode basicNode = new BasicNode(uuid, "Network", "Network");
         PDM.NetEvent.Direction direct = netEvent.getDirect();
