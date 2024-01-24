@@ -25,17 +25,17 @@
         <node id="n1">
             <data key="type">Process</data>
             <data key="process_name">.*nginx.*</data>
-            <data key="is_seed_node">true</data>
+            <data key="is_seed_node">false</data>
         </node>
         <node id="n2">
             <data key="type">File</data>
             <data key="file_path">/etc/group</data>
-            <data key="is_seed_node">true</data>
+            <data key="is_seed_node">false</data>
         </node>
         <node id="n3">
             <data key="type">File</data>
             <data key="file_path">/etc/passwd</data>
-            <data key="is_seed_node">true</data>
+            <data key="is_seed_node">false</data>
         </node>
         <node id="n4">
             <data key="type">Network</data>
@@ -81,37 +81,37 @@
         <edge source="n2" target="n1">
             <data key="event_type">FILE_READ</data>
             <data key="sequence_num">1</data>
-            <data key="is_seed_edge">false</data>
+            <data key="is_seed_edge">true</data>
         </edge>
         <edge source="n3" target="n1">
             <data key="event_type">FILE_READ</data>
             <data key="sequence_num">2</data>
-            <data key="is_seed_edge">false</data>
+            <data key="is_seed_edge">true</data>
         </edge>
         <edge source="n1" target="n4">
             <data key="event_type">NET_CONNECT</data>
             <data key="sequence_num">3</data>
-            <data key="is_seed_edge">false</data>
+            <data key="is_seed_edge">true</data>
         </edge>
         <edge source="n1" target="n5">
             <data key="event_type">NET_CONNECT</data>
             <data key="sequence_num">4</data>
-            <data key="is_seed_edge">false</data>
+            <data key="is_seed_edge">true</data>
         </edge>
         <edge source="n1" target="n6">
             <data key="event_type">FILE_WRITE</data>
             <data key="sequence_num">5</data>
-            <data key="is_seed_edge">false</data>
+            <data key="is_seed_edge">true</data>
         </edge>
         <edge source="n3" target="n7">
             <data key="event_type">FILE_READ</data>
             <data key="sequence_num">6</data>
-            <data key="is_seed_edge">false</data>
+            <data key="is_seed_edge">true</data>
         </edge>
         <edge source="n1" target="n7">
             <data key="event_type">PROCESS_FORK</data>
             <data key="sequence_num">7</data>
-            <data key="is_seed_edge">false</data>
+            <data key="is_seed_edge">true</data>
         </edge>
         <edge source="n6" target="n7">
             <data key="event_type">PROCESS_LOAD</data>

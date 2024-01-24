@@ -25,7 +25,7 @@
         <node id="n1">
             <data key="type">Process</data>
             <data key="process_name">.*firefox</data>
-            <data key="is_seed_node">true</data>
+            <data key="is_seed_node">false</data>
         </node>
         <node id="n2">
             <data key="type">Network</data>
@@ -35,7 +35,7 @@
         <node id="n3">
             <data key="type">File</data>
             <data key="file_path">.*glx_alsa_675.*</data>
-            <data key="is_seed_node">true</data>
+            <data key="is_seed_node">false</data>
         </node>
         <node id="n4">
             <data key="type">File</data>
@@ -71,7 +71,7 @@
         <edge source="n1" target="n4">
             <data key="event_type">FILE_WRITE</data>
             <data key="sequence_num">3</data>
-            <data key="is_seed_edge">false</data>
+            <data key="is_seed_edge">true</data>
         </edge>
         <edge source="n4" target="n5">
             <data key="event_type">PROCESS_LOAD</data>

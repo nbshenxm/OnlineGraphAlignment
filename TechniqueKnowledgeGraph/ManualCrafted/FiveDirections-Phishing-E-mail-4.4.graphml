@@ -30,7 +30,7 @@
         <node id="n2">
             <data key="type">File</data>
             <data key="file_path">.*\.config</data>
-            <data key="is_seed_node">true</data>
+            <data key="is_seed_node">false</data>
         </node>
         <node id="n3">
             <data key="type">File</data>
@@ -46,7 +46,7 @@
         <edge source="n2" target="n1">
             <data key="event_type">FILE_READ</data>
             <data key="sequence_num">1</data>
-            <data key="is_seed_edge">false</data>
+            <data key="is_seed_edge">true</data>
         </edge>
         <edge source="n1" target="n3">
             <data key="event_type">FILE_WRITE</data>
