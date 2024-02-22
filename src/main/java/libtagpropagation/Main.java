@@ -28,41 +28,42 @@ public class Main {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         DataStream<AssociatedEvent> event_stream;
 
-        if (Objects.equals(args[0], "online")){
+        // if (Objects.equals(args[0], "online")){
 //            String kafkaBroker = "192.168.10.102:9092";
-            String kafkaBroker = "10.214.242.214:9092";
-            String kafkaTopic = "topic-HipsToMrd";
-            String kafkaGroupId = "mergeAlert";
+        String kafkaBroker = "10.214.242.214:9092";
+        String kafkaTopic = "topic-HipsToMrd";
+        String kafkaGroupId = "mergeAlert";
 
-            // TODO: replace deserializer with protobuf PDM deserializer
-            env.getConfig().registerTypeWithKryoSerializer(PDM.LogPack.class, ProtobufSerializer.class);
-            KafkaSource<PDM.LogPack> source = KafkaSource.<PDM.LogPack>builder()
-                    .setBootstrapServers(kafkaBroker)
-                    .setTopics(kafkaTopic)
-                    .setGroupId(kafkaGroupId)
-                    .setStartingOffsets(OffsetsInitializer.latest())
-                    .setValueOnlyDeserializer(new KafkaPDMDeserializer())
-                    .build();
+        // TODO: replace deserializer with protobuf PDM deserializer
+        env.getConfig().registerTypeWithKryoSerializer(PDM.LogPack.class, ProtobufSerializer.class);
+        KafkaSource<PDM.LogPack> source = KafkaSource.<PDM.LogPack>builder()
+                .setBootstrapServers(kafkaBroker)
+                .setTopics(kafkaTopic)
+                .setGroupId(kafkaGroupId)
+                .setStartingOffsets(OffsetsInitializer.latest())
+                .setValueOnlyDeserializer(new KafkaPDMDeserializer())
+                .build();
 
-            DataStream<PDM.LogPack> logPack_stream = env.fromSource(source, WatermarkStrategy.noWatermarks(), "Kafka Source");
-            DataStream<PDM.Log> log_stream = logPack_stream.flatMap(new PDMParser());
-            event_stream = log_stream.map(PDMParser::initAssociatedEvent);
+        DataStream<PDM.LogPack> logPack_stream = env.fromSource(source, WatermarkStrategy.noWatermarks(), "Kafka Source");
+            // DataStream<PDM.Log> log_stream = logPack_stream.flatMap(new PDMParser());
+            // event_stream = log_stream.map(PDMParser::initAssociatedEvent);
 //            event_stream.print();
 
-        }
-        else {
-            final String inputDirectory = "SystemLog/apt.log";
-            final FileSource<String> source =
-                    FileSource.forRecordStreamFormat(new TextLineInputFormat(), new Path(inputDirectory) ).build();
-            final DataStream<String> stream =
-                    env.fromSource(source, WatermarkStrategy.noWatermarks(), "file-source");
-            final DataStream<JsonElement> json_stream = stream.map(Main::convertToJson).name("json-source");
-            event_stream = json_stream.map(LocalParser::initAssociatedEvent);
-        }
+        // }
+        // else {
+        //     final String inputDirectory = "SystemLog/apt.log";
+        //     final FileSource<String> source =
+        //             FileSource.forRecordStreamFormat(new TextLineInputFormat(), new Path(inputDirectory) ).build();
+        //     final DataStream<String> stream =
+        //             env.fromSource(source, WatermarkStrategy.noWatermarks(), "file-source");
+        //     final DataStream<JsonElement> json_stream = stream.map(Main::convertToJson).name("json-source");
+        //     event_stream = json_stream.map(LocalParser::initAssociatedEvent);
+        // }
 
-        event_stream.keyBy(associatedEvent -> associatedEvent.hostUUID)
-                .process(new GraphAlignmentProcessFunction());
-
+        // event_stream.keyBy(associatedEvent -> associatedEvent.hostUUID)
+        //         .process(new GraphAlignmentProcessFunction());
+        EventFrequencyDBConstructionHandler(logPack_stream);
+        
         // Execute the Flink job
         env.execute("Online Flink");
     }
