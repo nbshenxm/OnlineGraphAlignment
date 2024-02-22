@@ -63,6 +63,8 @@ public class Main {
         // event_stream.keyBy(associatedEvent -> associatedEvent.hostUUID)
         //         .process(new GraphAlignmentProcessFunction());
         EventFrequencyDBConstructionHandler(logPack_stream);
+
+        // AnomalyPathMiningHandler(logPack_stream);
         
         // Execute the Flink job
         env.execute("Online Flink");
