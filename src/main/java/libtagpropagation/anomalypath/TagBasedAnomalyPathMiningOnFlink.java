@@ -1,6 +1,7 @@
 package libtagpropagation.anomalypath;
 
 
+import ai.djl.ModelException;
 import libtagpropagation.alert.AlertFormatter;
 import libtagpropagation.alert.MergedAlertGraph;
 import org.apache.flink.api.common.functions.FlatMapFunction;
@@ -31,14 +32,18 @@ public class TagBasedAnomalyPathMiningOnFlink extends KeyedProcessFunction<PDM.H
     private transient MapState<UUID, BasicNode> nodeInfoMap;
 
     private static Map<AssociatedEvent, Double> eventRelativeFrequencyMap;
+    private static HuggingFaceRegressionInference regressor;
 
-    public static final String ALERT_FILE_NAME = "alerts_output.txt";
+    public static final String ALERT_FILE_NAME = "./Alerts/alerts-cadets-1.txt";
+    public static FileWriter fileWriter;
+    public static PrintWriter printWriter;
+
     public static Integer alertCount = 0;
     public static Long eventCount = 0L;
     public static Long lostEventCount = 0L;
     public static Long pipeIOCount = 0L;
     public static HashSet<String> debugOutputSet = new HashSet<>();
-    public static String outputTarget = "stdout";
+    public static String outputTarget = "file";
 
     private transient ValueState<Long> processedEventCountValue;
 
@@ -105,6 +110,9 @@ public class TagBasedAnomalyPathMiningOnFlink extends KeyedProcessFunction<PDM.H
     public static DataStream AnomalyPathMiningHandler(DataStream<PDM.LogPack> ds) throws Exception {
         TagBasedAnomalyPathMiningOnFlink detector = new TagBasedAnomalyPathMiningOnFlink();
         calculateRegularScore();
+//        if (outputTarget.equals("file")){
+//            fileWriter = new FileWriter(ALERT_FILE_NAME, true);
+//        }
         DataStream<String> dsStringOutput =  ds
                 .flatMap(new FlatMapFunction<PDM.LogPack, PDM.Log>() {
                     public void flatMap(PDM.LogPack logPack, Collector<PDM.Log> collector) throws Exception {
@@ -162,10 +170,17 @@ public class TagBasedAnomalyPathMiningOnFlink extends KeyedProcessFunction<PDM.H
                 if (tag == null) return;
                 else {
                     String alertJsonString = alertGeneration(tag);
-                    if (outputTarget.equals("kafka"))
-                        out.collect(alertJsonString);
-                    else if (outputTarget.equals("stdout"))
-                        System.out.println(alertJsonString);
+//                    if (outputTarget.equals("kafka"))
+//                        out.collect(alertJsonString);
+//                    else if (outputTarget.equals("stdout"))
+//                        System.out.println(alertJsonString);
+//                    else if (outputTarget.equals("file")) {
+////                        System.out.println(alertJsonString);
+//                        fileWriter = new FileWriter(ALERT_FILE_NAME, true);
+//                        printWriter = new PrintWriter(fileWriter);
+//                        printWriter.println(alertJsonString);
+//                        printWriter.close();
+//                    }
                 }
             }
         }
@@ -188,7 +203,7 @@ public class TagBasedAnomalyPathMiningOnFlink extends KeyedProcessFunction<PDM.H
         Long eventTime = tag.anomalyPath.get(tag.anomalyPath.size()-1).f2;
         updateStatisticInfo(eventTime);
 
-        printRegularInformation();
+//        printRegularInformation();
 //        System.out.println(tag.toString());
 
         MergedAlertGraph singleAlertPath = new MergedAlertGraph();
@@ -254,6 +269,10 @@ public class TagBasedAnomalyPathMiningOnFlink extends KeyedProcessFunction<PDM.H
         TagBasedAnomalyPathMiningOnFlink.eventRelativeFrequencyMap = eventRelativeFrequencyMap;
     }
 
+//    public static void setEventRelativeFrequencyMap (Map eventRelativeFrequencyMap) throws ModelException, IOException {
+//        regressor = new HuggingFaceRegressionInference();
+//    }
+
     @Override
     public Double getEventRegularScore(AssociatedEvent associatedEvent) throws Exception {
         if (eventRelativeFrequencyMap.containsKey(associatedEvent)) {
@@ -262,6 +281,13 @@ public class TagBasedAnomalyPathMiningOnFlink extends KeyedProcessFunction<PDM.H
 
         else return unseenEventScore;
     }
+
+//    @Override
+//    public Double getEventRegularScore(AssociatedEvent associatedEvent) throws Exception {
+//        String event_string = associatedEvent.toString();
+//        float freq_predict = regressor.freq_predict(event_string);
+//        return (double) freq_predict;
+//    }
 
     public void printRegularInformation() throws Exception {
         Long processingTimeSpan = (currentTime - detectionStartTime) / 1000;
@@ -308,8 +334,8 @@ public class TagBasedAnomalyPathMiningOnFlink extends KeyedProcessFunction<PDM.H
         hostEventLatestTime.update(eventTime);
     }
 
-    public static void calculateRegularScore() throws IOException, ClassNotFoundException {
-        ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("SystemLog\\EventFrequencyDB.out"));
+    public static void calculateRegularScore() throws IOException, ClassNotFoundException, ModelException {
+        ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("./SystemLog/cadetsEventFrequencyDB.out"));
         Tuple2<Map, Map> dbstring = (Tuple2<Map, Map>) objectInputStream.readObject();
         Map<AssociatedEvent, HashSet<String>> exactlyMatchEventFrequencyMap = dbstring.f0;
         Map<AssociatedEvent, HashSet<String>> sourceRelationshipMatchEventFrequencyMap = dbstring.f1;
@@ -319,6 +345,7 @@ public class TagBasedAnomalyPathMiningOnFlink extends KeyedProcessFunction<PDM.H
             double freq_event = exactlyMatchEventFrequencyMap.get(key).size();
             double freq_src_rel = sourceRelationshipMatchEventFrequencyMap.get(key.ignoreSink()).size();
             double score = freq_event / freq_src_rel;
+//            score(s, event, o) = freq(s, event, o)/freq(s, event)
             map.put(key, score);
         }
 

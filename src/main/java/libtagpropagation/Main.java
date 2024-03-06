@@ -1,6 +1,7 @@
 package libtagpropagation;
 
 import com.twitter.chill.protobuf.ProtobufSerializer;
+import libtagpropagation.anomalypath.EventFrequencyDBConstructionWithFlink;
 import libtagpropagation.graphalignment.GraphAlignmentProcessFunction;
 import org.apache.flink.connector.file.src.FileSource;
 import org.apache.flink.connector.file.src.reader.TextLineInputFormat;
@@ -22,6 +23,9 @@ import utils.KafkaPDMDeserializer;
 
 import java.util.Objects;
 
+import static libtagpropagation.anomalypath.EventFrequencyDBConstructionWithFlink.EventFrequencyDBConstructionHandler;
+import static libtagpropagation.anomalypath.TagBasedAnomalyPathMiningOnFlink.AnomalyPathMiningHandler;
+
 public class Main {
 
     public static void main(String[] args) throws Exception {
@@ -29,9 +33,13 @@ public class Main {
         DataStream<AssociatedEvent> event_stream;
 
         if (Objects.equals(args[0], "online")){
-//            String kafkaBroker = "192.168.10.102:9092";
-            String kafkaBroker = "10.214.242.214:9092";
-            String kafkaTopic = "topic-HipsToMrd";
+            String kafkaBroker = "localhost:9092";
+//            String kafkaBroker = "10.105.189.7:9092";
+//            String kafkaBroker = "192.168.0.173:9092";
+//            String kafkaTopic = "topic-HipsToMrd";
+//            String kafkaTopic = "topic-Linux-malicious";
+//            String kafkaTopic = "topic-CADETS-0-train";
+            String kafkaTopic = "topic-CADETS-1-test";
             String kafkaGroupId = "mergeAlert";
 
             // TODO: replace deserializer with protobuf PDM deserializer
@@ -45,6 +53,8 @@ public class Main {
                     .build();
 
             DataStream<PDM.LogPack> logPack_stream = env.fromSource(source, WatermarkStrategy.noWatermarks(), "Kafka Source");
+//            EventFrequencyDBConstructionHandler(logPack_stream);
+            AnomalyPathMiningHandler(logPack_stream);
             DataStream<PDM.Log> log_stream = logPack_stream.flatMap(new PDMParser());
             event_stream = log_stream.map(PDMParser::initAssociatedEvent);
 //            event_stream.print();
@@ -60,8 +70,8 @@ public class Main {
             event_stream = json_stream.map(LocalParser::initAssociatedEvent);
         }
 
-        event_stream.keyBy(associatedEvent -> associatedEvent.hostUUID)
-                .process(new GraphAlignmentProcessFunction());
+//        event_stream.keyBy(associatedEvent -> associatedEvent.hostUUID)
+//                .process(new GraphAlignmentProcessFunction());
 
         // Execute the Flink job
         env.execute("Online Flink");

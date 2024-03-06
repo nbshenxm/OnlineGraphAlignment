@@ -16,7 +16,7 @@ public class AnomalyScoreTagCache  extends GenericTagCache{
     private static Long DECAY_TIME_THRESHOLD = 10 * 60 * 1000000L; // 1000 Second
 
     private static double ALPHA = 3;
-    private static double ALERT_THRESHOLD = 0.9;
+    private static double ALERT_THRESHOLD = 0.99;
     private static final double ALERT_DISTANCE_THRESHOLD = 4;
 
     public static int currentTagCount = 0;
