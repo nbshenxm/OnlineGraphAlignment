@@ -44,3 +44,4 @@ build/
 consoleOutput.txt
 Alerts/
 target
+src/main/resources/*
