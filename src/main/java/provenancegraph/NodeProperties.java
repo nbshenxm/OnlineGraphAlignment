@@ -25,6 +25,10 @@ public class NodeProperties implements Serializable {
         return String.format("[%s]", this.type.toString());
     }
 
+    public String toMLString(){
+        return String.format("%s", this.type.toString());
+    }
+
     public String toShapeAttribution() {
         String shapeInString;
         switch (type) {

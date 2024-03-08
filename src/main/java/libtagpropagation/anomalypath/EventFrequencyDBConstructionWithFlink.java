@@ -28,7 +28,6 @@ import static provenancegraph.parser.PDMParser.*;
 
 
 public class EventFrequencyDBConstructionWithFlink extends KeyedProcessFunction<PDM.HostUUID, PDM.Log, Row> {
-//    public static Long dbDumpEventCount = 300000L;
     public static Long dbDumpEventCount = 300000L;
     private transient MapState<UUID, BasicNode> nodeInfoMap;
 
@@ -106,6 +105,7 @@ public class EventFrequencyDBConstructionWithFlink extends KeyedProcessFunction<
 
             dumpEventFrequencyDBToFile(); //String.valueOf(processedEventCount / DB_DUMP_EVENT_COUNT)
             System.out.println("Continuing ...");
+
         }
 
         processedEventCountValue.update(processedEventCount);
@@ -115,7 +115,8 @@ public class EventFrequencyDBConstructionWithFlink extends KeyedProcessFunction<
         {
             if (log.hasEventData())
             {
-                AssociatedEvent associatedEvent = initAssociatedEvent(log);
+                AssociatedEvent associatedEvent = initAnomalyEvent(log);
+//                System.out.println(associatedEvent.toString());
                 String item = log.getUHeader().getClientID().toString() + generalizeTime(log.getEventData().getEHeader().getTs());
 
                 // add item of event
@@ -150,7 +151,7 @@ public class EventFrequencyDBConstructionWithFlink extends KeyedProcessFunction<
                 covertMapStateToMap(exactlyMatchEventFrequencyMap),
                 covertMapStateToMap(sourceRelationshipMatchEventFrequencyMap));
         System.out.println("exactlyMatchEventFrequencyMap : " + output.f0.size());
-//        ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("SystemLog\\EventFrequencyDB.out"));
+//        System.out.println(output.f0.toString());
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("./SystemLog/cadetsEventFrequencyDB.out"));
         objectOutputStream.writeObject(output);
         objectOutputStream.flush();

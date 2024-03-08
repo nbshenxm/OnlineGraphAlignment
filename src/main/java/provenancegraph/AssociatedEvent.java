@@ -99,9 +99,9 @@ public class AssociatedEvent extends BasicEdge implements Serializable {
         return String.format("%s->%s->%s", sourceNodeProperties.toString(), relationship, sinkNodeProperties.toString());
     }
 
-//    public String toMLString() {
-//        return String.format("%s, %s, %s", sourceNodeProperties.toString(), relationship, sinkNodeProperties.toString());
-//    }
+    public String toMLString() {
+        return String.format("%s, %s, %s", sourceNodeProperties.toMLString(), relationship, sinkNodeProperties.toMLString());
+    }
 
     public String toJsonString() {
         Gson fullEventJson = new Gson();

@@ -32,6 +32,10 @@ public class ProcessNodeProperties extends NodeProperties {
         return String.format("[%s: PID-%s, PName-%s, ARGUMENTS-%s]", this.type.toString(), this.processId, this.processName, this.cmdLineArguments);
     }
 
+    public String toMLString() {
+        return String.format("[%s: PName-%s]", this.type.toString(), this.processName);
+    }
+
 //    @Override
 //    public boolean haveSameProperties(NodeProperties np) {
 //        ProcessNodeProperties that = (ProcessNodeProperties) np;

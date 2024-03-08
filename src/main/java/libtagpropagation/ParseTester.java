@@ -2,7 +2,6 @@ package libtagpropagation;
 import org.apache.flink.api.java.tuple.Tuple2;
 import provenancegraph.AssociatedEvent;
 
-import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -12,8 +11,6 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-
-import static libtagpropagation.anomalypath.TagBasedAnomalyPathMiningOnFlink.calculateRegularScore;
 
 public class ParseTester {
     public static void main(String[] args) throws Exception{
@@ -52,9 +49,6 @@ public class ParseTester {
             System.out.println("An error occurred while writing CSV file.");
             e.printStackTrace();
         }
-
-
-        int a = 0;
 
     }
 

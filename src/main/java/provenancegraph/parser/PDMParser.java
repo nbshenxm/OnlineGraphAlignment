@@ -75,6 +75,49 @@ public class PDMParser implements FlatMapFunction<PDM.LogPack, PDM.Log> {
         return event;
     }
 
+    public static AssociatedEvent initAnomalyEvent(PDM.Log log){
+        AssociatedEvent event = new AssociatedEvent();
+        // set hostUUID,timeStamp and relationship
+        Long hostUUID = log.getUHeader().getClientID().getHostUUID();
+        event.setHostUUID(new UUID(hostUUID,hostUUID));
+        long ts = log.getEventData().getEHeader().getTs();
+        event.setTimeStamp(ts);
+
+        String content = log.getUHeader().getContent().toString();
+        event.setRelationship(content);
+
+        BasicNode source;
+        BasicNode sink;
+
+        switch (log.getUHeader().getContent()) {
+            case PROCESS_FORK:
+            case PROCESS_EXEC:
+                source = initBasicNode(log.getEventData().getEHeader().getProc());
+                sink = initBasicNode(log.getEventData().getProcessEvent().getChildProc());
+                break;
+            case FILE_WRITE:
+            case FILE_OPEN:
+            case FILE_READ:
+            case PROCESS_LOAD:
+                source = initBasicNode(log.getEventData().getEHeader().getProc());
+                sink = initBasicNode(log.getEventData().getFileEvent().getFile());
+                break;
+            case NET_CONNECT:
+                source = initBasicNode(log.getEventData().getEHeader().getProc());
+                sink = initBasicNode(log.getEventData().getNetEvent());
+                break;
+            default:
+                return null;
+        }
+
+        String eventUUID = source.getNodeUUID().toString() + sink.getNodeUUID().toString() + event.getRelationship();
+        event.setEventUUID(UUID.nameUUIDFromBytes(eventUUID.getBytes(StandardCharsets.UTF_8)));
+
+        event.setSourceNode(source);
+        event.setSinkNode(sink);
+        return event;
+    }
+
     public static BasicNode initBasicNode(PDM.Process process){
         Long ts = process.getProcUUID().getTs();
         int pid = process.getProcUUID().getPid();
