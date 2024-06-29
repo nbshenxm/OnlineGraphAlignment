@@ -39,6 +39,6 @@ build/
 
 ### User Defined ###
 /ProtoBuf/
-/SystemLog/
+/FrequencyDatabase/
 /.idea/
 consoleOutput.txt
